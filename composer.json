@@ -1,0 +1,35 @@
+{
+    "name": "gtg/module-gtg",
+    "description": "GTG Initial Project Structure",
+    "type": "project",
+    "require": {
+        "coffeecode/router": "^2.0",
+        "league/plates": "^3.4",
+        "phpmailer/phpmailer": "^6.6",
+        "league/oauth2-facebook": "^2.2",
+        "league/oauth2-google": "^4.0",
+        "dompdf/dompdf": "^2.0",
+        "monolog/monolog": "^2.7",
+        "ext-gd": "*",
+        "ext-exif": "*",
+        "coffeecode/uploader": "^2.0"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Src\\": "src/",
+            "GTG\\DataLayer\\": "plugins/gtg/datalayer/src",
+            "GTG\\Pay\\": "plugins/gtg/pay/src"
+        },
+        "files": [
+            "src/Config.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "natanaelnogueira77",
+            "email": "piano.nogueirans@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}

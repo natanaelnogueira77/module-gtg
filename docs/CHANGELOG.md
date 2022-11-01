@@ -1,0 +1,105 @@
+# Changelog
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [1.3.9] - 2022-10-18
+### Fixed
+- Once and for all! Image upload stress fixed!
+
+## [1.3.8] - 2022-10-11
+### Added 
+- Admin can change the db info.
+
+### Changed
+- Separating the Core routing.
+- env.ini for database config.
+
+## [1.3.7] - 2022-09-26
+### Added 
+- Versioning to all css and js resources.
+- SYS_VERSION const in Config.php.
+
+## [1.3.6] - 2022-09-09
+### Added
+- Signature Pad plugin.
+- CModel funcions to load raw script and style.
+
+## [1.3.5] - 2022-09-01
+### Added
+- Number in full function.
+
+## [1.3.4] - 2022-08-20
+### Added
+- CRUD Control for Menu, Emails and Users.
+
+### Fixed
+- Order type fixed for the Table List.
+
+## [1.3.3] - 2022-08-16
+### Added 
+- Modal template on architect-ui theme and app.js.
+- Texts on Users and E-mais CRUD changed.
+
+## [1.3.2] - 2022-08-02
+### Added 
+- Logo Icon on the ajax loading.
+
+### Fixed
+- Users table issue.
+- Counting with joined tables on DataTable fixed.
+
+## [1.3.1] - 2022-07-20
+### Changed 
+- Routes were corrected and changed, accordingly to its purposes.
+
+### Fixed
+- Usertypes edition is working.
+
+## [1.3.0] - 2022-07-01
+### Changed 
+- Folder structure changed.
+- Namespaces changed.
+
+## [1.2.0] - 2022-06-28
+### Added
+- Works with PHP 8.0.
+- Improvements for the TableList.
+
+### Fixed
+- Change Password not working correctly.
+- Namespaces corrected and ordered.
+
+## [1.1.0] - 2022-06-13
+### Added
+- Monolog for errors monitoring.
+
+## [1.0.4] - 2022-06-02
+### Added
+- Corrections and moving files.
+- Version constant.
+
+## [1.0.3] - 2022-05-30
+### Added
+- Setting Max Size to the Media Library.
+
+### Fixed
+- Fix Media Library not uploading some sort of files.
+- Media Library modal wrong attribute name.
+
+## [1.0.2] - 2022-05-10
+### Updated
+- Changes on the app.js, for the form controller.
+
+## [1.0.1] - 2022-05-10
+### Added
+- LogException when the E-mail fails.
+
+### Updated
+- DataTable component improvements and fixes.
+
+### Fixed
+- Encoding when exporting to excel.
+
+## [1.0.0] - 2022-05-06
