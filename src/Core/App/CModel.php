@@ -175,7 +175,7 @@ class CModel
 
     protected function getDateTime(?string $date = null): DateTime 
     {
-        return new DateTime($date);
+        return new DateTime($date ? $date : '');
     }
 
     protected function setEmailTemplate($meta): void 

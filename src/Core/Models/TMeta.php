@@ -181,7 +181,7 @@ trait TMeta
     {
         if($meta) {
             $methodName = self::$handlers[$meta];
-            if(method_exists(new self, $methodName)) {
+            if($methodName && method_exists(new self, $methodName)) {
                 self::$methodName($value);
             }
         }

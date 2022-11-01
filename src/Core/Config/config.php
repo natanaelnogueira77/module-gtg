@@ -2,8 +2,8 @@
 
 // Definindo Timezone e Memory Limit
 ini_set('memory_limit', '8M');
+setlocale( LC_ALL, 'pt_BR.utf-8', 'pt_BR', 'Portuguese_Brazil');
 date_default_timezone_set('America/Recife');
-setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'portuguese');
 
 define('GTG_VERSION', '1.3.9');
 
