@@ -110,12 +110,6 @@ function getTimeStringFromSeconds(int $seconds): string
     return sprintf('%02d:%02d:%02d', $h, $m, $s);
 }
 
-function formatDateWithLocale($date, $pattern): string
-{
-    $time = getDateAsDateTime($date)->getTimestamp();
-    return strftime($pattern, $time);
-}
-
 function isDateAfter($date1, $date2): bool
 {
     $ts1 = (new DateTime($date1))->getTimestamp();
