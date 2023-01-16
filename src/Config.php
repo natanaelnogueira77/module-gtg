@@ -1,15 +1,30 @@
 <?php
 
-define('MAIL', parse_ini_file(realpath(dirname(__FILE__) . '/smtp.ini')));
-define('MAIN', parse_ini_file(realpath(dirname(__FILE__) . '/main.ini')));
+define('ENV', parse_ini_file(realpath(dirname(__FILE__, 2) . '/env.ini')));
 
 define('PATH', realpath(dirname(__DIR__)));
-define("SYS_VERSION", MAIN['version']);
-define('ROOT', MAIN['root']);
-define('SITE', MAIN['sitename']);
-define('SESS_NAME', MAIN['sessname']);
+define('APP_VERSION', ENV['app_version']);
+define('ROOT', ENV['app_url']);
+define('SITE', ENV['app_name']);
+define('SESS_NAME', ENV['app_sessname']);
+define('ERROR_MAIL', ENV['app_error_mail']);
 
-define('DATA_LAYER', parse_ini_file(realpath(dirname(__FILE__) . '/env.ini')) + [
+define('MAIL', [
+    'host' => ENV['mail_host'],
+    'port' => ENV['mail_port'],
+    'username' => ENV['mail_username'],
+    'password' => ENV['mail_password'],
+    'name' => ENV['mail_name'],
+    'email' => ENV['mail_email']
+]);
+
+define('DB_INFO', [
+    'driver' => ENV['db_driver'],
+    'dbname' => ENV['db_name'],
+    'host' => ENV['db_host'],
+    'port' => ENV['db_port'],
+    'username' => ENV['db_username'],
+    'passwd' => ENV['db_password'],
     'options' => [
         PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -30,21 +45,3 @@ define('GOOGLE', [
     'app_secret' => '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',
     'app_redirect' => ROOT . '/entrar'
 ]);
-
-function url(string $uri = null): string 
-{
-    if($uri) {
-        if(strpos($uri, 'http://') !== false || strpos($uri, 'https://') !== false) {
-            return $uri;
-        }
-
-        return ROOT . "/{$uri}";
-    }
-
-    return ROOT;
-}
-
-function message(string $message, string $type): array 
-{
-    return ['message' => $message, 'type' => $type];
-}

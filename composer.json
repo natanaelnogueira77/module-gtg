@@ -12,7 +12,9 @@
         "monolog/monolog": "^2.7",
         "ext-gd": "*",
         "ext-exif": "*",
-        "coffeecode/uploader": "^2.0"
+        "coffeecode/uploader": "^2.0",
+        "jms/translation-bundle": "^1.6",
+        "coffeecode/datalayer": "^2.0"
     },
     "license": "MIT",
     "autoload": {
@@ -20,10 +22,7 @@
             "Src\\": "src/",
             "GTG\\DataLayer\\": "plugins/gtg/datalayer/src",
             "GTG\\Pay\\": "plugins/gtg/pay/src"
-        },
-        "files": [
-            "src/Config.php"
-        ]
+        }
     },
     "authors": [
         {
