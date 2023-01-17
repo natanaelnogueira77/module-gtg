@@ -15,7 +15,6 @@ class CLogin extends Controller
 {
     public function index(array $data): void 
     {
-        $data = array_merge($data, filter_input_array(INPUT_GET, FILTER_DEFAULT));
         $exception = null;
         $errors = [];
         $config = Config::getMetasByName(['logo', 'logo_icon', 'login_img']);
@@ -49,7 +48,7 @@ class CLogin extends Controller
             'background' => url($config['login_img']),
             'logo' => url($config['logo']),
             'shortcutIcon' => url($config['logo_icon']),
-            'redirect' => $data['redirect'],
+            'redirect' => $_GET['redirect'],
             'errors' => $errors,
             'exception' => $exception
         ]);
