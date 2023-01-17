@@ -10,6 +10,9 @@
 
 <main class="login-body" data-vide-bg="<?= $background ?>">
     <form class="form-default" action="<?= $router->route('login.index') ?>" method="post">
+        <?php if($redirect): ?>
+        <input type="hidden" name="redirect" value="<?= $redirect ?>">
+        <?php endif; ?>
         <div class="login-form mt-5">
             <div class="logo-login">
                 <a href="#">

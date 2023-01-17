@@ -15,6 +15,7 @@ class CLogin extends Controller
 {
     public function index(array $data): void 
     {
+        $data = array_merge($data, filter_input_array(INPUT_GET, FILTER_DEFAULT));
         $exception = null;
         $errors = [];
         $config = Config::getMetasByName(['logo', 'logo_icon', 'login_img']);
@@ -26,8 +27,8 @@ class CLogin extends Controller
                 Auth::set($user);
 
                 addSuccessMsg('Seja bem vindo, ' . $user->name . '!');
-                if(isset($_GET['redirect'])) {
-                    header('Location: ' . url($_GET['redirect']));
+                if(isset($data['redirect'])) {
+                    header('Location: ' . url($data['redirect']));
                     exit();
                 } else {
                     if($user->isAdmin()) {
@@ -48,6 +49,7 @@ class CLogin extends Controller
             'background' => url($config['login_img']),
             'logo' => url($config['logo']),
             'shortcutIcon' => url($config['logo_icon']),
+            'redirect' => $data['redirect'],
             'errors' => $errors,
             'exception' => $exception
         ]);
