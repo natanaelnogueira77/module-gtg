@@ -32,7 +32,7 @@ $router->namespace('Src\App\Controllers');
 $router->group('erro');
 $router->get('/{code}', 'CError:index', 'error.index');
 
-$router->group('ml', \Src\App\Middlewares\MUser::class);
+$router->group('ml');
 $router->post('/add', 'CMediaLibrary:add', 'mediaLibrary.add');
 $router->get('/load', 'CMediaLibrary:load', 'mediaLibrary.load');
 $router->delete('/delete', 'CMediaLibrary:delete', 'mediaLibrary.delete');
