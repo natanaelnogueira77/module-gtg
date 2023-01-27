@@ -52,10 +52,14 @@ class UserType extends Model
         
         if(!$this->name_sing) {
             $errors['name_sing'] = 'O Nome no Singular é obrigatório!';
+        } elseif(strlen($this->name_sing) > 45) {
+            $errors['name_sing'] = 'O Nome no Singular precisa ter 45 caractéres ou menos!';
         }
 
         if(!$this->name_plur) {
             $errors['name_plur'] = 'O Nome no Plural é obrigatório!';
+        } elseif(strlen($this->name_plur) > 45) {
+            $errors['name_plur'] = 'O Nome no Plural precisa ter 45 caractéres ou menos!';
         }
 
         if(count($errors) > 0) {

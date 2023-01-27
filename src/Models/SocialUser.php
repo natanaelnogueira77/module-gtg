@@ -3,6 +3,7 @@
 namespace Src\Models;
 
 use DateTime;
+use Src\Exceptions\AppException;
 use Src\Exceptions\ValidationException;
 use Src\Models\Model;
 use Src\Models\User;
@@ -30,12 +31,12 @@ class SocialUser extends Model
         return parent::save();
     }
 
-    public function getUser() 
+    public function getUser(): ?User
     {
         $this->user = User::getById($this->usu_id);
     }
 
-    public static function getBySocialId(string $socialId, string $social) 
+    public static function getBySocialId(string $socialId, string $social): ?self 
     {
         $object = (new self())->get([
             'social_id' => $socialId,
@@ -45,7 +46,7 @@ class SocialUser extends Model
         return $object;
     }
 
-    public static function getBySocialEmail(string $email, string $social) 
+    public static function getBySocialEmail(string $email, string $social): ?self 
     {
         $object = (new self())->get([
             'email' => $email,
@@ -55,7 +56,7 @@ class SocialUser extends Model
         return $object;
     }
 
-    private function validate() 
+    private function validate(): void 
     {
         $errors = [];
         
@@ -77,6 +78,8 @@ class SocialUser extends Model
             $errors['email'] = 'O Email é obrigatório!';
         } elseif(!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
             $errors['email'] = 'Este Email é inválido!';
+        } elseif(strlen($this->email) > 100) {
+            $errors['email'] = 'O Email precisa ter 100 caractéres ou menos!';
         } else {
             if(!$this->id) {
                 $email = (new self())

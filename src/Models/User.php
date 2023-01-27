@@ -143,12 +143,16 @@ class User extends Model
         
         if(!$this->name) {
             $errors['name'] = 'O Nome é obrigatório!';
+        } elseif(strlen($this->name) > 100) {
+            $errors['name'] = 'O Nome precisa ter 100 caractéres ou menos!';
         }
 
         if(!$this->email) {
             $errors['email'] = 'O Email é obrigatório!';
         } elseif(!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
             $errors['email'] = 'O Email é inválido!';
+        } elseif(strlen($this->email) > 100) {
+            $errors['email'] = 'O Email precisa ter 100 caractéres ou menos!';
         } else {
             if(!$this->id) {
                 $email = (new self())
@@ -167,6 +171,8 @@ class User extends Model
 
         if(!$this->slug) {
             $errors['slug'] = 'O Apelido é obrigatório!';
+        } elseif(strlen($this->slug) > 100) {
+            $errors['slug'] = 'O Apelido precisa ter 100 caractéres ou menos!';
         } else {
             if(!$this->id) {
                 $slug = (new self())

@@ -2,6 +2,7 @@
 
 namespace Src\Models;
 
+use Src\Exceptions\AppException;
 use Src\Exceptions\ValidationException;
 use Src\Models\Model;
 use Src\Models\TConfig;
@@ -44,6 +45,8 @@ class Config extends Model
 
         if(!$this->style) {
             $errors['style'] = 'O Estilo é obrigatório!';
+        } elseif(!in_array($this->style, ['light', 'dark'])) {
+            $errors['style'] = 'O Estilo é inválido!';
         }
 
         if(count($errors) > 0) {
