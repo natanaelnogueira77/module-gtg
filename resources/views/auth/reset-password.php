@@ -28,6 +28,10 @@
                 <div class="invalid-feedback"><?= $errors['email'] ?></div>
             </div>
 
+            <div class="form-input d-flex justify-content-around">
+                <div class="g-recaptcha" data-sitekey="<?= RECAPTCHA['site_key'] ?>"></div>
+            </div>
+
             <div class="form-input pt-30">
                 <input type="submit" value="Enviar">
             </div>

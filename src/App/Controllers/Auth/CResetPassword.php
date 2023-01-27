@@ -2,11 +2,13 @@
 
 namespace Src\App\Controllers\Auth;
 
+use ReCaptcha\ReCaptcha;
 use Src\App\Controllers\Controller;
 use Src\Components\Auth;
 use Src\Components\Email;
 use Src\Components\ForgotPassword;
 use Src\Components\ResetPassword;
+use Src\Exceptions\AppException;
 use Src\Models\Config;
 use Src\Models\User;
 
@@ -21,24 +23,28 @@ class CResetPassword extends Controller
         if(count($data) > 0) {
             $forgotPassword = new ForgotPassword($data['email']);
             try {
-                $user = $forgotPassword->check();
+                $recaptcha = new ReCaptcha(RECAPTCHA['secret_key']);
+                $resp = $recaptcha->setExpectedHostname(RECAPTCHA['host'])->verify($data['g-recaptcha-response']);
+                if(!$resp->isSuccess()) {
+                    throw new AppException('Você precisa completar o teste do ReCaptcha!');
+                }
+
+                $user = $forgotPassword->verify();
+                if(!$user) {
+                    throw $forgotPassword->error();
+                }
                 
                 $email = new Email();
-                $email->add(
-                    'Redefinir Senha',
-                    $this->getView('emails/reset-password', [
-                        'user' => $user,
-                        'logo' => url($config['logo'])
-                    ]),
-                    $user->name,
-                    $user->email
-                )->send();
+                $email->add('Redefinir Senha', $this->getView('emails/reset-password', [
+                    'user' => $user,
+                    'logo' => url($config['logo'])
+                ]), $user->name, $user->email);
                 
-                if($email->error()) {
+                if(!$email->send()) {
                     $this->throwException($email->error()->getMessage());
                 }
                 
-                addSuccessMsg('Um email foi enviado para ' . $user->email . '. Verifique para poder redefinir sua senha.');
+                addSuccessMsg("Um email foi enviado para {$user->email}. Verifique para poder redefinir sua senha.");
                 $this->redirect('login.index');
             } catch(\Exception $e) {
                 $exception = $e;
@@ -73,7 +79,11 @@ class CResetPassword extends Controller
         if(isset($data['password']) || isset($data['confirm_password'])) {
             $resetPassword = new ResetPassword($data);
             try {
-                $user = $resetPassword->check($data['code']);
+                $user = $resetPassword->verify($data['code']);
+                if(!$user) {
+                    throw $resetPassword->error();
+                }
+
                 Auth::set($user);
 
                 addSuccessMsg('Senha redefinida com sucesso!');

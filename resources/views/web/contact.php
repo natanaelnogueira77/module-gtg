@@ -70,6 +70,14 @@
                                     <div class="invalid-feedback"><?= $errors['message'] ?></div>
                                 </div>
                             </div>
+
+                            <div class="col-12">
+                                <div class="d-flex justify-content-around">
+                                    <div class="g-recaptcha" data-sitekey="<?= RECAPTCHA['site_key'] ?>"></div>
+                                </div>
+
+                                <small class="text-danger"><?= $errors['recaptcha'] ?></small>
+                            </div>
                         </div>
                         
                         <div class="form-group mt-3">

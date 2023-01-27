@@ -63,6 +63,10 @@ class ComposerStaticInit7ddf24c22616fa52e0654a4ac941adde
             'Src\\' => 4,
             'Sabberworm\\CSS\\' => 15,
         ),
+        'R' => 
+        array (
+            'ReCaptcha\\' => 10,
+        ),
         'P' => 
         array (
             'Psr\\Log\\' => 8,
@@ -244,6 +248,10 @@ class ComposerStaticInit7ddf24c22616fa52e0654a4ac941adde
         'Sabberworm\\CSS\\' => 
         array (
             0 => __DIR__ . '/..' . '/sabberworm/php-css-parser/src',
+        ),
+        'ReCaptcha\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/google/recaptcha/src/ReCaptcha',
         ),
         'Psr\\Log\\' => 
         array (

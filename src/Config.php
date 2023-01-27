@@ -15,7 +15,14 @@ define('MAIL', [
     'username' => ENV['mail_username'],
     'password' => ENV['mail_password'],
     'name' => ENV['mail_name'],
-    'email' => ENV['mail_email']
+    'email' => ENV['mail_email'],
+    'limit' => ENV['mail_limit']
+]);
+
+define('RECAPTCHA', [
+    'host' => ENV['recaptcha_host'],
+    'site_key' => ENV['recaptcha_site_key'],
+    'secret_key' => ENV['recaptcha_secret_key']
 ]);
 
 define('DB_INFO', [

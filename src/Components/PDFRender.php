@@ -49,7 +49,7 @@ class PDFRender
         return $this;
     }
 
-    public function render()
+    public function render(): bool
     {
         try {
             $this->dompdf = new Dompdf($this->options);
@@ -69,6 +69,8 @@ class PDFRender
             $this->dompdf->loadHtml($this->data->html);
             $this->dompdf->setPaper($this->data->paperSize, $this->data->paperOrientation);
             $this->dompdf->render();
+
+            return true;
         } catch(Exception $exception) {
             $this->error = $exception;
             return false;

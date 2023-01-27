@@ -43,18 +43,19 @@ class CUsers extends Template
             $dbUser->save();
 
             $email = new Email();
-            $email->add(
-                'Você se Registrou com Sucesso!',
-                $this->getView('emails/user-register', [
-                    'user' => $dbUser,
-                    'password' => $data['password'],
-                    'logo' => url(Config::getMetaByName('logo'))
-                ]),
-                $dbUser->name,
-                $dbUser->email
-            )->send();
+            $email->add('Você se Registrou com Sucesso!', $this->getView('emails/user-register', [
+                'user' => $dbUser,
+                'password' => $data['password'],
+                'logo' => url(Config::getMetaByName('logo'))
+            ]), $dbUser->name, $dbUser->email);
 
-            addSuccessMsg('Usuário "' . $dbUser->name . '" foi criado com sucesso!');
+            if(!$email->send()) {
+                addSuccessMsg("O Usuário \"{$dbUser->name}\" foi criado com sucesso! 
+                    Porém não foi possível enviar no seu email.");
+            } else {
+                addSuccessMsg("Usuário \"{$dbUser->name}\" foi criado com sucesso!");
+            }
+
             $callback['link'] = $this->getRoute('admin.users.edit', ['user_id' => $dbUser->id]);
         } catch(\Exception $e) {
             $this->error = $e;

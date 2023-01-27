@@ -2,11 +2,13 @@
 
 namespace Src\App\Controllers\Auth;
 
+use ReCaptcha\ReCaptcha;
 use Src\App\Controllers\Controller;
 use Src\Components\Auth;
 use Src\Components\FacebookLogin;
 use Src\Components\GoogleLogin;
 use Src\Components\Login;
+use Src\Exceptions\AppException;
 use Src\Models\Config;
 use Src\Models\User;
 use Src\Models\SocialUser;
@@ -22,10 +24,20 @@ class CLogin extends Controller
         if(count($data) > 0) {
             $login = new Login($data['email'], $data['password']);
             try {
-                $user = $login->checkLogin();
+                $recaptcha = new ReCaptcha(RECAPTCHA['secret_key']);
+                $resp = $recaptcha->setExpectedHostname(RECAPTCHA['host'])->verify($data['g-recaptcha-response']);
+                if(!$resp->isSuccess()) {
+                    throw new AppException('Você precisa completar o teste do ReCaptcha!');
+                }
+
+                $user = $login->verify();
+                if(!$user) {
+                    throw $login->error();
+                }
+
                 Auth::set($user);
 
-                addSuccessMsg('Seja bem vindo, ' . $user->name . '!');
+                addSuccessMsg("Seja bem-vindo, {$user->name}!");
                 if(isset($data['redirect'])) {
                     header('Location: ' . url($data['redirect']));
                     exit();
@@ -44,11 +56,12 @@ class CLogin extends Controller
             }
         }
 
-        $this->loadView('auth/login', [
+        $this->loadView('auth/login', $data + [
             'background' => url($config['login_img']),
             'logo' => url($config['logo']),
             'shortcutIcon' => url($config['logo_icon']),
             'redirect' => $_GET['redirect'],
+            'email' => $data['email'],
             'errors' => $errors,
             'exception' => $exception
         ]);
@@ -61,7 +74,11 @@ class CLogin extends Controller
 
         $login = new Login($data);
         try {
-            $user = $login->checkLogin();
+            $user = $login->verify();
+            if(!$user) {
+                throw $login->error();
+            }
+
             Auth::set($user);
             $callback['success'] = true;
         } catch(\Exception $e) {

@@ -23,19 +23,21 @@
             <h2>Entrar</h2>
 
             <div class="form-input">
-                <label for="email">Email</label>
                 <input type="email" id="email" name="email" 
                     placeholder="Digite seu email" value="<?= $email ?>" required>
                 <div class="invalid-feedback"><?= $errors['email'] ?></div>
             </div>
 
             <div class="form-input">
-                <label for="password">Senha</label>
                 <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
                 <div class="invalid-feedback"><?= $errors['password'] ?></div>
             </div>
 
-            <div class="form-input pt-30">
+            <div class="form-input d-flex justify-content-around">
+                <div class="g-recaptcha" data-sitekey="<?= RECAPTCHA['site_key'] ?>"></div>
+            </div>
+
+            <div class="form-input pt-10">
                 <input type="submit" value="Entrar">
             </div>
 

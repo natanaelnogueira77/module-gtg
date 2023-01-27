@@ -5,6 +5,7 @@ namespace Src\App\Controllers\Web;
 use Src\App\Controllers\Web\Template;
 use Src\Components\Contact;
 use Src\Components\Email;
+use Src\Exceptions\ValidationException;
 
 class CContact extends Template 
 {
@@ -19,15 +20,9 @@ class CContact extends Template
         if(isset($data['subject']) || isset($data['message']) || isset($data['name']) || isset($data['email'])) {
             $contactData = $data;
             try {
-                $contact = new Contact($data['subject'], $data['message'], $data['name'], $data['email']);
-                $contact->check();
-
-                $email = new Email();
-                $email->add($contact->subject, $contact->message, $contact->name, ERROR_MAIL)
-                    ->send($contact->name, $contact->email);
-
-                if($email->error()) {
-                    $this->throwException($email->error()->getMessage());
+                $contact = new Contact($data['subject'], $data['message'], $data['name'], $data['email'], $data['g-recaptcha-response']);
+                if(!$contact->send()) {
+                    throw $contact->error();
                 }
 
                 addSuccessMsg('Mensagem enviada com sucesso!');
