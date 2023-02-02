@@ -56,8 +56,6 @@ return array(
     'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),
     'GuzzleHttp\\Promise\\' => array($vendorDir . '/guzzlehttp/promises/src'),
     'GuzzleHttp\\' => array($vendorDir . '/guzzlehttp/guzzle/src'),
-    'GTG\\Pay\\' => array($baseDir . '/plugins/gtg/pay/src'),
-    'GTG\\DataLayer\\' => array($baseDir . '/plugins/gtg/datalayer/src'),
     'FontLib\\' => array($vendorDir . '/phenx/php-font-lib/src/FontLib'),
     'Dompdf\\' => array($vendorDir . '/dompdf/dompdf/src'),
     'CoffeeCode\\Uploader\\' => array($vendorDir . '/coffeecode/uploader/src'),

@@ -20,9 +20,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Src\\": "src/",
-            "GTG\\DataLayer\\": "plugins/gtg/datalayer/src",
-            "GTG\\Pay\\": "plugins/gtg/pay/src"
+            "Src\\": "src/"
         }
     },
     "authors": [

@@ -97,8 +97,6 @@ class ComposerStaticInit7ddf24c22616fa52e0654a4ac941adde
             'GuzzleHttp\\Psr7\\' => 16,
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
-            'GTG\\Pay\\' => 8,
-            'GTG\\DataLayer\\' => 14,
         ),
         'F' => 
         array (
@@ -319,14 +317,6 @@ class ComposerStaticInit7ddf24c22616fa52e0654a4ac941adde
         'GuzzleHttp\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
-        ),
-        'GTG\\Pay\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/plugins/gtg/pay/src',
-        ),
-        'GTG\\DataLayer\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/plugins/gtg/datalayer/src',
         ),
         'FontLib\\' => 
         array (
