@@ -3,7 +3,7 @@
         'name' => 'gtg/module-gtg',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '1613c54d5673ac28f531c87a426830937007798e',
+        'reference' => '5ae2dadc916bf12e4d7a611c063d9d55998a0883',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -58,7 +58,7 @@
         'gtg/module-gtg' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '1613c54d5673ac28f531c87a426830937007798e',
+            'reference' => '5ae2dadc916bf12e4d7a611c063d9d55998a0883',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

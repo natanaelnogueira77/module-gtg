@@ -25,6 +25,24 @@
                                         endif;
                                         ?>
 
+                                        <?php if($right['languages']): ?>
+                                        <li>
+                                            <a href="#">
+                                                <img width="42" class="rounded-circle" src="<?= $right['languages']['curr_img'] ?>" alt="">
+                                            </a>
+                                            <?php if($right["languages"]['items']): ?>
+                                            <ul class="submenu">
+                                                <li><?= $right['languages']['heading'] ?></li>
+                                                <?php foreach($right["languages"]['items'] as $language): ?>
+                                                <li>
+                                                    <a href="<?= $language['url'] ?>"><?= $language["desc"] ?></a>
+                                                </li>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                            <?php endif; ?>
+                                        </li>
+                                        <?php endif; ?>
+
                                         <?php 
                                         if($right["items"]):
                                             foreach($right["items"] as $item):

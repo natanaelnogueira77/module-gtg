@@ -10,6 +10,8 @@ class CHome extends Template
     public function index(array $data): void 
     {
         $this->addData();
+        $lang = getLang()->setFilepath('controllers/web/home')->getContent()->setBase('index');
+
         $this->loadView('web/home');
     }
 }

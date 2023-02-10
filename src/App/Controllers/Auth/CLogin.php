@@ -20,6 +20,7 @@ class CLogin extends Controller
         $exception = null;
         $errors = [];
         $config = Config::getMetasByName(['logo', 'logo_icon', 'login_img']);
+        $lang = getLang()->setFilepath('controllers/auth/login')->getContent()->setBase('index');
 
         if(count($data) > 0) {
             $login = new Login($data['email'], $data['password']);
@@ -27,7 +28,7 @@ class CLogin extends Controller
                 $recaptcha = new ReCaptcha(RECAPTCHA['secret_key']);
                 $resp = $recaptcha->setExpectedHostname(RECAPTCHA['host'])->verify($data['g-recaptcha-response']);
                 if(!$resp->isSuccess()) {
-                    throw new AppException('Você precisa completar o teste do ReCaptcha!');
+                    throw new AppException($lang->get('recaptcha_error'));
                 }
 
                 $user = $login->verify();
@@ -37,7 +38,7 @@ class CLogin extends Controller
 
                 Auth::set($user);
 
-                addSuccessMsg("Seja bem-vindo, {$user->name}!");
+                addSuccessMsg($lang->get('welcome', ['user_name' => $user->name]));
                 if(isset($data['redirect'])) {
                     header('Location: ' . url($data['redirect']));
                     exit();
@@ -69,10 +70,9 @@ class CLogin extends Controller
 
     public function check(array $data): void 
     {
-        session_start();
         $callback = [];
-
-        $login = new Login($data);
+        
+        $login = new Login($data['email'], $data['password']);
         try {
             $user = $login->verify();
             if(!$user) {
@@ -96,7 +96,7 @@ class CLogin extends Controller
 
     public function expired(array $data): void 
     {
-        $sess = $this->getSessionUser();
+        $sess = Auth::get();
         $callback = [];
 
         $callback['success'] = false;
@@ -113,7 +113,7 @@ class CLogin extends Controller
             $facebook = new FacebookLogin([
                 'id' => FACEBOOK['app_id'],
                 'secret' => FACEBOOK['app_secret'],
-                'redirect' => FACEBOOK['app_redirect'],
+                'redirect' => $this->getRoute('login.index'),
                 'version' => FACEBOOK['app_version']
             ]);
     
@@ -179,7 +179,7 @@ class CLogin extends Controller
             $google = new GoogleLogin([
                 'id' => GOOGLE['app_id'],
                 'secret' => GOOGLE['app_secret'],
-                'redirect' => GOOGLE['app_redirect']
+                'redirect' => $this->getRoute('login.index')
             ]);
     
             if(!$data['token']) {

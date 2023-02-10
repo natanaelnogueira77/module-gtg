@@ -1,8 +1,8 @@
 <?php 
 
-if(isset($_SESSION['message'])) {
-    $message = $_SESSION['message'];
-    unset($_SESSION['message']);
+if(isset($_SESSION[SESS_MESSAGE])) {
+    $message = $_SESSION[SESS_MESSAGE];
+    unset($_SESSION[SESS_MESSAGE]);
 } elseif($exception) {
     $message = [
         'type' => 'error',

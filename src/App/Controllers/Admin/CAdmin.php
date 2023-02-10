@@ -29,6 +29,7 @@ class CAdmin extends Template
         $callback = [];
         
         try {
+            $lang = getLang()->setFilepath('controllers/admin/admin')->getContent()->setBase('system');
             Config::saveMetas([
                 'style' => $data['style'],
                 'logo' => $data['logo'],
@@ -36,7 +37,7 @@ class CAdmin extends Template
                 'login_img' => $data['login_img']
             ]);
             
-            $this->setMessage('Configurações atualizadas com sucesso!');
+            $this->setMessage($lang->get('success'));
         } catch(\Exception $e) {
             $this->error = $e;
         }

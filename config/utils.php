@@ -29,7 +29,7 @@ function redirect(string $url): void
 
 function addSuccessMsg(string $msg): void 
 {
-    $_SESSION['message'] = [
+    $_SESSION[SESS_MESSAGE] = [
         'type' => 'success',
         'message' => $msg
     ];
@@ -37,7 +37,7 @@ function addSuccessMsg(string $msg): void
 
 function addErrorMsg(string $msg): void  
 {
-    $_SESSION['message'] = [
+    $_SESSION[SESS_MESSAGE] = [
         'type' => 'error',
         'message' => $msg
     ];
@@ -45,10 +45,15 @@ function addErrorMsg(string $msg): void
 
 function addInfoMsg(string $msg): void  
 {
-    $_SESSION['message'] = [
+    $_SESSION[SESS_MESSAGE] = [
         'type' => 'info',
         'message' => $msg
     ];
+}
+
+function getLang(): Src\Components\Lang 
+{
+    return new Src\Components\Lang;
 }
 
 function generatePassword(

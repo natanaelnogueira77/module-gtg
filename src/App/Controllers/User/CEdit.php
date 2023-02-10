@@ -11,6 +11,7 @@ class CEdit extends Template
     public function index(array $data): void 
     {
         $this->addData();
+        $lang = getLang()->setFilepath('controllers/user/edit')->getContent()->setBase('index');
         $this->loadView('user/edit', [
             'user' => Auth::get()
         ]);
@@ -21,6 +22,7 @@ class CEdit extends Template
         $callback = [];
         
         try {
+            $lang = getLang()->setFilepath('controllers/user/edit')->getContent()->setBase('update');
             $user = Auth::get();
             $data['password'] = $data['update_password'] ? $data['password'] : $user->password;
 
@@ -36,7 +38,7 @@ class CEdit extends Template
             $dbUser->save();
 
             Auth::set($dbUser);
-            $this->setMessage('Seus dados foram atualizados com sucesso!');
+            $this->setMessage($lang->get('success'));
         } catch(\Exception $e) {
             $this->error = $e;
         }

@@ -37,6 +37,9 @@ $router->post('/add', 'CMediaLibrary:add', 'mediaLibrary.add');
 $router->get('/load', 'CMediaLibrary:load', 'mediaLibrary.load');
 $router->delete('/delete', 'CMediaLibrary:delete', 'mediaLibrary.delete');
 
+$router->group('language');
+$router->get('/{lang}', 'CLanguage:index', 'language.index');
+
 $router->namespace('Src\App\Controllers\Admin');
 
 $router->group('admin', \Src\App\Middlewares\MAdmin::class);

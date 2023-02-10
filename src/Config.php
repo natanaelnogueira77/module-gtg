@@ -7,6 +7,8 @@ define('APP_VERSION', ENV['app_version']);
 define('ROOT', ENV['app_url']);
 define('SITE', ENV['app_name']);
 define('SESS_NAME', ENV['app_sessname']);
+define('SESS_LANG', ENV['app_sesslang']);
+define('SESS_MESSAGE', ENV['app_sessmessage']);
 define('ERROR_MAIL', ENV['app_error_mail']);
 
 define('MAIL', [
@@ -41,14 +43,12 @@ define('DB_INFO', [
 ]);
 
 define('FACEBOOK', [
-    'app_id' => '1222448374912330',
-    'app_secret' => '001953934a26df57f2fa5443eeefc4d4',
-    'app_redirect' => ROOT . '/entrar',
-    'app_version' => 'v4.0'
+    'app_id' => ENV['facebook_id'],
+    'app_secret' => ENV['facebook_secret'],
+    'app_version' => ENV['facebook_version']
 ]);
 
 define('GOOGLE', [
-    'app_id' => '365252850591-8baeqgcol1s3fjdin2je2q7bmk4s9o4k.apps.googleusercontent.com',
-    'app_secret' => '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',
-    'app_redirect' => ROOT . '/entrar'
+    'app_id' => ENV['google_id'],
+    'app_secret' => ENV['google_secret']
 ]);

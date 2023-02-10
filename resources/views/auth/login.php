@@ -1,6 +1,7 @@
 <?php 
+    $lang = getLang()->setFilepath('views/auth/login')->getContent();
     $this->layout("themes/courses-master/_theme", [
-        'title' => 'Entrar | ' . SITE,
+        'title' => $lang->get('title', ['site_name' => SITE]),
         'noHeader' => true,
         'noFooter' => true,
         'shortcutIcon' => $shortcutIcon,
@@ -20,16 +21,17 @@
                 </a>
             </div>
 
-            <h2>Entrar</h2>
+            <h2><?= $lang->get('card1.title') ?></h2>
 
             <div class="form-input">
                 <input type="email" id="email" name="email" 
-                    placeholder="Digite seu email" value="<?= $email ?>" required>
+                    placeholder="<?= $lang->get('card1.email.placeholder') ?>" value="<?= $email ?>" required>
                 <div class="invalid-feedback"><?= $errors['email'] ?></div>
             </div>
 
             <div class="form-input">
-                <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+                <input type="password" id="password" name="password" 
+                    placeholder="<?= $lang->get('card1.password.placeholder') ?>" required>
                 <div class="invalid-feedback"><?= $errors['password'] ?></div>
             </div>
 
@@ -38,11 +40,11 @@
             </div>
 
             <div class="form-input pt-10">
-                <input type="submit" value="Entrar">
+                <input type="submit" value="<?= $lang->get('card1.submit.value') ?>">
             </div>
 
             <a href="<?= $router->route('reset-password.index') ?>" class="forget">
-                Esqueceu a senha?
+                <?= $lang->get('card1.forget_password') ?>
             </a>
         </div>
     </form>

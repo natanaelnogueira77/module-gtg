@@ -35,38 +35,40 @@ class Contact
         try {
             $errors = [];
     
+            $lang = getLang()->setFilepath('components/contact')->getContent()->setBase('send');
+
             if(!$this->name) {
-                $errors['name'] = 'O Nome é obrigatório!';
+                $errors['name'] = $lang->get('name.required');
             } elseif(strlen($this->name) > 100) {
-                $errors['name'] = 'O Nome precisa ter 100 caractéres ou menos!';
+                $errors['name'] = $lang->get('name.max');
             }
     
             if(!$this->email) {
-                $errors['email'] = 'O Email é obrigatório!';
+                $errors['email'] = $lang->get('email.required');
             } elseif(!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-                $errors['email'] = 'Este Email é inválido!';
+                $errors['email'] = $lang->get('email.invalid');
             } elseif(strlen($this->email) > 100) {
-                $errors['email'] = 'O Email precisa ter 100 caractéres ou menos!';
+                $errors['email'] = $lang->get('email.max');
             }
     
             if(!$this->subject) {
-                $errors['subject'] = 'O Assunto é obrigatório!';
+                $errors['subject'] = $lang->get('subject.required');
             } elseif(strlen($this->subject) > 100) {
-                $errors['subject'] = 'O Assunto precisa ter 100 caractéres ou menos!';
+                $errors['subject'] = $lang->get('subject.max');
             }
     
             if(!$this->message) {
-                $errors['message'] = 'A Mensagem é obrigatória!';
+                $errors['message'] = $lang->get('message.required');
             } elseif(strlen($this->message) > 1000) {
-                $errors['message'] = 'A Mensagem precisa ter 1000 caractéres ou menos!';
+                $errors['message'] = $lang->get('message.max');
             }
     
             if(!$this->recaptchaResponse->isSuccess()) {
-                $errors['recaptcha'] = 'Você precisa completar o teste do ReCaptcha!';
+                $errors['recaptcha'] = $lang->get('recaptcha_error');
             }
     
             if(count($errors) > 0) {
-                throw new ValidationException($errors);
+                throw new ValidationException($errors, $lang->get('error_message'));
             }
 
             $email = new Email();

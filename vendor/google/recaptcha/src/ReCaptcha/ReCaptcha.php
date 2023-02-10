@@ -165,15 +165,15 @@ class ReCaptcha
         $initialResponse = Response::fromJson($rawResponse);
         $validationErrors = array();
 
-        if (isset($this->hostname) && strcasecmp($this->hostname, $initialResponse->getHostname()) !== 0) {
+        if (isset($this->hostname) && strcasecmp($this->hostname, $initialResponse->getHostname() ?? '') !== 0) {
             $validationErrors[] = self::E_HOSTNAME_MISMATCH;
         }
 
-        if (isset($this->apkPackageName) && strcasecmp($this->apkPackageName, $initialResponse->getApkPackageName()) !== 0) {
+        if (isset($this->apkPackageName) && strcasecmp($this->apkPackageName, $initialResponse->getApkPackageName() ?? '') !== 0) {
             $validationErrors[] = self::E_APK_PACKAGE_NAME_MISMATCH;
         }
 
-        if (isset($this->action) && strcasecmp($this->action, $initialResponse->getAction()) !== 0) {
+        if (isset($this->action) && strcasecmp($this->action, $initialResponse->getAction() ?? '') !== 0) {
             $validationErrors[] = self::E_ACTION_MISMATCH;
         }
 

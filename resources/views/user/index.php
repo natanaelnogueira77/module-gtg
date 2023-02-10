@@ -1,17 +1,21 @@
 <?php 
+    $lang = getLang()->setFilepath('views/user/index')->getContent();
     $this->layout("themes/architect-ui/_theme", [
-        'title' => 'Painel do Usuário | ' . SITE
+        'title' => $lang->get('title', ['site_name' => SITE])
     ]);
 ?>
 
 <?php $this->start('scripts'); ?>
+<script> 
+    const lang = <?php echo json_encode($lang->get('script')) ?>;
+</script>
 <script src="<?= url('resources/js/user/index.js') ?>"></script>
 <?php $this->end(); ?>
 
 <?php 
     $this->insert('themes/architect-ui/components/title', [
-        'title' => 'Painel do Usuário',
-        'subtitle' => 'Informações sobre sua atividade no sistema',
+        'title' => $lang->get('title2'),
+        'subtitle' => $lang->get('subtitle'),
         'icon' => 'pe-7s-user',
         'icon_color' => 'bg-malibu-beach'
     ]);

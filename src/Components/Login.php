@@ -22,22 +22,23 @@ class Login
     public function verify(): ?User 
     {
         try {
+            $lang = getLang()->setFilepath('components/login')->getContent()->setBase('verify');
             $errors = [];
 
             if(!$this->email) {
-                $errors['email'] = 'Email é obrigatório!';
+                $errors['email'] = $lang->get('email.required');
             } elseif(!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-                $errors['email'] = 'Email inválido!';
+                $errors['email'] = $lang->get('email.invalid');
             } elseif(strlen($this->email) > 100) {
-                $errors['email'] = 'O Email precisa ter 100 caractéres ou menos!';
+                $errors['email'] = $lang->get('email.max');
             }
 
             if(!$this->password) {
-                $errors['password'] = 'Senha é obrigatório!';
+                $errors['password'] = $lang->get('password.required');
             }
 
             if(count($errors) > 0) {
-                throw new ValidationException($errors);
+                throw new ValidationException($errors, $lang->get('error_message'));
             }
 
             $user = User::getByEmail($this->email);
@@ -45,7 +46,7 @@ class Login
                 return $user;
             }
             
-            throw new AppException('Usuário ou Senha inválidos!');
+            throw new AppException($lang->get('invalid_user'));
         } catch(Exception $e) {
             $this->error = $e;
             return null;

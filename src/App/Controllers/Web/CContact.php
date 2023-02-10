@@ -13,6 +13,7 @@ class CContact extends Template
     {
         $this->addData();
 
+        $lang = getLang()->setFilepath('controllers/web/contact')->getContent()->setBase('index');
         $contactData = [];
         $errors = [];
         $exception = null;
@@ -25,7 +26,7 @@ class CContact extends Template
                     throw $contact->error();
                 }
 
-                addSuccessMsg('Mensagem enviada com sucesso!');
+                addSuccessMsg($lang->get('success'));
             } catch(\Exception $e) {
                 $exception = $e;
                 if((new \ReflectionClass($exception))->getShortName() == 'ValidationException') {

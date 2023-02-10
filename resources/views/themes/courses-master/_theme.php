@@ -32,7 +32,7 @@
                 <div class="ajax_rotation"></div>
                 <img src="<?= $shortcutIcon ?>" alt="">
             </div>
-            <div class="ajax_load_box_title">Aguarde, carregando!</div>
+            <div class="ajax_load_box_title"><?= $loadingText ?></div>
         </div>
     </div>
 

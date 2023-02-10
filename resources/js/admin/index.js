@@ -13,7 +13,7 @@ $(function () {
             table.find("[data-act=delete]").click(function () {
                 var data = $(this).data();
 
-                if(confirm("Deseja realmente excluir este Usuário?")) {
+                if(confirm(lang.users.delete.confirm)) {
                     app.callAjax({
                         url: data.action,
                         type: data.method,

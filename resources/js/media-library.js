@@ -257,8 +257,7 @@ class MediaLibrary {
             }
         } else {
             var str = object.fileTypes.join(", ");
-            object.app.showMessage(`A extensão do arquivo que você tentou enviar não é permitida aqui! 
-                Extensões permitidas: ${str}`, "error");
+            object.app.showMessage(`${this.chooseButton.getAttribute('data-allowed')} ${str}`, "error");
         }
     }
 
@@ -438,8 +437,8 @@ class MediaLibrary {
             if(curr_page > 1) {
                 pagination.innerHTML += `
                     <li class="page-item">
-                        <button class="page-link" aria-label="Anterior" data-page="${curr_page - 1}">
-                            <span aria-hidden="true">«</span><span class="sr-only">Anterior</span>
+                        <button class="page-link" aria-label="Previous" data-page="${curr_page - 1}">
+                            <span aria-hidden="true">«</span><span class="sr-only">Previous</span>
                         </button>
                     </li>
                 `;
@@ -449,8 +448,8 @@ class MediaLibrary {
                 for(var i = curr_page - 4; i <= pages && i <= curr_page + 5; i++) {
                     pagination.innerHTML += `
                         <li class="page-item ${curr_page == i ? "active" : ""}">
-                            <button class="page-link" aria-label="Página ${i}" data-page="${i}">
-                                <span aria-hidden="true">${i}</span><span class="sr-only">Página ${i}</span>
+                            <button class="page-link" aria-label="Page ${i}" data-page="${i}">
+                                <span aria-hidden="true">${i}</span><span class="sr-only">Page ${i}</span>
                             </button>
                         </li>
                     `;
@@ -459,8 +458,8 @@ class MediaLibrary {
                 for(var i = 1; i <= pages && i <= 10; i++) {
                     pagination.innerHTML += `
                         <li class="page-item ${curr_page == i ? "active" : ""}">
-                            <button class="page-link" aria-label="Página ${i}" data-page="${i}">
-                                <span aria-hidden="true">${i}</span><span class="sr-only">Página ${i}</span>
+                            <button class="page-link" aria-label="Page ${i}" data-page="${i}">
+                                <span aria-hidden="true">${i}</span><span class="sr-only">Page ${i}</span>
                             </button>
                         </li>
                     `;
@@ -470,8 +469,8 @@ class MediaLibrary {
             if(pages > curr_page) {
                 pagination.innerHTML += `
                     <li class="page-item">
-                        <button class="page-link" aria-label="Próxima" data-page="${parseInt(curr_page) + 1}">
-                            <span aria-hidden="true">»</span><span class="sr-only">Próxima</span>
+                        <button class="page-link" aria-label="Next" data-page="${parseInt(curr_page) + 1}">
+                            <span aria-hidden="true">»</span><span class="sr-only">Next</span>
                         </button>
                     </li>
                 `;
@@ -495,7 +494,7 @@ class MediaLibrary {
     }
 
     setMaxSize(size) {
-        this.maxSizeText.innerHTML = `Tamanho Máximo Permitido: ${size}MB`;
+        this.maxSizeText.innerHTML = `${this.maxSizeText.getAttribute('data-text')} ${size}MB`;
     }
 
     returnFilePath(filename) {

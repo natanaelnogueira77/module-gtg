@@ -20,7 +20,7 @@
                 <div class="ajax_rotation"></div>
                 <img src="<?= $shortcutIcon ?>" alt="">
             </div>
-            <div class="ajax_load_box_title">Aguarde, carregando!</div>
+            <div class="ajax_load_box_title"><?= $loadingText ?></div>
         </div>
     </div>
 
@@ -60,6 +60,14 @@
             'storeAt' => $storeAt,
             'path' => ROOT
         ]);
+
+        if($user) {
+            $this->insert('components/expired-session', [
+                'action' => $router->route('login.check'),
+                'return' => $router->route('login.index'),
+                'check' => $router->route('login.expired')
+            ]);
+        }
     ?>
 </body>
 </html>

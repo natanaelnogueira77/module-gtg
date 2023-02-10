@@ -24,7 +24,6 @@ class ErrorHandler
     ) 
     {
         $this->monolog = new Logger('web');
-        //$this->monolog->pushHandler(new BrowserConsoleHandler(Logger::DEBUG));
         $this->monolog->pushHandler(new StreamHandler(__DIR__ . '/../../errors.log', Logger::ERROR));
         $this->monolog->pushProcessor(function ($record) {
             $record['extra']['HTTP_HOST'] = $_SERVER['HTTP_HOST'];

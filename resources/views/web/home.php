@@ -1,0 +1,1 @@
+<?php $lang = getLang()->setFilepath('views/web/home')->getContent(); ?>

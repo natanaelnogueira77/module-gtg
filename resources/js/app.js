@@ -271,10 +271,6 @@ class App {
                 data: {},
                 success: function (response) {
                     if(response.success) {
-                        $('#login-modal').modal({
-                            backdrop: "static",
-                            keyboard: false
-                        });
                         $('#login-modal').modal("show");
                         is_session_expired = 'yes';
                     }
@@ -292,7 +288,7 @@ class App {
         
         $('#login_form').submit(function(e) {
             e.preventDefault();
-            var form = $(this);
+            const form = $(this);
             
             object.callAjax({
                 url: form.attr("action"),
@@ -301,10 +297,6 @@ class App {
                 success: function(response) {
                     if(response.success) {
                         form.closest(".modal").modal('toggle');
-                    }
-
-                    if(response.message) {
-                        object.showMessage(response.message.message, response.message.type)
                     }
                 }
             });
@@ -317,38 +309,49 @@ $(function () {
     app.tinymce({
         selector:'textarea.tinymce',
         language: 'pt_BR',
-        block_formats: 'Smart Meet=h2; Parágrafo=p; Cabeçalho 1=h1; Cabeçalho 2=h2; Cabeçalho 3=h3; Cabeçalho 4=h4; Cabeçalho 5=h5; Cabeçalho 6=h6',
+        block_formats: 'Parágrafo=p; Cabeçalho 1=h1; Cabeçalho 2=h2; Cabeçalho 3=h3; Cabeçalho 4=h4; Cabeçalho 5=h5; Cabeçalho 6=h6',
         style_formats: [
-            {title: 'Headers', items: [
-                {title: 'Smart Meet', block: 'h2'},
-                {title: 'Cabeçalho 1', block: 'h1'},
-                {title: 'Cabeçalho 2', block: 'h2'},
-                {title: 'Cabeçalho 3', block: 'h3'},
-                {title: 'Cabeçalho 4', block: 'h4'},
-                {title: 'Cabeçalho 5', block: 'h5'},
-                {title: 'Cabeçalho 6', block: 'h6'}
-            ]},
-            {title: 'Inline', items: [
-                {title: 'Bold', inline: 'b', icon: 'bold'},
-                {title: 'Italic', inline: 'i', icon: 'italic'},
-                {title: 'Underline', inline: 'span', styles : {textDecoration : 'underline'}, icon: 'underline'},
-                {title: 'Strikethrough', inline: 'span', styles : {textDecoration : 'line-through'}},
-                {title: 'Superscript', inline: 'sup', icon: 'superscript'},
-                {title: 'Subscript', inline: 'sub', icon: 'subscript'},
-                {title: 'Code', inline: 'code'},
-            ]},
-            {title: 'Blocks', items: [
-                {title: 'Paragraph', block: 'p'},
-                {title: 'Blockquote', block: 'blockquote'},
-                {title: 'Div', block: 'div'},
-                {title: 'Pre', block: 'pre'}
-            ]},
-            {title: 'Alinhamento', items: [
-                {title: 'Left', block: 'div', styles : {textAlign : 'left'}},
-                {title: 'Center', block: 'div', styles : {textAlign : 'center'}},
-                {title: 'Right', block: 'div', styles : {textAlign : 'right'}},
-                {title: 'Justify', block: 'div', styles : {textAlign : 'justify'}}
-            ]}
+            {
+                title: 'Headers', 
+                items: [
+                    {title: 'Cabeçalho 1', block: 'h1'},
+                    {title: 'Cabeçalho 2', block: 'h2'},
+                    {title: 'Cabeçalho 3', block: 'h3'},
+                    {title: 'Cabeçalho 4', block: 'h4'},
+                    {title: 'Cabeçalho 5', block: 'h5'},
+                    {title: 'Cabeçalho 6', block: 'h6'}
+                ]
+            },
+            {
+                title: 'Inline', 
+                items: [
+                    {title: 'Bold', inline: 'b', icon: 'bold'},
+                    {title: 'Italic', inline: 'i', icon: 'italic'},
+                    {title: 'Underline', inline: 'span', styles : {textDecoration : 'underline'}, icon: 'underline'},
+                    {title: 'Strikethrough', inline: 'span', styles : {textDecoration : 'line-through'}},
+                    {title: 'Superscript', inline: 'sup', icon: 'superscript'},
+                    {title: 'Subscript', inline: 'sub', icon: 'subscript'},
+                    {title: 'Code', inline: 'code'},
+                ]
+            },
+            {
+                title: 'Blocks', 
+                items: [
+                    {title: 'Paragraph', block: 'p'},
+                    {title: 'Blockquote', block: 'blockquote'},
+                    {title: 'Div', block: 'div'},
+                    {title: 'Pre', block: 'pre'}
+                ]
+            },
+            {
+                title: 'Alinhamento', 
+                items: [
+                    {title: 'Left', block: 'div', styles : {textAlign : 'left'}},
+                    {title: 'Center', block: 'div', styles : {textAlign : 'center'}},
+                    {title: 'Right', block: 'div', styles : {textAlign : 'right'}},
+                    {title: 'Justify', block: 'div', styles : {textAlign : 'justify'}}
+                ]
+            }
         ]
     });
 });

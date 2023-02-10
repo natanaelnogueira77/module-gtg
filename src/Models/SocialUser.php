@@ -59,27 +59,29 @@ class SocialUser extends Model
     private function validate(): void 
     {
         $errors = [];
+
+        $lang = getLang()->setFilepath('models/social-user')->getContent()->setBase('validate');
         
         if(!$this->usu_id) {
-            $errors['usu_id'] = 'O Usuário é obrigatório!';
+            $errors['usu_id'] = $lang->get('user.required');
         }
 
         if(!$this->social_id) {
-            $errors['social_id'] = 'O ID da Rede Social é obrigatório!';
+            $errors['social_id'] = $lang->get('social_id.required');
         }
 
         if(!$this->social) {
-            $errors['social'] = 'O Nome da Rede Social é obrigatório!';
+            $errors['social'] = $lang->get('social.required');
         } elseif(!in_array($this->social, ['facebook', 'google'])) {
-            $errors['social'] = 'O Nome da Rede Social é inválido!';
+            $errors['social'] = $lang->get('social.invalid');
         }
 
         if(!$this->email) {
-            $errors['email'] = 'O Email é obrigatório!';
+            $errors['email'] = $lang->get('email.required');
         } elseif(!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-            $errors['email'] = 'Este Email é inválido!';
+            $errors['email'] = $lang->get('email.invalid');
         } elseif(strlen($this->email) > 100) {
-            $errors['email'] = 'O Email precisa ter 100 caractéres ou menos!';
+            $errors['email'] = $lang->get('email.max');
         } else {
             if(!$this->id) {
                 $email = (new self())
@@ -92,12 +94,12 @@ class SocialUser extends Model
             }
 
             if($email) {
-                $errors['email'] = 'Este Email já está em uso! Tente outro.';
+                $errors['email'] = $lang->get('email.exists');
             }
         }
 
         if(count($errors) > 0) {
-            throw new ValidationException($errors);
+            throw new ValidationException($errors, $lang->get('error_message'));
         }
     }
 }
