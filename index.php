@@ -7,5 +7,4 @@ if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'on' && $_SERVER['HTTP_HOST'
 
 require __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/config/config.php';
-require __DIR__ . '/src/config.php';
 require __DIR__ . '/src/routes.php';

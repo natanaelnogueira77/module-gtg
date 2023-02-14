@@ -8,11 +8,9 @@ class CError extends Controller
 {
     public function index(array $data): void 
     {
-        $lang = getLang()->setFilepath('controller/error')->getContent()->setBase('index');
-
         $this->loadView('error/index', [
             'code' => $data['code'],
-            'message' => $lang->get('error_message'),
+            'message' => _('Lamentamos, mas ocorreu um erro inesperado. Clique abaixo para voltar.'),
             'exception' => $exception
         ]);
     }

@@ -1,21 +1,17 @@
 <?php 
-    $lang = getLang()->setFilepath('views/user/index')->getContent();
     $this->layout("themes/architect-ui/_theme", [
-        'title' => $lang->get('title', ['site_name' => SITE])
+        'title' => sprintf(_('Painel do Usuário | %s'), SITE)
     ]);
 ?>
 
 <?php $this->start('scripts'); ?>
-<script> 
-    const lang = <?php echo json_encode($lang->get('script')) ?>;
-</script>
 <script src="<?= url('resources/js/user/index.js') ?>"></script>
 <?php $this->end(); ?>
 
 <?php 
     $this->insert('themes/architect-ui/components/title', [
-        'title' => $lang->get('title2'),
-        'subtitle' => $lang->get('subtitle'),
+        'title' => _('Painel do Usuário'),
+        'subtitle' => _('Informações sobre sua atividade no sistema'),
         'icon' => 'pe-7s-user',
         'icon_color' => 'bg-malibu-beach'
     ]);
@@ -34,6 +30,6 @@
             </div>
         </a>
     </div>
-    <?php endforeach ?>
+    <?php endforeach; ?>
 </div>
-<?php endif ?>
+<?php endif; ?>

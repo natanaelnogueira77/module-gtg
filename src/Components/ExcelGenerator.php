@@ -31,9 +31,8 @@ class ExcelGenerator
     public function render(): bool
     {
         try {
-            $lang = getLang()->setFilepath('components/excel-generator')->getContent()->setBase('render');
             if(!$this->data) {
-                throw new Exception($lang->get('no_data'));
+                throw new Exception(_('Nenhum dado foi adicionado para a geração do Excel!'));
             }
 
             function cleanData(&$str) {

@@ -4,7 +4,6 @@ namespace Src\App\Controllers\Web;
 
 use Src\App\Controllers\Controller;
 use Src\Components\Auth;
-use Src\Components\Lang;
 use Src\Models\Config;
 use Src\Models\User;
 
@@ -15,8 +14,6 @@ class Template extends Controller
         $user = Auth::get();
         $config = Config::getMetasByName(['logo', 'logo_icon']);
 
-        $lang = getLang()->setFilepath('controllers/web/template')->getContent();
-
         $logo = url($config['logo']);
         $logoIcon = url($config['logo_icon']);
 
@@ -25,13 +22,13 @@ class Template extends Controller
                 'type' => 'item', 
                 'level' => 1, 
                 'url' => $this->getRoute('login.index'), 
-                'desc' => $lang->get('header.menu.item1')
+                'desc' => _('Início')
             ],
             [
                 'type' => 'item', 
                 'level' => 1,
                 'url' => $this->getRoute('contact.index'), 
-                'desc' => $lang->get('header.menu.item2')
+                'desc' => _('Contato')
             ]
         ];
 
@@ -39,18 +36,18 @@ class Template extends Controller
             $rightItems = [
                 [
                     'url' => $this->getRoute('user.index'), 
-                    'desc' => $lang->get('header.right.items.item1')
+                    'desc' => _('Painel Principal')
                 ],
                 [
                     'url' => $this->getRoute('login.logout'), 
-                    'desc' => $lang->get('header.right.items.item2')
+                    'desc' => _('Sair')
                 ]
             ];
         } else {
             $rightItems = [
                 [
                     'url' => $this->getRoute('login.index'), 
-                    'desc' => $lang->get('header.right.items.item3')
+                    'desc' => _('Entrar')
                 ]
             ];
         }
@@ -59,27 +56,27 @@ class Template extends Controller
             'user' => $user,
             'logo' => $logo,
             'shortcutIcon' => $logoIcon,
-            'loadingText' => $lang->get('loading_text'),
+            'loadingText' => _('Aguarde, carregando...'),
             'preloader' => ['logo' => $logo],
             'header' => [
                 'menu' => $headerMenu,
                 'right' => [
                     'items' => $rightItems,
                     'languages' => [
-                        'heading' => $lang->get('header.right.languages.heading'),
-                        'curr_img' => url('resources/imgs/flags/' . Lang::getLanguage() . '.png'),
+                        'heading' => _('Linguagens'),
+                        'curr_img' => url('resources/imgs/flags/' . '' . '.png'),
                         'items' => [
                             [
                                 'url' => $this->getRoute('language.index', ['lang' => 'pt']),
-                                'desc' => 'Português'
+                                'desc' => _('Português')
                             ],
                             [
                                 'url' => $this->getRoute('language.index', ['lang' => 'en']),
-                                'desc' => 'English'
+                                'desc' => _('Inglês')
                             ],
                             [
                                 'url' => $this->getRoute('language.index', ['lang' => 'es']),
-                                'desc' => 'Español'
+                                'desc' => _('Espanhol')
                             ]
                         ]
                     ]

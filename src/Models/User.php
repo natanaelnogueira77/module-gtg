@@ -140,21 +140,19 @@ class User extends Model
     private function validate(): void 
     {
         $errors = [];
-
-        $lang = getLang()->setFilepath('models/user')->getContent()->setBase('validate');
         
         if(!$this->name) {
-            $errors['name'] = $lang->get('name.required');
+            $errors['name'] = _('O Nome é obrigatório!');
         } elseif(strlen($this->name) > 100) {
-            $errors['name'] = $lang->get('name.max');
+            $errors['name'] = _('O Nome precisa ter 100 caractéres ou menos!');
         }
 
         if(!$this->email) {
-            $errors['email'] = $lang->get('email.required');
+            $errors['email'] = _('O Email é obrigatório!');
         } elseif(!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-            $errors['email'] = $lang->get('email.invalid');
+            $errors['email'] = _('O Email é inválido!');
         } elseif(strlen($this->email) > 100) {
-            $errors['email'] = $lang->get('email.max');
+            $errors['email'] = _('O Email precisa ter 100 caractéres ou menos!');
         } else {
             if(!$this->id) {
                 $email = (new self())
@@ -167,14 +165,14 @@ class User extends Model
             }
 
             if($email) {
-                $errors['email'] = $lang->get('email.exists');
+                $errors['email'] = _('Este Email já está em uso! Tente outro.');
             }
         }
 
         if(!$this->slug) {
-            $errors['slug'] = $lang->get('slug.required');
+            $errors['slug'] = _('O Apelido é obrigatório!');
         } elseif(strlen($this->slug) > 100) {
-            $errors['slug'] = $lang->get('slug.max');
+            $errors['slug'] = _('O Apelido precisa ter 100 caractéres ou menos!');
         } else {
             if(!$this->id) {
                 $slug = (new self())
@@ -187,22 +185,22 @@ class User extends Model
             }
             
             if($slug) {
-                $errors['slug'] = $lang->get('slug.exists');
+                $errors['slug'] = _('Este Apelido já está em uso! Tente outro.');
             }
         }
 
         if(!$this->utip_id) {
-            $errors['utip_id'] = $lang->get('user_type.required');
+            $errors['utip_id'] = _('O Tipo de Usuário é obrigatório!');
         }
 
         if(!$this->password) {
-            $errors['password'] = $lang->get('password.required');
+            $errors['password'] = _('A Senha é obrigatória!');
         } elseif(strlen($this->password) < 5) {
-            $errors['password'] = $lang->get('password.min');
+            $errors['password'] = _('A Senha deve conter 5 caracteres ou mais!');
         }
 
         if(count($errors) > 0) {
-            throw new ValidationException($errors, $lang->get('error_message'));
+            throw new ValidationException($errors, _('Erros de Validação! Verifique os campos.'));
         }
     }
 }

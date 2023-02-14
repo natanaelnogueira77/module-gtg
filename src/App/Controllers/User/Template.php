@@ -4,7 +4,6 @@ namespace Src\App\Controllers\User;
 
 use Src\App\Controllers\Controller;
 use Src\Components\Auth;
-use Src\Components\Lang;
 use Src\Models\Config;
 use Src\Models\User;
 use Src\Models\UserType;
@@ -14,8 +13,6 @@ class Template extends Controller
     public function addData(): void 
     {
         $config = Config::getMetasByName(['logo', 'logo_icon', 'style']);
-
-        $lang = getLang()->setFilepath('controllers/user/template')->getContent();
 
         $logo = url($config['logo']);
         $logoIcon = url($config['logo_icon']);
@@ -35,14 +32,14 @@ class Template extends Controller
         $leftMenu = [
             [
                 'type' => 'heading', 
-                'desc' => $lang->get('left.menu.heading1')
+                'desc' => _('Painéis')
             ],
             [
                 'type' => 'item', 
                 'level' => 1, 
                 'icon' => 'metismenu-icon pe-7s-display2', 
                 'url' => $this->getRoute('user.index'), 
-                'desc' => $lang->get('left.menu.item1')
+                'desc' => _('Painel Principal')
             ]
         ];
 
@@ -52,14 +49,14 @@ class Template extends Controller
                 'level' => 1, 
                 'icon' => 'nav-link-icon fa fa-home', 
                 'url' => $this->getRoute('login.index'), 
-                'desc' => $lang->get('header.menu.item1')
+                'desc' => _('Início')
             ],
             [
                 'type' => 'item', 
                 'level' => 1, 
                 'icon' => 'nav-link-icon fa fa-phone', 
                 'url' => $this->getRoute('contact.index'), 
-                'desc' => $lang->get('header.menu.item2')
+                'desc' => _('Contato')
             ]
         ];
 
@@ -71,7 +68,7 @@ class Template extends Controller
             'storeAt' => 'storage/users/user' . $user->id,
             'logo' => $logo,
             'shortcutIcon' => $logoIcon,
-            'loadingText' => $lang->get('loading_text'),
+            'loadingText' => _('Aguarde, carregando...'),
             'noLeft' => false,
             'noFooter' => false,
             'left' => [
@@ -86,40 +83,40 @@ class Template extends Controller
                 'right' => [
                     'show' => true,
                     'languages' => [
-                        'heading' => $lang->get('header.right.languages.heading'),
-                        'curr_img' => url('resources/imgs/flags/' . Lang::getLanguage() . '.png'),
+                        'heading' => _('Linguagens'),
+                        'curr_img' => url('resources/imgs/flags/' . '' . '.png'),
                         'items' => [
                             [
                                 'url' => $this->getRoute('language.index', ['lang' => 'pt']),
-                                'desc' => 'Português'
+                                'desc' => _('Português')
                             ],
                             [
                                 'url' => $this->getRoute('language.index', ['lang' => 'en']),
-                                'desc' => 'English'
+                                'desc' => _('Inglês')
                             ],
                             [
                                 'url' => $this->getRoute('language.index', ['lang' => 'es']),
-                                'desc' => 'Español'
+                                'desc' => _('Espanhol')
                             ]
                         ]
                     ],
                     'items' => [
                         [
                             'url' => $this->getRoute('user.index'), 
-                            'desc' => $lang->get('header.right.items.item1')
+                            'desc' => _('Painel Principal')
                         ],
                         [
                             'url' => $this->getRoute('user.edit.index'), 
-                            'desc' => $lang->get('header.right.items.item2')
+                            'desc' => _('Editar Meus Dados')
                         ],
                         [
                             'url' => $this->getRoute('login.index'), 
-                            'desc' => $lang->get('header.right.items.item3')
+                            'desc' => _('Voltar ao Início')
                         ],
                         ['divider' => true],
                         [
                             'url' => $this->getRoute('login.logout'), 
-                            'desc' => $lang->get('header.right.items.item4')
+                            'desc' => _('Sair')
                         ]
                     ],
                     'avatar' => 'https://www.gravatar.com/avatar/' . md5(strtolower(trim($user->email))),
@@ -127,7 +124,7 @@ class Template extends Controller
                     'avatar_subtitle' => $user->userType->name_sing
                 ]
             ],
-            'footer' => ['rightText' => 'Dashboard v' . GTG_VERSION]
+            'footer' => ['rightText' => sprintf(_('Painel %s'), 'v' . GTG_VERSION)]
         ]);
     }
 }

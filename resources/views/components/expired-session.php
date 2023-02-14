@@ -1,4 +1,3 @@
-<?php $lang = getLang()->setFilepath('views/components/expired-session')->getContent() ?>
 <script>
     $(function () {
         const app = new App();
@@ -10,28 +9,28 @@
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title"><?= $lang->get('title') ?></h5>
+                <h5 class="modal-title"><?= _('Sessão expirada, faça login') ?></h5>
             </div>
             <form id="login_form" action="<?= $action ?>" method="post">
                 <div class="modal-body">
                     <div class="position-relative form-group">
-                        <label for="email"><?= $lang->get('email.label') ?></label>
+                        <label for="email"><?= _('Email') ?></label>
                         <input type="text" class="form-control" name="email" 
-                            placeholder="<?= $lang->get('email.placeholder') ?>" required>
+                            placeholder="<?= _('Informe seu Email...') ?>" required>
                         <div class="invalid-feedback"></div>
                     </div>
                     
                     <div class="position-relative form-group">
-                        <label for="password"><?= $lang->get('password.label') ?></label>
-                        <input type="password" class="form-control" placeholder="<?= $lang->get('password.placeholder') ?>" 
+                        <label for="password"><?= _('Senha') ?></label>
+                        <input type="password" class="form-control" placeholder="<?= _('Informe sua Senha...') ?>" 
                             name="password" required>
                         <div class="invalid-feedback"></div>
                     </div>
                 </div>
                 <div class="modal-footer d-block text-center">
-                    <input type="submit" class="btn btn-lg btn-primary" value="<?= $lang->get('submit.value') ?>">
+                    <input type="submit" class="btn btn-lg btn-primary" value="<?= _('Entrar') ?>">
                     <a href="<?= $return ?>" class="btn btn-lg btn-secondary">
-                        <?= $lang->get('return_button') ?>
+                        <?= _('Voltar') ?>
                     </a>
                 </div>
             </form>

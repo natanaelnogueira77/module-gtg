@@ -52,11 +52,10 @@ class PDFRender
     public function render(): bool
     {
         try {
-            $lang = getLang()->setFilepath('components/pdf-render')->getContent()->setBase('render');
             $this->dompdf = new Dompdf($this->options);
 
             if(!$this->data->html) {
-                throw new Exception($lang->get('no_html'));
+                throw new Exception(_('O HTML é necessário!'));
             }
 
             if(!$this->data->paperSize) {

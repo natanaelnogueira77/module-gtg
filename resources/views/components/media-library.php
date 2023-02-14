@@ -1,22 +1,21 @@
-<?php $lang = getLang()->setFilepath('views/components/media-library')->getContent() ?>
 <div class="modal fade" id="modal-media-library" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true" 
     data-load="<?= $mlLoad ?>" data-add="<?= $mlAdd ?>" data-delete="<?= $mlDelete ?>" data-path="<?= $path ?>" data-root="<?= $storeAt ?>">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title"><?= $lang->get('title') ?></h5>
+                <h5 class="modal-title"><?= _('Biblioteca de Mídia') ?></h5>
             </div>
             <div class="modal-body">
                 <div class="card">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
                             <a data-toggle="tab" href="#ml-tab-1" class="nav-link show active">
-                                <?= $lang->get('file_uploads') ?>
+                                <?= _('Upload de Arquivos') ?>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a data-toggle="tab" href="#ml-tab-2" class="nav-link">
-                                <?= $lang->get('media_library') ?>
+                                <?= _('Biblioteca de Mídia') ?>
                             </a>
                         </li>
                     </ul>
@@ -29,9 +28,9 @@
                                         style="cursor: pointer; height: 100%; width: 100%;">
                                         <div class="d-flex justify-content-around align-items-center" style="height: 100%">
                                             <div>
-                                                <h3 class="text-center"><?= $lang->get('click_select') ?></h3>
-                                                <h3 class="text-center"><?= $lang->get('drag_files') ?></h3>
-                                                <h5 class="text-center" data-text="<?= $lang->get('max_size') ?>" id="ml-maxsize"></h5>
+                                                <h3 class="text-center"><?= _('Clique para selecionar ou') ?></h3>
+                                                <h3 class="text-center"><?= _('arraste o(s) arquivo(s)') ?></h3>
+                                                <h5 class="text-center" data-text="<?= _('Tamanho Máximo Permitido:') ?>" id="ml-maxsize"></h5>
                                                 <div class="progress-bar-sm progress-bar-animated-alt progress">
                                                     <div class="progress-bar progress-bar-animated progress-bar-striped bg-primary" 
                                                         id="ml-progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" 
@@ -49,7 +48,7 @@
                                 <form id="ml-images-list" class="mb-4">
                                     <div class="input-group">
                                         <input type="search" name="search" id="ml-search" class="form-control rounded" 
-                                            placeholder="<?= $lang->get('search') ?>">
+                                            placeholder="<?= _('Pesquisar...') ?>">
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-outline-primary">
                                                 <i class="icofont-search"></i>
@@ -66,11 +65,11 @@
                                 <div class="d-block text-center mt-4">
                                     <input type="hidden" id="ml-choosen-file">
                                     <button type="button" id="ml-choose" class="btn btn-primary" 
-                                        data-allowed="<?= $lang->get('allowed_extensions') ?>">
-                                        <?= $lang->get('choose') ?>
+                                        data-allowed="<?= _('A extensão do arquivo que você tentou enviar não é permitida aqui! Extensões permitidas:') ?>">
+                                        <?= _('Escolher') ?>
                                     </button>
                                     <button type="button" id="ml-cancel" class="btn btn-secondary" data-bs-dismiss="modal">
-                                        <?= $lang->get('cancel') ?>
+                                        <?= _('Cancelar') ?>
                                     </button>
                                 </div>
                             </div>

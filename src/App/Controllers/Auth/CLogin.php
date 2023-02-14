@@ -20,7 +20,6 @@ class CLogin extends Controller
         $exception = null;
         $errors = [];
         $config = Config::getMetasByName(['logo', 'logo_icon', 'login_img']);
-        $lang = getLang()->setFilepath('controllers/auth/login')->getContent()->setBase('index');
 
         if(count($data) > 0) {
             $login = new Login($data['email'], $data['password']);
@@ -28,7 +27,7 @@ class CLogin extends Controller
                 $recaptcha = new ReCaptcha(RECAPTCHA['secret_key']);
                 $resp = $recaptcha->setExpectedHostname(RECAPTCHA['host'])->verify($data['g-recaptcha-response']);
                 if(!$resp->isSuccess()) {
-                    throw new AppException($lang->get('recaptcha_error'));
+                    throw new AppException(_('Você precisa completar o teste do ReCaptcha!'));
                 }
 
                 $user = $login->verify();
@@ -38,7 +37,7 @@ class CLogin extends Controller
 
                 Auth::set($user);
 
-                addSuccessMsg($lang->get('welcome', ['user_name' => $user->name]));
+                addSuccessMsg(sprintf(_("Seja bem-vindo, %s!"), $user->name));
                 if(isset($data['redirect'])) {
                     header('Location: ' . url($data['redirect']));
                     exit();

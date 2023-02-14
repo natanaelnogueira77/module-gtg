@@ -19,7 +19,6 @@ class CResetPassword extends Controller
         $exception = null;
         $errors = [];
         $config = Config::getMetasByName(['logo', 'logo_icon', 'login_img']);
-        $lang = getLang()->setFilepath('controllers/auth/reset-password')->getContent()->setBase('index');
 
         if(count($data) > 0) {
             $forgotPassword = new ForgotPassword($data['email']);
@@ -27,7 +26,7 @@ class CResetPassword extends Controller
                 $recaptcha = new ReCaptcha(RECAPTCHA['secret_key']);
                 $resp = $recaptcha->setExpectedHostname(RECAPTCHA['host'])->verify($data['g-recaptcha-response']);
                 if(!$resp->isSuccess()) {
-                    throw new AppException($lang->get('recaptcha_error'));
+                    throw new AppException(_('Você precisa completar o teste do ReCaptcha!'));
                 }
 
                 $user = $forgotPassword->verify();
@@ -36,7 +35,7 @@ class CResetPassword extends Controller
                 }
                 
                 $email = new Email();
-                $email->add($lang->get('email.subject'), $this->getView('emails/reset-password', [
+                $email->add(_('Redefinir Senha'), $this->getView('emails/reset-password', [
                     'user' => $user,
                     'logo' => url($config['logo'])
                 ]), $user->name, $user->email);
@@ -45,7 +44,7 @@ class CResetPassword extends Controller
                     $this->throwException($email->error()->getMessage());
                 }
                 
-                addSuccessMsg($lang->get('success', ['user_email' => $user->email]));
+                addSuccessMsg(sprintf(_("Um email foi enviado para %s. Verifique para poder redefinir sua senha."), $user->email));
                 $this->redirect('login.index');
             } catch(\Exception $e) {
                 $exception = $e;
@@ -69,11 +68,10 @@ class CResetPassword extends Controller
         $exception = null;
         $errors = [];
         $config = Config::getMetasByName(['logo', 'logo_icon', 'login_img']);
-        $lang = getLang()->setFilepath('controllers/auth/reset-password')->getContent()->setBase('verify');
         
         $user = User::getByToken($data['code']);
         if(!$user) {
-            addErrorMsg($lang->get('no_user'));
+            addErrorMsg(_('Esse cógido é inválido!'));
             $this->redirect('login.index');
         }
 
@@ -87,7 +85,7 @@ class CResetPassword extends Controller
 
                 Auth::set($user);
 
-                addSuccessMsg($lang->get('success'));
+                addSuccessMsg(_('Senha redefinida com sucesso!'));
                 $this->redirect('login.index');
             } catch(\Exception $e) {
                 $exception = $e;

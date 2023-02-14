@@ -32,7 +32,6 @@ class CUsers extends Template
         $callback = [];
         
         try {
-            $lang = getLang()->setFilepath('controllers/admin/users')->getContent()->setBase('store');
             $dbUser = new User();
             $dbUser->setValues([
                 'utip_id' => $data['utip_id'],
@@ -44,16 +43,21 @@ class CUsers extends Template
             $dbUser->save();
 
             $email = new Email();
-            $email->add($lang->get('email.subject'), $this->getView('emails/user-register', [
+            $email->add(_('Você se Registrou com Sucesso!'), $this->getView('emails/user-register', [
                 'user' => $dbUser,
                 'password' => $data['password'],
                 'logo' => url(Config::getMetaByName('logo'))
             ]), $dbUser->name, $dbUser->email);
 
             if(!$email->send()) {
-                addSuccessMsg($lang->get('email.no_send', ['user_name' => $dbUser->name]));
+                addSuccessMsg(
+                    sprintf(
+                        _("O Usuário \"%s\" foi cadastrado com sucesso! Porém não foi possível enviar uma notificação no email dele."), 
+                        $dbUser->name
+                    )
+                );
             } else {
-                addSuccessMsg($lang->get('email.success', ['user_name' => $dbUser->name]));
+                addSuccessMsg(sprintf(_("Usuário \"%s\" foi criado com sucesso!"), $dbUser->name));
             }
 
             $callback['link'] = $this->getRoute('admin.users.edit', ['user_id' => $dbUser->id]);
@@ -67,11 +71,10 @@ class CUsers extends Template
     public function edit(array $data): void 
     {
         $this->addData();
-        $lang = getLang()->setFilepath('controllers/admin/users')->getContent()->setBase('edit');
 
         $dbUser = (new User())->findById(intval($data['user_id']));
         if(!$dbUser) {
-            addErrorMsg($lang->get('no_user'));
+            addErrorMsg(_('Nenhum Usuário foi encontrado!'));
             $this->redirect('admin.users.index');
         }
 
@@ -86,11 +89,9 @@ class CUsers extends Template
         $callback = [];
         
         try {
-            $lang = getLang()->setFilepath('controllers/admin/users')->getContent()->setBase('update');
-
             $dbUser = (new User())->findById(intval($data['user_id']));
             if(!$dbUser) {
-                $this->throwException($lang->get('no_user'));
+                $this->throwException(_('Nenhum Usuário foi encontrado!'));
             }
 
             $dbUser->setValues([
@@ -102,7 +103,7 @@ class CUsers extends Template
             ]);
             $dbUser->save();
 
-            $this->setMessage($lang->get('success', ['user_name' => $dbUser->name]));
+            $this->setMessage(sprintf(_("Os dados do Usuário \"%s\" foram alterados com sucesso!"), $dbUser->name));
         } catch(\Exception $e) {
             $this->error = $e;
         }
@@ -116,8 +117,6 @@ class CUsers extends Template
         $callback = [];
 
         try {
-            $lang = getLang()->setFilepath('controllers/admin/users')->getContent()->setBase('list');
-
             $content = [];
             $filters = [];
 
@@ -173,19 +172,19 @@ class CUsers extends Template
                             <div class=\"dropup d-inline-block\">
                                 <button type=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\" 
                                     data-toggle=\"dropdown\" class=\"dropdown-toggle btn btn-sm btn-primary\">
-                                    {$lang->get('actions.title')}
+                                    " . _('Ações') . "
                                 </button>
                                 <div tabindex=\"-1\" role=\"menu\" aria-hidden=\"true\" class=\"dropdown-menu\">
                                     <h6 tabindex=\"-1\" class=\"dropdown-header\">Ações</h6>
                                     <a href=\"{$this->getRoute('admin.users.edit', $params)}\" 
                                         type=\"button\" tabindex=\"0\" class=\"dropdown-item\">
-                                        {$lang->get('actions.edit')}
+                                        " . _('Editar Usuário') . "
                                     </a>
 
                                     <button type=\"button\" tabindex=\"0\" class=\"dropdown-item\" 
                                         data-act=\"delete\" data-method=\"delete\" 
                                         data-action=\"{$this->getRoute('admin.users.delete', $params)}\">
-                                        {$lang->get('actions.delete')}
+                                        " . _('Excluir Usuário') . "
                                     </button>
                                 </div>
                             </div>
@@ -197,11 +196,11 @@ class CUsers extends Template
             $callback['content'] = [
                 'table' => $this->getView('components/data-table', [
                     'headers' => [
-                        'actions' => ['text' => $lang->get('headers.actions')],
-                        'id' => ['text' => $lang->get('headers.id'), 'sort' => true],
-                        'name' => ['text' => $lang->get('headers.name'), 'sort' => true],
-                        'email' => ['text' => $lang->get('headers.email'), 'sort' => true],
-                        'created_at' => ['text' => $lang->get('headers.created_at'), 'sort' => true]
+                        'actions' => ['text' => _('Ações')],
+                        'id' => ['text' => _('ID'), 'sort' => true],
+                        'name' => ['text' => _('Nome'), 'sort' => true],
+                        'email' => ['text' => _('Email'), 'sort' => true],
+                        'created_at' => ['text' => _('Criado em'), 'sort' => true]
                     ],
                     'order' => [
                         'selected' => $order,
@@ -228,15 +227,13 @@ class CUsers extends Template
         $callback = [];
 
         try {
-            $lang = getLang()->setFilepath('controllers/admin/users')->getContent()->setBase('delete');
-
             $dbUser = (new User())->findById(intval($data['user_id']));
             if(!$dbUser) {
-                $this->throwException($lang->get('no_user'));
+                $this->throwException(_('Nenhum Usuário foi encontrado!'));
             }
 
             $dbUser->destroy();
-            $this->setMessage($lang->get('success', ['user_name' => $dbUser->name]));
+            $this->setMessage(sprintf(_("O Usuário \"%s\" foi excluído com sucesso."), $dbUser->name));
         } catch(\Exception $e) {
             $this->error = $e;
         }

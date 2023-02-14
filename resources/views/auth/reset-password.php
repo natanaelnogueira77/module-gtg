@@ -1,7 +1,6 @@
 <?php 
-    $lang = getLang()->setFilepath('views/auth/reset-password')->getContent();
     $this->layout("themes/courses-master/_theme", [
-        'title' => $lang->get('title', ['site_name' => SITE]),
+        'title' => sprintf(_('Redefinir Senha | %s'), SITE),
         'noHeader' => true,
         'noFooter' => true,
         'shortcutIcon' => $shortcutIcon,
@@ -17,13 +16,13 @@
             </a>
         </div>
 
-        <h2><?= $lang->get('card1.title') ?></h2>
+        <h2><?= _('Redefinir Senha') ?></h2>
 
         <?php if(!isset($code)): ?>
         <form class="form-default" action="<?= $router->route('reset-password.index') ?>" method="post">
             <div class="form-input">
-                <label for="email"><?= $lang->get('card1.email.label') ?></label>
-                <input type="email" id="email" name="email" placeholder="<?= $lang->get('card1.email.placeholder') ?>" 
+                <label for="email"><?= _('Email') ?></label>
+                <input type="email" id="email" name="email" placeholder="<?= _('Digite seu email') ?>" 
                     class="form-control <?= $errors['email'] ? 'is-invalid' : '' ?>" 
                     value="<?= $email ?>" required>
                 <div class="invalid-feedback"><?= $errors['email'] ?></div>
@@ -34,28 +33,28 @@
             </div>
 
             <div class="form-input pt-30">
-                <input type="submit" value="<?= $lang->get('card1.send') ?>">
+                <input type="submit" value="<?= _('Enviar') ?>">
             </div>
         </form>
         <?php else: ?>
         <form class="form-default" action="<?= $router->route('reset-password.verify') ?>" method="post">
             <div class="form-input">
-                <label for="password"><?= $lang->get('card1.password.label') ?></label>
-                <input type="password" id="password" name="password" placeholder="<?= $lang->get('card1.email.placeholder') ?>" 
+                <label for="password"><?= _('Nova Senha') ?></label>
+                <input type="password" id="password" name="password" placeholder="<?= _('Digite sua nova senha') ?>" 
                     class="form-control <?= $errors['password'] ? 'is-invalid' : '' ?>" required>
                 <div class="invalid-feedback"><?= $errors['password'] ?></div>
             </div>
 
             <div class="form-input">
-                <label for="confirm_password"><?= $lang->get('card1.confirm_password.label') ?></label>
+                <label for="confirm_password"><?= _('Confirmar Nova Senha') ?></label>
                 <input type="password" id="confirm_password" name="confirm_password" 
                     class="form-control <?= $errors['confirm_password'] ? 'is-invalid' : '' ?>"
-                    placeholder="<?= $lang->get('card1.confirm_password.placeholder') ?>" required>
+                    placeholder="<?= _('Digite novamente a nova senha') ?>" required>
                 <div class="invalid-feedback"><?= $errors['confirm_password'] ?></div>
             </div>
 
             <div class="form-input pt-30">
-                <input type="submit" value="<?= $lang->get('card1.redefine') ?>">
+                <input type="submit" value="<?= _('Redefinir') ?>">
             </div>
         </form>
         <?php endif; ?>

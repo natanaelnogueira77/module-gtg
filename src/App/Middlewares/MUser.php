@@ -9,9 +9,8 @@ class MUser
 {
     public function handle(Router $router): bool
     {
-        $lang = getLang()->setFilepath('middlewares/user')->getContent()->setBase('handle');
         if(!Auth::get()) {
-            addErrorMsg($lang->get('not_authenticated'));
+            addErrorMsg(_('Você precisa estar autenticado para acessar essa área!'));
             redirect($router->route('login.index'));
             return false;
         }

@@ -22,26 +22,25 @@ class ResetPassword
     public function verify(string $token): ?User
     {
         try {
-            $lang = getLang()->setFilepath('components/reset-password')->getContent()->setBase('verify');
             $errors = [];
             
             if(!$this->password) {
-                $errors['password'] = $lang->get('password.required');
+                $errors['password'] = _('A Senha é obrigatória!');
             }
     
             if(!$this->confirm_password) {
-                $errors['confirm_password'] = $lang->get('confirm_password.required');
+                $errors['confirm_password'] = _('A Confirmação de Senha é obrigatória!');
             }
     
             if($this->password 
                 && $this->confirm_password 
                 && $this->password !== $this->confirm_password) {
-                $errors['password'] = $lang->get('password_match');
-                $errors['confirme_password'] = $lang->get('password_match');
+                $errors['password'] = _('As senhas não correspondem!');
+                $errors['confirme_password'] = _('As senhas não correspondem!');
             }
 
             if(count($errors) > 0) {
-                throw new ValidationException($errors, $lang->get('error_message'));
+                throw new ValidationException($errors, _('Erros de Validação! Verifique os campos.'));
                 return null;
             }
 
@@ -53,7 +52,7 @@ class ResetPassword
                 return $user;
             }
 
-            throw new AppException($lang->get('invalid_key'));
+            throw new AppException(_('Chave de verificação é inválida!'));
         } catch(Exception $e) {
             $this->error = $e;
         }

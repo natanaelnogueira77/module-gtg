@@ -49,23 +49,21 @@ class UserType extends Model
     private function validate(): void 
     {
         $errors = [];
-
-        $lang = getLang()->setFilepath('models/user-type')->getContent()->setBase('validate');
         
         if(!$this->name_sing) {
-            $errors['name_sing'] = $lang->get('name_sing.required');
+            $errors['name_sing'] = _('O Nome no Singular é obrigatório!');
         } elseif(strlen($this->name_sing) > 45) {
-            $errors['name_sing'] = $lang->get('name_sing.max');
+            $errors['name_sing'] = _('O Nome no Singular precisa ter 45 caractéres ou menos!');
         }
 
         if(!$this->name_plur) {
-            $errors['name_plur'] = $lang->get('name_plur.required');
+            $errors['name_plur'] = _('O Nome no Plural é obrigatório!');
         } elseif(strlen($this->name_plur) > 45) {
-            $errors['name_plur'] = $lang->get('name_plur.max');
+            $errors['name_plur'] = _('O Nome no Plural precisa ter 45 caractéres ou menos!');
         }
 
         if(count($errors) > 0) {
-            throw new ValidationException($errors, $lang->get('error_message'));
+            throw new ValidationException($errors, _('Erros de Validação! Verifique os campos.'));
         }
     }
 }

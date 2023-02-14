@@ -1,9 +1,8 @@
-<?php $lang = getLang()->setFilepath('views/components/data-table-filters')->getContent() ?>
 <div class="d-flex justify-content-between">
     <div class="form-group">
         <div class="input-group">
             <div class="input-group-append">
-                <span class="input-group-text"><?= $lang->get('rows') ?></span>
+                <span class="input-group-text"><?= _('Linhas') ?></span>
             </div>
             <select form="<?= $formId ?>" name="limit" class="form-control">
                 <option value="10">10</option>
@@ -16,10 +15,10 @@
     <div class="form-group">
         <div class="input-group">
             <div class="input-group-append">
-                <span class="input-group-text"><?= $lang->get('search') ?></span>
+                <span class="input-group-text"><?= _('Buscar') ?></span>
             </div>
             <input form="<?= $formId ?>" type="search" name="search" 
-                placeholder="<?= $lang->get('search_placeholder') ?>" class="form-control">
+                placeholder="<?= _('Buscar por') ?>" class="form-control">
         </div>
     </div>
 </div>

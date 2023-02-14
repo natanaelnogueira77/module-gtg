@@ -9,7 +9,6 @@ class MGuest
 {
     public function handle(Router $router): bool
     {
-        $lang = getLang()->setFilepath('middlewares/guest')->getContent()->setBase('handle');
         $user = Auth::get();
         if($user) {
             if($user->isAdmin()) {

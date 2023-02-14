@@ -59,29 +59,27 @@ class SocialUser extends Model
     private function validate(): void 
     {
         $errors = [];
-
-        $lang = getLang()->setFilepath('models/social-user')->getContent()->setBase('validate');
         
         if(!$this->usu_id) {
-            $errors['usu_id'] = $lang->get('user.required');
+            $errors['usu_id'] = _('O Usuário é obrigatório!');
         }
 
         if(!$this->social_id) {
-            $errors['social_id'] = $lang->get('social_id.required');
+            $errors['social_id'] = _('O ID da Rede Social é obrigatório!');
         }
 
         if(!$this->social) {
-            $errors['social'] = $lang->get('social.required');
+            $errors['social'] = _('O Nome da Rede Social é obrigatório!');
         } elseif(!in_array($this->social, ['facebook', 'google'])) {
-            $errors['social'] = $lang->get('social.invalid');
+            $errors['social'] = _('O Nome da Rede Social é inválido!');
         }
 
         if(!$this->email) {
-            $errors['email'] = $lang->get('email.required');
+            $errors['email'] = _('O Email é obrigatório!');
         } elseif(!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-            $errors['email'] = $lang->get('email.invalid');
+            $errors['email'] = _('Este Email é inválido!');
         } elseif(strlen($this->email) > 100) {
-            $errors['email'] = $lang->get('email.max');
+            $errors['email'] = _('O Email precisa ter 100 caractéres ou menos!');
         } else {
             if(!$this->id) {
                 $email = (new self())
@@ -94,12 +92,12 @@ class SocialUser extends Model
             }
 
             if($email) {
-                $errors['email'] = $lang->get('email.exists');
+                $errors['email'] = _('Este Email já está em uso! Tente outro.');
             }
         }
 
         if(count($errors) > 0) {
-            throw new ValidationException($errors, $lang->get('error_message'));
+            throw new ValidationException($errors, _('Erros de Validação! Verifique os campos.'));
         }
     }
 }

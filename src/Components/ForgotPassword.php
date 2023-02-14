@@ -20,24 +20,23 @@ class ForgotPassword
     public function verify(): ?User
     {
         try {
-            $lang = getLang()->setFilepath('components/forgot-password')->getContent()->setBase('verify');
             $errors = [];
 
             if(!$this->email) {
-                $errors['email'] = $lang->get('email.required');
+                $errors['email'] = _('O Email é obrigatório!');
             } elseif(!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-                $errors['email'] = $lang->get('email.invalid');
+                $errors['email'] = _('O Email é inválido!');
             } elseif(strlen($this->email) > 100) {
-                $errors['email'] = $lang->get('email.max');
+                $errors['email'] = _('O Email precisa ter 100 caractéres ou menos!');
             } else {
                 $user = User::getByEmail($this->email);
                 if(!$user) {
-                    $errors['email'] = $lang->get('email.exists');
+                    $errors['email'] = _('Este Email não foi encontrado!');
                 }
             }
 
             if(count($errors) > 0) {
-                throw new ValidationException($errors, $lang->get('error_message'));
+                throw new ValidationException($errors, _('Erros de Validação! Verifique os campos.'));
                 return null;
             }
 

@@ -51,9 +51,16 @@ function addInfoMsg(string $msg): void
     ];
 }
 
-function getLang(): Src\Components\Lang 
+function getLanguage(): ?array 
 {
-    return new Src\Components\Lang;
+    session_status() === PHP_SESSION_ACTIVE ?: session_start();
+    return isset($_SESSION[SESS_LANG]) ? $_SESSION[SESS_LANG] : null;
+}
+
+function setLanguage(array $langInfo): void
+{
+    session_status() === PHP_SESSION_ACTIVE ?: session_start();
+    $_SESSION[SESS_LANG] = $langInfo;
 }
 
 function generatePassword(

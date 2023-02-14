@@ -1,21 +1,24 @@
 <?php 
-    $lang = getLang()->setFilepath('views/admin/users/index')->getContent();
     $this->layout("themes/architect-ui/_theme", [
-        'title' => $lang->get('title', ['site_name' => SITE])
+        'title' => sprintf(_('Usuários | %s'), SITE)
     ]);
 ?>
 
 <?php $this->start('scripts'); ?>
 <script> 
-    const lang = <?php echo json_encode($lang->get('script')) ?>;
+    const lang = {
+        delete: {
+            confirm: <?php echo json_encode(_('Deseja realmente excluir este Usuário?')) ?>
+        }
+    };
 </script>
 <script src="<?= url('resources/js/admin/users/index.js') ?>"></script>
 <?php $this->end(); ?>
 
 <?php 
     $this->insert('themes/architect-ui/components/title', [
-        'title' => $lang->get('title2'),
-        'subtitle' => $lang->get('subtitle'),
+        'title' => _('Lista de Usuários'),
+        'subtitle' => _('Segue abaixo a lista de usuários do Sistema'),
         'icon' => 'pe-7s-users',
         'icon_color' => 'bg-malibu-beach'
     ]);
@@ -25,13 +28,13 @@
     <div class="card-header-tab card-header-tab-animation card-header brt-15">    
         <div class="card-header-title">
             <i class="header-icon icofont-users icon-gradient bg-info"> </i>
-            <?= $lang->get('card1.title') ?>
+            <?= _('Usuários') ?>
         </div>
 
         <div class="btn-actions-pane-right">
             <div role="group" class="btn-group-sm btn-group">
                 <a class="btn btn-lg btn-primary" href="<?= $router->route('admin.users.create') ?>">
-                    <?= $lang->get('card1.create_user') ?>
+                    <?= _('Criar Usuário') ?>
                 </a>
             </div>
         </div>
@@ -42,9 +45,9 @@
             <?php $this->insert('components/data-table-filters', ['formId' => 'filters']); ?>
             <div class="form-row"> 
                 <div class="form-group col-md-4 col-sm-6">
-                    <label><?= $lang->get('card1.filters.user_type.label') ?></label>
+                    <label><?= _('Nível de Usuário') ?></label>
                     <select name="user_type" class="form-control">
-                        <option value=""><?= $lang->get('card1.filters.user_type.option0') ?></option>
+                        <option value=""><?= _('Todos os Usuários') ?></option>
                         <?php 
                             if($userTypes) {
                                 foreach($userTypes as $userType) {

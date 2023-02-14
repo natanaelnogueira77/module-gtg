@@ -74,7 +74,6 @@ class CMediaLibrary extends Controller
     public function delete(array $data): void 
     {
         $callback = [];
-        $lang = getLang()->setFilepath('controller/media-library')->getContent()->setBase('delete');
 
         if(isset($data['name'])) {
             $files = glob($data['root'] . "/{$data["name"]}");
@@ -88,7 +87,7 @@ class CMediaLibrary extends Controller
                 }
             }
         } else {
-            $this->throwException($lang->get('no_filename'));
+            $this->throwException(_('Nenhum nome de arquivo foi declarado!'));
         }
         
         $this->echoCallback($callback);

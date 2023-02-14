@@ -1,9 +1,8 @@
-<?php $lang = getLang()->setFilepath('views/components/pagination')->getContent() ?>
 <nav>
     <ul class="pagination">
         <?php if($currPage > 1): ?>
         <li class="page-item">
-            <a class="page-link" data-page="<?= ($currPage - 1) ?>"><?= $lang->get('previous') ?></a>
+            <a class="page-link" data-page="<?= ($currPage - 1) ?>"><?= _('Anterior') ?></a>
         </li>
         <?php endif; ?>
 
@@ -21,7 +20,7 @@
 
         <?php if($currPage < $pages): ?>
         <li class="page-item">
-            <a class="page-link" data-page="<?= ($currPage + 1) ?>"><?= $lang->get('next') ?></a>
+            <a class="page-link" data-page="<?= ($currPage + 1) ?>"><?= _('Próxima') ?></a>
         </li>
         <?php endif; ?>
     </ul>

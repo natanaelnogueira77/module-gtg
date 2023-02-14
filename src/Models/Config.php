@@ -43,16 +43,14 @@ class Config extends Model
     {
         $errors = [];
 
-        $lang = getLang()->setFilepath('models/config')->getContent()->setBase('validate');
-
         if(!$this->style) {
-            $errors['style'] = $lang->get('style.required');
+            $errors['style'] = _('O Estilo é obrigatório!');
         } elseif(!in_array($this->style, ['light', 'dark'])) {
-            $errors['style'] = $lang->get('style.invalid');
+            $errors['style'] = _('O Estilo é inválido!');
         }
 
         if(count($errors) > 0) {
-            throw new ValidationException($errors, $lang->get('error_message'));
+            throw new ValidationException($errors, _('Erros de Validação! Verifique os campos.'));
         }
     }
 }
