@@ -13,7 +13,7 @@ $(function () {
             table.find("[data-act=delete]").click(function () {
                 var data = $(this).data();
 
-                if(confirm(lang.users.delete.confirm)) {
+                if(confirm(lang.text1)) {
                     app.callAjax({
                         url: data.action,
                         type: data.method,

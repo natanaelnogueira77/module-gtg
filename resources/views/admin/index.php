@@ -7,9 +7,7 @@
 <?php $this->start('scripts'); ?>
 <script> 
     const lang = {
-        delete: {
-            confirm: <?php echo json_encode(_('Deseja realmente excluir este Usuário?')) ?>
-        }
+        text1: <?php echo json_encode(_('Deseja realmente excluir este Usuário?')) ?>
     };
 </script>
 <script src="<?= url('resources/js/admin/index.js') ?>"></script>
