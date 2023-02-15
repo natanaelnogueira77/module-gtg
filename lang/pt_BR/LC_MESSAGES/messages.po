@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-02-14 14:52-0300\n"
-"PO-Revision-Date: 2023-02-14 14:54-0300\n"
+"POT-Creation-Date: 2023-02-15 08:44-0300\n"
+"PO-Revision-Date: 2023-02-15 08:44-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -640,8 +640,8 @@ msgstr ""
 "Um email foi enviado para %s. Verifique para poder redefinir sua senha."
 
 #: src/App/Controllers/Auth/CResetPassword.php:74
-msgid "Esse cógido é inválido!"
-msgstr "Esse cógido é inválido!"
+msgid "Esse código é inválido!"
+msgstr "Esse código é inválido!"
 
 #: src/App/Controllers/Auth/CResetPassword.php:88
 msgid "Senha redefinida com sucesso!"
@@ -767,10 +767,10 @@ msgstr "O Estilo é inválido!"
 
 #: src/Models/Model.php:214 src/Models/Model.php:234
 msgid ""
-"Ocorreu um erro inesperado enquando você executava essa ação! Informe ao "
+"Ocorreu um erro inesperado enquanto você executava essa ação! Informe ao "
 "Administrador."
 msgstr ""
-"Ocorreu um erro inesperado enquando você executava essa ação! Informe ao "
+"Ocorreu um erro inesperado enquanto você executava essa ação! Informe ao "
 "Administrador."
 
 #: src/Models/SocialUser.php:64

@@ -71,7 +71,7 @@ class CResetPassword extends Controller
         
         $user = User::getByToken($data['code']);
         if(!$user) {
-            addErrorMsg(_('Esse cógido é inválido!'));
+            addErrorMsg(_('Esse código é inválido!'));
             $this->redirect('login.index');
         }
 
