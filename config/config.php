@@ -60,15 +60,11 @@ require_once(realpath(dirname(__FILE__) . '/utils.php'));
 
 define('LANG', getLanguage() ?? ['pt_BR.utf-8', 'pt_BR', 'Portuguese_Brazil']);
 
-putenv('LANG=' . LANG[0]);
-putenv('LANGUAGE=' . LANG[0]);
-putenv('LC_ALL=' . LANG[0]);
-putenv('LC_MESSAGES=' . LANG[0]);
+setlocale(LC_ALL, LANG[1]);
+putenv('LANGUAGE=' . LANG[1]);
 
-setlocale(LC_ALL, LANG);
-textdomain("messages");
-
-bindtextdomain("messages", 'lang');
-bind_textdomain_codeset("messages", 'UTF-8');
+bindtextdomain('messages', dirname(__FILE__, 2) . '/lang');
+bind_textdomain_codeset('messages', 'UTF-8');
+textdomain('messages');
 
 date_default_timezone_set('America/Recife');

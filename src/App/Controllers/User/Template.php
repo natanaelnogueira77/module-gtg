@@ -84,7 +84,7 @@ class Template extends Controller
                     'show' => true,
                     'languages' => [
                         'heading' => _('Linguagens'),
-                        'curr_img' => url('resources/imgs/flags/' . '' . '.png'),
+                        'curr_img' => url('resources/imgs/flags/' . LANG[1] . '.png'),
                         'items' => [
                             [
                                 'url' => $this->getRoute('language.index', ['lang' => 'pt']),
