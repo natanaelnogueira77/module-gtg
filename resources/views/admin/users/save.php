@@ -4,10 +4,6 @@
     ]);
 ?>
 
-<?php $this->start('scripts'); ?>
-<script src="<?= url('resources/js/admin/users/save.js') ?>"></script>
-<?php $this->end(); ?>
-
 <?php 
     $this->insert('themes/architect-ui/components/title', [
         'title' => ($dbUser ? sprintf(_("Editar Usuário \"%s\""), $dbUser->name) : _('Criar Usuário')),
@@ -126,3 +122,28 @@
         </div>
     </div>
 </form>
+
+<?php $this->start('scripts'); ?>
+<script>
+    $(function () {
+        const app = new App();
+        const form = $("#save-user");
+        const update_password = $("input[name$='update_password']");
+        const password_area = $("#password");
+
+        update_password.change(function () {
+            if($('#update_password1').is(':checked')) {
+                password_area.show('fast');
+            }
+
+            if($('#update_password2').is(':checked')) {
+                password_area.hide('fast');
+            }
+        });
+
+        app.form(form, function (response) {
+            if(response.link) window.location.href = response.link;
+        });
+    });
+</script>
+<?php $this->end(); ?>

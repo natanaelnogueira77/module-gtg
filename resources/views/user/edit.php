@@ -4,10 +4,6 @@
     ]);
 ?>
 
-<?php $this->start('scripts'); ?>
-<script src="<?= url('resources/js/user/edit.js') ?>"></script>
-<?php $this->end(); ?>
-
 <?php 
     $this->insert('themes/architect-ui/components/title', [
         'title' => _('Editar Conta'),
@@ -102,3 +98,25 @@
         </div>
     </div>
 </form>
+
+<?php $this->start('scripts'); ?>
+<script>
+    $(function () {
+        const app = new App();
+
+        app.form($("#save-user"), function (response) {
+            if(response.link) window.location.href = response.link;
+        });
+
+        $("input[name$='update_password']").change(function(){
+            if($('#update_password1').is(':checked')) {
+                $("#password").show('fast');
+            }
+
+            if($('#update_password2').is(':checked')) {
+                $("#password").hide('fast');
+            }
+        });
+    });
+</script>
+<?php $this->end(); ?>

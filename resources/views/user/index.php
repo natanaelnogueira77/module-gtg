@@ -4,10 +4,6 @@
     ]);
 ?>
 
-<?php $this->start('scripts'); ?>
-<script src="<?= url('resources/js/user/index.js') ?>"></script>
-<?php $this->end(); ?>
-
 <?php 
     $this->insert('themes/architect-ui/components/title', [
         'title' => _('Painel do Usuário'),
@@ -33,3 +29,17 @@
     <?php endforeach; ?>
 </div>
 <?php endif; ?>
+
+<?php $this->start('scripts'); ?>
+<script>
+    $(function () {
+        $("[card-link]").mouseover(function () {
+            $(this).addClass("border border-primary");
+        });
+
+        $("[card-link]").mouseleave(function () {
+            $(this).removeClass("border border-primary");
+        });
+    });
+</script>
+<?php $this->end(); ?>

@@ -99,7 +99,7 @@ class App {
 
         $.ajax({
             url: data.url,
-            type: data.type ? data.type : "GET",
+            type: data.type ? data.type : "get",
             data: data.data ? data.data : {},
             dataType: data.dataType ? data.dataType : "json",
             beforeSend: function () {
@@ -172,7 +172,7 @@ class App {
         return "";
     }
 
-    getAddressByCEP(cep, inputs = {}) {
+    getAddressByCEP(cep, inputs = {}, awaitText = "...") {
         let url = `https://viacep.com.br/ws/${cep}/json/`;
         let xmlHttp = new XMLHttpRequest();
     
@@ -181,10 +181,10 @@ class App {
         var cidade = document.getElementById(inputs.cidade);
         var estado = document.getElementById(inputs.estado);
     
-        endereco.value = "Carregando...";
-        bairro.value = "Carregando...";
-        cidade.value = "Carregando...";
-        estado.value = "Carregando...";
+        endereco.value = awaitText;
+        bairro.value = awaitText;
+        cidade.value = awaitText;
+        estado.value = awaitText;
     
         xmlHttp.open('GET', url);
         xmlHttp.onreadystatechange = () => {
@@ -216,23 +216,6 @@ class App {
         $(elem).val(textArea.slice(0, curPos) + text + textArea.slice(curPos));
     }
 
-    tinymce(init = {}) {
-        tinymce.init(init);
-    }
-
-    setMediaLibrary() {
-        const modal = $('#modal-media-library');
-        if(modal.length != 0) {
-            this.mediaLibrary = new MediaLibrary({
-                root: modal.attr("data-root"),
-                load_script: modal.attr("data-load"), 
-                add_script: modal.attr("data-add"),
-                del_script: modal.attr("data-delete"),
-                path: modal.attr("data-path")
-            });
-        }
-    }
-
     setModal(modal, data = {}) {
         const modal_header = modal.find(".modal-header");
         const modal_title = modal_header.find(".modal-title");
@@ -259,99 +242,4 @@ class App {
             }
         }
     }
-
-    expiredSession(check_url) {
-        const object = this;
-        var is_session_expired = 'no';
-
-        function check_session(url) {
-            object.callAjax({
-                url: url,
-                type: "POST",
-                data: {},
-                success: function (response) {
-                    if(response.success) {
-                        $('#login-modal').modal("show");
-                        is_session_expired = 'yes';
-                    }
-                },
-                noLoad: true
-            });
-        }
-        
-        var count_interval = setInterval(function () {
-            check_session(check_url);
-            if(is_session_expired == 'yes') {
-                clearInterval(count_interval);
-            }
-        }, 10000);
-        
-        $('#login_form').submit(function(e) {
-            e.preventDefault();
-            const form = $(this);
-            
-            object.callAjax({
-                url: form.attr("action"),
-                type: form.attr("method"),
-                data: form.serialize(),
-                success: function(response) {
-                    if(response.success) {
-                        form.closest(".modal").modal('toggle');
-                    }
-                }
-            });
-        });
-    }
 }
-
-$(function () {
-    const app = new App();
-    app.tinymce({
-        selector:'textarea.tinymce',
-        language: 'pt_BR',
-        block_formats: 'Parágrafo=p; Cabeçalho 1=h1; Cabeçalho 2=h2; Cabeçalho 3=h3; Cabeçalho 4=h4; Cabeçalho 5=h5; Cabeçalho 6=h6',
-        style_formats: [
-            {
-                title: 'Headers', 
-                items: [
-                    {title: 'Cabeçalho 1', block: 'h1'},
-                    {title: 'Cabeçalho 2', block: 'h2'},
-                    {title: 'Cabeçalho 3', block: 'h3'},
-                    {title: 'Cabeçalho 4', block: 'h4'},
-                    {title: 'Cabeçalho 5', block: 'h5'},
-                    {title: 'Cabeçalho 6', block: 'h6'}
-                ]
-            },
-            {
-                title: 'Inline', 
-                items: [
-                    {title: 'Bold', inline: 'b', icon: 'bold'},
-                    {title: 'Italic', inline: 'i', icon: 'italic'},
-                    {title: 'Underline', inline: 'span', styles : {textDecoration : 'underline'}, icon: 'underline'},
-                    {title: 'Strikethrough', inline: 'span', styles : {textDecoration : 'line-through'}},
-                    {title: 'Superscript', inline: 'sup', icon: 'superscript'},
-                    {title: 'Subscript', inline: 'sub', icon: 'subscript'},
-                    {title: 'Code', inline: 'code'},
-                ]
-            },
-            {
-                title: 'Blocks', 
-                items: [
-                    {title: 'Paragraph', block: 'p'},
-                    {title: 'Blockquote', block: 'blockquote'},
-                    {title: 'Div', block: 'div'},
-                    {title: 'Pre', block: 'pre'}
-                ]
-            },
-            {
-                title: 'Alinhamento', 
-                items: [
-                    {title: 'Left', block: 'div', styles : {textAlign : 'left'}},
-                    {title: 'Center', block: 'div', styles : {textAlign : 'center'}},
-                    {title: 'Right', block: 'div', styles : {textAlign : 'right'}},
-                    {title: 'Justify', block: 'div', styles : {textAlign : 'justify'}}
-                ]
-            }
-        ]
-    });
-});

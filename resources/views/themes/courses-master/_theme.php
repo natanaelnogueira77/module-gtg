@@ -56,5 +56,6 @@
     <?= $this->section("modals"); ?>
     
     <?php $this->insert("themes/messages"); ?>
+    <?php $this->insert("components/tinymce"); ?>
 </body>
 </html>

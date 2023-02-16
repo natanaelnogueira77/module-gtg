@@ -4,15 +4,6 @@
     ]);
 ?>
 
-<?php $this->start('scripts'); ?>
-<script> 
-    const lang = {
-        text1: <?php echo json_encode(_('Deseja realmente excluir este Usuário?')) ?>
-    };
-</script>
-<script src="<?= url('resources/js/admin/index.js') ?>"></script>
-<?php $this->end(); ?>
-
 <?php 
     $this->insert('themes/architect-ui/components/title', [
         'title' => _('Painel do Administrador'),
@@ -196,3 +187,77 @@
         </div>
     </form>
 </div>
+
+<?php $this->start('scripts'); ?>
+<script>
+    $(function () {
+        const app = new App();
+        const table = $("#users");
+        const filters_form = $("#filters");
+        const clear_btn = $("#clear");
+
+        const mediaLibrary = new MediaLibrary();
+        const dataTable = app.table(table, table.data('action'));
+        dataTable.defaultParams(app.objectifyForm(filters_form))
+            .filtersForm(filters_form)
+            .clearButton(clear_btn)
+            .setMsgFunc((msg) => app.showMessage(msg.message, msg.type))
+            .addAction((table) => {
+                table.find("[data-act=delete]").click(function () {
+                    var data = $(this).data();
+
+                    if(confirm(<?php echo json_encode(_('Deseja realmente excluir este Usuário?')) ?>)) {
+                        app.callAjax({
+                            url: data.action,
+                            type: data.method,
+                            success: function (response) {
+                                dataTable.load();
+                            }
+                        });
+                    }
+                });
+            }).load();
+
+        $("#logo_upload").click(function () {
+            mediaLibrary.setFileTypes(['jpg', 'jpeg', 'png']).setSuccess(function (path) {
+                $("#logo").val(path);
+                $("img#logo_view").attr("src", `${mediaLibrary.path}/${path}`);
+            }).open();
+        });
+
+        $("#logo_icon_upload").click(function () {
+            mediaLibrary.setFileTypes(['jpg', 'jpeg', 'png']).setSuccess(function (path) {
+                $("#logo_icon").val(path);
+                $("img#logo_icon_view").attr("src", `${mediaLibrary.path}/${path}`);
+            }).open();
+        });
+
+        $("#login_img_upload").click(function () {
+            app.mediaLibrary.openML({
+                accept: ['jpg', 'jpeg', 'png'],
+                success: function(path) {
+                    $("#login_img").val(path);
+                    $("img#login_img_view").attr("src", `${app.mediaLibrary.path}/${path}`);
+                }
+            });
+        });
+
+        $("form#system, form#database, form#email, form#usertypes").each(function () {
+            app.form($(this));
+        });
+
+        $("[data-info=users]").click(function() {
+            var data = $(this).data();
+            $("#panel_users").show('fast');
+            
+            dataTable.params({
+                user_type: data.id
+            }).load();
+
+            $('html,body').animate({
+                scrollTop: $("#panels_top").offset().top},
+                'slow');
+        });
+    });
+</script>
+<?php $this->end(); ?>

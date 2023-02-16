@@ -4,15 +4,6 @@
     ]);
 ?>
 
-<?php $this->start('scripts'); ?>
-<script> 
-    const lang = {
-        text1: <?php echo json_encode(_('Deseja realmente excluir este Usuário?')) ?>
-    };
-</script>
-<script src="<?= url('resources/js/admin/users/index.js') ?>"></script>
-<?php $this->end(); ?>
-
 <?php 
     $this->insert('themes/architect-ui/components/title', [
         'title' => _('Lista de Usuários'),
@@ -64,3 +55,35 @@
         <div id="users" data-action="<?= $router->route('admin.users.list') ?>"></div>
     </div>
 </div>
+
+<?php $this->start('scripts'); ?>
+<script>
+    $(function () {
+        const app = new App();
+        const table = $("#users");
+        const filters_form = $("#filters");
+        const clear_btn = $("#clear");
+
+        const dataTable = app.table(table, table.data('action'));
+        dataTable.defaultParams(app.objectifyForm(filters_form))
+            .filtersForm(filters_form)
+            .clearButton(clear_btn)
+            .setMsgFunc((msg) => app.showMessage(msg.message, msg.type))
+            .addAction((table) => {
+                table.find("[data-act=delete]").click(function () {
+                    var data = $(this).data();
+
+                    if(confirm(<?php echo json_encode(_('Deseja realmente excluir este Usuário?')) ?>)) {
+                        app.callAjax({
+                            url: data.action,
+                            type: data.method,
+                            success: function (response) {
+                                dataTable.load();
+                            }
+                        });
+                    }
+                });
+            }).load();
+    });
+</script>
+<?php $this->end(); ?>

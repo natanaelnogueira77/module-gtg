@@ -1,9 +1,52 @@
 <script>
     $(function () {
         const app = new App();
-        app.expiredSession(<?php echo json_encode($check) ?>);
+
+        const login_modal = $("#login-modal");
+        const login_form = $("#login-form");
+
+        var is_session_expired = false;
+
+        function check_session(url) {
+            app.callAjax({
+                url: url,
+                type: "post",
+                data: {},
+                success: function (response) {
+                    if(response.success) {
+                        login_modal.modal("show");
+                        is_session_expired = true;
+                    }
+                },
+                noLoad: true
+            });
+        }
+        
+        var count_interval = setInterval(function () {
+            check_session(<?php echo json_encode($check) ?>);
+            if(is_session_expired == false) {
+                clearInterval(count_interval);
+            }
+        }, 10000);
+        
+        login_form.submit(function(e) {
+            e.preventDefault();
+            const form = $(this);
+            
+            app.callAjax({
+                url: form.attr("action"),
+                type: form.attr("method"),
+                data: form.serialize(),
+                success: function(response) {
+                    if(response.success) {
+                        login_modal.modal('toggle');
+                    }
+                }
+            });
+        });
     });
 </script>
+
 <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="login-modal" 
     data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-md">
@@ -11,7 +54,7 @@
             <div class="modal-header">
                 <h5 class="modal-title"><?= _('Sessão expirada, faça login') ?></h5>
             </div>
-            <form id="login_form" action="<?= $action ?>" method="post">
+            <form id="login-form" action="<?= $action ?>" method="post">
                 <div class="modal-body">
                     <div class="position-relative form-group">
                         <label for="email"><?= _('Email') ?></label>

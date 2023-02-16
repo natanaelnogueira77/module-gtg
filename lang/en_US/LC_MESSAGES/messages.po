@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-02-15 08:44-0300\n"
-"PO-Revision-Date: 2023-02-15 10:47-0300\n"
+"POT-Creation-Date: 2023-02-16 19:55-0300\n"
+"PO-Revision-Date: 2023-02-16 19:57-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -21,108 +21,108 @@ msgstr ""
 msgid "Administrador | %s"
 msgstr "Administrator | %s"
 
-#: resources/views/admin/index.php:11 resources/views/admin/users/index.php:11
-msgid "Deseja realmente excluir este Usuário?"
-msgstr "Do you really want to delete this User?"
-
-#: resources/views/admin/index.php:20
+#: resources/views/admin/index.php:9
 msgid "Painel do Administrador"
 msgstr "Administrator Panel"
 
-#: resources/views/admin/index.php:21
+#: resources/views/admin/index.php:10
 msgid "Relatórios e gerenciamento do Sistema"
 msgstr "System reporting and management"
 
-#: resources/views/admin/index.php:33
+#: resources/views/admin/index.php:22
 msgid "Módulo GTG"
 msgstr "Module GTG"
 
-#: resources/views/admin/index.php:38
+#: resources/views/admin/index.php:27
 #, php-format
 msgid "Versão: <strong>%s</strong>"
 msgstr "Version: <strong>%s</strong>"
 
-#: resources/views/admin/index.php:55
+#: resources/views/admin/index.php:44
 #, php-format
 msgid "%s do Sistema"
 msgstr "System's %s"
 
-#: resources/views/admin/index.php:68
+#: resources/views/admin/index.php:57
 #, php-format
 msgid "Ver %s"
 msgstr "See %s"
 
-#: resources/views/admin/index.php:88 resources/views/admin/users/index.php:31
+#: resources/views/admin/index.php:77 resources/views/admin/users/index.php:20
 #: src/App/Controllers/Admin/Template.php:46
 #: src/App/Controllers/Admin/Template.php:53
 msgid "Usuários"
 msgstr "Users"
 
-#: resources/views/admin/index.php:97 resources/views/admin/users/index.php:48
+#: resources/views/admin/index.php:86 resources/views/admin/users/index.php:37
 msgid "Nível de Usuário"
 msgstr "User Type"
 
-#: resources/views/admin/index.php:99 resources/views/admin/users/index.php:50
+#: resources/views/admin/index.php:88 resources/views/admin/users/index.php:39
 msgid "Todos os Usuários"
 msgstr "All Users"
 
-#: resources/views/admin/index.php:123
+#: resources/views/admin/index.php:112
 msgid "Configurações do Sistema"
 msgstr "System Configurations"
 
-#: resources/views/admin/index.php:131
+#: resources/views/admin/index.php:120
 msgid "Tema"
 msgstr "Theme"
 
-#: resources/views/admin/index.php:133
+#: resources/views/admin/index.php:122
 msgid "Escolha o Tema de Cores do Sistema..."
 msgstr "Choose System Color Theme..."
 
-#: resources/views/admin/index.php:135
+#: resources/views/admin/index.php:124
 msgid "Tema Claro"
 msgstr "Light Theme"
 
-#: resources/views/admin/index.php:138
+#: resources/views/admin/index.php:127
 msgid "Tema Escuro"
 msgstr "Dark Theme"
 
-#: resources/views/admin/index.php:145
+#: resources/views/admin/index.php:134
 msgid "Imagem de Fundo (Login)"
 msgstr "Background Image (Login)"
 
-#: resources/views/admin/index.php:154 resources/views/admin/index.php:172
-#: resources/views/admin/index.php:188
+#: resources/views/admin/index.php:143 resources/views/admin/index.php:161
+#: resources/views/admin/index.php:177
 msgid "Escolher Imagem"
 msgstr "Choose Image"
 
-#: resources/views/admin/index.php:163
+#: resources/views/admin/index.php:152
 msgid "Logo"
 msgstr "Logo"
 
-#: resources/views/admin/index.php:179
+#: resources/views/admin/index.php:168
 msgid "Ícone (Tamanho Recomendado: 512 x 512)"
 msgstr "Icon (Recommended Size: 512 x 512)"
 
-#: resources/views/admin/index.php:197
+#: resources/views/admin/index.php:186
 msgid "Salvar Configurações"
 msgstr "Save Settings"
+
+#: resources/views/admin/index.php:209 resources/views/admin/users/index.php:76
+msgid "Deseja realmente excluir este Usuário?"
+msgstr "Do you really want to delete this User?"
 
 #: resources/views/admin/users/index.php:3
 #, php-format
 msgid "Usuários | %s"
 msgstr "Users | %s"
 
-#: resources/views/admin/users/index.php:20
+#: resources/views/admin/users/index.php:9
 msgid "Lista de Usuários"
 msgstr "Users List"
 
-#: resources/views/admin/users/index.php:21
+#: resources/views/admin/users/index.php:10
 msgid "Segue abaixo a lista de usuários do Sistema"
 msgstr "Below is the list of System Users"
 
-#: resources/views/admin/users/index.php:37
-#: resources/views/admin/users/save.php:13
-#: resources/views/admin/users/save.php:122
+#: resources/views/admin/users/index.php:26
+#: resources/views/admin/users/save.php:9
+#: resources/views/admin/users/save.php:118
 #: src/App/Controllers/Admin/Template.php:60
 msgid "Criar Usuário"
 msgstr "Create User"
@@ -137,12 +137,12 @@ msgstr "Edit User | %s"
 msgid "Criar Usuário | %s"
 msgstr "Create User | %s"
 
-#: resources/views/admin/users/save.php:13
+#: resources/views/admin/users/save.php:9
 #, php-format
 msgid "Editar Usuário \"%s\""
 msgstr "Edit User \"%s\""
 
-#: resources/views/admin/users/save.php:15
+#: resources/views/admin/users/save.php:11
 msgid ""
 "Preencha os dados abaixo para alterar o Usuário, e então clique em "
 "\"Atualizar Usuário\""
@@ -150,90 +150,90 @@ msgstr ""
 "Fill in the information below to change the User, and then click on \"Update "
 "User\""
 
-#: resources/views/admin/users/save.php:16
+#: resources/views/admin/users/save.php:12
 msgid ""
 "Preencha os dados abaixo para criar um Usuário, e então clique em \"Criar "
 "Usuário\""
 msgstr ""
 "Fill in the details below to create a User, then click on \"Create User\""
 
-#: resources/views/admin/users/save.php:28 resources/views/user/edit.php:25
+#: resources/views/admin/users/save.php:24 resources/views/user/edit.php:21
 msgid "Informações da Conta"
 msgstr "Account Details"
 
-#: resources/views/admin/users/save.php:35 resources/views/user/edit.php:32
+#: resources/views/admin/users/save.php:31 resources/views/user/edit.php:28
 #: src/App/Controllers/Admin/CUsers.php:201
 msgid "Nome"
 msgstr "Name"
 
-#: resources/views/admin/users/save.php:36 resources/views/user/edit.php:33
+#: resources/views/admin/users/save.php:32 resources/views/user/edit.php:29
 msgid "Informe um nome..."
 msgstr "Enter a name..."
 
-#: resources/views/admin/users/save.php:42 resources/views/user/edit.php:39
+#: resources/views/admin/users/save.php:38 resources/views/user/edit.php:35
 msgid "Apelido"
 msgstr "Nickname"
 
-#: resources/views/admin/users/save.php:48 resources/views/user/edit.php:44
+#: resources/views/admin/users/save.php:44 resources/views/user/edit.php:40
 msgid "Informe um apelido..."
 msgstr "Enter a nickname..."
 
-#: resources/views/admin/users/save.php:57
+#: resources/views/admin/users/save.php:53
 #: resources/views/auth/reset-password.php:24
-#: resources/views/components/expired-session.php:17
-#: resources/views/user/edit.php:53 src/App/Controllers/Admin/CUsers.php:202
+#: resources/views/components/expired-session.php:60
+#: resources/views/user/edit.php:49 src/App/Controllers/Admin/CUsers.php:202
 msgid "Email"
 msgstr "Email"
 
-#: resources/views/admin/users/save.php:58 resources/views/user/edit.php:54
+#: resources/views/admin/users/save.php:54 resources/views/user/edit.php:50
 msgid "Informe um email..."
 msgstr "Enter a email..."
 
-#: resources/views/admin/users/save.php:64
+#: resources/views/admin/users/save.php:60
 msgid "Nível do Usuário"
 msgstr "User Type"
 
-#: resources/views/admin/users/save.php:66
+#: resources/views/admin/users/save.php:62
 msgid "Selecionar..."
 msgstr "Select..."
 
-#: resources/views/admin/users/save.php:82 resources/views/user/edit.php:63
+#: resources/views/admin/users/save.php:78 resources/views/user/edit.php:59
 msgid "Deseja alterar a Senha?"
 msgstr "Do you want to change the Password?"
 
-#: resources/views/admin/users/save.php:87 resources/views/user/edit.php:67
+#: resources/views/admin/users/save.php:83 resources/views/user/edit.php:63
 msgid "Sim"
 msgstr "Yes"
 
-#: resources/views/admin/users/save.php:95 resources/views/user/edit.php:73
+#: resources/views/admin/users/save.php:91 resources/views/user/edit.php:69
 msgid "Não"
 msgstr "No"
 
-#: resources/views/admin/users/save.php:105
-#: resources/views/components/expired-session.php:24
-#: resources/views/user/edit.php:82
+#: resources/views/admin/users/save.php:101
+#: resources/views/components/expired-session.php:67
+#: resources/views/user/edit.php:78
 msgid "Senha"
 msgstr "Password"
 
-#: resources/views/admin/users/save.php:107 resources/views/user/edit.php:84
+#: resources/views/admin/users/save.php:103 resources/views/user/edit.php:80
 msgid "Digite uma senha..."
 msgstr "Enter a password..."
 
-#: resources/views/admin/users/save.php:112 resources/views/user/edit.php:89
+#: resources/views/admin/users/save.php:108 resources/views/user/edit.php:85
 msgid "Confirmar Senha"
 msgstr "Confirm Password"
 
-#: resources/views/admin/users/save.php:114 resources/views/user/edit.php:91
+#: resources/views/admin/users/save.php:110 resources/views/user/edit.php:87
 msgid "Digite novamente a senha..."
 msgstr "Enter the password again..."
 
-#: resources/views/admin/users/save.php:122
+#: resources/views/admin/users/save.php:118
 msgid "Atualizar Usuário"
 msgstr "Update User"
 
-#: resources/views/admin/users/save.php:124
-#: resources/views/components/expired-session.php:33
-#: resources/views/error/index.php:11 resources/views/user/edit.php:100
+#: resources/views/admin/users/save.php:120
+#: resources/views/components/expired-session.php:76
+#: resources/views/error/index.php:11 resources/views/user/edit.php:96
 msgid "Voltar"
 msgstr "Return"
 
@@ -243,7 +243,7 @@ msgid "Entrar | %s"
 msgstr "Login | %s"
 
 #: resources/views/auth/login.php:23 resources/views/auth/login.php:42
-#: resources/views/components/expired-session.php:31
+#: resources/views/components/expired-session.php:74
 #: src/App/Controllers/Web/Template.php:50
 msgid "Entrar"
 msgstr "Login"
@@ -316,66 +316,94 @@ msgstr "Search"
 msgid "Buscar por"
 msgstr "Search for"
 
-#: resources/views/components/expired-session.php:12
+#: resources/views/components/expired-session.php:55
 msgid "Sessão expirada, faça login"
 msgstr "Session expired, please login"
 
-#: resources/views/components/expired-session.php:19
+#: resources/views/components/expired-session.php:62
 msgid "Informe seu Email..."
 msgstr "Enter your Email..."
 
-#: resources/views/components/expired-session.php:25
+#: resources/views/components/expired-session.php:68
 msgid "Informe sua Senha..."
 msgstr "Enter your Password..."
 
-#: resources/views/components/media-library.php:6
-#: resources/views/components/media-library.php:18
-msgid "Biblioteca de Mídia"
-msgstr "Media Library"
-
-#: resources/views/components/media-library.php:13
-msgid "Upload de Arquivos"
-msgstr "Files Upload"
-
-#: resources/views/components/media-library.php:31
-msgid "Clique para selecionar ou"
-msgstr "Click to select or"
-
-#: resources/views/components/media-library.php:32
-msgid "arraste o(s) arquivo(s)"
-msgstr "drag the file(s)"
-
-#: resources/views/components/media-library.php:33
-msgid "Tamanho Máximo Permitido:"
-msgstr "Maximum Size Allowed:"
-
-#: resources/views/components/media-library.php:51
-msgid "Pesquisar..."
-msgstr "Search..."
-
-#: resources/views/components/media-library.php:68
+#: resources/views/components/media-library.php:136
+#, php-format
 msgid ""
-"A extensão do arquivo que você tentou enviar não é permitida aqui! Extensões "
-"permitidas:"
+"A extensão do arquivo que você selecionou não é permitida aqui! Extensões "
+"permitidas: %s"
 msgstr ""
 "The file extension you tried to upload is not allowed here! Allowed "
-"extensions:"
+"extensions: %s"
 
-#: resources/views/components/media-library.php:69
-msgid "Escolher"
-msgstr "Choose"
+#: resources/views/components/media-library.php:147
+#, php-format
+msgid "Tamanho Máximo Permitido: %sMB"
+msgstr "Maximum Size Allowed: %sMB"
 
-#: resources/views/components/media-library.php:72
-msgid "Cancelar"
-msgstr "Cancel"
+#: resources/views/components/media-library.php:167
+#, php-format
+msgid "O arquivo que você tentou enviar é maior do que %sMB!"
+msgstr "The file you tried to upload is larger than %sMB!"
 
+#: resources/views/components/media-library.php:203
+msgid "Lamentamos, mas parece que ocorreu um erro no upload do seu arquivo."
+msgstr "We're sorry, but it looks like there was an error uploading your file."
+
+#: resources/views/components/media-library.php:214
+msgid "Lamentamos, mas houve uma falha na leitura do arquivo!"
+msgstr "Sorry, there was a failure while reading the file!"
+
+#: resources/views/components/media-library.php:233
+#, php-format
+msgid ""
+"A extensão do arquivo que você tentou enviar não é permitida aqui! Extensões "
+"permitidas: %s"
+msgstr ""
+"The file extension you tried to upload is not allowed here! Allowed "
+"extensions: %s"
+
+#: resources/views/components/media-library.php:412
+#: resources/views/components/media-library.php:415
 #: resources/views/components/pagination.php:5
 msgid "Anterior"
 msgstr "Previous"
 
+#: resources/views/components/media-library.php:447
+#: resources/views/components/media-library.php:450
 #: resources/views/components/pagination.php:23
 msgid "Próxima"
 msgstr "Next"
+
+#: resources/views/components/media-library.php:484
+#: resources/views/components/media-library.php:496
+msgid "Biblioteca de Mídia"
+msgstr "Media Library"
+
+#: resources/views/components/media-library.php:491
+msgid "Upload de Arquivos"
+msgstr "Files Upload"
+
+#: resources/views/components/media-library.php:509
+msgid "Clique para selecionar ou"
+msgstr "Click to select or"
+
+#: resources/views/components/media-library.php:510
+msgid "arraste o(s) arquivo(s)"
+msgstr "drag the file(s)"
+
+#: resources/views/components/media-library.php:529
+msgid "Pesquisar..."
+msgstr "Search..."
+
+#: resources/views/components/media-library.php:546
+msgid "Escolher"
+msgstr "Choose"
+
+#: resources/views/components/media-library.php:549
+msgid "Cancelar"
+msgstr "Cancel"
 
 #: resources/views/emails/reset-password.php:15
 #, php-format
@@ -419,15 +447,15 @@ msgstr "Password:"
 msgid "Editar Conta | %s"
 msgstr "Edit Account | %s"
 
-#: resources/views/user/edit.php:13
+#: resources/views/user/edit.php:9
 msgid "Editar Conta"
 msgstr "Edit Account"
 
-#: resources/views/user/edit.php:14
+#: resources/views/user/edit.php:10
 msgid "Edite os Detalhes de sua Conta logo abaixo"
 msgstr "Edit your Account Details below"
 
-#: resources/views/user/edit.php:98
+#: resources/views/user/edit.php:94
 msgid "Atualizar"
 msgstr "Update"
 
@@ -436,11 +464,11 @@ msgstr "Update"
 msgid "Painel do Usuário | %s"
 msgstr "User Panel | %s"
 
-#: resources/views/user/index.php:13
+#: resources/views/user/index.php:9
 msgid "Painel do Usuário"
 msgstr "User Panel"
 
-#: resources/views/user/index.php:14
+#: resources/views/user/index.php:10
 msgid "Informações sobre sua atividade no sistema"
 msgstr "Information about your activity on the system"
 
