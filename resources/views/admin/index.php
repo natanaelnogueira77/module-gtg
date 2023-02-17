@@ -233,13 +233,10 @@
         });
 
         $("#login_img_upload").click(function () {
-            app.mediaLibrary.openML({
-                accept: ['jpg', 'jpeg', 'png'],
-                success: function(path) {
-                    $("#login_img").val(path);
-                    $("img#login_img_view").attr("src", `${app.mediaLibrary.path}/${path}`);
-                }
-            });
+            mediaLibrary.setFileTypes(['jpg', 'jpeg', 'png']).setSuccess(function (path) {
+                $("#login_img").val(path);
+                $("img#login_img_view").attr("src", `${mediaLibrary.path}/${path}`);
+            }).open();
         });
 
         $("form#system, form#database, form#email, form#usertypes").each(function () {
