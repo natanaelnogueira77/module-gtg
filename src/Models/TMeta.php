@@ -157,7 +157,7 @@ trait TMeta
             }
 
             if(count($errors) > 0) {
-                throw new ValidationException($errors, 'Erros de validação! Verifique os dados!');
+                throw new ValidationException($errors, _('Erros de validação! Verifique os dados!'));
             }
 
             $in[strlen($in) - 1] = ' ';

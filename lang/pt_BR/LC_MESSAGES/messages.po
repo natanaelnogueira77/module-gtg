@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-02-16 19:55-0300\n"
-"PO-Revision-Date: 2023-02-16 19:55-0300\n"
+"POT-Creation-Date: 2023-02-23 13:03-0300\n"
+"PO-Revision-Date: 2023-02-23 13:03-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -824,6 +824,10 @@ msgstr "Este Email é inválido!"
 #: src/Models/SocialUser.php:95 src/Models/User.php:168
 msgid "Este Email já está em uso! Tente outro."
 msgstr "Este Email já está em uso! Tente outro."
+
+#: src/Models/TConfig.php:138 src/Models/TMeta.php:160
+msgid "Erros de validação! Verifique os dados!"
+msgstr "Erros de validação! Verifique os dados!"
 
 #: src/Models/User.php:173
 msgid "O Apelido é obrigatório!"

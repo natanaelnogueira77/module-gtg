@@ -50,12 +50,12 @@
             $this->insert("themes/courses-master/partials/footer", $footer);
         }
         $this->insert("themes/courses-master/partials/scripts");
+        $this->insert("components/tinymce");
     ?>
 
     <?= $this->section("scripts"); ?>
     <?= $this->section("modals"); ?>
     
     <?php $this->insert("themes/messages"); ?>
-    <?php $this->insert("components/tinymce"); ?>
 </body>
 </html>

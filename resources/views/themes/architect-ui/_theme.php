@@ -50,10 +50,10 @@
     </div>
     <?php 
         $this->insert("themes/architect-ui/partials/scripts");
+        $this->insert("components/tinymce");
         echo $this->section("scripts");
         echo $this->section("modals");
         $this->insert("themes/messages");
-        $this->insert("components/tinymce");
         $this->insert("components/media-library", [
             'mlAdd' => $router->route('mediaLibrary.add'),
             'mlLoad' => $router->route('mediaLibrary.load'),
