@@ -24,7 +24,8 @@ class CResetPassword extends Controller
             $forgotPassword = new ForgotPassword($data['email']);
             try {
                 $recaptcha = new ReCaptcha(RECAPTCHA['secret_key']);
-                $resp = $recaptcha->setExpectedHostname(RECAPTCHA['host'])->verify($data['g-recaptcha-response']);
+                $resp = $recaptcha->setExpectedHostname($_SERVER['SERVER_NAME'])
+                    ->verify($data['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
                 if(!$resp->isSuccess()) {
                     throw new AppException(_('Você precisa completar o teste do ReCaptcha!'));
                 }

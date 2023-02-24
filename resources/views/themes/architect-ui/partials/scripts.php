@@ -9,4 +9,3 @@
 <script src="<?= url("resources/js/tinymce.min.js") ?>"></script>
 <script src="<?= url("resources/js/data-table.js") ?>"></script>
 <script src="<?= url("resources/js/app.js") ?>"></script>
-<script async src="https://www.google.com/recaptcha/api.js"></script>

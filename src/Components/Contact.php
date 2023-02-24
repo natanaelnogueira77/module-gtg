@@ -25,7 +25,8 @@ class Contact
         $this->message = $message;
 
         $recaptcha = new ReCaptcha(RECAPTCHA['secret_key']);
-        $resp = $recaptcha->setExpectedHostname(RECAPTCHA['host'])->verify($recaptchaResponse);
+        $resp = $recaptcha->setExpectedHostname($_SERVER['SERVER_NAME'])
+            ->verify($recaptchaResponse, $_SERVER['REMOTE_ADDR']);
 
         $this->recaptchaResponse = $resp;
     }

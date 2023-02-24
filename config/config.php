@@ -23,7 +23,6 @@ define('MAIL', [
 ]);
 
 define('RECAPTCHA', [
-    'host' => ENV['recaptcha_host'],
     'site_key' => ENV['recaptcha_site_key'],
     'secret_key' => ENV['recaptcha_secret_key']
 ]);

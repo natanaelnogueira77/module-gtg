@@ -25,7 +25,8 @@ class CLogin extends Controller
             $login = new Login($data['email'], $data['password']);
             try {
                 $recaptcha = new ReCaptcha(RECAPTCHA['secret_key']);
-                $resp = $recaptcha->setExpectedHostname(RECAPTCHA['host'])->verify($data['g-recaptcha-response']);
+                $resp = $recaptcha->setExpectedHostname($_SERVER['SERVER_NAME'])
+                    ->verify($data['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
                 if(!$resp->isSuccess()) {
                     throw new AppException(_('Você precisa completar o teste do ReCaptcha!'));
                 }
@@ -60,7 +61,7 @@ class CLogin extends Controller
             'background' => url($config['login_img']),
             'logo' => url($config['logo']),
             'shortcutIcon' => url($config['logo_icon']),
-            'redirect' => $data['redirect'],
+            'redirect' => $_GET['redirect'],
             'email' => $data['email'],
             'errors' => $errors,
             'exception' => $exception

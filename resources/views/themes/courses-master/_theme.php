@@ -24,6 +24,7 @@
     <?= $this->section("css"); ?>
     <link rel="shortcut icon" href="<?= $shortcutIcon ?>" type="image/png">
     <title><?= $title ?></title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
     <div class="ajax_load">

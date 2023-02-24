@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-02-23 21:11-0300\n"
-"PO-Revision-Date: 2023-02-23 21:11-0300\n"
+"POT-Creation-Date: 2023-02-24 11:04-0300\n"
+"PO-Revision-Date: 2023-02-24 11:04-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -267,7 +267,7 @@ msgstr "Reset Password | %s"
 
 #: resources/views/auth/reset-password.php:19
 #: resources/views/emails/reset-password.php:14
-#: src/App/Controllers/Auth/CResetPassword.php:38
+#: src/App/Controllers/Auth/CResetPassword.php:39
 msgid "Redefinir Senha"
 msgstr "Reset Password"
 
@@ -649,26 +649,26 @@ msgstr "Logout"
 msgid "Painel %s"
 msgstr "Panel %s"
 
-#: src/App/Controllers/Auth/CLogin.php:30
-#: src/App/Controllers/Auth/CResetPassword.php:29 src/Components/Contact.php:65
+#: src/App/Controllers/Auth/CLogin.php:31
+#: src/App/Controllers/Auth/CResetPassword.php:30 src/Components/Contact.php:66
 msgid "Você precisa completar o teste do ReCaptcha!"
 msgstr "You need to complete the ReCaptcha test!"
 
-#: src/App/Controllers/Auth/CLogin.php:40
+#: src/App/Controllers/Auth/CLogin.php:41
 #, php-format
 msgid "Seja bem-vindo(a), %s!"
 msgstr "Welcome, %s!"
 
-#: src/App/Controllers/Auth/CResetPassword.php:47
+#: src/App/Controllers/Auth/CResetPassword.php:48
 #, php-format
 msgid "Um email foi enviado para %s. Verifique para poder redefinir sua senha."
 msgstr "An email has been sent to %s. Check to be able to reset your password."
 
-#: src/App/Controllers/Auth/CResetPassword.php:74
+#: src/App/Controllers/Auth/CResetPassword.php:75
 msgid "Esse código é inválido!"
 msgstr "This code is invalid!"
 
-#: src/App/Controllers/Auth/CResetPassword.php:88
+#: src/App/Controllers/Auth/CResetPassword.php:89
 msgid "Senha redefinida com sucesso!"
 msgstr "Password successfully reset!"
 
@@ -698,48 +698,48 @@ msgstr "You need to be authenticated as an Administrator to access this area!"
 msgid "Você precisa estar autenticado para acessar essa área!"
 msgstr "You need to be authenticated to access this area!"
 
-#: src/Components/Contact.php:39 src/Models/User.php:145
+#: src/Components/Contact.php:40 src/Models/User.php:145
 msgid "O Nome é obrigatório!"
 msgstr "Name is required!"
 
-#: src/Components/Contact.php:41 src/Models/User.php:147
+#: src/Components/Contact.php:42 src/Models/User.php:147
 msgid "O Nome precisa ter 100 caractéres ou menos!"
 msgstr "Name must be 100 characters or less!"
 
-#: src/Components/Contact.php:45 src/Components/ForgotPassword.php:26
+#: src/Components/Contact.php:46 src/Components/ForgotPassword.php:26
 #: src/Components/Login.php:28 src/Models/SocialUser.php:78
 #: src/Models/User.php:151
 msgid "O Email é obrigatório!"
 msgstr "Email is required!"
 
-#: src/Components/Contact.php:47 src/Components/ForgotPassword.php:28
+#: src/Components/Contact.php:48 src/Components/ForgotPassword.php:28
 #: src/Components/Login.php:30 src/Models/User.php:153
 msgid "O Email é inválido!"
 msgstr "The e-mail is invalid!"
 
-#: src/Components/Contact.php:49 src/Components/ForgotPassword.php:30
+#: src/Components/Contact.php:50 src/Components/ForgotPassword.php:30
 #: src/Components/Login.php:32 src/Models/SocialUser.php:82
 #: src/Models/User.php:155
 msgid "O Email precisa ter 100 caractéres ou menos!"
 msgstr "Email must be 100 characters or less!"
 
-#: src/Components/Contact.php:53
+#: src/Components/Contact.php:54
 msgid "O Assunto é obrigatório!"
 msgstr "Subject is required!"
 
-#: src/Components/Contact.php:55
+#: src/Components/Contact.php:56
 msgid "O Assunto precisa ter 100 caractéres ou menos!"
 msgstr "Subject must be 100 characters or less!"
 
-#: src/Components/Contact.php:59
+#: src/Components/Contact.php:60
 msgid "A Mensagem é obrigatória!"
 msgstr "Message is required!"
 
-#: src/Components/Contact.php:61
+#: src/Components/Contact.php:62
 msgid "A Mensagem precisa ter 1000 caractéres ou menos!"
 msgstr "Message must be 1000 characters or less!"
 
-#: src/Components/Contact.php:69 src/Components/ForgotPassword.php:39
+#: src/Components/Contact.php:70 src/Components/ForgotPassword.php:39
 #: src/Components/Login.php:40 src/Components/ResetPassword.php:43
 #: src/Models/Config.php:53 src/Models/SocialUser.php:100
 #: src/Models/User.php:203 src/Models/UserType.php:66
