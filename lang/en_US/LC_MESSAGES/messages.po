@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-02-24 11:04-0300\n"
-"PO-Revision-Date: 2023-02-24 11:04-0300\n"
+"POT-Creation-Date: 2023-02-24 12:54-0300\n"
+"PO-Revision-Date: 2023-02-24 12:55-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -242,7 +242,7 @@ msgstr "Return"
 msgid "Entrar | %s"
 msgstr "Login | %s"
 
-#: resources/views/auth/login.php:23 resources/views/auth/login.php:42
+#: resources/views/auth/login.php:23 resources/views/auth/login.php:39
 #: resources/views/components/expired-session.php:74
 #: src/App/Controllers/Web/Template.php:50
 msgid "Entrar"
@@ -256,7 +256,7 @@ msgstr "Enter your email"
 msgid "Digite sua senha"
 msgstr "Enter your password"
 
-#: resources/views/auth/login.php:46
+#: resources/views/auth/login.php:43
 msgid "Esqueceu a Senha?"
 msgstr "Forgot Password?"
 
@@ -267,32 +267,32 @@ msgstr "Reset Password | %s"
 
 #: resources/views/auth/reset-password.php:19
 #: resources/views/emails/reset-password.php:14
-#: src/App/Controllers/Auth/CResetPassword.php:39
+#: src/App/Controllers/Auth/CResetPassword.php:41
 msgid "Redefinir Senha"
 msgstr "Reset Password"
 
-#: resources/views/auth/reset-password.php:36
-#: resources/views/web/contact.php:89
+#: resources/views/auth/reset-password.php:33
+#: resources/views/web/contact.php:83
 msgid "Enviar"
 msgstr "Send"
 
-#: resources/views/auth/reset-password.php:42
+#: resources/views/auth/reset-password.php:39
 msgid "Nova Senha"
 msgstr "New Password"
 
-#: resources/views/auth/reset-password.php:43
+#: resources/views/auth/reset-password.php:40
 msgid "Digite sua nova senha"
 msgstr "Enter your new password"
 
-#: resources/views/auth/reset-password.php:49
+#: resources/views/auth/reset-password.php:46
 msgid "Confirmar Nova Senha"
 msgstr "Confirm New Password"
 
-#: resources/views/auth/reset-password.php:52
+#: resources/views/auth/reset-password.php:49
 msgid "Digite novamente a nova senha"
 msgstr "Re-enter the new password"
 
-#: resources/views/auth/reset-password.php:57
+#: resources/views/auth/reset-password.php:54
 msgid "Redefinir"
 msgstr "Reset"
 
@@ -515,7 +515,7 @@ msgstr "Enter your Email"
 msgid "Digite sua Mensagem"
 msgstr "Enter your Message"
 
-#: resources/views/web/contact.php:98
+#: resources/views/web/contact.php:92
 msgid "Envie-nos sua dúvida a qualquer hora!"
 msgstr "Send us your question anytime!"
 
@@ -649,26 +649,26 @@ msgstr "Logout"
 msgid "Painel %s"
 msgstr "Panel %s"
 
-#: src/App/Controllers/Auth/CLogin.php:31
-#: src/App/Controllers/Auth/CResetPassword.php:30 src/Components/Contact.php:66
-msgid "Você precisa completar o teste do ReCaptcha!"
-msgstr "You need to complete the ReCaptcha test!"
+#: src/App/Controllers/Auth/CLogin.php:33
+#: src/App/Controllers/Auth/CResetPassword.php:32 src/Components/Contact.php:77
+msgid "O Teste do ReCaptcha falhou! Tente novamente."
+msgstr "ReCaptcha Test Failed! Try again."
 
-#: src/App/Controllers/Auth/CLogin.php:41
+#: src/App/Controllers/Auth/CLogin.php:43
 #, php-format
 msgid "Seja bem-vindo(a), %s!"
 msgstr "Welcome, %s!"
 
-#: src/App/Controllers/Auth/CResetPassword.php:48
+#: src/App/Controllers/Auth/CResetPassword.php:50
 #, php-format
 msgid "Um email foi enviado para %s. Verifique para poder redefinir sua senha."
 msgstr "An email has been sent to %s. Check to be able to reset your password."
 
-#: src/App/Controllers/Auth/CResetPassword.php:75
+#: src/App/Controllers/Auth/CResetPassword.php:77
 msgid "Esse código é inválido!"
 msgstr "This code is invalid!"
 
-#: src/App/Controllers/Auth/CResetPassword.php:89
+#: src/App/Controllers/Auth/CResetPassword.php:91
 msgid "Senha redefinida com sucesso!"
 msgstr "Password successfully reset!"
 
@@ -685,7 +685,7 @@ msgstr "No filename has been declared!"
 msgid "Seus dados foram atualizados com sucesso!"
 msgstr "Your data has been successfully updated!"
 
-#: src/App/Controllers/Web/CContact.php:28
+#: src/App/Controllers/Web/CContact.php:37
 msgid "Mensagem enviada com sucesso!"
 msgstr "Message sent successfully!"
 
@@ -698,48 +698,48 @@ msgstr "You need to be authenticated as an Administrator to access this area!"
 msgid "Você precisa estar autenticado para acessar essa área!"
 msgstr "You need to be authenticated to access this area!"
 
-#: src/Components/Contact.php:40 src/Models/User.php:145
+#: src/Components/Contact.php:51 src/Models/User.php:145
 msgid "O Nome é obrigatório!"
 msgstr "Name is required!"
 
-#: src/Components/Contact.php:42 src/Models/User.php:147
+#: src/Components/Contact.php:53 src/Models/User.php:147
 msgid "O Nome precisa ter 100 caractéres ou menos!"
 msgstr "Name must be 100 characters or less!"
 
-#: src/Components/Contact.php:46 src/Components/ForgotPassword.php:26
+#: src/Components/Contact.php:57 src/Components/ForgotPassword.php:26
 #: src/Components/Login.php:28 src/Models/SocialUser.php:78
 #: src/Models/User.php:151
 msgid "O Email é obrigatório!"
 msgstr "Email is required!"
 
-#: src/Components/Contact.php:48 src/Components/ForgotPassword.php:28
+#: src/Components/Contact.php:59 src/Components/ForgotPassword.php:28
 #: src/Components/Login.php:30 src/Models/User.php:153
 msgid "O Email é inválido!"
 msgstr "The e-mail is invalid!"
 
-#: src/Components/Contact.php:50 src/Components/ForgotPassword.php:30
+#: src/Components/Contact.php:61 src/Components/ForgotPassword.php:30
 #: src/Components/Login.php:32 src/Models/SocialUser.php:82
 #: src/Models/User.php:155
 msgid "O Email precisa ter 100 caractéres ou menos!"
 msgstr "Email must be 100 characters or less!"
 
-#: src/Components/Contact.php:54
+#: src/Components/Contact.php:65
 msgid "O Assunto é obrigatório!"
 msgstr "Subject is required!"
 
-#: src/Components/Contact.php:56
+#: src/Components/Contact.php:67
 msgid "O Assunto precisa ter 100 caractéres ou menos!"
 msgstr "Subject must be 100 characters or less!"
 
-#: src/Components/Contact.php:60
+#: src/Components/Contact.php:71
 msgid "A Mensagem é obrigatória!"
 msgstr "Message is required!"
 
-#: src/Components/Contact.php:62
+#: src/Components/Contact.php:73
 msgid "A Mensagem precisa ter 1000 caractéres ou menos!"
 msgstr "Message must be 1000 characters or less!"
 
-#: src/Components/Contact.php:70 src/Components/ForgotPassword.php:39
+#: src/Components/Contact.php:81 src/Components/ForgotPassword.php:39
 #: src/Components/Login.php:40 src/Components/ResetPassword.php:43
 #: src/Models/Config.php:53 src/Models/SocialUser.php:100
 #: src/Models/User.php:203 src/Models/UserType.php:66
@@ -861,6 +861,9 @@ msgstr "Name in Plural is required!"
 #: src/Models/UserType.php:62
 msgid "O Nome no Plural precisa ter 45 caractéres ou menos!"
 msgstr "The Plural Name must be 45 characters or less!"
+
+#~ msgid "Você precisa completar o teste do ReCaptcha!"
+#~ msgstr "You need to complete the ReCaptcha test!"
 
 #~ msgid "Versão:"
 #~ msgstr "Version:"

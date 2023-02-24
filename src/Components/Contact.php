@@ -17,7 +17,16 @@ class Contact
     private $recaptchaResponse;
     private $error;
 
-    public function __construct(string $subject, string $message, string $name, string $email, $recaptchaResponse) 
+    public function __construct(
+        string $subject, 
+        string $message, 
+        string $name, 
+        string $email, 
+        $recaptchaResponse, 
+        $action,
+        $serverName,
+        $remoteAddr
+    ) 
     {
         $this->name = $name;
         $this->email = $email;
@@ -25,8 +34,10 @@ class Contact
         $this->message = $message;
 
         $recaptcha = new ReCaptcha(RECAPTCHA['secret_key']);
-        $resp = $recaptcha->setExpectedHostname($_SERVER['SERVER_NAME'])
-            ->verify($recaptchaResponse, $_SERVER['REMOTE_ADDR']);
+        $resp = $recaptcha->setExpectedHostname($serverName)
+            ->setExpectedAction($action)
+            ->setScoreThreshold(0.5)
+            ->verify($recaptchaResponse, $remoteAddr);
 
         $this->recaptchaResponse = $resp;
     }
@@ -63,7 +74,7 @@ class Contact
             }
     
             if(!$this->recaptchaResponse->isSuccess()) {
-                $errors['recaptcha'] = _('Você precisa completar o teste do ReCaptcha!');
+                $errors['recaptcha'] = _('O Teste do ReCaptcha falhou! Tente novamente.');
             }
     
             if(count($errors) > 0) {

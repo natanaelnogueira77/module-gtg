@@ -9,7 +9,7 @@
 ?>
 
 <main class="login-body" data-vide-bg="<?= $background ?>">
-    <form class="form-default" action="<?= $router->route('login.index') ?>" method="post">
+    <form id="main-login-form" class="form-default" action="<?= $router->route('login.index') ?>" method="post">
         <?php if($redirect): ?>
         <input type="hidden" name="redirect" value="<?= $redirect ?>">
         <?php endif; ?>
@@ -34,12 +34,9 @@
                 <div class="invalid-feedback"><?= $errors['password'] ?></div>
             </div>
 
-            <div class="form-input d-flex justify-content-around">
-                <div class="g-recaptcha" data-sitekey="<?= RECAPTCHA['site_key'] ?>"></div>
-            </div>
-
             <div class="form-input pt-10">
-                <input type="submit" value="<?= _('Entrar') ?>">
+                <input type="submit" class="g-recaptcha" data-sitekey="<?= RECAPTCHA['site_key'] ?>"
+                    data-callback='onSubmit' data-action='submit' value="<?= _('Entrar') ?>">
             </div>
 
             <a href="<?= $router->route('reset-password.index') ?>" class="forget">
@@ -48,3 +45,11 @@
         </div>
     </form>
 </main>
+
+<?php $this->start('scripts'); ?>
+<script>
+    function onSubmit(token) {
+        document.getElementById("main-login-form").submit();
+    }
+</script>
+<?php $this->end(); ?>

@@ -25,9 +25,11 @@ class CResetPassword extends Controller
             try {
                 $recaptcha = new ReCaptcha(RECAPTCHA['secret_key']);
                 $resp = $recaptcha->setExpectedHostname($_SERVER['SERVER_NAME'])
+                    ->setExpectedAction($_GET['action'])
+                    ->setScoreThreshold(0.5)
                     ->verify($data['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
                 if(!$resp->isSuccess()) {
-                    throw new AppException(_('Você precisa completar o teste do ReCaptcha!'));
+                    throw new AppException(_('O Teste do ReCaptcha falhou! Tente novamente.'));
                 }
 
                 $user = $forgotPassword->verify();

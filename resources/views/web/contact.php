@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="col-lg-8">
-                    <form class="form-contact" action="<?= $router->route('contact.index') ?>" method="post">
+                    <form id="contact-form" class="form-contact" action="<?= $router->route('contact.index') ?>" method="post">
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
@@ -75,18 +75,12 @@
                                     <div class="invalid-feedback"><?= $errors['message'] ?></div>
                                 </div>
                             </div>
-
-                            <div class="col-12">
-                                <div class="d-flex justify-content-around">
-                                    <div class="g-recaptcha" data-sitekey="<?= RECAPTCHA['site_key'] ?>"></div>
-                                </div>
-
-                                <small class="text-danger"><?= $errors['recaptcha'] ?></small>
-                            </div>
                         </div>
                         
                         <div class="form-group mt-3">
-                            <input type="submit" class="button button-contactForm boxed-btn" value="<?= _('Enviar') ?>">
+                            <input type="submit" data-sitekey="<?= RECAPTCHA['site_key'] ?>"
+                                data-callback='onSubmit' data-action='submit' 
+                                class="g-recaptcha button button-contactForm boxed-btn" value="<?= _('Enviar') ?>">
                         </div>
                     </form>
                 </div>
@@ -103,3 +97,11 @@
         </div>
     </section>
 </main>
+
+<?php $this->start('scripts'); ?>
+<script>
+    function onSubmit(token) {
+        document.getElementById("contact-form").submit();
+    }
+</script>
+<?php $this->end(); ?>

@@ -19,7 +19,7 @@
         <h2><?= _('Redefinir Senha') ?></h2>
 
         <?php if(!isset($code)): ?>
-        <form class="form-default" action="<?= $router->route('reset-password.index') ?>" method="post">
+        <form id="redefine-password-form" class="form-default" action="<?= $router->route('reset-password.index') ?>" method="post">
             <div class="form-input">
                 <label for="email"><?= _('Email') ?></label>
                 <input type="email" id="email" name="email" placeholder="<?= _('Digite seu email') ?>" 
@@ -28,16 +28,13 @@
                 <div class="invalid-feedback"><?= $errors['email'] ?></div>
             </div>
 
-            <div class="form-input d-flex justify-content-around">
-                <div class="g-recaptcha" data-sitekey="<?= RECAPTCHA['site_key'] ?>"></div>
-            </div>
-
             <div class="form-input pt-30">
-                <input type="submit" value="<?= _('Enviar') ?>">
+                <input type="submit" class="g-recaptcha" data-sitekey="<?= RECAPTCHA['site_key'] ?>"
+                    data-callback='onSubmit' data-action='submit' value="<?= _('Enviar') ?>">
             </div>
         </form>
         <?php else: ?>
-        <form class="form-default" action="<?= $router->route('reset-password.verify') ?>" method="post">
+        <form id="redefine-password-form" class="form-default" action="<?= $router->route('reset-password.verify') ?>" method="post">
             <div class="form-input">
                 <label for="password"><?= _('Nova Senha') ?></label>
                 <input type="password" id="password" name="password" placeholder="<?= _('Digite sua nova senha') ?>" 
@@ -60,3 +57,11 @@
         <?php endif; ?>
     </div>
 </main>
+
+<?php $this->start('scripts'); ?>
+<script>
+    function onSubmit(token) {
+        document.getElementById("redefine-password-form").submit();
+    }
+</script>
+<?php $this->end(); ?>

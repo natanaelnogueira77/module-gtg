@@ -20,7 +20,16 @@ class CContact extends Template
         if(isset($data['subject']) || isset($data['message']) || isset($data['name']) || isset($data['email'])) {
             $contactData = $data;
             try {
-                $contact = new Contact($data['subject'], $data['message'], $data['name'], $data['email'], $data['g-recaptcha-response']);
+                $contact = new Contact(
+                    $data['subject'], 
+                    $data['message'], 
+                    $data['name'], 
+                    $data['email'], 
+                    $data['g-recaptcha-response'],
+                    $_GET['action'],
+                    $_SERVER['SERVER_NAME'],
+                    $_SERVER['REMOTE_ADDR']
+                );
                 if(!$contact->send()) {
                     throw $contact->error();
                 }
