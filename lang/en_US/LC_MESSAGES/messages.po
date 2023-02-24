@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-02-23 13:03-0300\n"
-"PO-Revision-Date: 2023-02-23 13:04-0300\n"
+"POT-Creation-Date: 2023-02-23 21:11-0300\n"
+"PO-Revision-Date: 2023-02-23 21:11-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -656,7 +656,7 @@ msgstr "You need to complete the ReCaptcha test!"
 
 #: src/App/Controllers/Auth/CLogin.php:40
 #, php-format
-msgid "Seja bem-vindo, %s!"
+msgid "Seja bem-vindo(a), %s!"
 msgstr "Welcome, %s!"
 
 #: src/App/Controllers/Auth/CResetPassword.php:47

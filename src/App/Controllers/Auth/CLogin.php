@@ -37,7 +37,7 @@ class CLogin extends Controller
 
                 Auth::set($user);
 
-                addSuccessMsg(sprintf(_("Seja bem-vindo, %s!"), $user->name));
+                addSuccessMsg(sprintf(_("Seja bem-vindo(a), %s!"), $user->name));
                 if(isset($data['redirect'])) {
                     header('Location: ' . url($data['redirect']));
                     exit();
@@ -60,7 +60,7 @@ class CLogin extends Controller
             'background' => url($config['login_img']),
             'logo' => url($config['logo']),
             'shortcutIcon' => url($config['logo_icon']),
-            'redirect' => $_GET['redirect'],
+            'redirect' => $data['redirect'],
             'email' => $data['email'],
             'errors' => $errors,
             'exception' => $exception
