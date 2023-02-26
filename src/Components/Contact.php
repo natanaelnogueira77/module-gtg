@@ -48,37 +48,37 @@ class Contact
             $errors = [];
 
             if(!$this->name) {
-                $errors['name'] = _('O Nome é obrigatório!');
+                $errors['name'] = _('O nome é obrigatório!');
             } elseif(strlen($this->name) > 100) {
-                $errors['name'] = _('O Nome precisa ter 100 caractéres ou menos!');
+                $errors['name'] = _('O nome precisa ter 100 caractéres ou menos!');
             }
     
             if(!$this->email) {
-                $errors['email'] = _('O Email é obrigatório!');
+                $errors['email'] = _('O email é obrigatório!');
             } elseif(!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-                $errors['email'] = _('O Email é inválido!');
+                $errors['email'] = _('O email é inválido!');
             } elseif(strlen($this->email) > 100) {
-                $errors['email'] = _('O Email precisa ter 100 caractéres ou menos!');
+                $errors['email'] = _('O email precisa ter 100 caractéres ou menos!');
             }
     
             if(!$this->subject) {
-                $errors['subject'] = _('O Assunto é obrigatório!');
+                $errors['subject'] = _('O assunto é obrigatório!');
             } elseif(strlen($this->subject) > 100) {
-                $errors['subject'] = _('O Assunto precisa ter 100 caractéres ou menos!');
+                $errors['subject'] = _('O assunto precisa ter 100 caractéres ou menos!');
             }
     
             if(!$this->message) {
-                $errors['message'] = _('A Mensagem é obrigatória!');
+                $errors['message'] = _('A mensagem é obrigatória!');
             } elseif(strlen($this->message) > 1000) {
-                $errors['message'] = _('A Mensagem precisa ter 1000 caractéres ou menos!');
+                $errors['message'] = _('A mensagem precisa ter 1000 caractéres ou menos!');
             }
     
             if(!$this->recaptchaResponse->isSuccess()) {
-                $errors['recaptcha'] = _('O Teste do ReCaptcha falhou! Tente novamente.');
+                $errors['recaptcha'] = _('O teste do ReCaptcha falhou! Tente novamente.');
             }
     
             if(count($errors) > 0) {
-                throw new ValidationException($errors, _('Erros de Validação! Verifique os campos.'));
+                throw new ValidationException($errors, _('Erros de validação! Verifique os campos.'));
             }
 
             $email = new Email();

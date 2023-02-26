@@ -40,7 +40,7 @@
             </div>
 
             <a href="<?= $router->route('reset-password.index') ?>" class="forget">
-                <?= _('Esqueceu a Senha?') ?>
+                <?= _('Esqueceu a senha?') ?>
             </a>
         </div>
     </form>

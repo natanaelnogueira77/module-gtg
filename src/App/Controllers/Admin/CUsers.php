@@ -52,12 +52,12 @@ class CUsers extends Template
             if(!$email->send()) {
                 addSuccessMsg(
                     sprintf(
-                        _("O Usuário \"%s\" foi cadastrado com sucesso! Porém não foi possível enviar uma notificação no email dele."), 
+                        _('O usuário "%s" foi cadastrado com sucesso! Porém não foi possível enviar uma notificação no email dele.'), 
                         $dbUser->name
                     )
                 );
             } else {
-                addSuccessMsg(sprintf(_("Usuário \"%s\" foi criado com sucesso!"), $dbUser->name));
+                addSuccessMsg(sprintf(_('O usuário "%s" foi criado com sucesso!'), $dbUser->name));
             }
 
             $callback['link'] = $this->getRoute('admin.users.edit', ['user_id' => $dbUser->id]);
@@ -74,7 +74,7 @@ class CUsers extends Template
 
         $dbUser = (new User())->findById(intval($data['user_id']));
         if(!$dbUser) {
-            addErrorMsg(_('Nenhum Usuário foi encontrado!'));
+            addErrorMsg(_('Nenhum usuário foi encontrado!'));
             $this->redirect('admin.users.index');
         }
 
@@ -91,7 +91,7 @@ class CUsers extends Template
         try {
             $dbUser = (new User())->findById(intval($data['user_id']));
             if(!$dbUser) {
-                $this->throwException(_('Nenhum Usuário foi encontrado!'));
+                $this->throwException(_('Nenhum usuário foi encontrado!'));
             }
 
             $dbUser->setValues([
@@ -103,7 +103,7 @@ class CUsers extends Template
             ]);
             $dbUser->save();
 
-            $this->setMessage(sprintf(_("Os dados do Usuário \"%s\" foram alterados com sucesso!"), $dbUser->name));
+            $this->setMessage(sprintf(_('Os dados do usuário "%s" foram alterados com sucesso!'), $dbUser->name));
         } catch(\Exception $e) {
             $this->error = $e;
         }
@@ -175,7 +175,7 @@ class CUsers extends Template
                                     " . _('Ações') . "
                                 </button>
                                 <div tabindex=\"-1\" role=\"menu\" aria-hidden=\"true\" class=\"dropdown-menu\">
-                                    <h6 tabindex=\"-1\" class=\"dropdown-header\">Ações</h6>
+                                    <h6 tabindex=\"-1\" class=\"dropdown-header\">" . _('Ações') . "</h6>
                                     <a href=\"{$this->getRoute('admin.users.edit', $params)}\" 
                                         type=\"button\" tabindex=\"0\" class=\"dropdown-item\">
                                         " . _('Editar Usuário') . "
@@ -229,11 +229,11 @@ class CUsers extends Template
         try {
             $dbUser = (new User())->findById(intval($data['user_id']));
             if(!$dbUser) {
-                $this->throwException(_('Nenhum Usuário foi encontrado!'));
+                $this->throwException(_('Nenhum usuário foi encontrado!'));
             }
 
             $dbUser->destroy();
-            $this->setMessage(sprintf(_("O Usuário \"%s\" foi excluído com sucesso."), $dbUser->name));
+            $this->setMessage(sprintf(_('O usuário "%s" foi excluído com sucesso.'), $dbUser->name));
         } catch(\Exception $e) {
             $this->error = $e;
         }

@@ -7,7 +7,7 @@
 <?php 
     $this->insert('themes/architect-ui/components/title', [
         'title' => _('Painel do Administrador'),
-        'subtitle' => _('Relatórios e gerenciamento do Sistema'),
+        'subtitle' => _('Relatórios e gerenciamento do sistema'),
         'icon' => 'pe-7s-home',
         'icon_color' => 'bg-malibu-beach'
     ]);
@@ -41,7 +41,7 @@
                                 <div class="widget-content-left">
                                     <div class="widget-heading"><?= $userType->name_plur ?></div>
                                     <div class="widget-subheading">
-                                        <?= sprintf(_("%s do Sistema"), $userType->name_plur) ?>
+                                        <?= sprintf(_("%s do sistema"), $userType->name_plur) ?>
                                     </div>
                                 </div>
                                 <div class="widget-content-right">
@@ -119,7 +119,7 @@
                 <div class="form-group col-md-6">
                     <label for="style"><?= _('Tema') ?></label>
                     <select id="style" name="style" class="form-control">
-                        <option value=""><?= _('Escolha o Tema de Cores do Sistema...') ?></option>
+                        <option value=""><?= _('Escolha o tema de cores do sistema...') ?></option>
                         <option value="light" <?= $configData['style'] == 'light' ? 'selected' : '' ?>>
                             <?= _('Tema Claro') ?>
                         </option>
@@ -206,7 +206,7 @@
                 table.find("[data-act=delete]").click(function () {
                     var data = $(this).data();
 
-                    if(confirm(<?php echo json_encode(_('Deseja realmente excluir este Usuário?')) ?>)) {
+                    if(confirm(<?php echo json_encode(_('Deseja realmente excluir este usuário?')) ?>)) {
                         app.callAjax({
                             url: data.action,
                             type: data.method,

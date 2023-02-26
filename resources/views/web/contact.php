@@ -13,7 +13,7 @@
         ],
         'subtitle' => [
             'text' => _('Para entrar em contato conosco para maiores esclarecimentos, preencha o formulário abaixo com seu 
-                Nome, Email, Assunto e Mensagem e clique em Enviar. Seu Feedback é altamente apreciado.'),
+                nome, email, assunto e mensagem e clique em "Enviar". Seu feedback é altamente apreciado.'),
             'animation' => ['effect' => 'bounceIn', 'delay' => '.5s']
         ]
     ]);
@@ -35,8 +35,8 @@
                                     <input class="form-control <?= $errors['subject'] ? 'is-invalid' : '' ?>" 
                                         name="subject" id="subject" type="text" 
                                         onfocus="this.placeholder = ''" 
-                                        onblur="this.placeholder = '<?= _('Qual é o Assunto?') ?>'" 
-                                        placeholder="<?= _('Qual é o Assunto?') ?>" value="<?= $subject ?>">
+                                        onblur="this.placeholder = '<?= _('Qual é o assunto?') ?>'" 
+                                        placeholder="<?= _('Qual é o assunto?') ?>" value="<?= $subject ?>">
                                     <div class="invalid-feedback"><?= $errors['subject'] ?></div>
                                 </div>
                             </div>
@@ -46,8 +46,8 @@
                                     <input class="form-control <?= $errors['name'] ? 'is-invalid' : '' ?>" 
                                         name="name" id="name" type="text" 
                                         onfocus="this.placeholder = ''" 
-                                        onblur="this.placeholder = '<?= _('Digite seu Nome') ?>'" 
-                                        placeholder="<?= _('Digite seu Nome') ?>" 
+                                        onblur="this.placeholder = '<?= _('Digite seu nome') ?>'" 
+                                        placeholder="<?= _('Digite seu nome') ?>" 
                                         value="<?= isset($user) ? $user->name : $name ?>">
                                     <div class="invalid-feedback"><?= $errors['name'] ?></div>
                                 </div>
@@ -58,8 +58,8 @@
                                     <input class="form-control <?= $errors['email'] ? 'is-invalid' : '' ?>" 
                                         name="email" id="email" type="email" 
                                         onfocus="this.placeholder = ''" 
-                                        onblur="this.placeholder = '<?= _('Digite seu Email') ?>'" 
-                                        placeholder="<?= _('Digite seu Email') ?>" 
+                                        onblur="this.placeholder = '<?= _('Digite seu email') ?>'" 
+                                        placeholder="<?= _('Digite seu email') ?>" 
                                         value="<?= isset($user) ? $user->email : $email ?>">
                                     <div class="invalid-feedback"><?= $errors['email'] ?></div>
                                 </div>
@@ -70,8 +70,8 @@
                                     <textarea class="form-control w-100 <?= $errors['message'] ? 'is-invalid' : '' ?>" 
                                         name="message" id="message" cols="30" rows="9" 
                                         onfocus="this.placeholder = ''" 
-                                        onblur="this.placeholder = '<?= _('Digite sua Mensagem') ?>'" 
-                                        placeholder=" <?= _('Digite sua Mensagem') ?>"><?= $message ?></textarea>
+                                        onblur="this.placeholder = '<?= _('Digite sua mensagem') ?>'" 
+                                        placeholder=" <?= _('Digite sua mensagem') ?>"><?= $message ?></textarea>
                                     <div class="invalid-feedback"><?= $errors['message'] ?></div>
                                 </div>
                             </div>

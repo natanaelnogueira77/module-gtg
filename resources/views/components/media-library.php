@@ -144,7 +144,7 @@
                 this.modal.modal('toggle');
             }
 
-            this.maxSizeText.innerHTML = <?php echo json_encode(sprintf(_('Tamanho Máximo Permitido: %sMB'), '{max_size}')) ?>.replace('{max_size}', `${this.maxSize}`);
+            this.maxSizeText.innerHTML = <?php echo json_encode(sprintf(_('Tamanho máximo permitido: %sMB'), '{max_size}')) ?>.replace('{max_size}', `${this.maxSize}`);
         }
 
         openTab() {

@@ -51,19 +51,19 @@ class UserType extends Model
         $errors = [];
         
         if(!$this->name_sing) {
-            $errors['name_sing'] = _('O Nome no Singular é obrigatório!');
+            $errors['name_sing'] = _('O nome no singular é obrigatório!');
         } elseif(strlen($this->name_sing) > 45) {
-            $errors['name_sing'] = _('O Nome no Singular precisa ter 45 caractéres ou menos!');
+            $errors['name_sing'] = _('O nome no singular precisa ter 45 caractéres ou menos!');
         }
 
         if(!$this->name_plur) {
-            $errors['name_plur'] = _('O Nome no Plural é obrigatório!');
+            $errors['name_plur'] = _('O nome no plural é obrigatório!');
         } elseif(strlen($this->name_plur) > 45) {
-            $errors['name_plur'] = _('O Nome no Plural precisa ter 45 caractéres ou menos!');
+            $errors['name_plur'] = _('O nome no plural precisa ter 45 caractéres ou menos!');
         }
 
         if(count($errors) > 0) {
-            throw new ValidationException($errors, _('Erros de Validação! Verifique os campos.'));
+            throw new ValidationException($errors, _('Erros de validação! Verifique os campos.'));
         }
     }
 }

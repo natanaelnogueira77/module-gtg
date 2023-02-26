@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-02-24 12:54-0300\n"
-"PO-Revision-Date: 2023-02-24 12:55-0300\n"
+"POT-Creation-Date: 2023-02-26 00:09-0300\n"
+"PO-Revision-Date: 2023-02-26 00:16-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -26,7 +26,7 @@ msgid "Painel do Administrador"
 msgstr "Administrator Panel"
 
 #: resources/views/admin/index.php:10
-msgid "Relatórios e gerenciamento do Sistema"
+msgid "Relatórios e gerenciamento do sistema"
 msgstr "System reporting and management"
 
 #: resources/views/admin/index.php:22
@@ -40,8 +40,8 @@ msgstr "Version: <strong>%s</strong>"
 
 #: resources/views/admin/index.php:44
 #, php-format
-msgid "%s do Sistema"
-msgstr "System's %s"
+msgid "%s do sistema"
+msgstr "%s of the system"
 
 #: resources/views/admin/index.php:57
 #, php-format
@@ -71,8 +71,8 @@ msgid "Tema"
 msgstr "Theme"
 
 #: resources/views/admin/index.php:122
-msgid "Escolha o Tema de Cores do Sistema..."
-msgstr "Choose System Color Theme..."
+msgid "Escolha o tema de cores do sistema..."
+msgstr "Choose the system's color theme..."
 
 #: resources/views/admin/index.php:124
 msgid "Tema Claro"
@@ -104,8 +104,8 @@ msgid "Salvar Configurações"
 msgstr "Save Settings"
 
 #: resources/views/admin/index.php:209 resources/views/admin/users/index.php:76
-msgid "Deseja realmente excluir este Usuário?"
-msgstr "Do you really want to delete this User?"
+msgid "Deseja realmente excluir este usuário?"
+msgstr "Do you really want to delete this user?"
 
 #: resources/views/admin/users/index.php:3
 #, php-format
@@ -117,8 +117,8 @@ msgid "Lista de Usuários"
 msgstr "Users List"
 
 #: resources/views/admin/users/index.php:10
-msgid "Segue abaixo a lista de usuários do Sistema"
-msgstr "Below is the list of System Users"
+msgid "Segue abaixo a lista de usuários do sistema"
+msgstr "Below is the list of users of the system"
 
 #: resources/views/admin/users/index.php:26
 #: resources/views/admin/users/save.php:9
@@ -144,18 +144,18 @@ msgstr "Edit User \"%s\""
 
 #: resources/views/admin/users/save.php:11
 msgid ""
-"Preencha os dados abaixo para alterar o Usuário, e então clique em "
+"Preencha os dados abaixo para alterar o usuário, e então clique em "
 "\"Atualizar Usuário\""
 msgstr ""
-"Fill in the information below to change the User, and then click on \"Update "
+"Fill in the information below to change the user, and then click on \"Update "
 "User\""
 
 #: resources/views/admin/users/save.php:12
 msgid ""
-"Preencha os dados abaixo para criar um Usuário, e então clique em \"Criar "
+"Preencha os dados abaixo para criar um usuário, e então clique em \"Criar "
 "Usuário\""
 msgstr ""
-"Fill in the details below to create a User, then click on \"Create User\""
+"Fill in the details below to create a user, then click on \"Create User\""
 
 #: resources/views/admin/users/save.php:24 resources/views/user/edit.php:21
 msgid "Informações da Conta"
@@ -198,8 +198,8 @@ msgid "Selecionar..."
 msgstr "Select..."
 
 #: resources/views/admin/users/save.php:78 resources/views/user/edit.php:59
-msgid "Deseja alterar a Senha?"
-msgstr "Do you want to change the Password?"
+msgid "Deseja alterar a senha?"
+msgstr "Do you want to change the password?"
 
 #: resources/views/admin/users/save.php:83 resources/views/user/edit.php:63
 msgid "Sim"
@@ -249,6 +249,7 @@ msgid "Entrar"
 msgstr "Login"
 
 #: resources/views/auth/login.php:27 resources/views/auth/reset-password.php:25
+#: resources/views/web/contact.php:61 resources/views/web/contact.php:62
 msgid "Digite seu email"
 msgstr "Enter your email"
 
@@ -257,8 +258,8 @@ msgid "Digite sua senha"
 msgstr "Enter your password"
 
 #: resources/views/auth/login.php:43
-msgid "Esqueceu a Senha?"
-msgstr "Forgot Password?"
+msgid "Esqueceu a senha?"
+msgstr "Forgot password?"
 
 #: resources/views/auth/reset-password.php:3
 #, php-format
@@ -321,12 +322,12 @@ msgid "Sessão expirada, faça login"
 msgstr "Session expired, please login"
 
 #: resources/views/components/expired-session.php:62
-msgid "Informe seu Email..."
-msgstr "Enter your Email..."
+msgid "Informe seu email..."
+msgstr "Enter your email..."
 
 #: resources/views/components/expired-session.php:68
-msgid "Informe sua Senha..."
-msgstr "Enter your Password..."
+msgid "Informe sua senha..."
+msgstr "Enter your password..."
 
 #: resources/views/components/media-library.php:136
 #, php-format
@@ -339,8 +340,8 @@ msgstr ""
 
 #: resources/views/components/media-library.php:147
 #, php-format
-msgid "Tamanho Máximo Permitido: %sMB"
-msgstr "Maximum Size Allowed: %sMB"
+msgid "Tamanho máximo permitido: %sMB"
+msgstr "Maximum size allowed: %sMB"
 
 #: resources/views/components/media-library.php:167
 #, php-format
@@ -452,8 +453,8 @@ msgid "Editar Conta"
 msgstr "Edit Account"
 
 #: resources/views/user/edit.php:10
-msgid "Edite os Detalhes de sua Conta logo abaixo"
-msgstr "Edit your Account Details below"
+msgid "Edite os detalhes de sua conta logo abaixo"
+msgstr "Edit your account details below"
 
 #: resources/views/user/edit.php:94
 msgid "Atualizar"
@@ -487,33 +488,29 @@ msgstr "Get in Touch"
 msgid ""
 "Para entrar em contato conosco para maiores esclarecimentos, preencha o "
 "formulário abaixo com seu \n"
-"                Nome, Email, Assunto e Mensagem e clique em Enviar. Seu "
-"Feedback é altamente apreciado."
+"                nome, email, assunto e mensagem e clique em \"Enviar\". Seu "
+"feedback é altamente apreciado."
 msgstr ""
 "To get in touch with us for further information, fill out the form below "
 "with your\n"
-"                 Name, Email, Subject and Message and click Send. Your "
-"Feedback is highly appreciated."
+"                 name, email, subject and message and click on \"Send\". "
+"Your feedback is highly appreciated."
 
 #: resources/views/web/contact.php:27
 msgid "Entre em Contato"
 msgstr "Get in Touch"
 
 #: resources/views/web/contact.php:38 resources/views/web/contact.php:39
-msgid "Qual é o Assunto?"
-msgstr "What's the Topic?"
+msgid "Qual é o assunto?"
+msgstr "What's the subject?"
 
 #: resources/views/web/contact.php:49 resources/views/web/contact.php:50
-msgid "Digite seu Nome"
-msgstr "Enter your Name"
-
-#: resources/views/web/contact.php:61 resources/views/web/contact.php:62
-msgid "Digite seu Email"
-msgstr "Enter your Email"
+msgid "Digite seu nome"
+msgstr "Enter your name"
 
 #: resources/views/web/contact.php:73 resources/views/web/contact.php:74
-msgid "Digite sua Mensagem"
-msgstr "Enter your Message"
+msgid "Digite sua mensagem"
+msgstr "Enter your message"
 
 #: resources/views/web/contact.php:92
 msgid "Envie-nos sua dúvida a qualquer hora!"
@@ -530,29 +527,30 @@ msgstr "You Have Successfully Registered!"
 #: src/App/Controllers/Admin/CUsers.php:55
 #, php-format
 msgid ""
-"O Usuário \"%s\" foi cadastrado com sucesso! Porém não foi possível enviar "
+"O usuário \"%s\" foi cadastrado com sucesso! Porém não foi possível enviar "
 "uma notificação no email dele."
 msgstr ""
-"User \"%s\" was successfully registered! However, it was not possible to "
+"The user \"%s\" was successfully registered! However, it was not possible to "
 "send a notification to his email."
 
 #: src/App/Controllers/Admin/CUsers.php:60
 #, php-format
-msgid "Usuário \"%s\" foi criado com sucesso!"
-msgstr "User \"%s\" was successfully created!"
+msgid "O usuário \"%s\" foi criado com sucesso!"
+msgstr "The user \"%s\" was successfully created!"
 
 #: src/App/Controllers/Admin/CUsers.php:77
 #: src/App/Controllers/Admin/CUsers.php:94
 #: src/App/Controllers/Admin/CUsers.php:232
-msgid "Nenhum Usuário foi encontrado!"
-msgstr "No Users found!"
+msgid "Nenhum usuário foi encontrado!"
+msgstr "No users found!"
 
 #: src/App/Controllers/Admin/CUsers.php:106
 #, php-format
-msgid "Os dados do Usuário \"%s\" foram alterados com sucesso!"
+msgid "Os dados do usuário \"%s\" foram alterados com sucesso!"
 msgstr "User \"%s\" data has been changed successfully!"
 
 #: src/App/Controllers/Admin/CUsers.php:175
+#: src/App/Controllers/Admin/CUsers.php:178
 #: src/App/Controllers/Admin/CUsers.php:199
 msgid "Ações"
 msgstr "Actions"
@@ -575,8 +573,8 @@ msgstr "Created at"
 
 #: src/App/Controllers/Admin/CUsers.php:236
 #, php-format
-msgid "O Usuário \"%s\" foi excluído com sucesso."
-msgstr "User \"%s\" has been successfully deleted."
+msgid "O usuário \"%s\" foi excluído com sucesso."
+msgstr "The user \"%s\" has been successfully deleted."
 
 #: src/App/Controllers/Admin/Template.php:35
 #: src/App/Controllers/User/Template.php:35
@@ -629,8 +627,8 @@ msgstr "Spanish"
 
 #: src/App/Controllers/Admin/Template.php:128
 #: src/App/Controllers/User/Template.php:110
-msgid "Editar Meus Dados"
-msgstr "Edit Account"
+msgid "Editar meus Dados"
+msgstr "Edit my account"
 
 #: src/App/Controllers/Admin/Template.php:132
 #: src/App/Controllers/User/Template.php:114
@@ -651,8 +649,8 @@ msgstr "Panel %s"
 
 #: src/App/Controllers/Auth/CLogin.php:33
 #: src/App/Controllers/Auth/CResetPassword.php:32 src/Components/Contact.php:77
-msgid "O Teste do ReCaptcha falhou! Tente novamente."
-msgstr "ReCaptcha Test Failed! Try again."
+msgid "O teste do ReCaptcha falhou! Tente novamente."
+msgstr "The ReCaptcha test failed! Try again."
 
 #: src/App/Controllers/Auth/CLogin.php:43
 #, php-format
@@ -691,176 +689,191 @@ msgstr "Message sent successfully!"
 
 #: src/App/Middlewares/MAdmin.php:14
 msgid ""
-"Você precisa estar autenticado como Administrador para acessar essa área!"
-msgstr "You need to be authenticated as an Administrator to access this area!"
+"Você precisa estar autenticado como administrador para acessar essa área!"
+msgstr "You need to be authenticated as an administrator to access this area!"
 
 #: src/App/Middlewares/MUser.php:13
 msgid "Você precisa estar autenticado para acessar essa área!"
 msgstr "You need to be authenticated to access this area!"
 
 #: src/Components/Contact.php:51 src/Models/User.php:145
-msgid "O Nome é obrigatório!"
-msgstr "Name is required!"
+msgid "O nome é obrigatório!"
+msgstr "The name is required!"
 
 #: src/Components/Contact.php:53 src/Models/User.php:147
-msgid "O Nome precisa ter 100 caractéres ou menos!"
-msgstr "Name must be 100 characters or less!"
+msgid "O nome precisa ter 100 caractéres ou menos!"
+msgstr "The name must be 100 characters or less!"
 
 #: src/Components/Contact.php:57 src/Components/ForgotPassword.php:26
 #: src/Components/Login.php:28 src/Models/SocialUser.php:78
 #: src/Models/User.php:151
-msgid "O Email é obrigatório!"
-msgstr "Email is required!"
+msgid "O email é obrigatório!"
+msgstr "The email is required!"
 
 #: src/Components/Contact.php:59 src/Components/ForgotPassword.php:28
-#: src/Components/Login.php:30 src/Models/User.php:153
-msgid "O Email é inválido!"
-msgstr "The e-mail is invalid!"
+#: src/Components/Login.php:30 src/Models/SocialUser.php:80
+#: src/Models/User.php:153
+msgid "O email é inválido!"
+msgstr "The email is invalid!"
 
 #: src/Components/Contact.php:61 src/Components/ForgotPassword.php:30
 #: src/Components/Login.php:32 src/Models/SocialUser.php:82
 #: src/Models/User.php:155
-msgid "O Email precisa ter 100 caractéres ou menos!"
-msgstr "Email must be 100 characters or less!"
+msgid "O email precisa ter 100 caractéres ou menos!"
+msgstr "The email must be 100 characters or less!"
 
 #: src/Components/Contact.php:65
-msgid "O Assunto é obrigatório!"
-msgstr "Subject is required!"
+msgid "O assunto é obrigatório!"
+msgstr "The subject is required!"
 
 #: src/Components/Contact.php:67
-msgid "O Assunto precisa ter 100 caractéres ou menos!"
-msgstr "Subject must be 100 characters or less!"
+msgid "O assunto precisa ter 100 caractéres ou menos!"
+msgstr "The subject must be 100 characters or less!"
 
 #: src/Components/Contact.php:71
-msgid "A Mensagem é obrigatória!"
-msgstr "Message is required!"
+msgid "A mensagem é obrigatória!"
+msgstr "The message is required!"
 
 #: src/Components/Contact.php:73
-msgid "A Mensagem precisa ter 1000 caractéres ou menos!"
-msgstr "Message must be 1000 characters or less!"
+msgid "A mensagem precisa ter 1000 caractéres ou menos!"
+msgstr "The message must be 1000 characters or less!"
 
 #: src/Components/Contact.php:81 src/Components/ForgotPassword.php:39
 #: src/Components/Login.php:40 src/Components/ResetPassword.php:43
 #: src/Models/Config.php:53 src/Models/SocialUser.php:100
-#: src/Models/User.php:203 src/Models/UserType.php:66
-msgid "Erros de Validação! Verifique os campos."
-msgstr "Validation Errors! Check the fields."
+#: src/Models/TConfig.php:138 src/Models/TMeta.php:160 src/Models/User.php:203
+#: src/Models/UserType.php:66
+msgid "Erros de validação! Verifique os campos."
+msgstr "Validation errors! Check the fields."
 
 #: src/Components/ExcelGenerator.php:35
-msgid "Nenhum dado foi adicionado para a geração do Excel!"
-msgstr "Nenhum dado foi adicionado para a geração do Excel!"
+msgid "Nenhum dado foi adicionado para a geração do excel!"
+msgstr "No data was added for excel generation!"
 
 #: src/Components/ForgotPassword.php:34
-msgid "Este Email não foi encontrado!"
-msgstr "This email was not found!"
+msgid "O email não foi encontrado!"
+msgstr "The email was not found!"
 
-#: src/Components/Login.php:36
-msgid "Senha é obrigatória!"
-msgstr "Password is required!"
+#: src/Components/Login.php:36 src/Components/ResetPassword.php:28
+#: src/Models/User.php:197
+msgid "A senha é obrigatória!"
+msgstr "The password is required!"
 
 #: src/Components/Login.php:48
-msgid "Usuário ou Senha inválidos!"
-msgstr "Username or password is invalid!"
+msgid "O email ou a senha estão incorretos!"
+msgstr "The email or password is incorrect!"
 
 #: src/Components/PDFRender.php:58
 msgid "O HTML é necessário!"
 msgstr "HTML is required!"
 
-#: src/Components/ResetPassword.php:28 src/Models/User.php:197
-msgid "A Senha é obrigatória!"
-msgstr "Password is required!"
-
 #: src/Components/ResetPassword.php:32
-msgid "A Confirmação de Senha é obrigatória!"
-msgstr "Password Confirmation is required!"
+msgid "A confirmação de senha é obrigatória!"
+msgstr "The password confirmation is required!"
 
 #: src/Components/ResetPassword.php:38 src/Components/ResetPassword.php:39
 msgid "As senhas não correspondem!"
 msgstr "Passwords do not match!"
 
 #: src/Components/ResetPassword.php:55
-msgid "Chave de verificação é inválida!"
-msgstr "Verification key is invalid!"
+msgid "A chave de verificação é inválida!"
+msgstr "The verification key is invalid!"
 
 #: src/Models/Config.php:47
-msgid "O Estilo é obrigatório!"
-msgstr "Style is required!"
+msgid "O tema é obrigatório!"
+msgstr "The theme is required!"
 
 #: src/Models/Config.php:49
-msgid "O Estilo é inválido!"
-msgstr "Style is invalid!"
+msgid "O tema é inválido!"
+msgstr "The theme is invalid!"
 
 #: src/Models/Model.php:214 src/Models/Model.php:234
 msgid ""
 "Ocorreu um erro inesperado enquanto você executava essa ação! Informe ao "
-"Administrador."
+"administrador."
 msgstr ""
 "An unexpected error occurred while you performed this action! Inform the "
-"Administrator."
+"administrator."
 
 #: src/Models/SocialUser.php:64
-msgid "O Usuário é obrigatório!"
-msgstr "User is required!"
+msgid "O usuário é obrigatório!"
+msgstr "The user is required!"
 
 #: src/Models/SocialUser.php:68
-msgid "O ID da Rede Social é obrigatório!"
-msgstr "Social Network ID is required!"
+msgid "O ID da rede social é obrigatório!"
+msgstr "The social network ID is required!"
 
 #: src/Models/SocialUser.php:72
-msgid "O Nome da Rede Social é obrigatório!"
-msgstr "Social Network Name is required!"
+msgid "O nome da rede social é obrigatório!"
+msgstr "The social network name is required!"
 
 #: src/Models/SocialUser.php:74
-msgid "O Nome da Rede Social é inválido!"
-msgstr "The Social Network Name is invalid!"
-
-#: src/Models/SocialUser.php:80
-msgid "Este Email é inválido!"
-msgstr "This Email is invalid!"
+msgid "O nome da rede social é inválido!"
+msgstr "The social network name is invalid!"
 
 #: src/Models/SocialUser.php:95 src/Models/User.php:168
-msgid "Este Email já está em uso! Tente outro."
-msgstr "This Email is already in use! Try another."
-
-#: src/Models/TConfig.php:138 src/Models/TMeta.php:160
-msgid "Erros de validação! Verifique os dados!"
-msgstr "Validation errors! Check the data!"
+msgid "O email informado já está em uso! Tente outro."
+msgstr "The given email is already in use! Try another."
 
 #: src/Models/User.php:173
-msgid "O Apelido é obrigatório!"
-msgstr "Last name is required!"
+msgid "O apelido é obrigatório!"
+msgstr "The nickname is required!"
 
 #: src/Models/User.php:175
-msgid "O Apelido precisa ter 100 caractéres ou menos!"
-msgstr "Nickname must be 100 characters or less!"
+msgid "O apelido precisa ter 100 caractéres ou menos!"
+msgstr "The nickname must be 100 characters or less!"
 
 #: src/Models/User.php:188
-msgid "Este Apelido já está em uso! Tente outro."
-msgstr "This Nickname is already in use! Try another."
+msgid "O apelido informado já está em uso! Tente outro."
+msgstr "The given nickname is already in use! Try another."
 
 #: src/Models/User.php:193
-msgid "O Tipo de Usuário é obrigatório!"
-msgstr "User Type is required!"
+msgid "O tipo de usuário é obrigatório!"
+msgstr "The user type is required!"
 
 #: src/Models/User.php:199
-msgid "A Senha deve conter 5 caracteres ou mais!"
-msgstr "Password must contain 5 characters or more!"
+msgid "A senha deve conter 5 caracteres ou mais!"
+msgstr "The password must contain 5 characters or more!"
 
 #: src/Models/UserType.php:54
-msgid "O Nome no Singular é obrigatório!"
-msgstr "Name in Singular is required!"
+msgid "O nome no singular é obrigatório!"
+msgstr "The singular name is required!"
 
 #: src/Models/UserType.php:56
-msgid "O Nome no Singular precisa ter 45 caractéres ou menos!"
-msgstr "Name in Singular must be 45 characters or less!"
+msgid "O nome no singular precisa ter 45 caractéres ou menos!"
+msgstr "The singular name must be 45 characters or less!"
 
 #: src/Models/UserType.php:60
-msgid "O Nome no Plural é obrigatório!"
-msgstr "Name in Plural is required!"
+msgid "O nome no plural é obrigatório!"
+msgstr "The plural name is required!"
 
 #: src/Models/UserType.php:62
-msgid "O Nome no Plural precisa ter 45 caractéres ou menos!"
-msgstr "The Plural Name must be 45 characters or less!"
+msgid "O nome no plural precisa ter 45 caractéres ou menos!"
+msgstr "The plural name must be 45 characters or less!"
+
+#~ msgid "Digite seu Email"
+#~ msgstr "Enter your Email"
+
+#~ msgid "Senha é obrigatória!"
+#~ msgstr "Password is required!"
+
+#~ msgid "Usuário ou Senha inválidos!"
+#~ msgstr "Username or password is invalid!"
+
+#~ msgid "O Estilo é obrigatório!"
+#~ msgstr "Style is required!"
+
+#~ msgid "O Estilo é inválido!"
+#~ msgstr "Style is invalid!"
+
+#~ msgid "Este Email é inválido!"
+#~ msgstr "This Email is invalid!"
+
+#~ msgid "Este Email já está em uso! Tente outro."
+#~ msgstr "This Email is already in use! Try another."
+
+#~ msgid "Erros de validação! Verifique os dados!"
+#~ msgstr "Validation errors! Check the data!"
 
 #~ msgid "Você precisa completar o teste do ReCaptcha!"
 #~ msgstr "You need to complete the ReCaptcha test!"

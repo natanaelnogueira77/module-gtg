@@ -135,7 +135,7 @@ trait TConfig
             }
 
             if(count($errors) > 0) {
-                throw new ValidationException($errors, _('Erros de validação! Verifique os dados!'));
+                throw new ValidationException($errors, _('Erros de validação! Verifique os campos.'));
             }
 
             $in[strlen($in) - 1] = ' ';

@@ -11,7 +11,7 @@ class MAdmin
     {
         $user = Auth::get();
         if(!$user || !$user->isAdmin()) {
-            addErrorMsg(_('Você precisa estar autenticado como Administrador para acessar essa área!'));
+            addErrorMsg(_('Você precisa estar autenticado como administrador para acessar essa área!'));
             redirect($router->route('login.index'));
             return false;
         }

@@ -25,11 +25,11 @@ class ResetPassword
             $errors = [];
             
             if(!$this->password) {
-                $errors['password'] = _('A Senha é obrigatória!');
+                $errors['password'] = _('A senha é obrigatória!');
             }
     
             if(!$this->confirm_password) {
-                $errors['confirm_password'] = _('A Confirmação de Senha é obrigatória!');
+                $errors['confirm_password'] = _('A confirmação de senha é obrigatória!');
             }
     
             if($this->password 
@@ -40,7 +40,7 @@ class ResetPassword
             }
 
             if(count($errors) > 0) {
-                throw new ValidationException($errors, _('Erros de Validação! Verifique os campos.'));
+                throw new ValidationException($errors, _('Erros de validação! Verifique os campos.'));
                 return null;
             }
 
@@ -52,7 +52,7 @@ class ResetPassword
                 return $user;
             }
 
-            throw new AppException(_('Chave de verificação é inválida!'));
+            throw new AppException(_('A chave de verificação é inválida!'));
         } catch(Exception $e) {
             $this->error = $e;
         }

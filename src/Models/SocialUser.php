@@ -61,25 +61,25 @@ class SocialUser extends Model
         $errors = [];
         
         if(!$this->usu_id) {
-            $errors['usu_id'] = _('O Usuário é obrigatório!');
+            $errors['usu_id'] = _('O usuário é obrigatório!');
         }
 
         if(!$this->social_id) {
-            $errors['social_id'] = _('O ID da Rede Social é obrigatório!');
+            $errors['social_id'] = _('O ID da rede social é obrigatório!');
         }
 
         if(!$this->social) {
-            $errors['social'] = _('O Nome da Rede Social é obrigatório!');
+            $errors['social'] = _('O nome da rede social é obrigatório!');
         } elseif(!in_array($this->social, ['facebook', 'google'])) {
-            $errors['social'] = _('O Nome da Rede Social é inválido!');
+            $errors['social'] = _('O nome da rede social é inválido!');
         }
 
         if(!$this->email) {
-            $errors['email'] = _('O Email é obrigatório!');
+            $errors['email'] = _('O email é obrigatório!');
         } elseif(!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-            $errors['email'] = _('Este Email é inválido!');
+            $errors['email'] = _('O email é inválido!');
         } elseif(strlen($this->email) > 100) {
-            $errors['email'] = _('O Email precisa ter 100 caractéres ou menos!');
+            $errors['email'] = _('O email precisa ter 100 caractéres ou menos!');
         } else {
             if(!$this->id) {
                 $email = (new self())
@@ -92,12 +92,12 @@ class SocialUser extends Model
             }
 
             if($email) {
-                $errors['email'] = _('Este Email já está em uso! Tente outro.');
+                $errors['email'] = _('O email informado já está em uso! Tente outro.');
             }
         }
 
         if(count($errors) > 0) {
-            throw new ValidationException($errors, _('Erros de Validação! Verifique os campos.'));
+            throw new ValidationException($errors, _('Erros de validação! Verifique os campos.'));
         }
     }
 }

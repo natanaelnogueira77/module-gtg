@@ -8,8 +8,8 @@
     $this->insert('themes/architect-ui/components/title', [
         'title' => ($dbUser ? sprintf(_("Editar Usuário \"%s\""), $dbUser->name) : _('Criar Usuário')),
         'subtitle' => $dbUser 
-            ? _('Preencha os dados abaixo para alterar o Usuário, e então clique em "Atualizar Usuário"') 
-            : _('Preencha os dados abaixo para criar um Usuário, e então clique em "Criar Usuário"'),
+            ? _('Preencha os dados abaixo para alterar o usuário, e então clique em "Atualizar Usuário"') 
+            : _('Preencha os dados abaixo para criar um usuário, e então clique em "Criar Usuário"'),
         'icon' => 'pe-7s-user',
         'icon_color' => 'bg-malibu-beach'
     ]);
@@ -75,7 +75,7 @@
             <div class="form-row">
                 <div class="form-group col-md-12 align-middle">
                     <div class="d-flex">
-                        <p class="mb-0 mr-2"><strong><?= _('Deseja alterar a Senha?') ?></strong></p>
+                        <p class="mb-0 mr-2"><strong><?= _('Deseja alterar a senha?') ?></strong></p>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="update_password" 
                                 id="update_password1" value="1">

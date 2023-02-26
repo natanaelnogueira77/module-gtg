@@ -125,7 +125,7 @@ class Template extends Controller
                         ],
                         [
                             'url' => $this->getRoute('user.edit.index'), 
-                            'desc' => _('Editar Meus Dados')
+                            'desc' => _('Editar meus Dados')
                         ],
                         [
                             'url' => $this->getRoute('login.index'), 

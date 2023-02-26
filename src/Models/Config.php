@@ -44,13 +44,13 @@ class Config extends Model
         $errors = [];
 
         if(!$this->style) {
-            $errors['style'] = _('O Estilo é obrigatório!');
+            $errors['style'] = _('O tema é obrigatório!');
         } elseif(!in_array($this->style, ['light', 'dark'])) {
-            $errors['style'] = _('O Estilo é inválido!');
+            $errors['style'] = _('O tema é inválido!');
         }
 
         if(count($errors) > 0) {
-            throw new ValidationException($errors, _('Erros de Validação! Verifique os campos.'));
+            throw new ValidationException($errors, _('Erros de validação! Verifique os campos.'));
         }
     }
 }

@@ -23,20 +23,20 @@ class ForgotPassword
             $errors = [];
 
             if(!$this->email) {
-                $errors['email'] = _('O Email é obrigatório!');
+                $errors['email'] = _('O email é obrigatório!');
             } elseif(!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-                $errors['email'] = _('O Email é inválido!');
+                $errors['email'] = _('O email é inválido!');
             } elseif(strlen($this->email) > 100) {
-                $errors['email'] = _('O Email precisa ter 100 caractéres ou menos!');
+                $errors['email'] = _('O email precisa ter 100 caractéres ou menos!');
             } else {
                 $user = User::getByEmail($this->email);
                 if(!$user) {
-                    $errors['email'] = _('Este Email não foi encontrado!');
+                    $errors['email'] = _('O email não foi encontrado!');
                 }
             }
 
             if(count($errors) > 0) {
-                throw new ValidationException($errors, _('Erros de Validação! Verifique os campos.'));
+                throw new ValidationException($errors, _('Erros de validação! Verifique os campos.'));
                 return null;
             }
 

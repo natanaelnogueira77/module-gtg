@@ -211,7 +211,7 @@ class Model extends DataLayer
         if($this->fail()) {
             throw new LogException(
                 $this->fail()->getMessage(),
-                _('Ocorreu um erro inesperado enquanto você executava essa ação! Informe ao Administrador.')
+                _('Ocorreu um erro inesperado enquanto você executava essa ação! Informe ao administrador.')
             );
         }
         return $result;
@@ -231,7 +231,7 @@ class Model extends DataLayer
         if($this->fail()) {
             throw new LogException(
                 $this->fail()->getMessage(),
-                _('Ocorreu um erro inesperado enquanto você executava essa ação! Informe ao Administrador.')
+                _('Ocorreu um erro inesperado enquanto você executava essa ação! Informe ao administrador.')
             );
         }
 

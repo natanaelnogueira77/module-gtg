@@ -7,7 +7,7 @@
 <?php 
     $this->insert('themes/architect-ui/components/title', [
         'title' => _('Editar Conta'),
-        'subtitle' => _('Edite os Detalhes de sua Conta logo abaixo'),
+        'subtitle' => _('Edite os detalhes de sua conta logo abaixo'),
         'icon' => 'pe-7s-user',
         'icon_color' => 'bg-malibu-beach'
     ]);
@@ -56,7 +56,7 @@
             <div class="form-row">
                 <div class="form-group col-md-12 align-middle">
                     <div class="d-flex">
-                        <p class="mb-0 mr-2"><strong><?= _('Deseja alterar a Senha?') ?></strong></p>
+                        <p class="mb-0 mr-2"><strong><?= _('Deseja alterar a senha?') ?></strong></p>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="update_password" id="update_password1" value="1">
                             <label class="form-check-label" for="update_password1">

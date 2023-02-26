@@ -30,7 +30,7 @@ class CLogin extends Controller
                     ->setScoreThreshold(0.5)
                     ->verify($data['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
                 if(!$resp->isSuccess()) {
-                    throw new AppException(_('O Teste do ReCaptcha falhou! Tente novamente.'));
+                    throw new AppException(_('O teste do ReCaptcha falhou! Tente novamente.'));
                 }
 
                 $user = $login->verify();

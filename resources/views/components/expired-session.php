@@ -59,13 +59,13 @@
                     <div class="position-relative form-group">
                         <label for="email"><?= _('Email') ?></label>
                         <input type="text" class="form-control" name="email" 
-                            placeholder="<?= _('Informe seu Email...') ?>" required>
+                            placeholder="<?= _('Informe seu email...') ?>" required>
                         <div class="invalid-feedback"></div>
                     </div>
                     
                     <div class="position-relative form-group">
                         <label for="password"><?= _('Senha') ?></label>
-                        <input type="password" class="form-control" placeholder="<?= _('Informe sua Senha...') ?>" 
+                        <input type="password" class="form-control" placeholder="<?= _('Informe sua senha...') ?>" 
                             name="password" required>
                         <div class="invalid-feedback"></div>
                     </div>

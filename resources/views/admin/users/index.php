@@ -7,7 +7,7 @@
 <?php 
     $this->insert('themes/architect-ui/components/title', [
         'title' => _('Lista de Usuários'),
-        'subtitle' => _('Segue abaixo a lista de usuários do Sistema'),
+        'subtitle' => _('Segue abaixo a lista de usuários do sistema'),
         'icon' => 'pe-7s-users',
         'icon_color' => 'bg-malibu-beach'
     ]);
@@ -73,7 +73,7 @@
                 table.find("[data-act=delete]").click(function () {
                     var data = $(this).data();
 
-                    if(confirm(<?php echo json_encode(_('Deseja realmente excluir este Usuário?')) ?>)) {
+                    if(confirm(<?php echo json_encode(_('Deseja realmente excluir este usuário?')) ?>)) {
                         app.callAjax({
                             url: data.action,
                             type: data.method,
