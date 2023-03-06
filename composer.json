@@ -13,7 +13,6 @@
         "ext-gd": "*",
         "ext-exif": "*",
         "coffeecode/uploader": "^2.0",
-        "jms/translation-bundle": "^1.6",
         "coffeecode/datalayer": "^2.0",
         "google/recaptcha": "^1.3"
     },
