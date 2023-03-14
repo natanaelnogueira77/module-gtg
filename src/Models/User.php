@@ -34,7 +34,7 @@ class User extends Model
 
     public function save(): bool 
     {
-        $this->slug = is_string($this->slug) ? generateSlug($this->slug) : null;
+        $this->slug = is_string($this->slug) ? slugify($this->slug) : null;
         $this->email = strtolower($this->email);
         $this->token = is_string($this->email) ? md5($this->email) : null;
         

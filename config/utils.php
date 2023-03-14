@@ -194,22 +194,23 @@ function cleanDocument(string $str): mixed
     return preg_replace('/[^A-Za-z0-9\-]/', '', $str);
 }
 
-function generateSlug(string $str): string
+function slugify(string $str, string $delimiter = '-'): string
 {
-    $str = html_entity_decode($str);
-    $str = mb_strtolower($str);
-    $str = preg_replace('/(â|á|ã)/', 'a', $str);
-    $str = preg_replace('/(ê|é)/', 'e', $str);
-    $str = preg_replace('/(í|Í)/', 'i', $str);
-    $str = preg_replace('/(ú)/', 'u', $str);
-    $str = preg_replace('/(ó|ô|õ|Ô)/', 'o',$str);
-    $str = preg_replace('/(_|\/|!|\?|#|&)/', '', $str);
-    $str = preg_replace('/( )/', '-', $str);
-    $str = preg_replace('/ç/', 'c', $str);
-    $str = preg_replace('/(-[-]{1,})/', '-', $str);
-    $str = preg_replace('/(,)/', '-', $str);
-    $str = strtolower($str);
-    return $str;
+    $slug = strtolower(
+        trim(
+            preg_replace(
+                '/[\s-]+/', 
+                $delimiter, 
+                preg_replace(
+                    '/[^A-Za-z0-9-]+/', 
+                    $delimiter, 
+                    preg_replace('/[&]/', 'and', preg_replace('/[\']/', '', iconv('UTF-8', 'ASCII//TRANSLIT', $str)))
+                )
+            ), 
+            $delimiter
+        )
+    );
+    return $slug;
 }
 
 function writeIniFile(array $array, string $path, bool $hasSections = false)

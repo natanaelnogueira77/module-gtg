@@ -144,7 +144,7 @@ class CLogin extends Controller
                         'name' => $facebookUser->getFirstName(),
                         'email' => $facebookUser->getEmail(),
                         'password' => $pass,
-                        'slug' => generateSlug($facebookUser->getFirstName() . rand(1, 10000))
+                        'slug' => slugify($facebookUser->getFirstName() . rand(1, 10000))
                     ]);
                     $dbUser->save();
                 }
@@ -209,7 +209,7 @@ class CLogin extends Controller
                         'namse' => $googleUser->getFirstName(),
                         'email' => $googleUser->getEmail(),
                         'password' => $pass,
-                        'slug' => generateSlug($googleUser->getFirstName() . rand(1, 10000))
+                        'slug' => slugify($googleUser->getFirstName() . rand(1, 10000))
                     ]);
                     $dbUser->save();
                 }

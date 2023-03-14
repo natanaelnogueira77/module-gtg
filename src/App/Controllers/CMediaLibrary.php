@@ -56,7 +56,7 @@ class CMediaLibrary extends Controller
 
             $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
             $basename = pathinfo($file['name'], PATHINFO_FILENAME);
-            $filename = generateSlug($basename) . '-' . time() . ".{$ext}";
+            $filename = slugify($basename) . '-' . time() . ".{$ext}";
 
             if(!is_dir($root)) {
                 mkdir($root);
