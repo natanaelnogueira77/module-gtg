@@ -24,6 +24,7 @@ class SocialUser extends Model
         'email',
         'social'
     ];
+    public $user;
 
     public function save(): bool 
     {
@@ -31,29 +32,61 @@ class SocialUser extends Model
         return parent::save();
     }
 
-    public function getUser(): ?User
+    public function user(): ?User
     {
-        $this->user = User::getById($this->usu_id);
+        if(!$this->user) {
+            $this->user = $this->belongsTo('Src\Models\User', 'usu_id', 'id', $columns);
+        }
+        return $this->user;
+    }
+
+    public static function withUser(
+        array $objects = [], 
+        array $filters = [], 
+        string $columns = '*'
+    ): array
+    {
+        if(count($objects) > 0) {
+            $ids = self::getPropertyValues($objects, 'usu_id');
+
+            $users = (new User())->get([
+                'in' => ['id' => $ids]
+            ] + $filters, $columns)->fetch(true);
+            if($users) {
+                $users = User::getGroupedBy($users, 'id');
+                foreach($objects as $index => $object) {
+                    $objects[$index]->user = $users[$object->usu_id];
+                }
+            }
+        }
+
+        return $objects;
+    }
+
+    public static function getByUserId(int $userId, string $columns = '*'): ?array 
+    {
+        return (new self())->get(['usu_id' => $userId], $columns)->fetch(true);
     }
 
     public static function getBySocialId(string $socialId, string $social): ?self 
     {
-        $object = (new self())->get([
+        return (new self())->get([
             'social_id' => $socialId,
             'social' => $social
         ])->fetch(false);
-
-        return $object;
     }
 
     public static function getBySocialEmail(string $email, string $social): ?self 
     {
-        $object = (new self())->get([
+        return (new self())->get([
             'email' => $email,
             'social' => $social
         ])->fetch(false);
+    }
 
-        return $object;
+    public static function getSocialNames(): array 
+    {
+        return ['facebook', 'google'];
     }
 
     private function validate(): void 
@@ -70,7 +103,7 @@ class SocialUser extends Model
 
         if(!$this->social) {
             $errors['social'] = _('O nome da rede social é obrigatório!');
-        } elseif(!in_array($this->social, ['facebook', 'google'])) {
+        } elseif(!in_array($this->social, self::getSocialNames())) {
             $errors['social'] = _('O nome da rede social é inválido!');
         }
 
@@ -81,15 +114,13 @@ class SocialUser extends Model
         } elseif(strlen($this->email) > 100) {
             $errors['email'] = _('O email precisa ter 100 caractéres ou menos!');
         } else {
-            if(!$this->id) {
-                $email = (new self())
+            $email = $this->id 
+                ? (new self())
+                    ->find('email = :email AND id != :id', "email={$this->email}&id={$this->id}")
+                    ->count()
+                : (new self())
                     ->find('email = :email', "email={$this->email}")
                     ->count();
-            } else {
-                $email = (new self())
-                    ->find('email = :email AND id != :id', "email={$this->email}&id={$this->id}")
-                    ->count();
-            }
 
             if($email) {
                 $errors['email'] = _('O email informado já está em uso! Tente outro.');

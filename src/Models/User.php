@@ -46,7 +46,7 @@ class User extends Model
         return parent::save();
     }
 
-    public function userMetas(string $columns = '*') 
+    public function userMetas(string $columns = '*'): ?array 
     {
         if(!$this->userMetas) {
             $this->userMetas = $this->hasMany('Src\Models\UserMeta', 'usu_id', 'id', $columns);
@@ -54,7 +54,7 @@ class User extends Model
         return $this->userMetas;
     }
 
-    public function userType(string $columns = '*') 
+    public function userType(string $columns = '*'): ?UserType 
     {
         if(!$this->userType) {
             $this->userType = $this->belongsTo('Src\Models\UserType', 'utip_id', 'id', $columns);
@@ -87,36 +87,28 @@ class User extends Model
 
     public function isAdmin(): bool
     {
-        if($this->utip_id == 1) {
-            return true;
-        }
-
-        return false;
+        return $this->utip_id == 1;
     }
 
     public static function getBySlug(string $slug): ?self 
     {
-        $user = (new self())->get(['slug' => $slug])->fetch(false);
-        return $user;
+        return (new self())->get(['slug' => $slug])->fetch(false);
     }
 
     public static function getByEmail(string $email): ?self 
     {
-        $user = (new self())->get(['email' => $email])->fetch(false);
-        return $user;
+        return (new self())->get(['email' => $email])->fetch(false);
     }
 
     public static function getByToken(string $token): ?self 
     {
-        $user = (new self())->get(['token' => $token])->fetch(false);
-        return $user;
+        return (new self())->get(['token' => $token])->fetch(false);
     }
 
     public static function countUsers(): array 
     {
         $array = [];
 
-        $model = new self();
         $results = (new self())->find(null, null, 'COUNT(*) as count, utip_id')
             ->group('utip_id')->fetch('count');
 
@@ -131,10 +123,7 @@ class User extends Model
 
     public function verifyPassword(string $password): bool 
     {
-        if(!$this->password) {
-            return false;
-        }
-        return password_verify($password, $this->password);
+        return $this->password ? password_verify($password, $this->password) : false;
     }
 
     private function validate(): void 
@@ -154,15 +143,13 @@ class User extends Model
         } elseif(strlen($this->email) > 100) {
             $errors['email'] = _('O email precisa ter 100 caractéres ou menos!');
         } else {
-            if(!$this->id) {
-                $email = (new self())
+            $email = $this->id 
+                ? (new self())
+                    ->find('email = :email AND id != :id', "email={$this->email}&id={$this->id}")
+                    ->count()
+                : (new self())
                     ->find('email = :email', "email={$this->email}")
                     ->count();
-            } else {
-                $email = (new self())
-                    ->find('email = :email AND id != :id', "email={$this->email}&id={$this->id}")
-                    ->count();
-            }
 
             if($email) {
                 $errors['email'] = _('O email informado já está em uso! Tente outro.');
@@ -174,15 +161,13 @@ class User extends Model
         } elseif(strlen($this->slug) > 100) {
             $errors['slug'] = _('O apelido precisa ter 100 caractéres ou menos!');
         } else {
-            if(!$this->id) {
-                $slug = (new self())
+            $slug = $this->id 
+                ? (new self())
+                    ->find('slug = :slug AND id != :id', "slug={$this->slug}&id={$this->id}")
+                    ->count()
+                : (new self())
                     ->find('slug = :slug', "slug={$this->slug}")
                     ->count();
-            } else {
-                $slug = (new self())
-                    ->find('slug = :slug AND id != :id', "slug={$this->slug}&id={$this->id}")
-                    ->count();
-            }
             
             if($slug) {
                 $errors['slug'] = _('O apelido informado já está em uso! Tente outro.');

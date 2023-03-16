@@ -2,8 +2,11 @@
 
 namespace Src\Models;
 
+use DateTime;
+use Src\Exceptions\AppException;
 use Src\Exceptions\ValidationException;
 use Src\Models\Model;
+use Src\Models\User;
 
 class UserType extends Model 
 {
@@ -25,7 +28,7 @@ class UserType extends Model
         return parent::save();
     }
 
-    public function users(string $columns = '*') 
+    public function users(string $columns = '*'): ?array
     {
         if(!$this->users) {
             $this->users = $this->hasMany('Src\Models\User', 'utip_id', 'id', $columns);
@@ -33,11 +36,15 @@ class UserType extends Model
         return $this->users;
     }
 
-    public static function withUsers(array $objects = [], string $columns = '*'): array
+    public static function withUsers(
+        array $objects = [], 
+        array $filters = [], 
+        string $columns = '*'
+    ): array
     {
         if(count($objects) > 0) {
             $objects = self::getGroupedBy($objects);
-            $users = (new User())->get([], $columns)->fetch(true);
+            $users = (new User())->get($filters, $columns)->fetch(true);
             foreach($users as $user) {
                 $objects[$user->utip_id]->users[] = $user;
             }

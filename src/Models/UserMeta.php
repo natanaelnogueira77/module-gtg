@@ -7,6 +7,7 @@ use Src\Exceptions\AppException;
 use Src\Exceptions\ValidationException;
 use Src\Models\Model;
 use Src\Models\TMeta;
+use Src\Models\User;
 
 class UserMeta extends Model 
 {
@@ -39,7 +40,7 @@ class UserMeta extends Model
         return parent::save();
     }
 
-    public function user(string $columns = '*') 
+    public function user(string $columns = '*'): ?User
     {
         if(!$this->user) {
             $this->user = $this->belongsTo('Src\Models\User', 'usu_id', 'id', $columns);
