@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-02-25 23:58-0300\n"
-"PO-Revision-Date: 2023-02-26 00:01-0300\n"
+"POT-Creation-Date: 2023-03-16 14:56-0300\n"
+"PO-Revision-Date: 2023-03-16 14:56-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -374,7 +374,7 @@ msgstr "Anterior"
 
 #: resources/views/components/media-library.php:447
 #: resources/views/components/media-library.php:450
-#: resources/views/components/pagination.php:23
+#: resources/views/components/pagination.php:34
 msgid "Próxima"
 msgstr "Próxima"
 
@@ -699,29 +699,29 @@ msgstr ""
 msgid "Você precisa estar autenticado para acessar essa área!"
 msgstr "Você precisa estar autenticado para acessar essa área!"
 
-#: src/Components/Contact.php:51 src/Models/User.php:145
+#: src/Components/Contact.php:51 src/Models/User.php:134
 msgid "O nome é obrigatório!"
 msgstr "O nome é obrigatório!"
 
-#: src/Components/Contact.php:53 src/Models/User.php:147
+#: src/Components/Contact.php:53 src/Models/User.php:136
 msgid "O nome precisa ter 100 caractéres ou menos!"
 msgstr "O nome precisa ter 100 caractéres ou menos!"
 
 #: src/Components/Contact.php:57 src/Components/ForgotPassword.php:26
-#: src/Components/Login.php:28 src/Models/SocialUser.php:78
-#: src/Models/User.php:151
+#: src/Components/Login.php:28 src/Models/SocialUser.php:111
+#: src/Models/User.php:140
 msgid "O email é obrigatório!"
 msgstr "O email é obrigatório!"
 
 #: src/Components/Contact.php:59 src/Components/ForgotPassword.php:28
-#: src/Components/Login.php:30 src/Models/SocialUser.php:80
-#: src/Models/User.php:153
+#: src/Components/Login.php:30 src/Models/SocialUser.php:113
+#: src/Models/User.php:142
 msgid "O email é inválido!"
 msgstr "O email é inválido!"
 
 #: src/Components/Contact.php:61 src/Components/ForgotPassword.php:30
-#: src/Components/Login.php:32 src/Models/SocialUser.php:82
-#: src/Models/User.php:155
+#: src/Components/Login.php:32 src/Models/SocialUser.php:115
+#: src/Models/User.php:144
 msgid "O email precisa ter 100 caractéres ou menos!"
 msgstr "O email precisa ter 100 caractéres ou menos!"
 
@@ -743,9 +743,9 @@ msgstr "A mensagem precisa ter 1000 caractéres ou menos!"
 
 #: src/Components/Contact.php:81 src/Components/ForgotPassword.php:39
 #: src/Components/Login.php:40 src/Components/ResetPassword.php:43
-#: src/Models/Config.php:53 src/Models/SocialUser.php:100
-#: src/Models/TConfig.php:138 src/Models/TMeta.php:160 src/Models/User.php:203
-#: src/Models/UserType.php:66
+#: src/Models/Config.php:53 src/Models/SocialUser.php:131
+#: src/Models/TConfig.php:138 src/Models/TMeta.php:160 src/Models/User.php:188
+#: src/Models/UserType.php:73
 msgid "Erros de validação! Verifique os campos."
 msgstr "Erros de validação! Verifique os campos."
 
@@ -758,7 +758,7 @@ msgid "O email não foi encontrado!"
 msgstr "O email não foi encontrado!"
 
 #: src/Components/Login.php:36 src/Components/ResetPassword.php:28
-#: src/Models/User.php:197
+#: src/Models/User.php:182
 msgid "A senha é obrigatória!"
 msgstr "A senha é obrigatória!"
 
@@ -798,59 +798,59 @@ msgstr ""
 "Ocorreu um erro inesperado enquanto você executava essa ação! Informe ao "
 "administrador."
 
-#: src/Models/SocialUser.php:64
+#: src/Models/SocialUser.php:97
 msgid "O usuário é obrigatório!"
 msgstr "O usuário é obrigatório!"
 
-#: src/Models/SocialUser.php:68
+#: src/Models/SocialUser.php:101
 msgid "O ID da rede social é obrigatório!"
 msgstr "O ID da rede social é obrigatório!"
 
-#: src/Models/SocialUser.php:72
+#: src/Models/SocialUser.php:105
 msgid "O nome da rede social é obrigatório!"
 msgstr "O nome da rede social é obrigatório!"
 
-#: src/Models/SocialUser.php:74
+#: src/Models/SocialUser.php:107
 msgid "O nome da rede social é inválido!"
 msgstr "O nome da rede social é inválido!"
 
-#: src/Models/SocialUser.php:95 src/Models/User.php:168
+#: src/Models/SocialUser.php:126 src/Models/User.php:155
 msgid "O email informado já está em uso! Tente outro."
 msgstr "O email informado já está em uso! Tente outro."
 
-#: src/Models/User.php:173
+#: src/Models/User.php:160
 msgid "O apelido é obrigatório!"
 msgstr "O apelido é obrigatório!"
 
-#: src/Models/User.php:175
+#: src/Models/User.php:162
 msgid "O apelido precisa ter 100 caractéres ou menos!"
 msgstr "O apelido precisa ter 100 caractéres ou menos!"
 
-#: src/Models/User.php:188
+#: src/Models/User.php:173
 msgid "O apelido informado já está em uso! Tente outro."
 msgstr "O apelido informado já está em uso! Tente outro."
 
-#: src/Models/User.php:193
+#: src/Models/User.php:178
 msgid "O tipo de usuário é obrigatório!"
 msgstr "O tipo de usuário é obrigatório!"
 
-#: src/Models/User.php:199
+#: src/Models/User.php:184
 msgid "A senha deve conter 5 caracteres ou mais!"
 msgstr "A senha deve conter 5 caracteres ou mais!"
 
-#: src/Models/UserType.php:54
+#: src/Models/UserType.php:61
 msgid "O nome no singular é obrigatório!"
 msgstr "O nome no singular é obrigatório!"
 
-#: src/Models/UserType.php:56
+#: src/Models/UserType.php:63
 msgid "O nome no singular precisa ter 45 caractéres ou menos!"
 msgstr "O nome no singular precisa ter 45 caractéres ou menos!"
 
-#: src/Models/UserType.php:60
+#: src/Models/UserType.php:67
 msgid "O nome no plural é obrigatório!"
 msgstr "O nome no plural é obrigatório!"
 
-#: src/Models/UserType.php:62
+#: src/Models/UserType.php:69
 msgid "O nome no plural precisa ter 45 caractéres ou menos!"
 msgstr "O nome no plural precisa ter 45 caractéres ou menos!"
 
