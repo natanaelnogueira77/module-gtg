@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-03-16 14:56-0300\n"
-"PO-Revision-Date: 2023-03-16 14:56-0300\n"
+"POT-Creation-Date: 2023-03-16 15:29-0300\n"
+"PO-Revision-Date: 2023-03-16 15:30-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -696,29 +696,29 @@ msgstr "You need to be authenticated as an administrator to access this area!"
 msgid "Você precisa estar autenticado para acessar essa área!"
 msgstr "You need to be authenticated to access this area!"
 
-#: src/Components/Contact.php:51 src/Models/User.php:134
+#: src/Components/Contact.php:51 src/Models/User.php:145
 msgid "O nome é obrigatório!"
 msgstr "The name is required!"
 
-#: src/Components/Contact.php:53 src/Models/User.php:136
+#: src/Components/Contact.php:53 src/Models/User.php:147
 msgid "O nome precisa ter 100 caractéres ou menos!"
 msgstr "The name must be 100 characters or less!"
 
 #: src/Components/Contact.php:57 src/Components/ForgotPassword.php:26
 #: src/Components/Login.php:28 src/Models/SocialUser.php:111
-#: src/Models/User.php:140
+#: src/Models/User.php:151
 msgid "O email é obrigatório!"
 msgstr "The email is required!"
 
 #: src/Components/Contact.php:59 src/Components/ForgotPassword.php:28
 #: src/Components/Login.php:30 src/Models/SocialUser.php:113
-#: src/Models/User.php:142
+#: src/Models/User.php:153
 msgid "O email é inválido!"
 msgstr "The email is invalid!"
 
 #: src/Components/Contact.php:61 src/Components/ForgotPassword.php:30
 #: src/Components/Login.php:32 src/Models/SocialUser.php:115
-#: src/Models/User.php:144
+#: src/Models/User.php:155
 msgid "O email precisa ter 100 caractéres ou menos!"
 msgstr "The email must be 100 characters or less!"
 
@@ -741,8 +741,8 @@ msgstr "The message must be 1000 characters or less!"
 #: src/Components/Contact.php:81 src/Components/ForgotPassword.php:39
 #: src/Components/Login.php:40 src/Components/ResetPassword.php:43
 #: src/Models/Config.php:53 src/Models/SocialUser.php:131
-#: src/Models/TConfig.php:138 src/Models/TMeta.php:160 src/Models/User.php:188
-#: src/Models/UserType.php:73
+#: src/Models/TConfig.php:138 src/Models/TMeta.php:160 src/Models/User.php:199
+#: src/Models/UserType.php:81
 msgid "Erros de validação! Verifique os campos."
 msgstr "Validation errors! Check the fields."
 
@@ -755,7 +755,7 @@ msgid "O email não foi encontrado!"
 msgstr "The email was not found!"
 
 #: src/Components/Login.php:36 src/Components/ResetPassword.php:28
-#: src/Models/User.php:182
+#: src/Models/User.php:193
 msgid "A senha é obrigatória!"
 msgstr "The password is required!"
 
@@ -811,43 +811,55 @@ msgstr "The social network name is required!"
 msgid "O nome da rede social é inválido!"
 msgstr "The social network name is invalid!"
 
-#: src/Models/SocialUser.php:126 src/Models/User.php:155
+#: src/Models/SocialUser.php:126 src/Models/User.php:166
 msgid "O email informado já está em uso! Tente outro."
 msgstr "The given email is already in use! Try another."
 
-#: src/Models/User.php:160
+#: src/Models/User.php:133
+msgid "Você não pode excluir um usuário vinculado à uma rede social!"
+msgstr "You cannot delete a user linked to a social network!"
+
+#: src/Models/User.php:135
+msgid "Você não pode excluir um usuário com dados armazenados!"
+msgstr "You cannot delete a user with stored data!"
+
+#: src/Models/User.php:171
 msgid "O apelido é obrigatório!"
 msgstr "The nickname is required!"
 
-#: src/Models/User.php:162
+#: src/Models/User.php:173
 msgid "O apelido precisa ter 100 caractéres ou menos!"
 msgstr "The nickname must be 100 characters or less!"
 
-#: src/Models/User.php:173
+#: src/Models/User.php:184
 msgid "O apelido informado já está em uso! Tente outro."
 msgstr "The given nickname is already in use! Try another."
 
-#: src/Models/User.php:178
+#: src/Models/User.php:189
 msgid "O tipo de usuário é obrigatório!"
 msgstr "The user type is required!"
 
-#: src/Models/User.php:184
+#: src/Models/User.php:195
 msgid "A senha deve conter 5 caracteres ou mais!"
 msgstr "The password must contain 5 characters or more!"
 
-#: src/Models/UserType.php:61
+#: src/Models/UserType.php:59
+msgid "Você não pode excluir um tipo de usuário vinculado à um usuário!"
+msgstr "You cannot delete a user type linked to a user!"
+
+#: src/Models/UserType.php:69
 msgid "O nome no singular é obrigatório!"
 msgstr "The singular name is required!"
 
-#: src/Models/UserType.php:63
+#: src/Models/UserType.php:71
 msgid "O nome no singular precisa ter 45 caractéres ou menos!"
 msgstr "The singular name must be 45 characters or less!"
 
-#: src/Models/UserType.php:67
+#: src/Models/UserType.php:75
 msgid "O nome no plural é obrigatório!"
 msgstr "The plural name is required!"
 
-#: src/Models/UserType.php:69
+#: src/Models/UserType.php:77
 msgid "O nome no plural precisa ter 45 caractéres ou menos!"
 msgstr "The plural name must be 45 characters or less!"
 

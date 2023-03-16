@@ -53,6 +53,14 @@ class UserType extends Model
         return $objects;
     }
 
+    public function destroy(): bool 
+    {
+        if((new User())->get(['utip_id' => $this->id])->count()) {
+            throw new AppException(_('Você não pode excluir um tipo de usuário vinculado à um usuário!'));
+        }
+        return parent::destroy();
+    }
+
     private function validate(): void 
     {
         $errors = [];

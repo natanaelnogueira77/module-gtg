@@ -6,6 +6,7 @@ use DateTime;
 use Src\Exceptions\AppException;
 use Src\Exceptions\ValidationException;
 use Src\Models\Model;
+use Src\Models\SocialUser;
 use Src\Models\UserMeta;
 use Src\Models\UserType;
 
@@ -124,6 +125,16 @@ class User extends Model
     public function verifyPassword(string $password): bool 
     {
         return $this->password ? password_verify($password, $this->password) : false;
+    }
+
+    public function destroy(): bool 
+    {
+        if((new SocialUser())->get(['usu_id' => $this->id])->count()) {
+            throw new AppException(_('Você não pode excluir um usuário vinculado à uma rede social!'));
+        } elseif((new UserMeta())->get(['usu_id' => $this->id])->count()) {
+            throw new AppException(_('Você não pode excluir um usuário com dados armazenados!'));
+        }
+        return parent::destroy();
     }
 
     private function validate(): void 
