@@ -51,7 +51,13 @@
     </div>
     <?php 
         $this->insert("themes/architect-ui/partials/scripts");
-        $this->insert("components/tinymce");
+        $this->insert("components/tinymce", [
+            'mlAdd' => $router->route('mediaLibrary.add'),
+            'mlLoad' => $router->route('mediaLibrary.load'),
+            'mlDelete' => $router->route('mediaLibrary.delete'),
+            'storeAt' => $storeAt,
+            'path' => ROOT
+        ]);
         echo $this->section("scripts");
         echo $this->section("modals");
         $this->insert("themes/messages");

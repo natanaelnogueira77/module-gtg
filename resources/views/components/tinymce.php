@@ -3,6 +3,82 @@
         tinymce.init({
             selector:'textarea.tinymce',
             language: <?php echo json_encode(LANG[1] == 'es_ES' ? 'es' : LANG[1]) ?>,
+            plugins: 'image',
+            relative_urls : false,
+            remove_script_host : false,
+            convert_urls : true,
+            a11y_advanced_options: true,
+            images_file_types: 'jpg,jpeg,png,svg,webp',
+            images_upload_handler: function (blobInfo, success, failure, progress) {
+                var xhr, formData;
+
+                xhr = new XMLHttpRequest();
+                xhr.withCredentials = false;
+                xhr.open('POST', <?php echo json_encode($mlAdd) ?>);
+
+                xhr.upload.onprogress = function (e) {
+                    progress(e.loaded / e.total * 100);
+                };
+
+                xhr.onload = function() {
+                    var json;
+
+                    if(xhr.status === 403) {
+                        failure(<?php echo json_encode(_('Erro de HTTP: ')) ?> + xhr.status, { remove: true });
+                        return;
+                    }
+
+                    if(xhr.status < 200 || xhr.status >= 300) {
+                        failure(<?php echo json_encode(_('Erro de HTTP: ')) ?> + xhr.status);
+                        return;
+                    }
+
+                    json = JSON.parse(xhr.responseText);
+
+                    if(!json || typeof json.filename != 'string') {
+                        failure(<?php echo json_encode(_('JSON Inválido: ')) ?> + xhr.responseText);
+                        return;
+                    }
+
+                    success(<?php echo json_encode($path . '/' . $storeAt . '/') ?> + json.filename);
+                };
+
+                xhr.onerror = function () {
+                    failure(<?php echo json_encode(_('O upload da imagem falhou! Código: ')) ?> + xhr.status);
+                };
+
+                formData = new FormData();
+                formData.append('file', blobInfo.blob(), blobInfo.filename());
+                formData.append('root', <?php echo json_encode($storeAt) ?>);
+
+                xhr.send(formData);
+            },
+            images_upload_base_path: <?php echo json_encode($path . '/' . $storeAt) ?>,
+            image_list: function (list_success) {
+                const images = [];
+                $.ajax({
+                    url: <?php echo json_encode($mlLoad) ?>,
+                    type: 'get',
+                    data: {
+                        root: <?php echo json_encode($storeAt) ?>,
+                        limit: 1000,
+                        page: 1
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+                        if(response.files) {
+                            for(var i = 0; i < response.files.length; i++) {
+                                images.push({
+                                    title: response.files[i], 
+                                    value: <?php echo json_encode($path . '/' . $storeAt . '/') ?> + response.files[i]
+                                });
+                            }
+                        }
+
+                        list_success(images);
+                    }
+                });
+            },
             style_formats: [
                 {
                     title: 'Headers', 

@@ -242,4 +242,12 @@ class App {
             }
         }
     }
+
+    cleanForm(elem) {
+        elem.find("input, textarea, select").each(function () {
+            if($(this).attr("type") !== "submit") {
+                $(this).val(``);
+            }
+        });
+    }
 }

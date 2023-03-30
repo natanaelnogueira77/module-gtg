@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-03-16 15:29-0300\n"
-"PO-Revision-Date: 2023-03-16 15:30-0300\n"
+"POT-Creation-Date: 2023-03-30 14:52-0300\n"
+"PO-Revision-Date: 2023-03-30 14:54-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -405,6 +405,19 @@ msgstr "Choose"
 #: resources/views/components/media-library.php:549
 msgid "Cancelar"
 msgstr "Cancel"
+
+#: resources/views/components/tinymce.php:27
+#: resources/views/components/tinymce.php:32
+msgid "Erro de HTTP: "
+msgstr "HTTP Error: "
+
+#: resources/views/components/tinymce.php:39
+msgid "JSON Inválido: "
+msgstr "Invalid JSON: "
+
+#: resources/views/components/tinymce.php:47
+msgid "O upload da imagem falhou! Código: "
+msgstr "Image upload failed! Code: "
 
 #: resources/views/emails/reset-password.php:15
 #, php-format
