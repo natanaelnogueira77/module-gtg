@@ -6,7 +6,7 @@
             plugins: ['image', 'table'],
             relative_urls : false,
             remove_script_host : false,
-            convert_urls : true,
+            convert_urls : false,
             a11y_advanced_options: true,
             images_file_types: 'jpg,jpeg,png,svg,webp',
             images_upload_handler: function (blobInfo, success, failure, progress) {
