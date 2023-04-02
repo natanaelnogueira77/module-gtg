@@ -3,7 +3,7 @@
         tinymce.init({
             selector:'textarea.tinymce',
             language: <?php echo json_encode(LANG[1] == 'es_ES' ? 'es' : LANG[1]) ?>,
-            plugins: 'image',
+            plugins: ['image', 'table'],
             relative_urls : false,
             remove_script_host : false,
             convert_urls : true,
