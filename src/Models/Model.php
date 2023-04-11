@@ -76,7 +76,7 @@ class Model extends DataLayer
         $groups = [];
         if($multiple) {
             foreach($objects as $object) {
-                $groups[$object->column][] = $object->column;
+                $groups[$object->column][] = $object;
             }
         } else {
             foreach($objects as $object) {
