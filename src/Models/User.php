@@ -126,11 +126,11 @@ class User extends Model
                     'value' => $value
                 ]);
             }
-
+            
             try {
                 $objects[$meta]->validate();
             } catch(ValidationException $e) {
-                $errors[$meta] = $e->getErrors()['value'];
+                $errors = array_merge($errors, $e->getErrors());
             }
         }
 

@@ -239,9 +239,7 @@
             }).open();
         });
 
-        $("form#system, form#database, form#email, form#usertypes").each(function () {
-            app.form($(this));
-        });
+        app.form($("#system"), function (response) { });
 
         $("[data-info=users]").click(function() {
             var data = $(this).data();

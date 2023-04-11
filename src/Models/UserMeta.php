@@ -44,13 +44,13 @@ class UserMeta extends Model
 
         if($this->meta == 'lang') {
             if(!$this->value) {
-                $errors['value'] = _('A linguagem é obrigatória!');
+                $errors['lang'] = _('A linguagem é obrigatória!');
             }
         } elseif($this->meta == 'last_pass_request') {
             if(!$this->value) {
-                $errors['value'] = _('A data da última alteração de senha é obrigatória!');
+                $errors['last_pass_request'] = _('A data da última alteração de senha é obrigatória!');
             } elseif(!DateTime::createFromFormat('Y-m-d H:i:s', $this->value)) {
-                $errors['value'] = _('A data da última alteração de senha deve seguir o padrão dd/mm/aaaa hh:mm:ss!');
+                $errors['last_pass_request'] = _('A data da última alteração de senha deve seguir o padrão dd/mm/aaaa hh:mm:ss!');
             }
         }
 

@@ -81,7 +81,7 @@ class Config extends Model
             try {
                 $objects[$meta]->validate();
             } catch(ValidationException $e) {
-                $errors[$meta] = $e->getErrors()['value'];
+                $errors = array_merge($errors, $e->getErrors());
             }
         }
 
@@ -102,27 +102,27 @@ class Config extends Model
 
         if($this->meta == 'login_img') {
             if(!$this->value) {
-                $errors['value'] = _('A imagem de fundo do login é obrigatória!');
+                $errors['login_img'] = _('A imagem de fundo do login é obrigatória!');
             } elseif(!in_array(pathinfo($this->value, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png'])) {
-                $errors['value'] = _('A imagem de fundo não é uma imagem válida!');
+                $errors['login_img'] = _('A imagem de fundo não é uma imagem válida!');
             }
         } elseif($this->meta == 'logo') {
             if(!$this->value) {
-                $errors['value'] = _('O logo é obrigatório!');
+                $errors['logo'] = _('O logo é obrigatório!');
             } elseif(!in_array(pathinfo($this->value, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png'])) {
-                $errors['value'] = _('O logo não é uma imagem válida!');
+                $errors['logo'] = _('O logo não é uma imagem válida!');
             }
         } elseif($this->meta == 'logo_icon') {
             if(!$this->value) {
-                $errors['value'] = _('O ícone é obrigatório!');
+                $errors['logo_icon'] = _('O ícone é obrigatório!');
             } elseif(!in_array(pathinfo($this->value, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png'])) {
-                $errors['value'] = _('O ícone não é uma imagem válida!');
+                $errors['logo_icon'] = _('O ícone não é uma imagem válida!');
             }
         } elseif($this->meta == 'style') {
             if(!$this->value) {
-                $errors['value'] = _('O tema é obrigatório!');
+                $errors['style'] = _('O tema é obrigatório!');
             } elseif(!in_array($this->value, ['light', 'dark'])) {
-                $errors['value'] = _('O tema é inválido!');
+                $errors['style'] = _('O tema é inválido!');
             }
         }
 
