@@ -2,8 +2,6 @@
 
 namespace Src\Models;
 
-use DateTime;
-use Src\Exceptions\AppException;
 use Src\Exceptions\ValidationException;
 use Src\Models\Model;
 use Src\Models\User;
@@ -32,31 +30,21 @@ class SocialUser extends Model
         return parent::save();
     }
 
-    public function user(): ?User
+    public function user(string $columns = '*'): ?User
     {
-        if(!$this->user) {
-            $this->user = $this->belongsTo('Src\Models\User', 'usu_id', 'id', $columns);
-        }
+        $this->user = (new User())->findById($this->usu_id, $columns);
         return $this->user;
     }
 
-    public static function withUser(
-        array $objects = [], 
-        array $filters = [], 
-        string $columns = '*'
-    ): array
+    public static function withUser(array $objects, array $filters = [], string $columns = '*'): array
     {
-        if(count($objects) > 0) {
-            $ids = self::getPropertyValues($objects, 'usu_id');
+        $ids = self::getPropertyValues($objects, 'usu_id');
 
-            $users = (new User())->get([
-                'in' => ['id' => $ids]
-            ] + $filters, $columns)->fetch(true);
-            if($users) {
-                $users = User::getGroupedBy($users, 'id');
-                foreach($objects as $index => $object) {
-                    $objects[$index]->user = $users[$object->usu_id];
-                }
+        $registries = (new User())->get(['in' => ['id' => $ids]] + $filters, $columns)->fetch(true);
+        if($registries) {
+            $registries = User::getGroupedBy($registries);
+            foreach($objects as $index => $object) {
+                $objects[$index]->user = $registries[$object->usu_id];
             }
         }
 

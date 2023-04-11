@@ -3,7 +3,6 @@
 namespace Src\App\Controllers\Web;
 
 use Src\App\Controllers\Web\Template;
-use Src\Models\User;
 
 class CHome extends Template 
 {

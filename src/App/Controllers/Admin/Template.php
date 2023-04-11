@@ -5,18 +5,16 @@ namespace Src\App\Controllers\Admin;
 use Src\App\Controllers\Controller;
 use Src\Components\Auth;
 use Src\Models\Config;
-use Src\Models\User;
-use Src\Models\UserType;
 
 class Template extends Controller 
 {
     public function addData(): void 
     {
-        $config = Config::getMetasByName(['logo', 'logo_icon', 'style']);
+        $configMetas = (new Config())->getGroupedMetas(['logo', 'logo_icon', 'style']);
 
-        $logo = url($config['logo']);
-        $logoIcon = url($config['logo_icon']);
-        $style = $config['style'];
+        $logo = $configMetas && $configMetas['logo'] ? url($configMetas['logo']) : '';
+        $logoIcon = $configMetas && $configMetas['logo_icon'] ? url($configMetas['logo_icon']) : '';
+        $style = $configMetas['style'];
 
         $bgColors = [
             'left' => [
@@ -90,13 +88,13 @@ class Template extends Controller
             'noLeft' => false,
             'noFooter' => false,
             'left' => [
-                'color' => $config['style'] ? $bgColors['left'][$config['style']] : null,
+                'color' => $configMetas['style'] ? $bgColors['left'][$configMetas['style']] : null,
                 'menu' => $leftMenu,
                 'active' => ROOT . filter_input(INPUT_GET, 'route', FILTER_DEFAULT)
             ],
             'header' => [
                 'left' => true,
-                'color' => $config['style'] ? $bgColors['header'][$config['style']] : null,
+                'color' => $configMetas['style'] ? $bgColors['header'][$configMetas['style']] : null,
                 'menu' => $headerMenu,
                 'right' => [
                     'show' => true,

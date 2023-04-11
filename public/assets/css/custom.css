@@ -236,3 +236,8 @@ input:checked + .slider:before {
     right: -5px;
     top: -5px;
 }
+
+.dropdown-menu {
+    max-height: 280px; 
+    overflow-y: auto;
+}

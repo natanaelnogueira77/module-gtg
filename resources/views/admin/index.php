@@ -24,7 +24,7 @@
             </div>
 
             <div class="card-body">
-                <div class="card-text"><?= sprintf(_('Versão: <strong>%s</strong>'), $gtgVersion) ?></div>
+                <div class="card-text"><?= sprintf(_('Versão: <strong>%s</strong>'), GTG_VERSION) ?></div>
             </div>
         </div>
     </div>
@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="widget-content-right">
                                     <div class="widget-numbers text-success">
-                                        <?= $countUsers[$userType->id] ?? 0 ?>
+                                        <?= $usersCount[$userType->id] ?? 0 ?>
                                     </div>
                                 </div>
                             </div>
@@ -120,10 +120,10 @@
                     <label for="style"><?= _('Tema') ?></label>
                     <select id="style" name="style" class="form-control">
                         <option value=""><?= _('Escolha o tema de cores do sistema...') ?></option>
-                        <option value="light" <?= $configData['style'] == 'light' ? 'selected' : '' ?>>
+                        <option value="light" <?= $configMetas['style'] == 'light' ? 'selected' : '' ?>>
                             <?= _('Tema Claro') ?>
                         </option>
-                        <option value="dark" <?= $configData['style'] == 'dark' ? 'selected' : '' ?>>
+                        <option value="dark" <?= $configMetas['style'] == 'dark' ? 'selected' : '' ?>>
                             <?= _('Tema Escuro') ?>
                         </option>
                     </select>
@@ -134,11 +134,11 @@
                     <label><?= _('Imagem de Fundo (Login)') ?></label>
                     <div class="d-flex justify-content-around">
                         <img id="login_img_view" style="max-height: 100px; max-width: 100%;" 
-                            src="<?= url($configData['login_img']) ?>">
+                            src="<?= url($configMetas['login_img']) ?>">
                     </div>
 
                     <div class="d-block text-center mt-2">
-                        <input type="hidden" id="login_img" name="login_img" value="<?= $configData['login_img'] ?>">
+                        <input type="hidden" id="login_img" name="login_img" value="<?= $configMetas['login_img'] ?>">
                         <button type="button" class="btn btn-outline-primary btn-md btn-block" id="login_img_upload">
                             <i class="icofont-upload-alt"></i> <?= _('Escolher Imagem') ?>
                         </button>
@@ -152,11 +152,11 @@
                     <label><?= _('Logo') ?></label>
                     <div class="d-flex justify-content-around">
                         <img id="logo_view" style="max-height: 100px; max-width: 100%;" 
-                            src="<?= url($configData['logo']) ?>">
+                            src="<?= url($configMetas['logo']) ?>">
                     </div>
 
                     <div class="d-block text-center mt-2">
-                        <input type="hidden" id="logo" name="logo" value="<?= $configData['logo'] ?>">
+                        <input type="hidden" id="logo" name="logo" value="<?= $configMetas['logo'] ?>">
                         <button type="button" class="btn btn-outline-primary btn-md btn-block" id="logo_upload">
                             <i class="icofont-upload-alt"></i> <?= _('Escolher Imagem') ?>
                         </button>
@@ -168,11 +168,11 @@
                     <label><?= _('Ícone (Tamanho Recomendado: 512 x 512)') ?></label>
                     <div class="d-flex justify-content-around">
                         <img id="logo_icon_view" style="max-height: 100px; max-width: 100%;" 
-                            src="<?= url($configData['logo_icon']) ?>">
+                            src="<?= url($configMetas['logo_icon']) ?>">
                     </div>
 
                     <div class="d-block text-center mt-2">
-                        <input type="hidden" id="logo_icon" name="logo_icon" value="<?= $configData['logo_icon'] ?>">
+                        <input type="hidden" id="logo_icon" name="logo_icon" value="<?= $configMetas['logo_icon'] ?>">
                         <button type="button" class="btn btn-outline-primary btn-md btn-block" id="logo_icon_upload">
                             <i class="icofont-upload-alt"></i> <?= _('Escolher Imagem') ?>
                         </button>

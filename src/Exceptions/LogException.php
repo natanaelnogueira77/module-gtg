@@ -3,22 +3,20 @@
 namespace Src\Exceptions;
 
 use DateTime;
-use Exception;
+use Src\Exceptions\AppException;
+use Throwable;
 
-class LogException extends Exception 
+class LogException extends AppException 
 {
-    // Email de quem deve receber o aviso de erro
-    protected $log_report = 'log_exception.txt';
-    protected $log_exception = 'log_exception.log';
-    protected $log_exception_date = 'log_exception_data.txt';
+    protected $exceptions_log = 'exceptions_log.log';
+    protected $exceptions_log_date = 'exceptions_log_data.txt';
     var $mailAdmin = ERROR_MAIL;
 
-    public function __construct($errorContent, $message = null, $code = 0) 
+    public function __construct(string $errorContent, string $message, int $code = 0, ?Throwable $previous = null) 
     {
-        parent::__construct($message, $code);
-        $hoje = date('Y-m-d H:i:s');
-        $msg_error = 
-            "\n ====== {$hoje} ======" .
+        parent::__construct($message, $code, $previous);
+        $errorMessage = 
+            "\n ====== " . date('Y-m-d H:i:s') . " ======" .
             "\n Erro no arquivo : " . $this->getFile().
             "\n Linha:      " . $this->getLine() .
             "\n Mensagem:   " . $this->getMessage() .
@@ -26,17 +24,17 @@ class LogException extends Exception
             "\n Trace(str): " . $this->getTraceAsString() . 
             "\n Mensagem de Erro: " . $errorContent . "\n";
         
-        $this->writeLog($msg_error);
+        $this->writeLog($errorMessage);
         
         switch($code) {
             case E_USER_ERROR: 
             case E_USER_WARNING: 
             case E_WARNING:
-                return error_log($msg_error, 1, $this->log_exception); 
+                return error_log($errorMessage, 1, $this->exceptions_log); 
                 break;
             case E_USER_NOTICE:
             case E_NOTICE:
-                error_log($msg_error, 3, 'log_de_erros.dat'); 
+                error_log($errorMessage, 3, 'errors_log.dat'); 
                 break;
             default:
                 return false; 
@@ -46,27 +44,17 @@ class LogException extends Exception
 
     private function isReportToday(): bool
     {
-        $lastReport = file_get_contents($this->log_exception_date);
-        $today = date('Y-m-d');
-
-        $date1 = (new DateTime($today))->format('Y-m-d');
-        $date2 = (new DateTime($lastReport))->format('Y-m-d');
-
-        if($date1 == $date2) {
-            return true;
-        } else {
-            return false;
-        }
+        return (new DateTime(date('Y-m-d')))->format('Y-m-d') == (new DateTime(file_get_contents($this->exceptions_log_date)))->format('Y-m-d');
     }
 
-    private function writeLog($log): void 
+    private function writeLog(string $log): void 
     {
         if($this->isReportToday()) {
-            $file = fopen($this->log_report, 'a');
+            $file = fopen($this->exceptions_log, 'a');
             fwrite($file, $log);
             fclose($file);
         } else {
-            $file = fopen($this->log_report, 'a');
+            $file = fopen($this->exceptions_log, 'a');
             fwrite($file, $log);
             fclose($file);
 
@@ -76,8 +64,8 @@ class LogException extends Exception
 
     private function sendReport(): bool 
     {
-        $report = file_get_contents($this->log_report);
-        $file = fopen($this->log_report, 'w');
+        $report = file_get_contents($this->exceptions_log);
+        $file = fopen($this->exceptions_log, 'w');
         fwrite($file, '');
         fclose($file);
 

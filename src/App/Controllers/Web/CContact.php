@@ -2,10 +2,10 @@
 
 namespace Src\App\Controllers\Web;
 
+use ReflectionClass;
 use Src\App\Controllers\Web\Template;
 use Src\Components\Contact;
-use Src\Components\Email;
-use Src\Exceptions\ValidationException;
+use Src\Exceptions\AppException;
 
 class CContact extends Template 
 {
@@ -35,9 +35,9 @@ class CContact extends Template
                 }
 
                 addSuccessMsg(_('Mensagem enviada com sucesso!'));
-            } catch(\Exception $e) {
+            } catch(AppException $e) {
                 $exception = $e;
-                if((new \ReflectionClass($exception))->getShortName() == 'ValidationException') {
+                if((new ReflectionClass($exception))->getShortName() == 'ValidationException') {
                     $errors = $exception->getErrors();
                 }
             }

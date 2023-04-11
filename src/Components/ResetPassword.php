@@ -2,7 +2,6 @@
 
 namespace Src\Components;
 
-use Exception;
 use Src\Exceptions\AppException;
 use Src\Exceptions\ValidationException;
 use Src\Models\User;
@@ -41,7 +40,6 @@ class ResetPassword
 
             if(count($errors) > 0) {
                 throw new ValidationException($errors, _('Erros de validação! Verifique os campos.'));
-                return null;
             }
 
             $user = User::getByToken($token);
@@ -53,12 +51,13 @@ class ResetPassword
             }
 
             throw new AppException(_('A chave de verificação é inválida!'));
-        } catch(Exception $e) {
+        } catch(AppException $e) {
             $this->error = $e;
+            return null;
         }
     }
 
-    public function error(): ?Exception 
+    public function error(): ?AppException 
     {
         return $this->error;
     }

@@ -3,8 +3,7 @@
 namespace Src\App\Controllers\Admin;
 
 use Src\App\Controllers\Admin\Template;
-use Src\App\Controllers\Controller;
-use Src\Components\Auth;
+use Src\Exceptions\AppException;
 use Src\Models\Config;
 use Src\Models\User;
 use Src\Models\UserType;
@@ -14,13 +13,18 @@ class CAdmin extends Template
     public function index(array $data): void 
     {
         $this->addData();
-        $configData = Config::getMetaValues();
+
+        $dbUserCounts = (new User())->get([], 'utip_id, COUNT(*) as users_count')->group('utip_id')->fetch('count');
+        if($dbUserCounts) {
+            foreach($dbUserCounts as $dbUserCount) {
+                $usersCount[$dbUserCount->utip_id] = $dbUserCount->users_count;
+            }
+        }
 
         $this->loadView('admin/index', [
-            'configData' => $configData,
-            'gtgVersion' => GTG_VERSION,
+            'configMetas' => (new Config())->getGroupedMetas(['login_img', 'logo', 'logo_icon', 'style']),
             'userTypes' => (new UserType())->get()->fetch(true),
-            'countUsers' => User::countUsers()
+            'usersCount' => $usersCount
         ]);
     }
 
@@ -29,7 +33,7 @@ class CAdmin extends Template
         $callback = [];
         
         try {
-            Config::saveMetas([
+            (new Config())->saveManyMetas([
                 'style' => $data['style'],
                 'logo' => $data['logo'],
                 'logo_icon' => $data['logo_icon'],
@@ -37,7 +41,8 @@ class CAdmin extends Template
             ]);
             
             $this->setMessage(_('Configurações atualizadas com sucesso!'));
-        } catch(\Exception $e) {
+            $callback['success'] = true;
+        } catch(AppException $e) {
             $this->error = $e;
         }
         

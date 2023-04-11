@@ -1,6 +1,6 @@
 <?php
 
-function url(string $uri = null): string 
+function url(?string $uri = null): string 
 {
     if($uri) {
         if(strpos($uri, 'http://') !== false || strpos($uri, 'https://') !== false) {
@@ -86,13 +86,7 @@ function generatePassword(
 
 function verifyCell(string $tel): bool 
 {
-    $regex = "/^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/";
-
-    if(preg_match($regex, $tel)) {
-        return true;
-    } else {
-        return false;
-    }
+    return preg_match("/^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/", $tel) ? true : false;
 }
 
 function validateCNPJ(string $cnpj): bool 
@@ -196,7 +190,7 @@ function cleanDocument(string $str): mixed
 
 function slugify(string $str, string $delimiter = '-'): string
 {
-    $slug = strtolower(
+    return strtolower(
         trim(
             preg_replace(
                 '/[\s-]+/', 
@@ -209,11 +203,10 @@ function slugify(string $str, string $delimiter = '-'): string
             ), 
             $delimiter
         )
-    );
-    return $slug;
+    );;
 }
 
-function writeIniFile(array $array, string $path, bool $hasSections = false)
+function writeIniFile(array $array, string $path, bool $hasSections = false): bool 
 {
     $content = ''; 
     if($hasSections) { 
@@ -252,10 +245,10 @@ function writeIniFile(array $array, string $path, bool $hasSections = false)
     $success = fwrite($handle, html_entity_decode($content));
     fclose($handle); 
 
-    return $success; 
+    return $success ? true : false; 
 }
 
-function numberInFull($number)
+function numberInFull(string|int $number): string 
 {
     $inFull = '';
     $str = "{$number}";

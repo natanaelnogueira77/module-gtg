@@ -2,10 +2,7 @@
 
 namespace Src\Exceptions;
 
-use Monolog\Formatter\LineFormatter;
-use Monolog\Handler\BrowserConsoleHandler;
 use Monolog\Handler\StreamHandler;
-use Monolog\Handler\TelegramBotHandler;
 use Monolog\Logger;
 
 class ErrorHandler 
@@ -16,12 +13,7 @@ class ErrorHandler
     protected $file = '';
     protected $line = 0;
     
-    public function __construct(
-        int $type, 
-        string $msg, 
-        ?string $file = null, 
-        ?int $line = null
-    ) 
+    public function __construct(int $type, string $msg, ?string $file = null, ?int $line = null) 
     {
         $this->monolog = new Logger('web');
         $this->monolog->pushHandler(new StreamHandler(__DIR__ . '/../../errors.log', Logger::ERROR));
@@ -40,12 +32,7 @@ class ErrorHandler
         $this->line = $line;
     }
 
-    public static function control(
-        int $type, 
-        string $msg, 
-        ?string $file = null, 
-        ?int $line = null
-    ) 
+    public static function control(int $type, string $msg, ?string $file = null, ?int $line = null): string 
     {
         $instance = new self($type, $msg, $file, $line);
         switch($type) {
@@ -98,7 +85,7 @@ class ErrorHandler
         return '';
     }
 
-    public static function shutdown() 
+    public static function shutdown(): void 
     {
         $last_error = error_get_last();
         if($last_error['type'] === E_ERROR) {
@@ -118,7 +105,6 @@ class ErrorHandler
     {
         $content = "Arquivo: {$this->file}, Linha: {$this->line}, Mensagem: {$this->msg}";
         $this->monolog->warning($content, ['logger' => true]);
-
         return true;
     }
     
@@ -126,7 +112,6 @@ class ErrorHandler
     {
         $content = "Arquivo: {$this->file}, Linha: {$this->line}, Mensagem: {$this->msg}";
         $this->monolog->notice($content, ['logger' => true]);
-
         return true;
     }
 }

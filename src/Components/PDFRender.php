@@ -5,6 +5,7 @@ namespace Src\Components;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Exception;
+use Src\Exceptions\AppException;
 use stdClass;
 
 class PDFRender 
@@ -71,8 +72,8 @@ class PDFRender
             $this->dompdf->render();
 
             return true;
-        } catch(Exception $exception) {
-            $this->error = $exception;
+        } catch(Exception $e) {
+            $this->error = (new AppException($e->getMessage()));
             return false;
         }
     }
@@ -87,7 +88,7 @@ class PDFRender
         return $this->dompdf;
     }
 
-    public function error(): ?Exception 
+    public function error(): ?AppException 
     {
         return $this->error;
     }

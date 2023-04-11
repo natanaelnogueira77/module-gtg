@@ -11,38 +11,41 @@ class CMediaLibrary extends Controller
         $data = array_merge($data, filter_input_array(INPUT_GET, FILTER_UNSAFE_RAW));
         $callback = [];
 
-        $filesCount = 0;
+        $count = 0;
         $files = scandir($data['root']);
+        $limit = $data['limit'];
+        $page = $data['page'];
 
-        if(isset($data['search'])) {
-            if($data['search'] !== '') {
-                if($files) {
-                    $filteredFiles = [];
-                    foreach($files as $file) {
-                        $name = pathinfo($file, PATHINFO_FILENAME);
-                        if(strpos(strtolower($name), strtolower($data['search']))) {
-                            $filteredFiles[] = $file;
-                        }
-                    }
-                    $files = $filteredFiles;
-                }
-            }
-        }
-
-        if($files) {
-            foreach($files as $file) {
-                if($file !== '.' && $file !== '..') {
-                    if($filesCount >= $data['limit'] * ($data['page'] - 1) 
-                        && $filesCount < ($data['limit'] * $data['page'])) {
-                        $callback['files'][] = $file;
-                    }
-                    $filesCount++;
-                }
-            }
-        }
-
-        $callback['pages'] = ceil($filesCount / $data['limit']);
+        $files = array_map(
+            function ($o) { return $o; }, 
+            array_filter($files, function ($e) {
+                return !in_array($e, ['.', '..']);
+            })
+        );
         
+        if(isset($data['search'])) {
+            $search = $data['search'];
+            if($search !== '') {
+                $files = array_filter($files, function ($e) use ($search) {
+                    return strpos(strtolower(pathinfo($e, PATHINFO_FILENAME)), strtolower($search)) !== false;
+                });
+            }
+        }
+
+        if(count($files) < $limit * ($page - 1)) {
+            $page = 1;
+        }
+
+        foreach($files as $file) {
+            if($count >= $limit * ($page - 1) && $count < $limit * $page) {
+                $callback['files'][] = $file;
+            }
+            $count++;
+        }
+
+        $callback['pages'] = ceil((count($files) - 2) / $limit);
+
+        $callback['success'] = true;
         $this->echoCallback($callback);
     }
 
@@ -54,18 +57,26 @@ class CMediaLibrary extends Controller
             $file = $_FILES['file'];
             $root = $data['root'];
 
-            $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
-            $basename = pathinfo($file['name'], PATHINFO_FILENAME);
-            $filename = slugify($basename) . '-' . time() . ".{$ext}";
+            $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+            $basename = slugify(pathinfo($file['name'], PATHINFO_FILENAME));
+
+            $files = scandir($root);
+            while($files && in_array($basename . '.' . $extension, $files)) {
+                $basename .= '-1';
+            }
+
+            $filename = $basename . '.' . $extension;
 
             if(!is_dir($root)) {
                 mkdir($root);
             }
 
-            if(move_uploaded_file($file['tmp_name'], "{$root}/{$filename}")) {
+            if(move_uploaded_file($file['tmp_name'], $root . '/' . $filename)) {
                 $callback['filename'] = $filename;
                 $callback['success'] = true;
             }
+
+            $callback['success'] = true;
         }
         
         $this->echoCallback($callback);
@@ -76,7 +87,7 @@ class CMediaLibrary extends Controller
         $callback = [];
 
         if(isset($data['name'])) {
-            $files = glob($data['root'] . "/{$data["name"]}");
+            $files = glob($data['root'] . '/' . $data["name"]);
 
             if(count($files) > 0) {
                 foreach($files as $file) {
@@ -86,6 +97,8 @@ class CMediaLibrary extends Controller
                     }
                 }
             }
+
+            $callback['success'] = true;
         } else {
             $this->throwException(_('Nenhum nome de arquivo foi declarado!'));
         }

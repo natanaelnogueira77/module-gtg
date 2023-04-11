@@ -2,7 +2,6 @@
 
 namespace Src\Components;
 
-use Exception;
 use Src\Exceptions\AppException;
 use Src\Exceptions\ValidationException;
 use Src\Models\User;
@@ -46,13 +45,13 @@ class Login
             }
             
             throw new AppException(_('O email ou a senha estão incorretos!'));
-        } catch(Exception $e) {
+        } catch(AppException $e) {
             $this->error = $e;
             return null;
         }
     }
 
-    public function error(): ?Exception 
+    public function error(): ?AppException 
     {
         return $this->error;
     }

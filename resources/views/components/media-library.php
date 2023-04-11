@@ -4,7 +4,7 @@
         path = <?php echo json_encode($path) ?>;
         filepath = '';
         maxSize = 2;
-        pageLimit = 20;
+        pageLimit = 24;
         fileTypes = ['jpeg', 'jpg', 'png', 'gif'];
         success = function(path) {};
         typesList = {
@@ -81,6 +81,8 @@
             this.choosenFile = null;
             this.setButtonStatus();
             this.loadFiles();
+            this.maxSizeText.innerHTML = <?php echo json_encode(sprintf(_('Tamanho máximo permitido: %sMB'), '{max_size}')) ?>
+                .replace('{max_size}', `${this.maxSize}`);
 
             this.modal.modal('show');
         }
@@ -143,8 +145,6 @@
             this.cancelButton.onclick = () => {
                 this.modal.modal('toggle');
             }
-
-            this.maxSizeText.innerHTML = <?php echo json_encode(sprintf(_('Tamanho máximo permitido: %sMB'), '{max_size}')) ?>.replace('{max_size}', `${this.maxSize}`);
         }
 
         openTab() {
@@ -164,7 +164,8 @@
             if(object.checkFileExtension(filename)) {
                 if(file.size > object.maxSize * 1024 * 1024) {
                     object.app.showMessage(
-                        <?php echo json_encode(sprintf(_('O arquivo que você tentou enviar é maior do que %sMB!'), '{max_size}')) ?>.replace('{max_size}', `${object.maxSize}`), 
+                        <?php echo json_encode(sprintf(_('O arquivo que você tentou enviar é maior do que %sMB!'), '{max_size}')) ?>
+                            .replace('{max_size}', `${object.maxSize}`), 
                         "error"
                     );
                 } else {
@@ -230,7 +231,8 @@
             } else {
                 var str = object.fileTypes.join(", ");
                 object.app.showMessage(
-                    <?php echo json_encode(sprintf(_('A extensão do arquivo que você tentou enviar não é permitida aqui! Extensões permitidas: %s'), '{extensions}')) ?>.replace('{extensions}', `${str}`), 
+                    <?php echo json_encode(sprintf(_('A extensão do arquivo que você tentou enviar não é permitida aqui! Extensões permitidas: %s'), '{extensions}')) ?>
+                        .replace('{extensions}', `${str}`), 
                     "error"
                 );
             }
@@ -300,7 +302,7 @@
                 let small = document.createElement('small');
         
                 icon.setAttribute('class', "icofont-close text-danger");
-                icon.style.fontSize = "22px";
+                icon.style.fontSize = "2rem";
                 
                 if(imagesTypes.includes(fileType)) {
                     content = document.createElement('img');
@@ -381,6 +383,7 @@
                 },
                 dataType: 'json',
                 success: function(response) {
+                    console.log(response);
                     if(response.message) {
                         object.app.showMessage(response.message.message, response.message.type);
                     }
@@ -478,7 +481,7 @@
 </script>
 
 <div class="modal fade" id="media-library-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title"><?= _('Biblioteca de Mídia') ?></h5>
@@ -500,11 +503,10 @@
 
                     <div class="card-body">
                         <div class="tab-content">
-                            <div class="tab-pane tabs-animation fade show active" style="height: 500px;" id="ml-tab-1" role="tabpanel">
-                                <label id="ml-upload-area" style="cursor: pointer; height: 100%; width: 100%;" for="ml-upload">
-                                    <div id="ml-area" class="card card-border border-info" 
-                                        style="cursor: pointer; height: 100%; width: 100%;">
-                                        <div class="d-flex justify-content-around align-items-center" style="height: 100%">
+                            <div class="tab-pane tabs-animation fade show active" id="ml-tab-1" role="tabpanel">
+                                <label id="ml-upload-area" class="w-100" style="cursor: pointer;" for="ml-upload">
+                                    <div id="ml-area" class="card card-border border-info w-100 p-5" style="cursor: pointer;">
+                                        <div class="d-flex justify-content-around align-items-center" style="height: 90%;">
                                             <div>
                                                 <h3 class="text-center"><?= _('Clique para selecionar ou') ?></h3>
                                                 <h3 class="text-center"><?= _('arraste o(s) arquivo(s)') ?></h3>

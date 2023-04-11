@@ -3,17 +3,13 @@
 namespace Src\Exceptions;
 
 use Src\Exceptions\AppException;
+use Throwable;
 
 class ValidationException extends AppException 
 {
     private $errors = [];
 
-    public function __construct(
-        $errors = [],
-        $message = 'Erros de validação! Verifique os campos!', 
-        $code = 0, 
-        $previous = null
-    ) 
+    public function __construct(array $errors, string $message, int $code = 0, ?Throwable $previous = null) 
     {
         parent::__construct($message, $code, $previous);
         $this->errors = $errors;
@@ -24,7 +20,7 @@ class ValidationException extends AppException
         return $this->errors;
     }
 
-    public function get($att): string 
+    public function get(string $att): string 
     {
         return $this->errors[$att];
     }

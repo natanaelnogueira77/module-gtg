@@ -5,17 +5,16 @@ namespace Src\App\Controllers\Web;
 use Src\App\Controllers\Controller;
 use Src\Components\Auth;
 use Src\Models\Config;
-use Src\Models\User;
 
 class Template extends Controller 
 {
     public function addData(): void 
     {
         $user = Auth::get();
-        $config = Config::getMetasByName(['logo', 'logo_icon']);
+        $configMetas = (new Config())->getGroupedMetas(['logo', 'logo_icon', 'style']);
 
-        $logo = url($config['logo']);
-        $logoIcon = url($config['logo_icon']);
+        $logo = $configMetas && $configMetas['logo'] ? url($configMetas['logo']) : '';
+        $logoIcon = $configMetas && $configMetas['logo_icon'] ? url($configMetas['logo_icon']) : '';
 
         $headerMenu = [
             [

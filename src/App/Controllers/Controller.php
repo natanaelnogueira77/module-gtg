@@ -2,13 +2,11 @@
 
 namespace Src\App\Controllers;
 
+use CoffeeCode\Router\Router;
 use DateTime;
-use DateInterval;
-use Exception;
 use League\Plates\Engine;
 use ReflectionClass;
 use Src\Exceptions\AppException;
-use Src\Exceptions\ValidationException;
 
 class Controller 
 {
@@ -17,7 +15,7 @@ class Controller
     protected $router;
     protected $error;
 
-    public function __construct($router) 
+    public function __construct(Router $router) 
     {
         $this->router = $router;
         $this->view = new Engine(__DIR__ . "/../../../resources/views", 'php');
@@ -56,7 +54,7 @@ class Controller
 
     protected function throwException(string $msg): void 
     {
-        throw new Exception($msg);
+        throw new AppException($msg);
     }
 
     protected function loadView(string $vName = '', array $params = array()): void 
@@ -93,7 +91,7 @@ class Controller
         return new DateTime($date ? $date : '');
     }
 
-    protected function getError(): ?Exception 
+    protected function getError(): ?AppException 
     {
         return $this->error;
     }

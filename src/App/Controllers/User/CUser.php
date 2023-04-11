@@ -9,11 +9,8 @@ class CUser extends Template
     public function index(array $data): void 
     {
         $this->addData();
-        
-        $blocks = [];
-
         $this->loadView('user/index', [
-            'blocks' => $blocks
+            'blocks' => []
         ]);
     }
 }

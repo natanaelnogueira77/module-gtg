@@ -2,7 +2,6 @@
 
 namespace Src\Components;
 
-use Exception;
 use Src\Models\User;
 
 class Auth 

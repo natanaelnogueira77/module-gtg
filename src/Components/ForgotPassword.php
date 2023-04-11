@@ -2,7 +2,7 @@
 
 namespace Src\Components;
 
-use Exception;
+use DateTime;
 use Src\Exceptions\AppException;
 use Src\Exceptions\ValidationException;
 use Src\Models\User;
@@ -32,22 +32,27 @@ class ForgotPassword
                 $user = User::getByEmail($this->email);
                 if(!$user) {
                     $errors['email'] = _('O email não foi encontrado!');
+                } else {
+                    if($lastRequest = $user->getMeta('last_pass_request')) {
+                        if(strtotime($lastRequest) >= strtotime('-1 hour')) {
+                            $errors['email'] = _('Uma requisição já foi enviada para este email! Espere 1 hora para poder enviar outra.');
+                        }
+                    };
                 }
             }
 
             if(count($errors) > 0) {
                 throw new ValidationException($errors, _('Erros de validação! Verifique os campos.'));
-                return null;
             }
 
             return $user;
-        } catch(Exception $e) {
+        } catch(AppException $e) {
             $this->error = $e;
             return null;
         }
     }
 
-    public function error(): ?Exception 
+    public function error(): ?AppException 
     {
         return $this->error;
     }

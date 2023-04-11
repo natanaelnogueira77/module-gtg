@@ -3,6 +3,7 @@
 namespace Src\App\Controllers\Auth;
 
 use ReCaptcha\ReCaptcha;
+use ReflectionClass;
 use Src\App\Controllers\Controller;
 use Src\Components\Auth;
 use Src\Components\FacebookLogin;
@@ -10,8 +11,8 @@ use Src\Components\GoogleLogin;
 use Src\Components\Login;
 use Src\Exceptions\AppException;
 use Src\Models\Config;
-use Src\Models\User;
 use Src\Models\SocialUser;
+use Src\Models\User;
 
 class CLogin extends Controller 
 {
@@ -19,19 +20,19 @@ class CLogin extends Controller
     {
         $exception = null;
         $errors = [];
-        $config = Config::getMetasByName(['logo', 'logo_icon', 'login_img']);
+        $configMetas = (new Config())->getGroupedMetas(['logo', 'logo_icon', 'login_img']);
 
         if(count($data) > 0) {
             $login = new Login($data['email'], $data['password']);
             try {
-                $recaptcha = new ReCaptcha(RECAPTCHA['secret_key']);
+                /* $recaptcha = new ReCaptcha(RECAPTCHA['secret_key']);
                 $resp = $recaptcha->setExpectedHostname($_SERVER['SERVER_NAME'])
                     ->setExpectedAction($_GET['action'])
                     ->setScoreThreshold(0.5)
                     ->verify($data['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
                 if(!$resp->isSuccess()) {
                     throw new AppException(_('O teste do ReCaptcha falhou! Tente novamente.'));
-                }
+                } */
 
                 $user = $login->verify();
                 if(!$user) {
@@ -51,18 +52,18 @@ class CLogin extends Controller
                         $this->redirect('user.index');
                     }
                 }
-            } catch(\Exception $e) {
+            } catch(AppException $e) {
                 $exception = $e;
-                if((new \ReflectionClass($exception))->getShortName() == 'ValidationException') {
+                if((new ReflectionClass($exception))->getShortName() == 'ValidationException') {
                     $errors = $exception->getErrors();
                 }
             }
         }
 
         $this->loadView('auth/login', $data + [
-            'background' => url($config['login_img']),
-            'logo' => url($config['logo']),
-            'shortcutIcon' => url($config['logo_icon']),
+            'background' => $configMetas && $configMetas['login_img'] ? url($configMetas['login_img']) : null,
+            'logo' => $configMetas && $configMetas['logo'] ? url($configMetas['logo']) : null,
+            'shortcutIcon' => $configMetas && $configMetas['logo_icon'] ? url($configMetas['logo_icon']) : null,
             'redirect' => $_GET['redirect'],
             'email' => $data['email'],
             'errors' => $errors,
@@ -74,16 +75,14 @@ class CLogin extends Controller
     {
         $callback = [];
         
-        $login = new Login($data['email'], $data['password']);
         try {
+            $login = new Login($data['email'], $data['password']);
             $user = $login->verify();
-            if(!$user) {
-                throw $login->error();
-            }
+            if(!$user) throw $login->error();
 
             Auth::set($user);
             $callback['success'] = true;
-        } catch(\Exception $e) {
+        } catch(AppException $e) {
             $this->error = $e;
         }
 
@@ -98,13 +97,11 @@ class CLogin extends Controller
 
     public function expired(array $data): void 
     {
-        $sess = Auth::get();
         $callback = [];
 
+        $sess = Auth::get();
         $callback['success'] = false;
-        if(!isset($sess)) {
-            $callback['success'] = true;
-        }
+        if(!isset($sess)) $callback['success'] = true;
 
         $this->echoCallback($callback);
     }
@@ -145,8 +142,7 @@ class CLogin extends Controller
                         'email' => $facebookUser->getEmail(),
                         'password' => $pass,
                         'slug' => slugify($facebookUser->getFirstName() . rand(1, 10000))
-                    ]);
-                    $dbUser->save();
+                    ])->save();
                 }
                 
                 Auth::set($dbUser);
@@ -157,18 +153,18 @@ class CLogin extends Controller
                     'social_id' => $facebookUser->getId(),
                     'email' => $dbUser->email,
                     'social' => 'facebook'
-                ]);
+                ])->save();
 
-                $socialUser->save();
                 $callback['success'] = true;
             } else {
                 $socialUser->getUser();
                 if($socialUser->user) {
                     $this->setSessionUser($socialUser->user);
-                    $callback['success'] = true;
                 }
             }
-        } catch(\Exception $e) {
+
+            $callback['success'] = true;
+        } catch(AppException $e) {
             $this->error = $e;
         }
 
@@ -210,8 +206,7 @@ class CLogin extends Controller
                         'email' => $googleUser->getEmail(),
                         'password' => $pass,
                         'slug' => slugify($googleUser->getFirstName() . rand(1, 10000))
-                    ]);
-                    $dbUser->save();
+                    ])->save();
                 }
                 
                 Auth::set($dbUser);
@@ -222,18 +217,18 @@ class CLogin extends Controller
                     'social_id' => $googleUser->getId(),
                     'email' => $dbUser->email,
                     'social' => 'google'
-                ]);
+                ])->save();
 
-                $socialUser->save();
                 $callback['success'] = true;
             } else {
                 $socialUser->getUser();
                 if($socialUser->user) {
                     $this->setSessionUser($socialUser->user);
-                    $callback['success'] = true;
                 }
             }
-        } catch(\Exception $e) {
+
+            $callback['success'] = true;
+        } catch(AppException $e) {
             $this->error = $e;
         }
 

@@ -4,12 +4,14 @@ namespace Src\Components;
 
 use Exception;
 use League\OAuth2\Client\Provider\Facebook;
+use Src\Exceptions\AppException;
 
 class FacebookLogin 
 {
     protected $facebook;
     protected $code;
     protected $token;
+    private $error;
 
     public function __construct(array $config = []) 
     {
@@ -21,24 +23,19 @@ class FacebookLogin
                 'graphApiVersion' => $config['version']
             ]);
         } catch(Exception $e) {
-            $this->error = $e;
+            $this->error = new AppException($e->getMessage());
         }
     }
 
     public function getAuthUrl() 
     {
-        $authUrl = $this->facebook->getAuthorizationUrl([
-            'scope' => ['email']
-        ]);
-
+        $authUrl = $this->facebook->getAuthorizationUrl(['scope' => ['email']]);
         return $authUrl;
     }
 
     public function setToken(string $code) 
     {
-        $this->token = $this->facebook->getAccessToken('authorization_code', [
-            'code' => $code
-        ]);
+        $this->token = $this->facebook->getAccessToken('authorization_code', ['code' => $code]);
     }
 
     public function getUser() 
@@ -46,7 +43,7 @@ class FacebookLogin
         return $this->facebook->getResourceOwner($this->token);
     }
 
-    public function error(): ?Exception 
+    public function error(): ?AppException 
     {
         return $this->error;
     }

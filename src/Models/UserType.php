@@ -2,7 +2,6 @@
 
 namespace Src\Models;
 
-use DateTime;
 use Src\Exceptions\AppException;
 use Src\Exceptions\ValidationException;
 use Src\Models\Model;
@@ -20,7 +19,7 @@ class UserType extends Model
         'name_sing',
         'name_plur'
     ];
-    public $users;
+    public $users = [];
 
     public function save(): bool 
     {
@@ -28,29 +27,10 @@ class UserType extends Model
         return parent::save();
     }
 
-    public function users(string $columns = '*'): ?array
+    public function users(array $filters = [], string $columns = '*'): ?array
     {
-        if(!$this->users) {
-            $this->users = $this->hasMany('Src\Models\User', 'utip_id', 'id', $columns);
-        }
+        $this->users = (new User())->get(['utip_id' => $this->id] + $filters, $columns)->fetch(true);
         return $this->users;
-    }
-
-    public static function withUsers(
-        array $objects = [], 
-        array $filters = [], 
-        string $columns = '*'
-    ): array
-    {
-        if(count($objects) > 0) {
-            $objects = self::getGroupedBy($objects);
-            $users = (new User())->get($filters, $columns)->fetch(true);
-            foreach($users as $user) {
-                $objects[$user->utip_id]->users[] = $user;
-            }
-        }
-
-        return $objects;
     }
 
     public function destroy(): bool 

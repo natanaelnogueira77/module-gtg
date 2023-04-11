@@ -3,6 +3,7 @@
 namespace Src\App\Controllers\Auth;
 
 use ReCaptcha\ReCaptcha;
+use ReflectionClass;
 use Src\App\Controllers\Controller;
 use Src\Components\Auth;
 use Src\Components\Email;
@@ -18,24 +19,26 @@ class CResetPassword extends Controller
     {
         $exception = null;
         $errors = [];
-        $config = Config::getMetasByName(['logo', 'logo_icon', 'login_img']);
+        $configMetas = (new Config())->getGroupedMetas(['logo', 'logo_icon', 'login_img']);
 
         if(count($data) > 0) {
             $forgotPassword = new ForgotPassword($data['email']);
             try {
-                $recaptcha = new ReCaptcha(RECAPTCHA['secret_key']);
+                /* $recaptcha = new ReCaptcha(RECAPTCHA['secret_key']);
                 $resp = $recaptcha->setExpectedHostname($_SERVER['SERVER_NAME'])
                     ->setExpectedAction($_GET['action'])
                     ->setScoreThreshold(0.5)
                     ->verify($data['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
                 if(!$resp->isSuccess()) {
                     throw new AppException(_('O teste do ReCaptcha falhou! Tente novamente.'));
-                }
+                } */
 
                 $user = $forgotPassword->verify();
                 if(!$user) {
                     throw $forgotPassword->error();
                 }
+
+                $user->saveMeta('last_pass_request', date('Y-m-d H:i:s'));
                 
                 $email = new Email();
                 $email->add(_('Redefinir Senha'), $this->getView('emails/reset-password', [
@@ -49,18 +52,18 @@ class CResetPassword extends Controller
                 
                 addSuccessMsg(sprintf(_("Um email foi enviado para %s. Verifique para poder redefinir sua senha."), $user->email));
                 $this->redirect('login.index');
-            } catch(\Exception $e) {
+            } catch(AppException $e) {
                 $exception = $e;
-                if((new \ReflectionClass($exception))->getShortName() == 'ValidationException') {
+                if((new ReflectionClass($exception))->getShortName() == 'ValidationException') {
                     $errors = $exception->getErrors();
                 }
             }
         }
 
         $this->loadView('auth/reset-password', [
-            'background' => url($config['login_img']),
-            'logo' => url($config['logo']),
-            'shortcutIcon' => url($config['logo_icon']),
+            'background' => $configMetas && $configMetas['login_img'] ? url($configMetas['login_img']) : null,
+            'logo' => $configMetas && $configMetas['logo'] ? url($configMetas['logo']) : null,
+            'shortcutIcon' => $configMetas && $configMetas['logo_icon'] ? url($configMetas['logo_icon']) : null,
             'errors' => $errors,
             'exception' => $exception
         ]);
@@ -70,7 +73,7 @@ class CResetPassword extends Controller
     {
         $exception = null;
         $errors = [];
-        $config = Config::getMetasByName(['logo', 'logo_icon', 'login_img']);
+        $configMetas = (new Config())->getGroupedMetas(['logo', 'logo_icon', 'login_img']);
         
         $user = User::getByToken($data['code']);
         if(!$user) {
@@ -90,9 +93,9 @@ class CResetPassword extends Controller
 
                 addSuccessMsg(_('Senha redefinida com sucesso!'));
                 $this->redirect('login.index');
-            } catch(\Exception $e) {
+            } catch(AppException $e) {
                 $exception = $e;
-                if((new \ReflectionClass($exception))->getShortName() == 'ValidationException') {
+                if((new ReflectionClass($exception))->getShortName() == 'ValidationException') {
                     $errors = $exception->getErrors();
                 }
             }
@@ -100,9 +103,9 @@ class CResetPassword extends Controller
 
         $this->loadView('auth/reset-password', [
             'code' => $code,
-            'background' => url($config['login_img']),
-            'logo' => url($config['logo']),
-            'shortcutIcon' => url($config['logo_icon']),
+            'background' => $configMetas && $configMetas['login_img'] ? url($config['login_img']) : null,
+            'logo' => $configMetas && $configMetas['logo'] ? url($config['logo']) : null,
+            'shortcutIcon' => $configMetas && $configMetas['logo_icon'] ? url($config['logo_icon']) : null,
             'errors' => $errors,
             'exception' => $exception
         ]);

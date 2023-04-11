@@ -1,5 +1,7 @@
 INSERT INTO config (meta, value) VALUES 
     ('style', 'light'), 
+    ('logo', 'storage/users/user1/logo.png'), 
+    ('logo_icon', 'storage/users/user1/logo-icon.png'), 
     ('login_img', 'storage/users/user1/plain-blue-background.jpg');
 
 INSERT INTO usuario_tipo (id, name_sing, name_plur, created_at, updated_at) VALUES 

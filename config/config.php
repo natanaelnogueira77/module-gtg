@@ -1,6 +1,6 @@
 <?php
 
-define('GTG_VERSION', '1.5.3');
+define('GTG_VERSION', '1.6.0');
 define('ENV', parse_ini_file(realpath(dirname(__FILE__, 2) . '/env.ini')));
 
 define('PATH', realpath(dirname(__DIR__)));

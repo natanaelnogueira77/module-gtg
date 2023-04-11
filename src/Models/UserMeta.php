@@ -2,11 +2,9 @@
 
 namespace Src\Models;
 
-use Exception;
-use Src\Exceptions\AppException;
+use DateTime;
 use Src\Exceptions\ValidationException;
 use Src\Models\Model;
-use Src\Models\TMeta;
 use Src\Models\User;
 
 class UserMeta extends Model 
@@ -21,30 +19,43 @@ class UserMeta extends Model
         'usu_id',
         'meta'
     ];
-    protected static $elements = [
-        'entity' => 'usu_id',
-        'meta' => 'meta',
-        'value' => 'value'
-    ];
-    protected static $metas = [
-        'lang'
-    ];
-    protected static $handlers = [];
-    protected static $jsonValues = [];
-    public $user;
 
-    use TMeta;
+    protected static $metas = [
+        'lang',
+        'last_pass_request'
+    ];
+    public $user;
 
     public function save(): bool 
     {
+        $this->validate();
         return parent::save();
     }
 
     public function user(string $columns = '*'): ?User
     {
-        if(!$this->user) {
-            $this->user = $this->belongsTo('Src\Models\User', 'usu_id', 'id', $columns);
-        }
+        $this->user = (new User())->findById($this->usu_id, $columns);
         return $this->user;
+    }
+
+    private function validate(): void 
+    {
+        $errors = [];
+
+        if($this->meta == 'lang') {
+            if(!$this->value) {
+                $errors['value'] = _('A linguagem é obrigatória!');
+            }
+        } elseif($this->meta == 'last_pass_request') {
+            if(!$this->value) {
+                $errors['value'] = _('A data da última alteração de senha é obrigatória!');
+            } elseif(!DateTime::createFromFormat('Y-m-d H:i:s', $this->value)) {
+                $errors['value'] = _('A data da última alteração de senha deve seguir o padrão dd/mm/aaaa hh:mm:ss!');
+            }
+        }
+
+        if(count($errors) > 0) {
+            throw new ValidationException($errors, _('Erros de validação! Verifique os campos.'));
+        }
     }
 }

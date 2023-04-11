@@ -2,7 +2,6 @@
 
 namespace Src\Models;
 
-use DateTime;
 use Src\Exceptions\AppException;
 use Src\Exceptions\ValidationException;
 use Src\Models\Model;
@@ -30,8 +29,8 @@ class User extends Model
         'token',
         'slug'
     ];
+    public $userMetas = [];
     public $userType;
-    public $userMetas;
 
     public function save(): bool 
     {
@@ -47,43 +46,103 @@ class User extends Model
         return parent::save();
     }
 
-    public function userMetas(string $columns = '*'): ?array 
+    public function userMetas(array $filters = [], string $columns = '*'): ?array 
     {
-        if(!$this->userMetas) {
-            $this->userMetas = $this->hasMany('Src\Models\UserMeta', 'usu_id', 'id', $columns);
-        }
+        $this->userMetas = (new UserMeta())->get(['usu_id' => $this->id] + $filters, $columns)->fetch(true);
         return $this->userMetas;
     }
 
     public function userType(string $columns = '*'): ?UserType 
     {
-        if(!$this->userType) {
-            $this->userType = $this->belongsTo('Src\Models\UserType', 'utip_id', 'id', $columns);
-        }
+        $this->userType = (new UserType())->findById($this->utip_id, $columns);
         return $this->userType;
     }
 
-    public static function withUserType(
-        array $objects = [], 
-        array $filters = [], 
-        string $columns = '*'
-    ): array
+    public static function withUserType(array $objects, array $filters = [], string $columns = '*'): array
     {
-        if(count($objects) > 0) {
-            $ids = self::getPropertyValues($objects, 'utip_id');
+        $ids = self::getPropertyValues($objects, 'utip_id');
 
-            $userTypes = (new UserType())->get([
-                'in' => ['id' => $ids]
-            ] + $filters, $columns)->fetch(true);
-            if($userTypes) {
-                $userTypes = UserType::getGroupedBy($userTypes, 'id');
-                foreach($objects as $index => $object) {
-                    $objects[$index]->userType = $userTypes[$object->utip_id];
-                }
+        $registries = (new UserType())->get(['in' => ['id' => $ids]] + $filters, $columns)->fetch(true);
+        if($registries) {
+            $registries = UserType::getGroupedBy($registries);
+            foreach($objects as $index => $object) {
+                $objects[$index]->userType = $registries[$object->utip_id];
             }
         }
 
         return $objects;
+    }
+
+    public function getMeta(string $meta): mixed
+    {
+        $object = (new UserMeta())->get(['usu_id' => $this->id, 'meta' => $meta])->fetch(false);
+        return $object ? $object->value : null;
+    }
+
+    public function getGroupedMetas(array $metas): ?array
+    {
+        $objects = (new UserMeta())->get(['usu_id' => $this->id, 'in' => ['meta' => $metas]])->fetch(true);
+        if($objects) {
+            $metas = [];
+            foreach($objects as $object) {
+                $metas[$object->meta] = $object->value;
+            }
+            return $metas;
+        }
+        return null;
+    }
+
+    public function saveMeta(string $meta, mixed $value): void 
+    {
+        $object = (new UserMeta())->get(['usu_id' => $this->id, 'meta' => $meta])->fetch(false);
+        if(!$object) {
+            $object = (new UserMeta());
+            $object->usu_id = $this->id;
+            $object->meta = $meta;
+        }
+        $object->value = $value;
+        $object->save();
+    }
+
+    public function saveManyMetas(array $data): void 
+    {
+        $objects = (new UserMeta())->get([
+            'usu_id' => $this->id,
+            'in' => ['meta' => array_keys($data)]
+        ])->fetch(true);
+        if($objects) {
+            $objects = UserMeta::getGroupedBy($objects, 'meta');
+        }
+
+        $errors = [];
+
+        foreach($data as $meta => $value) {
+            if(isset($objects[$meta])) {
+                $objects[$meta]->value = $value;
+            } else {
+                $objects[$meta] = (new UserMeta())->setValues([
+                    'usu_id' => $this->id,
+                    'meta' => $meta,
+                    'value' => $value
+                ]);
+            }
+
+            try {
+                $objects[$meta]->validate();
+            } catch(ValidationException $e) {
+                $errors[$meta] = $e->getErrors()['value'];
+            }
+        }
+
+        if(count($errors) > 0) {
+            throw new ValidationException($errors, _('Erros de validação! Verifique os campos.'));
+        }
+
+        for($i = 0; $i <= count($objects) - 1; $i += 1000) {
+            if($objects) {
+                parent::updateMany(array_slice($objects, $i, 1000));
+            }
+        }
     }
 
     public function isAdmin(): bool
@@ -91,35 +150,19 @@ class User extends Model
         return $this->utip_id == 1;
     }
 
-    public static function getBySlug(string $slug): ?self 
+    public static function getBySlug(string $slug, string $columns = '*'): ?self 
     {
-        return (new self())->get(['slug' => $slug])->fetch(false);
+        return (new self())->get(['slug' => $slug], $columns)->fetch(false);
     }
 
-    public static function getByEmail(string $email): ?self 
+    public static function getByEmail(string $email, string $columns = '*'): ?self 
     {
-        return (new self())->get(['email' => $email])->fetch(false);
+        return (new self())->get(['email' => $email], $columns)->fetch(false);
     }
 
-    public static function getByToken(string $token): ?self 
+    public static function getByToken(string $token, string $columns = '*'): ?self 
     {
-        return (new self())->get(['token' => $token])->fetch(false);
-    }
-
-    public static function countUsers(): array 
-    {
-        $array = [];
-
-        $results = (new self())->find(null, null, 'COUNT(*) as count, utip_id')
-            ->group('utip_id')->fetch('count');
-
-        if($results) {
-            foreach($results as $result) {
-                $array[$result->utip_id] = $result->data->count;
-            }
-        }
-
-        return $array;
+        return (new self())->get(['token' => $token], $columns)->fetch(false);
     }
 
     public function verifyPassword(string $password): bool 
@@ -129,7 +172,9 @@ class User extends Model
 
     public function destroy(): bool 
     {
-        if((new SocialUser())->get(['usu_id' => $this->id])->count()) {
+        if($this->utip_id == 1) {
+            throw new AppException(_('Vai por mim, isso vai dar ruim! Você não pode excluir o administrador do sistema.'));
+        } elseif((new SocialUser())->get(['usu_id' => $this->id])->count()) {
             throw new AppException(_('Você não pode excluir um usuário vinculado à uma rede social!'));
         } elseif((new UserMeta())->get(['usu_id' => $this->id])->count()) {
             throw new AppException(_('Você não pode excluir um usuário com dados armazenados!'));

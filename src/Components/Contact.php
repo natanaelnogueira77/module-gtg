@@ -2,7 +2,6 @@
 
 namespace Src\Components;
 
-use Exception;
 use ReCaptcha\ReCaptcha;
 use Src\Components\Email;
 use Src\Exceptions\AppException;
@@ -85,7 +84,7 @@ class Contact
             if(!$email->add($this->subject, $this->message, $this->name, ERROR_MAIL)->send($this->name, $this->email)) {
                 throw $email->error();
             }
-        } catch(Exception $e) {
+        } catch(AppException $e) {
             $this->error = $e;
             return false;
         }
@@ -93,7 +92,7 @@ class Contact
         return true;
     }
 
-    public function error(): ?Exception 
+    public function error(): ?AppException 
     {
         return $this->error;
     }

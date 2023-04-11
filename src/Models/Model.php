@@ -2,11 +2,8 @@
 
 namespace Src\Models;
 
-use Exception;
 use CoffeeCode\DataLayer\Connect;
 use CoffeeCode\DataLayer\DataLayer;
-use PDO;
-use Src\Exceptions\AppException;
 use Src\Exceptions\LogException;
 
 class Model extends DataLayer 
@@ -17,7 +14,6 @@ class Model extends DataLayer
     protected static $required = [];
     protected static $hasTimestamps = false;
     protected static $database = DB_INFO;
-    protected static $jsonColumns = [];
     
     protected $values = [];
     protected ?string $joins = null;
@@ -53,12 +49,13 @@ class Model extends DataLayer
         return $this->values;
     }
 
-    public function setValues(array $values = []): void 
+    public function setValues(array $values = []): static 
     {
         foreach($values as $column => $value) {
             $this->$column = $value;
             $this->values[$column] = $value;
         }
+        return $this;
     }
 
     public static function getTableName(): string 
@@ -66,17 +63,27 @@ class Model extends DataLayer
         return static::$tableName;
     }
 
-    public static function getPropertyValues(array $objects = [], string $property = 'id'): array 
+    public static function getPropertyValues(array $objects, string $property = 'id'): array 
     {
-        $values = [];
+        return array_map(
+            function ($o) use ($property) { return $o->$property; }, 
+            array_filter($objects, function ($e) use ($property) { return !is_null($e->$property); })
+        );
+    }
 
-        if($objects) {
+    public static function getGroupedBy(array $objects, string $column = 'id', bool $multiple = false): ?array 
+    {
+        $groups = [];
+        if($multiple) {
             foreach($objects as $object) {
-                $values[] = $object->$property;
+                $groups[$object->column][] = $object->column;
+            }
+        } else {
+            foreach($objects as $object) {
+                $groups[$object->$column] = $object;
             }
         }
-
-        return $values;
+        return $groups ? $groups : null;
     }
 
     public function get(array $filters = [], string $columns = '*'): DataLayer 
@@ -89,21 +96,6 @@ class Model extends DataLayer
     {
         $in = implode(',', $ids);
         return $this->find(static::$primaryKey . " IN ({$in})", null, $columns);
-    }
-
-    public static function getGroupedBy(array $objects = [], string $column = 'id'): ?array 
-    {
-        if(!$column) $column = static::$primaryKey;
-
-        if($objects) {
-            $grouped = [];
-            foreach($objects as $object) {
-                $grouped[$object->$column] = $object;
-            }
-
-            return $grouped;
-        }
-        return null;
     }
     
     public function join(string $entity, array $filters = []): static 
@@ -339,36 +331,6 @@ class Model extends DataLayer
         static::executeSQL('DELETE FROM ' . static::$tableName);
     }
 
-    public function decodeJSON(): static
-    {
-        if(self::$columns && self::$jsonColumns) {
-            foreach(self::$columns as $col) {
-                if(in_array($col, self::$jsonValues)) {
-                    if(gettype($this->$col) === 'string') {
-                        $this->$col = json_decode($this->$col, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-                    }
-                }
-            }
-        }
-
-        return $this;
-    }
-
-    public function encodeJSON(): static
-    {
-        if(self::$columns && self::$jsonColumns) {
-            foreach(self::$columns as $col) {
-                if(in_array($col, self::$jsonColumns)) {
-                    if(gettype($this->$col) === 'array') {
-                        $this->$col = json_encode($this->$col, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-                    }
-                }
-            }
-        }
-
-        return $this;
-    }
-
     protected static function executeSQL(string $sql, array $vars = []): void
     {
         $connect = Connect::getInstance(static::$database);
@@ -448,10 +410,7 @@ class Model extends DataLayer
                 } elseif($column == 'in') {
                     if($value) {
                         foreach($value as $col => $values) {
-                            foreach($values as $val) {
-                                $val = static::getFormatedValue($val);
-                            }
-                            $in = implode(',', $values);
+                            $in = implode(',', array_map(function ($e) { return static::getFormatedValue($e); }, $values));
                             $terms .= "{$col} IN ({$in}) AND ";
                         }
                     }
@@ -466,80 +425,6 @@ class Model extends DataLayer
         }
 
         return [$terms, $params];
-    }
-
-    protected function belongsTo(
-        string $model, 
-        string $foreign, 
-        string $key = 'id', 
-        string $columns = '*'
-    ) 
-    {
-        return (new $model())->get([$key => $this->$foreign], $columns)->fetch(false);
-    }
-
-    protected function belongsToMany(
-        string $model, 
-        string $pivot, 
-        string $foreign1, 
-        string $foreign2, 
-        string $columns = '*',
-        ?array $pivotColumns = null
-    ): ?array
-    {
-        $pivots = (new $pivot())
-            ->leftJoin($model::getTableName(), [
-                'raw' => "{$model::getTableName()}.{$model::$primaryKey} = {$pivot::getTableName()}.{$foreign2}"
-            ])
-            ->get([$foreign1 => $this->{$pivot::$primaryKey}])
-            ->fetch(true);
-        if($pivots) {
-            $objects = [];
-            foreach($pivots as $pivot) {
-                $object = new $model();
-                $object->{$model::$primaryKey} = $pivot->$foreign2;
-                foreach($model::$columns as $col) {
-                    $object->$col = $pivot->$col;
-                }
-
-                if($model::$hasTimestamps) {
-                    $object->created_at = $pivot->created_at;
-                    $object->updated_at = $pivot->updated_at;
-                }
-
-                if($pivotColumns) {
-                    foreach($pivotColumns as $col) {
-                        $object->$col = $pivot->$col;
-                    }
-                }
-                
-                $objects[] = $object;
-            }
-
-            return $objects;
-        }
-
-        return null;
-    }
-
-    protected function hasOne(
-        string $model, 
-        string $foreign, 
-        string $key = 'id', 
-        string $columns = '*'
-    )
-    {
-        return (new $model())->get([$foreign => $this->$key], $columns)->fetch(false);
-    }
-
-    protected function hasMany(
-        string $model, 
-        string $foreign, 
-        string $key = 'id', 
-        string $columns = '*'
-    ): ?array
-    {
-        return (new $model())->get([$foreign => $this->$key], $columns)->fetch(true);
     }
 
     private static function getFormatedValue($value) 

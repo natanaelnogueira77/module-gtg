@@ -4,6 +4,7 @@ namespace Src\App\Controllers\User;
 
 use Src\App\Controllers\User\Template;
 use Src\Components\Auth;
+use Src\Exceptions\AppException;
 use Src\Models\User;
 
 class CEdit extends Template 
@@ -32,12 +33,13 @@ class CEdit extends Template
                 'email' => $data['email'],
                 'password' => $data['password'],
                 'slug' => $data['slug']
-            ]);
-            $dbUser->save();
+            ])->save();
 
             Auth::set($dbUser);
+            
             $this->setMessage(_('Seus dados foram atualizados com sucesso!'));
-        } catch(\Exception $e) {
+            $callback['success'] = true;
+        } catch(AppException $e) {
             $this->error = $e;
         }
 

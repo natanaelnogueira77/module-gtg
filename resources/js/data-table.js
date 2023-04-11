@@ -1,5 +1,7 @@
-class DataTable {
-    constructor(table, urlBase) {
+class DataTable 
+{
+    constructor(table, urlBase) 
+    {
         this.table = table;
         this.urlBase = urlBase;
         this.msg = {};
@@ -11,7 +13,8 @@ class DataTable {
         this.msgFunc;
     }
 
-    load() {
+    load() 
+    {
         const object = this;
 
         $.ajax({
@@ -46,7 +49,14 @@ class DataTable {
         return object;
     }
 
-    setPagination(elem) {
+    setBaseUrl(url) 
+    {
+        this.urlBase = url;
+        return this;
+    }
+
+    setPagination(elem) 
+    {
         const object = this;
         elem.find("[data-page]").click(function () {
             object.urlParams.page = $(this).data('page');
@@ -56,7 +66,8 @@ class DataTable {
         return object;
     }
 
-    setOrdenation(elem) {
+    setOrdenation(elem) 
+    {
         const object = this;
         elem.find("[data-order]").click(function () {
             object.urlParams.order = $(this).data('order');
@@ -67,18 +78,21 @@ class DataTable {
         return object;
     }
 
-    params(params = {}) {
+    params(params = {}) 
+    {
         this.urlParams = params;
         this.changeFilterValues();
         return this;
     }
 
-    defaultParams(params = {}) {
+    defaultParams(params = {}) 
+    {
         this.defaultUrlParams = params;
         return this;
     }
 
-    filtersForm(elem) {
+    filtersForm(elem) 
+    {
         const object = this;
 
         this.form = elem;
@@ -101,7 +115,8 @@ class DataTable {
         return object;
     }
 
-    clearButton(elem) {
+    clearButton(elem) 
+    {
         const object = this;
         elem.click(function () {
             object.clear();
@@ -110,12 +125,14 @@ class DataTable {
         return object;
     }
 
-    addAction(func) {
+    addAction(func) 
+    {
         this.functions.push(func);
         return this;
     }
 
-    loadActions() {
+    loadActions() 
+    {
         if(this.functions) {
             for(var i = 0; i < this.functions.length; i++) {
                 this.functions[i](this.table);
@@ -125,7 +142,8 @@ class DataTable {
         return this;
     }
 
-    clear() {
+    clear() 
+    {
         this.urlParams = this.defaultUrlParams;
         this.changeFilterValues();
         this.load();
@@ -133,7 +151,8 @@ class DataTable {
         return this;
     }
 
-    changeFilterValues() {
+    changeFilterValues() 
+    {
         if(this.form) {
             for(const [index, value] of Object.entries(this.urlParams)) {
                 this.form.find(`[name=${index}]`).val(value);
@@ -143,12 +162,14 @@ class DataTable {
         return this;
     }
 
-    setMsgFunc(func) {
+    setMsgFunc(func) 
+    {
         this.msgFunc = func;
         return this;
     }
 
-    outputMsg() {
+    outputMsg() 
+    {
         this.msgFunc(this.msg);
     }
 }

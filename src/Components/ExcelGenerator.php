@@ -2,7 +2,7 @@
 
 namespace Src\Components;
 
-use Exception;
+use Src\Exceptions\AppException;
 
 class ExcelGenerator 
 {
@@ -32,7 +32,7 @@ class ExcelGenerator
     {
         try {
             if(!$this->data) {
-                throw new Exception(_('Nenhum dado foi adicionado para a geração do excel!'));
+                throw new AppException(_('Nenhum dado foi adicionado para a geração do excel!'));
             }
 
             function cleanData(&$str) {
@@ -77,7 +77,7 @@ class ExcelGenerator
         echo utf8_decode($this->content);
     }
 
-    public function error(): ?Exception 
+    public function error(): ?AppException 
     {
         return $this->error;
     }
