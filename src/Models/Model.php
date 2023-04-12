@@ -462,6 +462,7 @@ class Model extends DataLayer
         string $pivotModel, 
         string $foreign1, 
         string $foreign2, 
+        string $pivotProperty, 
         string $key1 = 'id',
         string $key2 = 'id',
         array $filters = [],
@@ -476,7 +477,7 @@ class Model extends DataLayer
             $objects = (new $model())->get(['in' => [$key2 => $ids]] + $filters, $columns)->fetch(true);
         }
 
-        return $objects ? array_map(function ($o) use ($pivots) { $o->pivot = $pivots[$o->$key2]; return $o; }, $objects) : null;
+        return $objects ? array_map(function ($o) use ($pivots) { $o->$pivotProperty = $pivots[$o->$key2]; return $o; }, $objects) : null;
     }
 
     protected static function withHasOne(
@@ -555,6 +556,7 @@ class Model extends DataLayer
         string $foreign1, 
         string $foreign2, 
         string $property, 
+        string $pivotProperty, 
         string $key1 = 'id',
         string $key2 = 'id',
         array $filters = [],
@@ -576,6 +578,7 @@ class Model extends DataLayer
             foreach($groupedPivots as $groupedPivot) {
                 foreach($groupedPivot as $pivot) {
                     if(isset($registries[$pivot->$foreign2])) {
+                        $registries[$pivot->$foreign2]->$pivotProperty = $pivot;
                         $groupedRegistries[$pivot->$foreign1][] = $registries[$pivot->$foreign2];
                     }
                 }

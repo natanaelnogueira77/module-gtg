@@ -162,8 +162,6 @@ class CLogin extends Controller
                     $this->setSessionUser($socialUser->user);
                 }
             }
-
-            $callback['success'] = true;
         } catch(AppException $e) {
             $this->error = $e;
         }
@@ -224,10 +222,9 @@ class CLogin extends Controller
                 $socialUser->getUser();
                 if($socialUser->user) {
                     $this->setSessionUser($socialUser->user);
+                    $callback['success'] = true;
                 }
             }
-
-            $callback['success'] = true;
         } catch(AppException $e) {
             $this->error = $e;
         }

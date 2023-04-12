@@ -383,7 +383,6 @@
                 },
                 dataType: 'json',
                 success: function(response) {
-                    console.log(response);
                     if(response.message) {
                         object.app.showMessage(response.message.message, response.message.type);
                     }

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-04-11 22:52-0300\n"
-"PO-Revision-Date: 2023-04-11 22:52-0300\n"
+"POT-Creation-Date: 2023-04-12 14:00-0300\n"
+"PO-Revision-Date: 2023-04-12 14:00-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -365,44 +365,44 @@ msgstr ""
 "The file extension you tried to upload is not allowed here! Allowed "
 "extensions: %s"
 
-#: resources/views/components/media-library.php:415
-#: resources/views/components/media-library.php:418
+#: resources/views/components/media-library.php:414
+#: resources/views/components/media-library.php:417
 #: resources/views/components/pagination.php:5
 msgid "Anterior"
 msgstr "Previous"
 
-#: resources/views/components/media-library.php:450
-#: resources/views/components/media-library.php:453
+#: resources/views/components/media-library.php:449
+#: resources/views/components/media-library.php:452
 #: resources/views/components/pagination.php:34
 msgid "Próxima"
 msgstr "Next"
 
-#: resources/views/components/media-library.php:487
-#: resources/views/components/media-library.php:499
+#: resources/views/components/media-library.php:486
+#: resources/views/components/media-library.php:498
 msgid "Biblioteca de Mídia"
 msgstr "Media Library"
 
-#: resources/views/components/media-library.php:494
+#: resources/views/components/media-library.php:493
 msgid "Upload de Arquivos"
 msgstr "Files Upload"
 
-#: resources/views/components/media-library.php:511
+#: resources/views/components/media-library.php:510
 msgid "Clique para selecionar ou"
 msgstr "Click to select or"
 
-#: resources/views/components/media-library.php:512
+#: resources/views/components/media-library.php:511
 msgid "arraste o(s) arquivo(s)"
 msgstr "drag the file(s)"
 
-#: resources/views/components/media-library.php:531
+#: resources/views/components/media-library.php:530
 msgid "Pesquisar..."
 msgstr "Search..."
 
-#: resources/views/components/media-library.php:548
+#: resources/views/components/media-library.php:547
 msgid "Escolher"
 msgstr "Choose"
 
-#: resources/views/components/media-library.php:551
+#: resources/views/components/media-library.php:550
 msgid "Cancelar"
 msgstr "Cancel"
 
@@ -660,7 +660,7 @@ msgstr "The password confirmation is required!"
 #: src/App/Controllers/Admin/CUsers.php:325 src/Components/Contact.php:80
 #: src/Components/ForgotPassword.php:45 src/Components/Login.php:39
 #: src/Components/ResetPassword.php:42 src/Models/Config.php:62
-#: src/Models/Model.php:696 src/Models/SocialUser.php:103
+#: src/Models/Model.php:699 src/Models/SocialUser.php:103
 #: src/Models/User.php:183 src/Models/UserMeta.php:52
 #: src/Models/UserType.php:55
 msgid "Erros de validação! Verifique os campos."
