@@ -26,19 +26,13 @@ class UserMeta extends Model
     ];
     public $user;
 
-    public function save(): bool 
-    {
-        $this->validate();
-        return parent::save();
-    }
-
     public function user(string $columns = '*'): ?User
     {
-        $this->user = (new User())->findById($this->usu_id, $columns);
+        $this->user = $this->belongsTo(User::class, 'usu_id', 'id', $columns)->fetch(false);
         return $this->user;
     }
 
-    private function validate(): void 
+    protected function validate(): void 
     {
         $errors = [];
 

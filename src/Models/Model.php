@@ -5,6 +5,7 @@ namespace Src\Models;
 use CoffeeCode\DataLayer\Connect;
 use CoffeeCode\DataLayer\DataLayer;
 use Src\Exceptions\LogException;
+use Src\Exceptions\ValidationException;
 
 class Model extends DataLayer 
 {
@@ -14,6 +15,7 @@ class Model extends DataLayer
     protected static $required = [];
     protected static $hasTimestamps = false;
     protected static $database = DB_INFO;
+    protected static $metaInfo = [];
     
     protected $values = [];
     protected ?string $joins = null;
@@ -209,8 +211,21 @@ class Model extends DataLayer
         return $result;
     }
 
+    public function encode(): static 
+    {
+        return $this;
+    }
+    
+    public function decode(): static 
+    {
+        return $this;
+    }
+
     public function save(): bool 
     {
+        $this->validate();
+        $this->encode();
+        
         foreach(static::$columns as $col) {
             if(!is_null($this->$col)) {
                 $this->$col = html_entity_decode($this->$col);
@@ -426,6 +441,270 @@ class Model extends DataLayer
 
         return [$terms, $params];
     }
+
+    protected function hasOne(string $model, string $foreign, string $key = 'id', string $columns = '*'): DataLayer 
+    {
+        return (new $model())->get([$foreign => $this->$key], $columns);
+    }
+
+    protected function hasMany(string $model, string $foreign, string $key = 'id', array $filters = [], string $columns = '*'): DataLayer
+    {
+        return (new $model())->get([$foreign => $this->$key] + $filters, $columns);
+    }
+
+    protected function belongsTo(string $model, string $foreign, string $key = 'id', string $columns = '*'): DataLayer 
+    {
+        return (new $model())->get([$key => $this->$foreign], $columns);
+    }
+
+    protected function belongsToMany(
+        string $model, 
+        string $pivotModel, 
+        string $foreign1, 
+        string $foreign2, 
+        string $key1 = 'id',
+        string $key2 = 'id',
+        array $filters = [],
+        string $columns = '*', 
+        string $pivotColumns = '*'
+    ): ?array
+    {
+        $pivots = (new $pivotModel())->get([$foreign1 => $this->$key1], $pivotColumns)->fetch(true);
+        if($pivots) {
+            $pivots = $pivotModel::getGroupedBy($pivots, $foreign2);
+            $ids = $pivotModel::getPropertyValues($pivots, $foreign2);
+            $objects = (new $model())->get(['in' => [$key2 => $ids]] + $filters, $columns)->fetch(true);
+        }
+
+        return $objects ? array_map(function ($o) use ($pivots) { $o->pivot = $pivots[$o->$key2]; return $o; }, $objects) : null;
+    }
+
+    protected static function withHasOne(
+        array $objects, 
+        string $model, 
+        string $foreign, 
+        string $property, 
+        string $key = 'id', 
+        array $filters = [], 
+        string $columns = '*'
+    ): array 
+    {
+        $ids = static::getPropertyValues($objects, $key);
+
+        $registries = (new $model())->get(['in' => [$foreign => $ids]] + $filters, $columns)->fetch(true);
+        if($registries) {
+            $registries = $model::getGroupedBy($registries, $foreign);
+            foreach($objects as $index => $object) {
+                $objects[$index]->$property = $registries[$object->$key];
+            }
+        }
+
+        return $objects;
+    }
+
+    protected static function withHasMany(
+        array $objects, 
+        string $model, 
+        string $foreign, 
+        string $property, 
+        string $key = 'id', 
+        array $filters = [], 
+        string $columns = '*'
+    ): array 
+    {
+        $ids = static::getPropertyValues($objects, $key);
+
+        $registries = (new $model())->get(['in' => [$foreign => $ids]] + $filters, $columns)->fetch(true);
+        if($registries) {
+            $registries = $model::getGroupedBy($registries, $foreign, true);
+            foreach($objects as $index => $object) {
+                $objects[$index]->$property = $registries[$object->$key];
+            }
+        }
+
+        return $objects;
+    }
+
+    protected static function withBelongsTo(
+        array $objects, 
+        string $model, 
+        string $foreign, 
+        string $property, 
+        string $key = 'id', 
+        array $filters = [], 
+        string $columns = '*'
+    ): array 
+    {
+        $ids = static::getPropertyValues($objects, $foreign);
+
+        $registries = (new $model())->get(['in' => [$key => $ids]] + $filters, $columns)->fetch(true);
+        if($registries) {
+            $registries = $model::getGroupedBy($registries);
+            foreach($objects as $index => $object) {
+                $objects[$index]->$property = $registries[$object->$foreign];
+            }
+        }
+
+        return $objects;
+    }
+
+    protected static function withBelongsToMany(
+        array $objects, 
+        string $model, 
+        string $pivotModel, 
+        string $foreign1, 
+        string $foreign2, 
+        string $property, 
+        string $key1 = 'id',
+        string $key2 = 'id',
+        array $filters = [],
+        string $columns = '*', 
+        string $pivotColumns = '*'
+    ): array 
+    {
+        $ids = static::getPropertyValues($objects, $key1);
+
+        $pivots = (new $pivotModel())->get(['in' => [$key1 => $ids]], $pivotColumns)->fetch(true);
+        if($pivots) {
+            $groupedPivots = $pivotModel::getGroupedBy($pivots, $foreign1, true);
+            $ids = $pivotModel::getPropertyValues($pivots, $foreign2);
+
+            $registries = (new $model())->get(['in' => [$key2 => $ids]] + $filters, $columns)->fetch(true);
+            $registries = $model::getGroupedBy($registries);
+
+            $groupedRegistries = [];
+            foreach($groupedPivots as $groupedPivot) {
+                foreach($groupedPivot as $pivot) {
+                    if(isset($registries[$pivot->$foreign2])) {
+                        $groupedRegistries[$pivot->$foreign1][] = $registries[$pivot->$foreign2];
+                    }
+                }
+            }
+
+            foreach($objects as $index => $object) {
+                $objects[$index]->$property = $groupedRegistries[$object->$key2];
+            }
+        }
+
+        return $objects;
+    }
+
+    public function getMeta(string $meta): mixed
+    {
+        if(!static::$metaInfo) {
+            return null;
+        }
+
+        $filters = [];
+        if(static::$metaInfo['entity']) {
+            $filters[static::$metaInfo['entity']] = $this->{static::$primaryKey};
+        }
+        $filters[static::$metaInfo['meta']] = $meta;
+        $object = (new static::$metaInfo['class']())->get($filters)->fetch(false);
+        if($object) $object->decode();
+
+        return $object ? $object->{static::$metaInfo['value']} : null;
+    }
+
+    public function getGroupedMetas(array $metas): ?array
+    {
+        if(!static::$metaInfo) {
+            return null;
+        }
+
+        $filters = [];
+        if(static::$metaInfo['entity']) {
+            $filters[static::$metaInfo['entity']] = $this->{static::$primaryKey};
+        }
+        $filters['in'] = [static::$metaInfo['meta'] => $metas];
+        $objects = (new static::$metaInfo['class']())->get($filters)->fetch(true);
+
+        if($objects) {
+            $metas = [];
+            foreach($objects as $object) {
+                $object->decode();
+                $metas[$object->{static::$metaInfo['meta']}] = $object->{static::$metaInfo['value']};
+            }
+            return $metas;
+        }
+
+        return null;
+    }
+
+    public function saveMeta(string $meta, mixed $value): void 
+    {
+        if(!static::$metaInfo) {
+            return;
+        }
+
+        $filters = [];
+        if(static::$metaInfo['entity']) {
+            $filters[static::$metaInfo['entity']] = $this->{static::$primaryKey};
+        }
+        $filters[static::$metaInfo['meta']] = $meta;
+
+        $object = (new static::$metaInfo['class']())->get($filters)->fetch(false);
+        if(!$object) {
+            $object = (new static::$metaInfo['class']());
+            $object->{static::$metaInfo['entity']} = $this->{static::$primaryKey};
+            $object->{static::$metaInfo['meta']} = $meta;
+        }
+
+        $object->{static::$metaInfo['value']} = $value;
+        $object->save();
+    }
+
+    public function saveManyMetas(array $data): void 
+    {
+        if(!static::$metaInfo) {
+            return;
+        }
+
+        $filters = [];
+        if(static::$metaInfo['entity']) {
+            $filters[static::$metaInfo['entity']] = $this->{static::$primaryKey};
+        }
+        $filters['in'] = [static::$metaInfo['meta'] => array_keys($data)];
+
+        $objects = (new static::$metaInfo['class']())->get($filters)->fetch(true);
+        if($objects) {
+            $objects = static::$metaInfo['class']::getGroupedBy($objects, static::$metaInfo['meta']);
+        }
+
+        $errors = [];
+
+        foreach($data as $meta => $value) {
+            if(isset($objects[$meta])) {
+                $objects[$meta]->{static::$metaInfo['value']} = $value;
+            } else {
+                $objects[$meta] = (new static::$metaInfo['class']())->setValues([
+                    static::$metaInfo['entity'] => $this->{static::$primaryKey},
+                    static::$metaInfo['meta'] => $meta,
+                    static::$metaInfo['value'] => $value
+                ]);
+            }
+            
+            try {
+                $objects[$meta]->validate();
+                $objects[$meta]->encode();
+            } catch(ValidationException $e) {
+                $errors = array_merge($errors, $e->getErrors());
+            }
+        }
+
+        if(count($errors) > 0) {
+            throw new ValidationException($errors, _('Erros de validação! Verifique os campos.'));
+        }
+
+        for($i = 0; $i <= count($objects) - 1; $i += 1000) {
+            if($objects) {
+                static::$metaInfo['class']::updateMany(array_slice($objects, $i, 1000));
+            }
+        }
+    }
+
+    protected function validate(): void 
+    {}
 
     private static function getFormatedValue($value) 
     {

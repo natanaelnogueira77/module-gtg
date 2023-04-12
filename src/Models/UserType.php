@@ -21,15 +21,9 @@ class UserType extends Model
     ];
     public $users = [];
 
-    public function save(): bool 
-    {
-        $this->validate();
-        return parent::save();
-    }
-
     public function users(array $filters = [], string $columns = '*'): ?array
     {
-        $this->users = (new User())->get(['utip_id' => $this->id] + $filters, $columns)->fetch(true);
+        $this->users = $this->hasMany(User::class, 'utip_id', 'id', $filters, $columns)->fetch(true);
         return $this->users;
     }
 
@@ -41,7 +35,7 @@ class UserType extends Model
         return parent::destroy();
     }
 
-    private function validate(): void 
+    protected function validate(): void 
     {
         $errors = [];
         

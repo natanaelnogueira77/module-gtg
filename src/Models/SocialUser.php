@@ -24,31 +24,15 @@ class SocialUser extends Model
     ];
     public $user;
 
-    public function save(): bool 
-    {
-        $this->validate();
-        return parent::save();
-    }
-
     public function user(string $columns = '*'): ?User
     {
-        $this->user = (new User())->findById($this->usu_id, $columns);
+        $this->user = $this->belongsTo(User::class, 'usu_id', 'id', $columns);
         return $this->user;
     }
 
     public static function withUser(array $objects, array $filters = [], string $columns = '*'): array
     {
-        $ids = self::getPropertyValues($objects, 'usu_id');
-
-        $registries = (new User())->get(['in' => ['id' => $ids]] + $filters, $columns)->fetch(true);
-        if($registries) {
-            $registries = User::getGroupedBy($registries);
-            foreach($objects as $index => $object) {
-                $objects[$index]->user = $registries[$object->usu_id];
-            }
-        }
-
-        return $objects;
+        return self::withBelongsTo($objects, User::class, 'usu_id', 'user', 'id', $filters, $columns);
     }
 
     public static function getByUserId(int $userId, string $columns = '*'): ?array 
@@ -77,7 +61,7 @@ class SocialUser extends Model
         return ['facebook', 'google'];
     }
 
-    private function validate(): void 
+    protected function validate(): void 
     {
         $errors = [];
         

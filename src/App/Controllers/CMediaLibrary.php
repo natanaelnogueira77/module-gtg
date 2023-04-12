@@ -16,12 +16,12 @@ class CMediaLibrary extends Controller
         $limit = $data['limit'];
         $page = $data['page'];
 
-        $files = array_map(
+        $files = $files ? array_map(
             function ($o) { return $o; }, 
             array_filter($files, function ($e) {
                 return !in_array($e, ['.', '..']);
             })
-        );
+        ) : [];
         
         if(isset($data['search'])) {
             $search = $data['search'];

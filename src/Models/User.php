@@ -29,6 +29,13 @@ class User extends Model
         'token',
         'slug'
     ];
+    protected static $metaInfo = [
+        'class' => UserMeta::class,
+        'entity' => 'usu_id',
+        'meta' => 'meta',
+        'value' => 'value'
+    ];
+    public $socialUser;
     public $userMetas = [];
     public $userType;
 
@@ -37,112 +44,44 @@ class User extends Model
         $this->slug = is_string($this->slug) ? slugify($this->slug) : null;
         $this->email = strtolower($this->email);
         $this->token = is_string($this->email) ? md5($this->email) : null;
-        
-        $this->validate();
 
+        return parent::save();
+    }
+
+    public function encode(): static 
+    {
         if(!password_get_info($this->password)['algo']) {
             $this->password = password_hash($this->password, PASSWORD_DEFAULT);
         }
-        return parent::save();
+        return $this;
+    }
+
+    public function socialUser(string $columns = '*'): ?SocialUser 
+    {
+        $this->socialUser = $this->hasOne(SocialUser::class, 'usu_id', 'id', $columns)->fetch(false);
+        return $this->socialUser;
     }
 
     public function userMetas(array $filters = [], string $columns = '*'): ?array 
     {
-        $this->userMetas = (new UserMeta())->get(['usu_id' => $this->id] + $filters, $columns)->fetch(true);
+        $this->userMetas = $this->hasMany(UserMeta::class, 'usu_id', 'id', $filters, $columns)->fetch(true);
         return $this->userMetas;
     }
 
     public function userType(string $columns = '*'): ?UserType 
     {
-        $this->userType = (new UserType())->findById($this->utip_id, $columns);
+        $this->userType = $this->belongsTo(UserType::class, 'utip_id', 'id', $columns)->fetch(false);
         return $this->userType;
+    }
+
+    public static function withSocialUser(array $objects, array $filters = [], string $columns = '*'): array
+    {
+        return self::withHasOne($objects, UserType::class, 'usu_id', 'socialUser', 'id', $filters, $columns);
     }
 
     public static function withUserType(array $objects, array $filters = [], string $columns = '*'): array
     {
-        $ids = self::getPropertyValues($objects, 'utip_id');
-
-        $registries = (new UserType())->get(['in' => ['id' => $ids]] + $filters, $columns)->fetch(true);
-        if($registries) {
-            $registries = UserType::getGroupedBy($registries);
-            foreach($objects as $index => $object) {
-                $objects[$index]->userType = $registries[$object->utip_id];
-            }
-        }
-
-        return $objects;
-    }
-
-    public function getMeta(string $meta): mixed
-    {
-        $object = (new UserMeta())->get(['usu_id' => $this->id, 'meta' => $meta])->fetch(false);
-        return $object ? $object->value : null;
-    }
-
-    public function getGroupedMetas(array $metas): ?array
-    {
-        $objects = (new UserMeta())->get(['usu_id' => $this->id, 'in' => ['meta' => $metas]])->fetch(true);
-        if($objects) {
-            $metas = [];
-            foreach($objects as $object) {
-                $metas[$object->meta] = $object->value;
-            }
-            return $metas;
-        }
-        return null;
-    }
-
-    public function saveMeta(string $meta, mixed $value): void 
-    {
-        $object = (new UserMeta())->get(['usu_id' => $this->id, 'meta' => $meta])->fetch(false);
-        if(!$object) {
-            $object = (new UserMeta());
-            $object->usu_id = $this->id;
-            $object->meta = $meta;
-        }
-        $object->value = $value;
-        $object->save();
-    }
-
-    public function saveManyMetas(array $data): void 
-    {
-        $objects = (new UserMeta())->get([
-            'usu_id' => $this->id,
-            'in' => ['meta' => array_keys($data)]
-        ])->fetch(true);
-        if($objects) {
-            $objects = UserMeta::getGroupedBy($objects, 'meta');
-        }
-
-        $errors = [];
-
-        foreach($data as $meta => $value) {
-            if(isset($objects[$meta])) {
-                $objects[$meta]->value = $value;
-            } else {
-                $objects[$meta] = (new UserMeta())->setValues([
-                    'usu_id' => $this->id,
-                    'meta' => $meta,
-                    'value' => $value
-                ]);
-            }
-            
-            try {
-                $objects[$meta]->validate();
-            } catch(ValidationException $e) {
-                $errors = array_merge($errors, $e->getErrors());
-            }
-        }
-
-        if(count($errors) > 0) {
-            throw new ValidationException($errors, _('Erros de validação! Verifique os campos.'));
-        }
-
-        for($i = 0; $i <= count($objects) - 1; $i += 1000) {
-            if($objects) {
-                parent::updateMany(array_slice($objects, $i, 1000));
-            }
-        }
+        return self::withBelongsTo($objects, UserType::class, 'utip_id', 'userType', 'id', $filters, $columns);
     }
 
     public function isAdmin(): bool
@@ -182,7 +121,7 @@ class User extends Model
         return parent::destroy();
     }
 
-    private function validate(): void 
+    protected function validate(): void 
     {
         $errors = [];
         
