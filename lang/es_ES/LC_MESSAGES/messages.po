@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-04-12 23:19-0300\n"
-"PO-Revision-Date: 2023-04-12 23:19-0300\n"
+"POT-Creation-Date: 2023-04-13 07:34-0300\n"
+"PO-Revision-Date: 2023-04-13 07:34-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -662,7 +662,7 @@ msgstr "¡La confirmación de la contraseña es obligatoria!"
 #: src/App/Controllers/Admin/CUsers.php:325 src/Components/Contact.php:80
 #: src/Components/ForgotPassword.php:45 src/Components/Login.php:39
 #: src/Components/ResetPassword.php:42 src/Models/Config.php:62
-#: src/Models/Model.php:694 src/Models/SocialUser.php:103
+#: src/Models/Model.php:701 src/Models/SocialUser.php:103
 #: src/Models/User.php:183 src/Models/UserMeta.php:52
 #: src/Models/UserType.php:55
 msgid "Erros de validação! Verifique os campos."

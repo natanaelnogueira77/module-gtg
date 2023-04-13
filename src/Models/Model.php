@@ -260,6 +260,10 @@ class Model extends DataLayer
 
     public static function insertMany(array $objects): bool 
     {
+        if(count($objects) === 0) {
+            return false;
+        }
+
         $vars = [];
         $sql = 'INSERT INTO ' . static::$tableName . ' (' . implode(',', static::$columns) 
             . (static::$hasTimestamps ? ',created_at,updated_at' : '') . ') VALUES ';
@@ -288,6 +292,10 @@ class Model extends DataLayer
 
     public static function updateMany(array $objects): bool 
     {
+        if(count($objects) === 0) {
+            return false;
+        }
+
         $vars = [];
         $sql = 'INSERT INTO ' . static::$tableName . ' (' . static::$primaryKey . ','
             . implode(',', static::$columns) . (static::$hasTimestamps ? ',created_at,updated_at' : '') 
@@ -592,7 +600,7 @@ class Model extends DataLayer
 
     public function getMeta(string $meta): mixed
     {
-        if(!static::$metaInfo) {
+        if(!static::$metaInfo || !static::$metaInfo['class'] || !static::$metaInfo['meta'] || !static::$metaInfo['value'] || !$meta) {
             return null;
         }
 
@@ -607,7 +615,7 @@ class Model extends DataLayer
 
     public function getGroupedMetas(array $metas): ?array
     {
-        if(!static::$metaInfo) {
+        if(!static::$metaInfo || !static::$metaInfo['class'] || !static::$metaInfo['meta'] || !static::$metaInfo['value'] || !$metas) {
             return null;
         }
 
@@ -617,7 +625,6 @@ class Model extends DataLayer
         }
         $filters['in'] = [static::$metaInfo['meta'] => $metas];
         $objects = (new static::$metaInfo['class']())->get($filters)->fetch(true);
-
         if($objects) {
             $metas = [];
             foreach($objects as $object) {
@@ -631,7 +638,7 @@ class Model extends DataLayer
 
     public function saveMeta(string $meta, mixed $value): bool 
     {
-        if(!static::$metaInfo) {
+        if(!static::$metaInfo || !static::$metaInfo['class'] || !static::$metaInfo['meta'] || !static::$metaInfo['value'] || !$meta) {
             return false;
         }
 
@@ -654,7 +661,7 @@ class Model extends DataLayer
 
     public function saveManyMetas(array $data): bool 
     {
-        if(!static::$metaInfo) {
+        if(!static::$metaInfo || !static::$metaInfo['class'] || !static::$metaInfo['meta'] || !static::$metaInfo['value'] || !$data) {
             return false;
         }
 
