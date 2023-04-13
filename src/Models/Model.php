@@ -78,7 +78,7 @@ class Model extends DataLayer
         $groups = [];
         if($multiple) {
             foreach($objects as $object) {
-                $groups[$object->column][] = $object;
+                $groups[$object->$column][] = $object;
             }
         } else {
             foreach($objects as $object) {
@@ -208,6 +208,17 @@ class Model extends DataLayer
                 _('Ocorreu um erro inesperado enquanto você executava essa ação! Informe ao administrador.')
             );
         }
+
+        if($result) {
+            if($all) {
+                foreach($result as $object) {
+                    $object->decode();
+                }
+            } else {
+                $result->decode();
+            }
+        }
+
         return $result;
     }
 
@@ -242,20 +253,48 @@ class Model extends DataLayer
             );
         }
 
+        $this->decode();
         $this->{static::$primaryKey} = $this->data->{static::$primaryKey};
         return $result;
     }
 
-    private static function getUpsertSQL(array $objects = []): array 
+    public static function insertMany(array $objects): bool 
     {
-        $sql = '';
         $vars = [];
+        $sql = 'INSERT INTO ' . static::$tableName . ' (' . implode(',', static::$columns) 
+            . (static::$hasTimestamps ? ',created_at,updated_at' : '') . ') VALUES ';
 
+        foreach($objects as $object) {
+            $object->encode();
+            $sql .= '(';
+            foreach(static::$columns as $col) {
+                $vars[] = $object->$col;
+                $sql .= '?,';
+            }
+
+            if(static::$hasTimestamps) {
+                $vars[] = date('Y-m-d H:i:s');
+                $vars[] = date('Y-m-d H:i:s');
+                $sql .= '?,?,';
+            }
+            
+            $sql[strlen($sql) - 1] = ' ';
+            $sql .= '),';
+        }
+
+        $sql[strlen($sql) - 1] = ' ';
+        return static::executeSQL($sql, $vars);
+    }
+
+    public static function updateMany(array $objects): bool 
+    {
+        $vars = [];
         $sql = 'INSERT INTO ' . static::$tableName . ' (' . static::$primaryKey . ','
             . implode(',', static::$columns) . (static::$hasTimestamps ? ',created_at,updated_at' : '') 
             . ') VALUES ';
 
         foreach($objects as $object) {
+            $object->encode();
             $sql .= '(' . static::getFormatedValue($object->{static::$primaryKey}) . ',';
             foreach(static::$columns as $col) {
                 $vars[] = $object->$col;
@@ -285,72 +324,31 @@ class Model extends DataLayer
         }
 
         $sql[strlen($sql) - 1] = ' ';
-
-        return [$sql, $vars];
+        return static::executeSQL($sql, $vars);
     }
 
-    public static function insertMany(array $objects = []): void 
+    public static function deleteMany(array $objects): bool 
     {
-        if(count($objects) > 0) {
-            $vars = [];
-            $sql = 'INSERT INTO ' . static::$tableName 
-                . ' (' . implode(',', static::$columns) 
-                . (static::$hasTimestamps ? ',created_at,updated_at' : '') . ') VALUES ';
+        $sql = 'DELETE FROM ' . static::$tableName . ' WHERE ' . static::$primaryKey . ' IN (';
 
-            foreach($objects as $object) {
-                $sql .= '(';
-                foreach(static::$columns as $col) {
-                    $vars[] = $object->$col;
-                    $sql .= '?,';
-                }
-
-                if(static::$hasTimestamps) {
-                    $vars[] = date('Y-m-d H:i:s');
-                    $vars[] = date('Y-m-d H:i:s');
-                    $sql .= '?,?,';
-                }
-                
-                $sql[strlen($sql) - 1] = ' ';
-                $sql .= '),';
-            }
-
-            $sql[strlen($sql) - 1] = ' ';
-            static::executeSQL($sql, $vars);
+        foreach($objects as $object) {
+            $sql .= static::getFormatedValue($object->{static::$primaryKey}) . ',';
         }
+        
+        $sql[strlen($sql) - 1] = ')';
+        return static::executeSQL($sql);
     }
 
-    public static function updateMany(array $objects = []): void 
+    public static function deleteAll(): bool 
     {
-        if(count($objects) > 0) {
-            [$sql, $vars] = static::getUpsertSQL($objects);
-            static::executeSQL($sql, $vars);
-        }
+        return static::executeSQL('DELETE FROM ' . static::$tableName);
     }
 
-    public static function deleteMany(array $objects = []): void 
-    {
-        if(count($objects) > 0) {
-            $sql = 'DELETE FROM ' . static::$tableName . ' WHERE ' . static::$primaryKey . ' IN (';
-            
-            foreach($objects as $object) {
-                $sql .= static::getFormatedValue($object->{static::$primaryKey}) . ',';
-            }
-            
-            $sql[strlen($sql) - 1] = ')';
-            static::executeSQL($sql);
-        }
-    }
-
-    public static function deleteAll(): void 
-    {
-        static::executeSQL('DELETE FROM ' . static::$tableName);
-    }
-
-    protected static function executeSQL(string $sql, array $vars = []): void
+    protected static function executeSQL(string $sql, array $vars = []): bool
     {
         $connect = Connect::getInstance(static::$database);
         $stmt = $connect->prepare($sql);
-        $stmt->execute($vars);
+        return $stmt->execute($vars);
     }
 
     private static function getSearch(string $terms = '', array $columns = []): string 
@@ -477,7 +475,7 @@ class Model extends DataLayer
             $objects = (new $model())->get(['in' => [$key2 => $ids]] + $filters, $columns)->fetch(true);
         }
 
-        return $objects ? array_map(function ($o) use ($pivots) { $o->$pivotProperty = $pivots[$o->$key2]; return $o; }, $objects) : null;
+        return $objects ? array_map(function ($o) use ($pivots, $pivotProperty, $key2) { $o->$pivotProperty = $pivots[$o->$key2]; return $o; }, $objects) : null;
     }
 
     protected static function withHasOne(
@@ -604,8 +602,6 @@ class Model extends DataLayer
         }
         $filters[static::$metaInfo['meta']] = $meta;
         $object = (new static::$metaInfo['class']())->get($filters)->fetch(false);
-        if($object) $object->decode();
-
         return $object ? $object->{static::$metaInfo['value']} : null;
     }
 
@@ -625,7 +621,6 @@ class Model extends DataLayer
         if($objects) {
             $metas = [];
             foreach($objects as $object) {
-                $object->decode();
                 $metas[$object->{static::$metaInfo['meta']}] = $object->{static::$metaInfo['value']};
             }
             return $metas;
@@ -634,10 +629,10 @@ class Model extends DataLayer
         return null;
     }
 
-    public function saveMeta(string $meta, mixed $value): void 
+    public function saveMeta(string $meta, mixed $value): bool 
     {
         if(!static::$metaInfo) {
-            return;
+            return false;
         }
 
         $filters = [];
@@ -654,13 +649,13 @@ class Model extends DataLayer
         }
 
         $object->{static::$metaInfo['value']} = $value;
-        $object->save();
+        return $object->save();
     }
 
-    public function saveManyMetas(array $data): void 
+    public function saveManyMetas(array $data): bool 
     {
         if(!static::$metaInfo) {
-            return;
+            return false;
         }
 
         $filters = [];
@@ -704,12 +699,14 @@ class Model extends DataLayer
                 static::$metaInfo['class']::updateMany(array_slice($objects, $i, 1000));
             }
         }
+
+        return true;
     }
 
     protected function validate(): void 
     {}
 
-    private static function getFormatedValue($value) 
+    private static function getFormatedValue(mixed $value): mixed 
     {
         if(is_null($value)) {
             return 'null';
