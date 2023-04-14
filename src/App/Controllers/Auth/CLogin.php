@@ -125,12 +125,12 @@ class CLogin extends Controller
             $facebook->setToken($data['token']);
             $facebookUser = $facebook->getUser();
 
-            $socialUser = SocialUser::getBySocialId($facebookUser->getId(), 'facebook');
-            if(!$socialUser) {
-                $socialUser = SocialUser::getBySocialEmail($facebookUser->getEmail(), 'facebook');
+            $dbSocialUser = SocialUser::getBySocialId($facebookUser->getId(), 'facebook');
+            if(!$dbSocialUser) {
+                $dbSocialUser = SocialUser::getBySocialEmail($facebookUser->getEmail(), 'facebook');
             }
 
-            if(!$socialUser) {
+            if(!$dbSocialUser) {
                 $dbUser = User::getByEmail($facebookUser->getEmail());
 
                 if(!$dbUser) {
@@ -147,8 +147,8 @@ class CLogin extends Controller
                 
                 Auth::set($dbUser);
 
-                $socialUser = new SocialUser();
-                $socialUser->setValues([
+                $dbSocialUser = new SocialUser();
+                $dbSocialUser->setValues([
                     'usu_id' => $dbUser->id,
                     'social_id' => $facebookUser->getId(),
                     'email' => $dbUser->email,
@@ -157,9 +157,9 @@ class CLogin extends Controller
 
                 $callback['success'] = true;
             } else {
-                $socialUser->getUser();
-                if($socialUser->user) {
-                    $this->setSessionUser($socialUser->user);
+                $dbSocialUser->getUser();
+                if($dbSocialUser->user) {
+                    $this->setSessionUser($dbSocialUser->user);
                 }
             }
         } catch(AppException $e) {
@@ -187,12 +187,12 @@ class CLogin extends Controller
             $google->setToken($data['token']);
             $googleUser = $google->getUser();
 
-            $socialUser = SocialUser::getBySocialId($googleUser->getId(), 'google');
-            if(!$socialUser) {
-                $socialUser = SocialUser::getBySocialEmail($googleUser->getEmail(), 'google');
+            $dbSocialUser = SocialUser::getBySocialId($googleUser->getId(), 'google');
+            if(!$dbSocialUser) {
+                $dbSocialUser = SocialUser::getBySocialEmail($googleUser->getEmail(), 'google');
             }
 
-            if(!$socialUser) {
+            if(!$dbSocialUser) {
                 $dbUser = User::getByEmail($googleUser->getEmail());
 
                 if(!$dbUser) {
@@ -209,8 +209,8 @@ class CLogin extends Controller
                 
                 Auth::set($dbUser);
 
-                $socialUser = new SocialUser();
-                $socialUser->setValues([
+                $dbSocialUser = new SocialUser();
+                $dbSocialUser->setValues([
                     'usu_id' => $dbUser->id,
                     'social_id' => $googleUser->getId(),
                     'email' => $dbUser->email,
@@ -219,9 +219,9 @@ class CLogin extends Controller
 
                 $callback['success'] = true;
             } else {
-                $socialUser->getUser();
-                if($socialUser->user) {
-                    $this->setSessionUser($socialUser->user);
+                $dbSocialUser->getUser();
+                if($dbSocialUser->user) {
+                    $this->setSessionUser($dbSocialUser->user);
                     $callback['success'] = true;
                 }
             }

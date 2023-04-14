@@ -61,7 +61,7 @@ class SocialUser extends Model
         return ['facebook', 'google'];
     }
 
-    protected function validate(): void 
+    protected function validate(): bool 
     {
         $errors = [];
         
@@ -100,7 +100,10 @@ class SocialUser extends Model
         }
 
         if(count($errors) > 0) {
-            throw new ValidationException($errors, _('Erros de validação! Verifique os campos.'));
+            $this->error = new ValidationException($errors, _('Erros de validação! Verifique os campos.'));
+            return false;
         }
+
+        return true;
     }
 }

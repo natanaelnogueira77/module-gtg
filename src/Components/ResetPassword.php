@@ -35,7 +35,7 @@ class ResetPassword
                 && $this->confirm_password 
                 && $this->password !== $this->confirm_password) {
                 $errors['password'] = _('As senhas não correspondem!');
-                $errors['confirme_password'] = _('As senhas não correspondem!');
+                $errors['confirm_password'] = _('As senhas não correspondem!');
             }
 
             if(count($errors) > 0) {

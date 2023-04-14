@@ -121,7 +121,7 @@ class User extends Model
         return parent::destroy();
     }
 
-    protected function validate(): void 
+    protected function validate(): bool 
     {
         $errors = [];
         
@@ -180,7 +180,10 @@ class User extends Model
         }
 
         if(count($errors) > 0) {
-            throw new ValidationException($errors, _('Erros de validação! Verifique os campos.'));
+            $this->error = new ValidationException($errors, _('Erros de validação! Verifique os campos.'));
+            return false;
         }
+
+        return true;
     }
 }

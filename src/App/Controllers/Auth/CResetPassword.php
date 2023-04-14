@@ -61,9 +61,9 @@ class CResetPassword extends Controller
         }
 
         $this->loadView('auth/reset-password', [
-            'background' => $configMetas && $configMetas['login_img'] ? url($configMetas['login_img']) : null,
-            'logo' => $configMetas && $configMetas['logo'] ? url($configMetas['logo']) : null,
-            'shortcutIcon' => $configMetas && $configMetas['logo_icon'] ? url($configMetas['logo_icon']) : null,
+            'background' => $configMetas && $configMetas['login_img'] ? url($configMetas['login_img']) : '',
+            'logo' => $configMetas && $configMetas['logo'] ? url($configMetas['logo']) : '',
+            'shortcutIcon' => $configMetas && $configMetas['logo_icon'] ? url($configMetas['logo_icon']) : '',
             'errors' => $errors,
             'exception' => $exception
         ]);
@@ -82,7 +82,7 @@ class CResetPassword extends Controller
         }
 
         if(isset($data['password']) || isset($data['confirm_password'])) {
-            $resetPassword = new ResetPassword($data);
+            $resetPassword = new ResetPassword($data['password'], $data['confirm_password']);
             try {
                 $user = $resetPassword->verify($data['code']);
                 if(!$user) {
@@ -102,10 +102,10 @@ class CResetPassword extends Controller
         }
 
         $this->loadView('auth/reset-password', [
-            'code' => $code,
-            'background' => $configMetas && $configMetas['login_img'] ? url($config['login_img']) : null,
-            'logo' => $configMetas && $configMetas['logo'] ? url($config['logo']) : null,
-            'shortcutIcon' => $configMetas && $configMetas['logo_icon'] ? url($config['logo_icon']) : null,
+            'code' => $data['code'],
+            'background' => $configMetas && $configMetas['login_img'] ? url($configMetas['login_img']) : '',
+            'logo' => $configMetas && $configMetas['logo'] ? url($configMetas['logo']) : '',
+            'shortcutIcon' => $configMetas && $configMetas['logo_icon'] ? url($configMetas['logo_icon']) : '',
             'errors' => $errors,
             'exception' => $exception
         ]);

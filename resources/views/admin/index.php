@@ -143,7 +143,7 @@
                             <i class="icofont-upload-alt"></i> <?= _('Escolher Imagem') ?>
                         </button>
                     </div>
-                    <div class="invalid-feedback"></div>
+                    <small class="text-danger" data-error="login_img"></small>
                 </div>
             </div>
 
@@ -161,7 +161,7 @@
                             <i class="icofont-upload-alt"></i> <?= _('Escolher Imagem') ?>
                         </button>
                     </div>
-                    <div class="invalid-feedback"></div>
+                    <small class="text-danger" data-error="logo"></small>
                 </div>
 
                 <div class="form-group col-md-6">
@@ -177,7 +177,7 @@
                             <i class="icofont-upload-alt"></i> <?= _('Escolher Imagem') ?>
                         </button>
                     </div>
-                    <div class="invalid-feedback"></div>
+                    <small class="text-danger" data-error="logo_icon"></small>
                 </div>
             </div>
         </div>

@@ -28,7 +28,7 @@ class Config extends Model
         'style'
     ];
 
-    protected function validate(): void 
+    protected function validate(): bool 
     {
         $errors = [];
 
@@ -59,7 +59,10 @@ class Config extends Model
         }
 
         if(count($errors) > 0) {
-            throw new ValidationException($errors, _('Erros de validação! Verifique os campos.'));
+            $this->error = new ValidationException($errors, _('Erros de validação! Verifique os campos.'));
+            return false;
         }
+
+        return true;
     }
 }

@@ -34,7 +34,8 @@
             </div>
         </form>
         <?php else: ?>
-        <form id="redefine-password-form" class="form-default" action="<?= $router->route('reset-password.verify') ?>" method="post">
+        <form id="redefine-password-form" class="form-default" 
+            action="<?= $router->route('reset-password.verify', ['code' => $code]) ?>" method="post">
             <div class="form-input">
                 <label for="password"><?= _('Nova Senha') ?></label>
                 <input type="password" id="password" name="password" placeholder="<?= _('Digite sua nova senha') ?>" 

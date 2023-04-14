@@ -4,6 +4,7 @@ namespace Src\Models;
 
 use CoffeeCode\DataLayer\Connect;
 use CoffeeCode\DataLayer\DataLayer;
+use Src\Exceptions\AppException;
 use Src\Exceptions\LogException;
 use Src\Exceptions\ValidationException;
 
@@ -16,6 +17,7 @@ class Model extends DataLayer
     protected static $hasTimestamps = false;
     protected static $database = DB_INFO;
     protected static $metaInfo = [];
+    protected $error;
     
     protected $values = [];
     protected ?string $joins = null;
@@ -234,7 +236,10 @@ class Model extends DataLayer
 
     public function save(): bool 
     {
-        $this->validate();
+        if(!$this->validate()) {
+            throw $this->error();
+            return false;
+        }
         $this->encode();
         
         foreach(static::$columns as $col) {
@@ -248,8 +253,7 @@ class Model extends DataLayer
         $result = parent::save();
         if($this->fail()) {
             throw new LogException(
-                $this->fail()->getMessage(),
-                _('Ocorreu um erro inesperado enquanto você executava essa ação! Informe ao administrador.')
+                $this->fail()->getMessage(), _('Lamentamos, mas houve um erro de requisição! Resolveremos em breve.')
             );
         }
 
@@ -268,22 +272,32 @@ class Model extends DataLayer
         $sql = 'INSERT INTO ' . static::$tableName . ' (' . implode(',', static::$columns) 
             . (static::$hasTimestamps ? ',created_at,updated_at' : '') . ') VALUES ';
 
+        $errors = false;
         foreach($objects as $object) {
-            $object->encode();
-            $sql .= '(';
-            foreach(static::$columns as $col) {
-                $vars[] = $object->$col;
-                $sql .= '?,';
+            if($object->validate()) {
+                $object->encode();
+                $sql .= '(';
+                foreach(static::$columns as $col) {
+                    $vars[] = $object->$col;
+                    $sql .= '?,';
+                }
+                $object->decode();
+    
+                if(static::$hasTimestamps) {
+                    $vars[] = date('Y-m-d H:i:s');
+                    $vars[] = date('Y-m-d H:i:s');
+                    $sql .= '?,?,';
+                }
+                
+                $sql[strlen($sql) - 1] = ' ';
+                $sql .= '),';
+            } else {
+                $errors = true;
             }
+        }
 
-            if(static::$hasTimestamps) {
-                $vars[] = date('Y-m-d H:i:s');
-                $vars[] = date('Y-m-d H:i:s');
-                $sql .= '?,?,';
-            }
-            
-            $sql[strlen($sql) - 1] = ' ';
-            $sql .= '),';
+        if($errors) {
+            return false;
         }
 
         $sql[strlen($sql) - 1] = ' ';
@@ -301,26 +315,36 @@ class Model extends DataLayer
             . implode(',', static::$columns) . (static::$hasTimestamps ? ',created_at,updated_at' : '') 
             . ') VALUES ';
 
+        $errors = false;
         foreach($objects as $object) {
-            $object->encode();
-            $sql .= '(' . static::getFormatedValue($object->{static::$primaryKey}) . ',';
-            foreach(static::$columns as $col) {
-                $vars[] = $object->$col;
-                $sql .= '?,';
-            }
-
-            if(static::$hasTimestamps) {
-                if($object->created_at) {
-                    $vars[] = $object->created_at;
-                } else {
-                    $vars[] = date('Y-m-d H:i:s');
+            if($object->validate()) {
+                $object->encode();
+                $sql .= '(' . static::getFormatedValue($object->{static::$primaryKey}) . ',';
+                foreach(static::$columns as $col) {
+                    $vars[] = $object->$col;
+                    $sql .= '?,';
                 }
-                $vars[] = date('Y-m-d H:i:s');
-                $sql .= '?,?,';
-            }
 
-            $sql[strlen($sql) - 1] = ' ';
-            $sql .= '),';
+                if(static::$hasTimestamps) {
+                    if($object->created_at) {
+                        $vars[] = $object->created_at;
+                    } else {
+                        $vars[] = date('Y-m-d H:i:s');
+                    }
+                    $vars[] = date('Y-m-d H:i:s');
+                    $sql .= '?,?,';
+                }
+                $object->decode();
+
+                $sql[strlen($sql) - 1] = ' ';
+                $sql .= '),';
+            } else {
+                $errors = true;
+            }
+        }
+
+        if($errors) {
+            return false;
         }
 
         $sql[strlen($sql) - 1] = ' ';
@@ -676,8 +700,6 @@ class Model extends DataLayer
             $objects = static::$metaInfo['class']::getGroupedBy($objects, static::$metaInfo['meta']);
         }
 
-        $errors = [];
-
         foreach($data as $meta => $value) {
             if(isset($objects[$meta])) {
                 $objects[$meta]->{static::$metaInfo['value']} = $value;
@@ -688,30 +710,27 @@ class Model extends DataLayer
                     static::$metaInfo['value'] => $value
                 ]);
             }
-            
-            try {
-                $objects[$meta]->validate();
-                $objects[$meta]->encode();
-            } catch(ValidationException $e) {
-                $errors = array_merge($errors, $e->getErrors());
-            }
         }
 
-        if(count($errors) > 0) {
+        $result = static::$metaInfo['class']::updateMany($objects);
+        if(!$result) {
+            $errors = [];
+            foreach($objects as $object) {
+                if($object->error()) {
+                    $errors = array_merge($errors, $object->error()->getErrors());
+                }
+            }
+
             throw new ValidationException($errors, _('Erros de validação! Verifique os campos.'));
         }
 
-        for($i = 0; $i <= count($objects) - 1; $i += 1000) {
-            if($objects) {
-                static::$metaInfo['class']::updateMany(array_slice($objects, $i, 1000));
-            }
-        }
-
-        return true;
+        return $result;
     }
 
-    protected function validate(): void 
-    {}
+    protected function validate(): bool 
+    {
+        return true;
+    }
 
     private static function getFormatedValue(mixed $value): mixed 
     {
@@ -723,5 +742,10 @@ class Model extends DataLayer
         } else {
             return $value;
         }
+    }
+
+    protected function error(): ?AppException 
+    {
+        return $this->error;
     }
 }
