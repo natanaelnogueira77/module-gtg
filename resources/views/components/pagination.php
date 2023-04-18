@@ -4,7 +4,7 @@
             <?= 
                 sprintf(
                     _('Mostrando %s à %s de %s resultado(s)'), 
-                    $limit * ($currPage - 1) + 1, 
+                    $results ? $limit * ($currPage - 1) + 1 : 0, 
                     $currPage < $pages ? $limit * $currPage : $results, 
                     $results
                 )

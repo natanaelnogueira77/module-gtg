@@ -25,8 +25,8 @@
             endif;
             ?>
         </thead>
-        <?php if($data): ?>
         <tbody>
+            <?php if($data): ?>
             <?php foreach($data as $row): ?>
             <tr>
                 <?php foreach($headers as $info => $head): ?>
@@ -34,7 +34,11 @@
                 <?php endforeach ?>
             </tr>
             <?php endforeach; ?>
+            <?php else: ?>
+            <td class="align-middle text-center" colspan="<?= is_array($headers) ? count($headers) : 0 ?>">
+                <?= _('Nenhum dado correspondente foi encontrado!') ?>
+            </td>
+            <?php endif; ?>
         </tbody>
-        <?php endif; ?>
     </table>
 </div>

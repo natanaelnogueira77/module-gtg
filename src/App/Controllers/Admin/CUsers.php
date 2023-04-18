@@ -219,14 +219,12 @@ class CUsers extends Template
                     ],
                     'data' => $content
                 ]),
-                'pagination' => $pages > 0 
-                    ? $this->getView('components/pagination', [
-                        'pages' => $pages,
-                        'currPage' => $page,
-                        'results' => $count,
-                        'limit' => $limit
-                    ]) 
-                    : null
+                'pagination' => $this->getView('components/pagination', [
+                    'pages' => $pages,
+                    'currPage' => $page,
+                    'results' => $count,
+                    'limit' => $limit
+                ])
             ];
             $callback['success'] = true;
         } catch(AppException $e) {
