@@ -1,38 +1,51 @@
-<nav>
-    <ul class="pagination justify-content-center flex-wrap">
-        <?php if($currPage > 1): ?>
-        <li class="page-item">
-            <a class="page-link" data-page="<?= ($currPage - 1) ?>"><?= _('Anterior') ?></a>
-        </li>
-        <?php endif; ?>
-
-        <?php 
-        if($pages): 
-            for(
-                $i = $currPage - 5 >= 1 
-                ? (
-                    $currPage >= $pages - 5 
-                    ? $pages - 10
-                    : $currPage - 5
-                ) : 1; 
-                $i <= $pages 
-                    && $i >= $currPage - ($currPage >= $pages - 5 ? 10 - ($pages - $currPage) : 5) 
-                    && $i <= $currPage + ($currPage <= 5 ? 10 - $currPage : 5);
-                $i++
-            ):
+<div class="row">
+    <div class="col-sm-12 col-md-5">
+        <div>
+            <?= 
+                sprintf(
+                    _('Mostrando %s à %s de %s resultado(s)'), 
+                    $limit * ($currPage - 1) + 1, 
+                    $currPage < $pages ? $limit * $currPage : $results, 
+                    $results
+                )
             ?>
-            <li class="page-item <?= $i == $currPage ? 'active' : '' ?>">
-                <a class="page-link" data-page="<?= $i ?>"><?= $i ?></a>
-            </li>
-            <?php 
-            endfor;
-        endif;
-        ?>
+        </div>
+    </div>
 
-        <?php if($currPage < $pages): ?>
-        <li class="page-item">
-            <a class="page-link" data-page="<?= ($currPage + 1) ?>"><?= _('Próxima') ?></a>
-        </li>
-        <?php endif; ?>
-    </ul>
-</nav>
+    <div class="col-sm-12 col-md-7">
+        <nav>
+            <ul class="pagination justify-content-end flex-wrap">
+                <li class="page-item <?= $currPage > 1 ? '' : 'disabled' ?>">
+                    <a class="page-link" data-page="<?= ($currPage - 1) ?>"><?= _('Anterior') ?></a>
+                </li>
+
+                <?php 
+                if($pages): 
+                    for(
+                        $i = $currPage - 5 >= 1 
+                        ? (
+                            $currPage >= $pages - 5 
+                            ? $pages - 10
+                            : $currPage - 5
+                        ) : 1; 
+                        $i <= $pages 
+                            && $i >= $currPage - ($currPage >= $pages - 5 ? 10 - ($pages - $currPage) : 5) 
+                            && $i <= $currPage + ($currPage <= 5 ? 10 - $currPage : 5);
+                        $i++
+                    ):
+                    ?>
+                    <li class="page-item <?= $i == $currPage ? 'active' : '' ?>">
+                        <a class="page-link" data-page="<?= $i ?>"><?= $i ?></a>
+                    </li>
+                    <?php 
+                    endfor;
+                endif;
+                ?>
+
+                <li class="page-item <?= $currPage < $pages ? '' : 'disabled' ?>">
+                    <a class="page-link" data-page="<?= ($currPage + 1) ?>"><?= _('Próxima') ?></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>

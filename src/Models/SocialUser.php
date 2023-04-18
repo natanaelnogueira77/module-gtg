@@ -26,7 +26,7 @@ class SocialUser extends Model
 
     public function user(string $columns = '*'): ?User
     {
-        $this->user = $this->belongsTo(User::class, 'usu_id', 'id', $columns);
+        $this->user = $this->belongsTo(User::class, 'usu_id', 'id', $columns)->fetch(false);
         return $this->user;
     }
 

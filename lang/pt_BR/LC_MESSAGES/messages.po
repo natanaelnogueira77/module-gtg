@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-04-13 23:48-0300\n"
-"PO-Revision-Date: 2023-04-13 23:48-0300\n"
+"POT-Creation-Date: 2023-04-18 13:24-0300\n"
+"PO-Revision-Date: 2023-04-18 13:24-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -62,48 +62,48 @@ msgstr "Nível de Usuário"
 msgid "Todos os Usuários"
 msgstr "Todos os Usuários"
 
-#: resources/views/admin/index.php:112
+#: resources/views/admin/index.php:108
 msgid "Configurações do Sistema"
 msgstr "Configurações do Sistema"
 
-#: resources/views/admin/index.php:120
+#: resources/views/admin/index.php:116
 msgid "Tema"
 msgstr "Tema"
 
-#: resources/views/admin/index.php:122
+#: resources/views/admin/index.php:118
 msgid "Escolha o tema de cores do sistema..."
 msgstr "Escolha o tema de cores do sistema..."
 
-#: resources/views/admin/index.php:124
+#: resources/views/admin/index.php:120
 msgid "Tema Claro"
 msgstr "Tema Claro"
 
-#: resources/views/admin/index.php:127
+#: resources/views/admin/index.php:123
 msgid "Tema Escuro"
 msgstr "Tema Escuro"
 
-#: resources/views/admin/index.php:134
+#: resources/views/admin/index.php:130
 msgid "Imagem de Fundo (Login)"
 msgstr "Imagem de Fundo (Login)"
 
-#: resources/views/admin/index.php:143 resources/views/admin/index.php:161
-#: resources/views/admin/index.php:177
+#: resources/views/admin/index.php:139 resources/views/admin/index.php:157
+#: resources/views/admin/index.php:173
 msgid "Escolher Imagem"
 msgstr "Escolher Imagem"
 
-#: resources/views/admin/index.php:152
+#: resources/views/admin/index.php:148
 msgid "Logo"
 msgstr "Logo"
 
-#: resources/views/admin/index.php:168
+#: resources/views/admin/index.php:164
 msgid "Ícone (Tamanho Recomendado: 512 x 512)"
 msgstr "Ícone (Tamanho Recomendado: 512 x 512)"
 
-#: resources/views/admin/index.php:186
+#: resources/views/admin/index.php:182
 msgid "Salvar Configurações"
 msgstr "Salvar Configurações"
 
-#: resources/views/admin/index.php:209 resources/views/admin/users/index.php:76
+#: resources/views/admin/index.php:204 resources/views/admin/users/index.php:72
 msgid "Deseja realmente excluir este usuário?"
 msgstr "Deseja realmente excluir este usuário?"
 
@@ -307,14 +307,14 @@ msgid "Limpar"
 msgstr "Limpar"
 
 #: resources/views/components/data-table-filters.php:5
+msgid "Mostrar"
+msgstr "Mostrar"
+
+#: resources/views/components/data-table-filters.php:13
 msgid "Linhas"
 msgstr "Linhas"
 
-#: resources/views/components/data-table-filters.php:18
-msgid "Buscar"
-msgstr "Buscar"
-
-#: resources/views/components/data-table-filters.php:21
+#: resources/views/components/data-table-filters.php:20
 msgid "Buscar por"
 msgstr "Buscar por"
 
@@ -368,13 +368,13 @@ msgstr ""
 
 #: resources/views/components/media-library.php:414
 #: resources/views/components/media-library.php:417
-#: resources/views/components/pagination.php:5
+#: resources/views/components/pagination.php:19
 msgid "Anterior"
 msgstr "Anterior"
 
 #: resources/views/components/media-library.php:449
 #: resources/views/components/media-library.php:452
-#: resources/views/components/pagination.php:34
+#: resources/views/components/pagination.php:46
 msgid "Próxima"
 msgstr "Próxima"
 
@@ -406,6 +406,11 @@ msgstr "Escolher"
 #: resources/views/components/media-library.php:550
 msgid "Cancelar"
 msgstr "Cancelar"
+
+#: resources/views/components/pagination.php:6
+#, php-format
+msgid "Mostrando %s à %s de %s resultado(s)"
+msgstr "Mostrando %s à %s de %s resultado(s)"
 
 #: resources/views/components/tinymce.php:27
 #: resources/views/components/tinymce.php:32
@@ -555,7 +560,7 @@ msgstr "O usuário \"%s\" foi criado com sucesso!"
 
 #: src/App/Controllers/Admin/CUsers.php:87
 #: src/App/Controllers/Admin/CUsers.php:104
-#: src/App/Controllers/Admin/CUsers.php:244
+#: src/App/Controllers/Admin/CUsers.php:246
 msgid "Nenhum usuário foi encontrado!"
 msgstr "Nenhum usuário foi encontrado!"
 
@@ -586,94 +591,94 @@ msgstr "ID"
 msgid "Criado em"
 msgstr "Criado em"
 
-#: src/App/Controllers/Admin/CUsers.php:248
+#: src/App/Controllers/Admin/CUsers.php:250
 #, php-format
 msgid "O usuário \"%s\" foi excluído com sucesso."
 msgstr "O usuário \"%s\" foi excluído com sucesso."
 
-#: src/App/Controllers/Admin/CUsers.php:262
+#: src/App/Controllers/Admin/CUsers.php:264
 #: src/App/Controllers/User/CEdit.php:55 src/Components/Contact.php:50
 #: src/Models/User.php:129
 msgid "O nome é obrigatório!"
 msgstr "O nome é obrigatório!"
 
-#: src/App/Controllers/Admin/CUsers.php:264
+#: src/App/Controllers/Admin/CUsers.php:266
 #: src/App/Controllers/User/CEdit.php:57 src/Components/Contact.php:52
 #: src/Models/User.php:131
 msgid "O nome precisa ter 100 caractéres ou menos!"
 msgstr "O nome precisa ter 100 caractéres ou menos!"
 
-#: src/App/Controllers/Admin/CUsers.php:268
+#: src/App/Controllers/Admin/CUsers.php:270
 #: src/App/Controllers/User/CEdit.php:61 src/Components/Contact.php:56
 #: src/Components/ForgotPassword.php:26 src/Components/Login.php:27
 #: src/Models/SocialUser.php:83 src/Models/User.php:135
 msgid "O email é obrigatório!"
 msgstr "O email é obrigatório!"
 
-#: src/App/Controllers/Admin/CUsers.php:270
+#: src/App/Controllers/Admin/CUsers.php:272
 #: src/App/Controllers/User/CEdit.php:63 src/Components/Contact.php:58
 #: src/Components/ForgotPassword.php:28 src/Components/Login.php:29
 #: src/Models/SocialUser.php:85 src/Models/User.php:137
 msgid "O email é inválido!"
 msgstr "O email é inválido!"
 
-#: src/App/Controllers/Admin/CUsers.php:272
+#: src/App/Controllers/Admin/CUsers.php:274
 #: src/App/Controllers/User/CEdit.php:65 src/Components/Contact.php:60
 #: src/Components/ForgotPassword.php:30 src/Components/Login.php:31
 #: src/Models/SocialUser.php:87 src/Models/User.php:139
 msgid "O email precisa ter 100 caractéres ou menos!"
 msgstr "O email precisa ter 100 caractéres ou menos!"
 
-#: src/App/Controllers/Admin/CUsers.php:283
+#: src/App/Controllers/Admin/CUsers.php:285
 #: src/App/Controllers/User/CEdit.php:76 src/Models/SocialUser.php:98
 #: src/Models/User.php:150
 msgid "O email informado já está em uso! Tente outro."
 msgstr "O email informado já está em uso! Tente outro."
 
-#: src/App/Controllers/Admin/CUsers.php:288
+#: src/App/Controllers/Admin/CUsers.php:290
 #: src/App/Controllers/User/CEdit.php:81 src/Models/User.php:155
 msgid "O apelido é obrigatório!"
 msgstr "O apelido é obrigatório!"
 
-#: src/App/Controllers/Admin/CUsers.php:290
+#: src/App/Controllers/Admin/CUsers.php:292
 #: src/App/Controllers/User/CEdit.php:83 src/Models/User.php:157
 msgid "O apelido precisa ter 100 caractéres ou menos!"
 msgstr "O apelido precisa ter 100 caractéres ou menos!"
 
-#: src/App/Controllers/Admin/CUsers.php:301
+#: src/App/Controllers/Admin/CUsers.php:303
 #: src/App/Controllers/User/CEdit.php:94 src/Models/User.php:168
 msgid "O apelido informado já está em uso! Tente outro."
 msgstr "O apelido informado já está em uso! Tente outro."
 
-#: src/App/Controllers/Admin/CUsers.php:306 src/Models/User.php:173
+#: src/App/Controllers/Admin/CUsers.php:308 src/Models/User.php:173
 msgid "O tipo de usuário é obrigatório!"
 msgstr "O tipo de usuário é obrigatório!"
 
-#: src/App/Controllers/Admin/CUsers.php:311
+#: src/App/Controllers/Admin/CUsers.php:313
 #: src/App/Controllers/User/CEdit.php:100 src/Components/Login.php:35
 #: src/Components/ResetPassword.php:27 src/Models/User.php:177
 msgid "A senha é obrigatória!"
 msgstr "A senha é obrigatória!"
 
-#: src/App/Controllers/Admin/CUsers.php:313
+#: src/App/Controllers/Admin/CUsers.php:315
 #: src/App/Controllers/User/CEdit.php:102 src/Models/User.php:179
 msgid "A senha deve conter 5 caracteres ou mais!"
 msgstr "A senha deve conter 5 caracteres ou mais!"
 
-#: src/App/Controllers/Admin/CUsers.php:315
-#: src/App/Controllers/Admin/CUsers.php:316
+#: src/App/Controllers/Admin/CUsers.php:317
+#: src/App/Controllers/Admin/CUsers.php:318
 #: src/App/Controllers/User/CEdit.php:104
 #: src/App/Controllers/User/CEdit.php:105 src/Components/ResetPassword.php:37
 #: src/Components/ResetPassword.php:38
 msgid "As senhas não correspondem!"
 msgstr "As senhas não correspondem!"
 
-#: src/App/Controllers/Admin/CUsers.php:320
+#: src/App/Controllers/Admin/CUsers.php:322
 #: src/App/Controllers/User/CEdit.php:109 src/Components/ResetPassword.php:31
 msgid "A confirmação de senha é obrigatória!"
 msgstr "A confirmação de senha é obrigatória!"
 
-#: src/App/Controllers/Admin/CUsers.php:325
+#: src/App/Controllers/Admin/CUsers.php:327
 #: src/App/Controllers/User/CEdit.php:114 src/Components/Contact.php:80
 #: src/Components/ForgotPassword.php:45 src/Components/Login.php:39
 #: src/Components/ResetPassword.php:42 src/Models/Config.php:62
@@ -956,6 +961,9 @@ msgstr "O nome no plural é obrigatório!"
 #: src/Models/UserType.php:51
 msgid "O nome no plural precisa ter 45 caractéres ou menos!"
 msgstr "O nome no plural precisa ter 45 caractéres ou menos!"
+
+#~ msgid "Buscar"
+#~ msgstr "Buscar"
 
 #~ msgid "Erros de validação! Verifique os dados!"
 #~ msgstr "Erros de validação! Verifique os dados!"

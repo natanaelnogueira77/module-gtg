@@ -47,11 +47,8 @@
                     </select>
                 </div>
             </div>
-            <?php $this->insert('components/data-table-buttons', ['formId' => 'filters', 'clearId' => 'clear']); ?>
         </form>
-    </div>
-    <hr class="my-0">
-    <div class="card-body">
+
         <div id="users" data-action="<?= $router->route('admin.users.list') ?>"></div>
     </div>
 </div>
@@ -62,13 +59,12 @@
         const app = new App();
         const table = $("#users");
         const filters_form = $("#filters");
-        const clear_btn = $("#clear");
 
         const dataTable = app.table(table, table.data('action'));
         dataTable.defaultParams(app.objectifyForm(filters_form))
             .filtersForm(filters_form)
-            .clearButton(clear_btn)
             .setMsgFunc((msg) => app.showMessage(msg.message, msg.type))
+            .loadOnChange()
             .addAction((table) => {
                 table.find("[data-act=delete]").click(function () {
                     var data = $(this).data();

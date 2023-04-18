@@ -95,8 +95,8 @@ class DataTable
     {
         const object = this;
 
-        this.form = elem;
-        this.form.submit(function (e) {
+        object.form = elem;
+        object.form.submit(function (e) {
             e.preventDefault();
 
             var returnArray = {};
@@ -166,6 +166,28 @@ class DataTable
     {
         this.msgFunc = func;
         return this;
+    }
+
+    loadOnChange() 
+    {
+        const object = this;
+        if(object.form) {
+            object.form.find("[name]").change(function () {
+                var returnArray = {};
+                var formArray = object.form.serializeArray();
+    
+                if(formArray) {
+                    for(var i = 0; i < formArray.length; i++){
+                        returnArray[formArray[i]["name"]] = formArray[i]["value"];
+                    }
+                }
+                
+                object.params(returnArray);
+                object.load();
+            });
+        }
+
+        return object;
     }
 
     outputMsg() 
