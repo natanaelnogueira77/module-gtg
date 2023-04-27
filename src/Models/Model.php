@@ -675,7 +675,9 @@ class Model extends DataLayer
         $object = (new static::$metaInfo['class']())->get($filters)->fetch(false);
         if(!$object) {
             $object = (new static::$metaInfo['class']());
-            $object->{static::$metaInfo['entity']} = $this->{static::$primaryKey};
+            if(static::$metaInfo['entity']) {
+                $object->{static::$metaInfo['entity']} = $this->{static::$primaryKey};
+            }
             $object->{static::$metaInfo['meta']} = $meta;
         }
 

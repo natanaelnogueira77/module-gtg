@@ -22,6 +22,9 @@ class DataTable
             type: 'get',
             data: this.urlParams,
             dataType: "json",
+            beforeSend: function () {
+                object.table.css('opacity', '0.1');
+            },
             success: function(response) {
                 object.msg = {};
                 if(response.message) {
@@ -30,6 +33,7 @@ class DataTable
                 }
 
                 if(response.content) {
+                    object.table.css('opacity', '0.1');
                     object.table.children().remove();
                     
                     if(response.content.pagination) {
@@ -43,6 +47,9 @@ class DataTable
                     object.table.append(table);
                     object.loadActions();
                 }
+            },
+            complete: function () {
+                object.table.animate({opacity: '1'}, 'fast');
             }
         });
 
