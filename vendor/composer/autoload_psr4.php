@@ -15,7 +15,7 @@ return array(
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'Masterminds\\' => array($vendorDir . '/masterminds/html5/src'),
     'League\\Plates\\' => array($vendorDir . '/league/plates/src'),
-    'GTG\\MVC\\' => array($vendorDir . '/gtg/php-mvc-core'),
+    'GTG\\MVC\\' => array($vendorDir . '/gtg/php-mvc-core/src'),
     'FontLib\\' => array($vendorDir . '/phenx/php-font-lib/src/FontLib'),
     'Dompdf\\' => array($vendorDir . '/dompdf/dompdf/src'),
     'CoffeeCode\\Router\\' => array($vendorDir . '/coffeecode/router/src'),

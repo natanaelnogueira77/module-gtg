@@ -89,7 +89,7 @@ class ComposerStaticInit7ddf24c22616fa52e0654a4ac941adde
         ),
         'GTG\\MVC\\' => 
         array (
-            0 => __DIR__ . '/..' . '/gtg/php-mvc-core',
+            0 => __DIR__ . '/..' . '/gtg/php-mvc-core/src',
         ),
         'FontLib\\' => 
         array (

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6081b12959106a18a40b2f4415b5a949",
+    "content-hash": "e9e3da1f4896379ef0649ce0f80b6d2a",
     "packages": [
         {
             "name": "coffeecode/datalayer",
@@ -224,16 +224,16 @@
         },
         {
             "name": "gtg/php-mvc-core",
-            "version": "v1.0.2",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/natanaelnogueira77/gtg-mvc-core.git",
-                "reference": "38475cae8442fd382c99d55fc2a7779981a5c0f4"
+                "reference": "101cdc00eb3283e4809e3ebabc005b51d32074ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/natanaelnogueira77/gtg-mvc-core/zipball/38475cae8442fd382c99d55fc2a7779981a5c0f4",
-                "reference": "38475cae8442fd382c99d55fc2a7779981a5c0f4",
+                "url": "https://api.github.com/repos/natanaelnogueira77/gtg-mvc-core/zipball/101cdc00eb3283e4809e3ebabc005b51d32074ef",
+                "reference": "101cdc00eb3283e4809e3ebabc005b51d32074ef",
                 "shasum": ""
             },
             "require": {
@@ -248,7 +248,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "GTG\\MVC\\": "."
+                    "GTG\\MVC\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -263,9 +263,9 @@
             ],
             "support": {
                 "issues": "https://github.com/natanaelnogueira77/gtg-mvc-core/issues",
-                "source": "https://github.com/natanaelnogueira77/gtg-mvc-core/tree/v1.0.2"
+                "source": "https://github.com/natanaelnogueira77/gtg-mvc-core/tree/v1.0.3"
             },
-            "time": "2023-05-25T18:30:49+00:00"
+            "time": "2023-05-25T20:36:11+00:00"
         },
         {
             "name": "league/plates",
