@@ -4,12 +4,12 @@
         'noHeader' => true,
         'noFooter' => true,
         'shortcutIcon' => $shortcutIcon,
-        'preloader' => ['logo' => $logo]
+        'preloader' => ['shortcutIcon' => $shortcutIcon]
     ]);
 ?>
 
 <main class="login-body" data-vide-bg="<?= $background ?>">
-    <form id="main-login-form" class="form-default" action="<?= $router->route('login.index') ?>" method="post">
+    <form id="main-login-form" class="form-default" action="<?= $router->route('auth.index') ?>" method="post">
         <?php if($redirect): ?>
         <input type="hidden" name="redirect" value="<?= $redirect ?>">
         <?php endif; ?>
@@ -39,7 +39,7 @@
                     data-callback='onSubmit' data-action='submit' value="<?= _('Entrar') ?>">
             </div>
 
-            <a href="<?= $router->route('reset-password.index') ?>" class="forget">
+            <a href="<?= $router->route('resetPassword.index') ?>" class="forget">
                 <?= _('Esqueceu a senha?') ?>
             </a>
         </div>

@@ -2,67 +2,79 @@
 
 namespace Src\Models;
 
-use Src\Exceptions\ValidationException;
-use Src\Models\Model;
+use GTG\MVC\DB\DBModel;
 
-class Config extends Model 
+class Config extends DBModel 
 {
-    protected static $tableName = 'config';
-    protected static $columns = [
-        'meta',
-        'value'
-    ];
-    protected static $required = [
-        'meta'
-    ];
-    protected static $metaInfo = [
-        'class' => self::class,
-        'meta' => 'meta',
-        'value' => 'value'
-    ];
-
-    protected static $metas = [
-        'login_img',
-        'logo',
-        'logo_icon',
-        'style'
-    ];
-
-    protected function validate(): bool 
+    public function tableName(): string 
     {
-        $errors = [];
+        return 'config';
+    }
 
-        if($this->meta == 'login_img') {
-            if(!$this->value) {
-                $errors['login_img'] = _('A imagem de fundo do login é obrigatória!');
-            } elseif(!in_array(pathinfo($this->value, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png'])) {
-                $errors['login_img'] = _('A imagem de fundo não é uma imagem válida!');
-            }
-        } elseif($this->meta == 'logo') {
-            if(!$this->value) {
-                $errors['logo'] = _('O logo é obrigatório!');
-            } elseif(!in_array(pathinfo($this->value, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png'])) {
-                $errors['logo'] = _('O logo não é uma imagem válida!');
-            }
-        } elseif($this->meta == 'logo_icon') {
-            if(!$this->value) {
-                $errors['logo_icon'] = _('O ícone é obrigatório!');
-            } elseif(!in_array(pathinfo($this->value, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png'])) {
-                $errors['logo_icon'] = _('O ícone não é uma imagem válida!');
-            }
-        } elseif($this->meta == 'style') {
-            if(!$this->value) {
-                $errors['style'] = _('O tema é obrigatório!');
-            } elseif(!in_array($this->value, ['light', 'dark'])) {
-                $errors['style'] = _('O tema é inválido!');
-            }
-        }
+    public function primaryKey(): string 
+    {
+        return 'id';
+    }
 
-        if(count($errors) > 0) {
-            $this->error = new ValidationException($errors, _('Erros de validação! Verifique os campos.'));
+    public function attributes(): array 
+    {
+        return ['meta', 'value'];
+    }
+
+    public function metaTableData(): ?array 
+    {
+        return [
+            'class' => self::class,
+            'meta' => 'meta',
+            'value' => 'value'
+        ];
+    }
+
+    public function rules(): array 
+    {
+        return [
+            'meta' => [
+                [self::RULE_REQUIRED, 'message' => _('O metadado é obrigatório!')],
+                [self::RULE_MAX, 'max' => 50, 'message' => sprintf(_('O metadado deve conter no máximo %s caractéres!'), 50)]
+            ],
+            'value' => [
+                [self::RULE_REQUIRED, 'message' => _('O valor é obrigatório!')]
+            ]
+        ];
+    }
+
+    public function validate(): bool 
+    {
+        if(!parent::validate()) {
             return false;
         }
 
-        return true;
+        if($this->meta == 'login_img') {
+            if(!$this->value) {
+                $this->addError('login_img', _('A imagem de fundo do login é obrigatória!'));
+            } elseif(!in_array(pathinfo($this->value, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png'])) {
+                $this->addError('login_img', _('A imagem de fundo não é uma imagem válida!'));
+            }
+        } elseif($this->meta == 'logo') {
+            if(!$this->value) {
+                $this->addError('logo', _('O logo é obrigatório!'));
+            } elseif(!in_array(pathinfo($this->value, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png'])) {
+                $this->addError('logo', _('O logo não é uma imagem válida!'));
+            }
+        } elseif($this->meta == 'logo_icon') {
+            if(!$this->value) {
+                $this->addError('logo_icon', _('O ícone é obrigatório!'));
+            } elseif(!in_array(pathinfo($this->value, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png'])) {
+                $this->addError('logo_icon', _('O ícone não é uma imagem válida!'));
+            }
+        } elseif($this->meta == 'style') {
+            if(!$this->value) {
+                $this->addError('style', _('O tema é obrigatório!'));
+            } elseif(!in_array($this->value, ['light', 'dark'])) {
+                $this->addError('style', _('O tema é inválido!'));
+            }
+        }
+
+        return !$this->hasErrors();
     }
 }

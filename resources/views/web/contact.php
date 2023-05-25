@@ -32,47 +32,55 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
-                                    <input class="form-control <?= $errors['subject'] ? 'is-invalid' : '' ?>" 
+                                    <input class="form-control <?= $contactForm->hasError('subject') ? 'is-invalid' : '' ?>" 
                                         name="subject" id="subject" type="text" 
                                         onfocus="this.placeholder = ''" 
                                         onblur="this.placeholder = '<?= _('Qual é o assunto?') ?>'" 
-                                        placeholder="<?= _('Qual é o assunto?') ?>" value="<?= $subject ?>">
-                                    <div class="invalid-feedback"><?= $errors['subject'] ?></div>
+                                        placeholder="<?= _('Qual é o assunto?') ?>" value="<?= $contactForm->subject ?>">
+                                    <div class="invalid-feedback">
+                                        <?= $contactForm->hasError('subject') ? $contactForm->getFirstError('subject') : '' ?>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input class="form-control <?= $errors['name'] ? 'is-invalid' : '' ?>" 
+                                    <input class="form-control <?= $contactForm->hasError('name') ? 'is-invalid' : '' ?>" 
                                         name="name" id="name" type="text" 
                                         onfocus="this.placeholder = ''" 
                                         onblur="this.placeholder = '<?= _('Digite seu nome') ?>'" 
                                         placeholder="<?= _('Digite seu nome') ?>" 
-                                        value="<?= isset($user) ? $user->name : $name ?>">
-                                    <div class="invalid-feedback"><?= $errors['name'] ?></div>
+                                        value="<?= isset($user) ? $user->name : $contactForm->name ?>">
+                                    <div class="invalid-feedback">
+                                        <?= $contactForm->hasError('name') ? $contactForm->getFirstError('name') : '' ?>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input class="form-control <?= $errors['email'] ? 'is-invalid' : '' ?>" 
+                                    <input class="form-control <?= $contactForm->hasError('email') ? 'is-invalid' : '' ?>" 
                                         name="email" id="email" type="email" 
                                         onfocus="this.placeholder = ''" 
                                         onblur="this.placeholder = '<?= _('Digite seu email') ?>'" 
                                         placeholder="<?= _('Digite seu email') ?>" 
-                                        value="<?= isset($user) ? $user->email : $email ?>">
-                                    <div class="invalid-feedback"><?= $errors['email'] ?></div>
+                                        value="<?= isset($user) ? $user->email : $contactForm->email ?>">
+                                    <div class="invalid-feedback">
+                                        <?= $contactForm->hasError('email') ? $contactForm->getFirstError('email') : '' ?>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="col-12">
                                 <div class="form-group">
-                                    <textarea class="form-control w-100 <?= $errors['message'] ? 'is-invalid' : '' ?>" 
-                                        name="message" id="message" cols="30" rows="9" 
+                                    <textarea class="form-control w-100 <?= $contactForm->hasError('body') ? 'is-invalid' : '' ?>" 
+                                        name="body" id="body" cols="30" rows="9" 
                                         onfocus="this.placeholder = ''" 
                                         onblur="this.placeholder = '<?= _('Digite sua mensagem') ?>'" 
-                                        placeholder=" <?= _('Digite sua mensagem') ?>"><?= $message ?></textarea>
-                                    <div class="invalid-feedback"><?= $errors['message'] ?></div>
+                                        placeholder=" <?= _('Digite sua mensagem') ?>"><?= $contactForm->body ?></textarea>
+                                    <div class="invalid-feedback">
+                                        <?= $contactForm->hasError('body') ? $contactForm->getFirstError('body') : '' ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>

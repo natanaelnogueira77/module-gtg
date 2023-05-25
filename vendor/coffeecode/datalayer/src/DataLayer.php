@@ -118,7 +118,7 @@ abstract class DataLayer
      * @param int $mode
      * @return array|null
      */
-    public function columns($mode = PDO::FETCH_OBJ): ?array
+    public function columns(int $mode = PDO::FETCH_OBJ): ?array
     {
         $stmt = Connect::getInstance($this->database)->prepare("DESCRIBE {$this->entity}");
         $stmt->execute($this->params);
@@ -152,7 +152,7 @@ abstract class DataLayer
     {
         if ($terms) {
             $this->statement = "SELECT {$columns} FROM {$this->entity} WHERE {$terms}";
-            parse_str($params ? $params : '', $this->params);
+            parse_str($params ?? "", $this->params);
             return $this;
         }
 
@@ -197,6 +197,39 @@ abstract class DataLayer
     public function limit(int $limit): ?DataLayer
     {
         $this->limit = " LIMIT {$limit}";
+        return $this;
+    }
+
+    /**
+     * @param string $column
+     * @param array $values
+     * @return DataLayer
+     */
+    public function in(string $column, array $values): DataLayer
+    {
+        $index = 0;
+        $params = array();
+        $statement = "{$column} IN (";
+
+        foreach ($values as $value) {
+            $index++;
+            if ($value == end($values)) {
+                $statement .= ":in_{$index}";
+            } else {
+                $statement .= ":in_{$index},";
+            }
+
+            $params["in_{$index}"] = $value;
+        }
+
+        $statement .= ")";
+        if (!str_contains($this->statement, "WHERE")) {
+            $this->statement .= " WHERE " . $statement;
+        } else {
+            $this->statement .= " AND " . $statement;
+        }
+
+        $this->params = $this->params ? $this->params += $params : $params;
         return $this;
     }
 
@@ -273,7 +306,7 @@ abstract class DataLayer
                 $save = $id;
             }
 
-            if ($save === null) {
+            if ($save === false) {
                 return false;
             }
 

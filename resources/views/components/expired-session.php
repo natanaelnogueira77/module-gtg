@@ -28,21 +28,9 @@
                 clearInterval(count_interval);
             }
         }, 10000);
-        
-        login_form.submit(function(e) {
-            e.preventDefault();
-            const form = $(this);
-            
-            app.callAjax({
-                url: form.attr("action"),
-                type: form.attr("method"),
-                data: form.serialize(),
-                success: function(response) {
-                    if(response.success) {
-                        login_modal.modal('toggle');
-                    }
-                }
-            });
+
+        app.form(login_form, function (response) {
+            login_modal.modal('toggle');
         });
     });
 </script>

@@ -1,11 +1,13 @@
 # Read me
 
-This is the primary GTG Project Structure. Whenever creating a new project, this structure can be used for starting off.
+An project structure example using the GTG MVC core. Can be used to start off a new project.
 
 ## Configuration
 
 Firstly, go to the env.sample.ini file, copy its contents and create a new file called env.ini, and paste there. 
 Then, complete the variables (app information, database, smtp configurations, etc.).
 
-Then, go to the database folder and execute in your database schema db.sql contents, and then the factory.sql contents. 
-After that, you're ready to start off.
+Then, open the terminal on the project's folder and execute the 2 following commands, in order, for database population: 
+
+- php migrations.php
+- php seeders.php

@@ -13,56 +13,6 @@ function url(?string $uri = null): string
     return ROOT;
 }
 
-function message(string $message, string $type): array 
-{
-    return [
-        'message' => $message, 
-        'type' => $type
-    ];
-}
-
-function redirect(string $url): void
-{
-    header('Location: ' . $url);
-    exit();
-}
-
-function addSuccessMsg(string $msg): void 
-{
-    $_SESSION[SESS_MESSAGE] = [
-        'type' => 'success',
-        'message' => $msg
-    ];
-}
-
-function addErrorMsg(string $msg): void  
-{
-    $_SESSION[SESS_MESSAGE] = [
-        'type' => 'error',
-        'message' => $msg
-    ];
-}
-
-function addInfoMsg(string $msg): void  
-{
-    $_SESSION[SESS_MESSAGE] = [
-        'type' => 'info',
-        'message' => $msg
-    ];
-}
-
-function getLanguage(): ?array 
-{
-    session_status() === PHP_SESSION_ACTIVE ?: session_start();
-    return isset($_SESSION[SESS_LANG]) ? $_SESSION[SESS_LANG] : null;
-}
-
-function setLanguage(array $langInfo): void
-{
-    session_status() === PHP_SESSION_ACTIVE ?: session_start();
-    $_SESSION[SESS_LANG] = $langInfo;
-}
-
 function generatePassword(
     int $length = 12, 
     bool $upperCase = true, 

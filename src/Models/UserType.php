@@ -2,24 +2,41 @@
 
 namespace Src\Models;
 
-use Src\Exceptions\AppException;
-use Src\Exceptions\ValidationException;
-use Src\Models\Model;
+use GTG\MVC\DB\DBModel;
 use Src\Models\User;
 
-class UserType extends Model 
+class UserType extends DBModel 
 {
-    protected static $tableName = 'usuario_tipo';
-    protected static $hasTimestamps = true;
-    protected static $columns = [
-        'name_sing',
-        'name_plur'
-    ];
-    protected static $required = [
-        'name_sing',
-        'name_plur'
-    ];
     public $users = [];
+
+    public function tableName(): string 
+    {
+        return 'usuario_tipo';
+    }
+
+    public function primaryKey(): string 
+    {
+        return 'id';
+    }
+
+    public function attributes(): array 
+    {
+        return ['name_sing', 'name_plur'];
+    }
+
+    public function rules(): array 
+    {
+        return [
+            'name_sing' => [
+                [self::RULE_REQUIRED, 'message' => _('O nome no singular é obrigatório!')],
+                [self::RULE_MAX, 'max' => 45, 'message' => sprintf(_('O nome no singular deve conter no máximo %s caractéres!'), 45)]
+            ],
+            'name_plur' => [
+                [self::RULE_REQUIRED, 'message' => _('O nome no plural é obrigatório!')],
+                [self::RULE_MAX, 'max' => 45, 'message' => sprintf(_('O nome no plural deve conter no máximo %s caractéres!'), 45)]
+            ]
+        ];
+    }
 
     public function users(array $filters = [], string $columns = '*'): ?array
     {
@@ -30,32 +47,9 @@ class UserType extends Model
     public function destroy(): bool 
     {
         if((new User())->get(['utip_id' => $this->id])->count()) {
-            throw new AppException(_('Você não pode excluir um tipo de usuário vinculado à um usuário!'));
-        }
-        return parent::destroy();
-    }
-
-    protected function validate(): bool 
-    {
-        $errors = [];
-        
-        if(!$this->name_sing) {
-            $errors['name_sing'] = _('O nome no singular é obrigatório!');
-        } elseif(strlen($this->name_sing) > 45) {
-            $errors['name_sing'] = _('O nome no singular precisa ter 45 caractéres ou menos!');
-        }
-
-        if(!$this->name_plur) {
-            $errors['name_plur'] = _('O nome no plural é obrigatório!');
-        } elseif(strlen($this->name_plur) > 45) {
-            $errors['name_plur'] = _('O nome no plural precisa ter 45 caractéres ou menos!');
-        }
-
-        if(count($errors) > 0) {
-            $this->error = new ValidationException($errors, _('Erros de validação! Verifique os campos.'));
+            $this->addError('destroy', _('Você não pode excluir um tipo de usuário vinculado à um usuário!'));
             return false;
         }
-
-        return true;
+        return parent::destroy();
     }
 }

@@ -186,24 +186,21 @@
                             dataType: 'json',
                             success: function (response) {
                                 if(response.message) {
-                                    object.app.showMessage(response.message.message, response.message.type);
+                                    object.app.showMessage(response.message[1], response.message[0]);
                                 }
 
-                                if(response.success) {
-                                    object.addFileToList(response.filename);
-                                    object.chooseFile(response.filename);
-                                    object.openTab();
+                                object.addFileToList(response.filename);
+                                object.chooseFile(response.filename);
+                                object.openTab();
 
-                                    object.progressPercentage.innerHTML = "";
-                                    object.progressBar.style.width = "0%";
-                                    object.progressBar.setAttribute('aria-valuenow', 0);
-                                }
+                                object.progressPercentage.innerHTML = "";
+                                object.progressBar.style.width = "0%";
+                                object.progressBar.setAttribute('aria-valuenow', 0);
                             },
                             error: function (response) {
-                                object.app.showMessage(
-                                    <?php echo json_encode(_('Lamentamos, mas parece que ocorreu um erro no upload do seu arquivo.')) ?>, 
-                                    "error"
-                                );
+                                if(response.responseJSON && response.responseJSON.message) {
+                                    object.app.showMessage(response.responseJSON.message[1], "error");
+                                }
                             },
                             contentType : false,
                             processData : false
@@ -251,15 +248,18 @@
                 dataType: 'json',
                 success: function (response) {
                     if(response.message) {
-                        object.app.showMessage(response.message.message, response.message.type);
+                        object.app.showMessage(response.message[1], response.message[0]);
                     }
                     
-                    if(response.success) {
-                        object.deleteFileFromList(filename);
-                        if(object.choosenFile == filename) {
-                            object.choosenFile = null;
-                            object.setButtonStatus();
-                        }
+                    object.deleteFileFromList(filename);
+                    if(object.choosenFile == filename) {
+                        object.choosenFile = null;
+                        object.setButtonStatus();
+                    }
+                },
+                error: function (response) {
+                    if(response.responseJSON && response.responseJSON.message) {
+                        object.app.showMessage(response.responseJSON.message[1], response.responseJSON.message[0]);
                     }
                 }
             });
@@ -384,7 +384,7 @@
                 dataType: 'json',
                 success: function(response) {
                     if(response.message) {
-                        object.app.showMessage(response.message.message, response.message.type);
+                        object.app.showMessage(response.message[1], response.message[0]);
                     }
 
                     object.pagination.querySelector("ul.pagination").innerHTML = "";
@@ -399,6 +399,11 @@
 
                     if(response.pages && response.pages > 1) {
                         object.setPagination(response.pages, page);
+                    }
+                },
+                error: function (response) {
+                    if(response.responseJSON && response.responseJSON.message) {
+                        object.app.showMessage(response.responseJSON.message[1], response.responseJSON.message[0]);
                     }
                 }
             });

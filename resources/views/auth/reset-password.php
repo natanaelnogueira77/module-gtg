@@ -4,7 +4,7 @@
         'noHeader' => true,
         'noFooter' => true,
         'shortcutIcon' => $shortcutIcon,
-        'preloader' => ['logo' => $logo]
+        'preloader' => ['shortcutIcon' => $shortcutIcon]
     ]);
 ?>
 
@@ -19,13 +19,15 @@
         <h2><?= _('Redefinir Senha') ?></h2>
 
         <?php if(!isset($code)): ?>
-        <form id="redefine-password-form" class="form-default" action="<?= $router->route('reset-password.index') ?>" method="post">
+        <form id="redefine-password-form" class="form-default" action="<?= $router->route('resetPassword.index') ?>" method="post">
             <div class="form-input">
                 <label for="email"><?= _('Email') ?></label>
                 <input type="email" id="email" name="email" placeholder="<?= _('Digite seu email') ?>" 
-                    class="form-control <?= $errors['email'] ? 'is-invalid' : '' ?>" 
+                    class="form-control <?= $forgotPasswordForm->hasError('email') ? 'is-invalid' : '' ?>" 
                     value="<?= $email ?>" required>
-                <div class="invalid-feedback"><?= $errors['email'] ?></div>
+                <div class="invalid-feedback">
+                    <?= $forgotPasswordForm->hasError('email') ? $forgotPasswordForm->getFirstError('email') : '' ?>
+                </div>
             </div>
 
             <div class="form-input pt-30">
@@ -35,20 +37,24 @@
         </form>
         <?php else: ?>
         <form id="redefine-password-form" class="form-default" 
-            action="<?= $router->route('reset-password.verify', ['code' => $code]) ?>" method="post">
+            action="<?= $router->route('resetPassword.verify', ['code' => $code]) ?>" method="post">
             <div class="form-input">
                 <label for="password"><?= _('Nova Senha') ?></label>
                 <input type="password" id="password" name="password" placeholder="<?= _('Digite sua nova senha') ?>" 
-                    class="form-control <?= $errors['password'] ? 'is-invalid' : '' ?>" required>
-                <div class="invalid-feedback"><?= $errors['password'] ?></div>
+                    class="form-control <?= $resetPasswordForm->hasError('password') ? 'is-invalid' : '' ?>" required>
+                <div class="invalid-feedback">
+                    <?= $resetPasswordForm->hasError('password') ? $resetPasswordForm->getFirstError('password') : '' ?>
+                </div>
             </div>
 
             <div class="form-input">
-                <label for="confirm_password"><?= _('Confirmar Nova Senha') ?></label>
-                <input type="password" id="confirm_password" name="confirm_password" 
-                    class="form-control <?= $errors['confirm_password'] ? 'is-invalid' : '' ?>"
+                <label for="password_confirm"><?= _('Confirmar Nova Senha') ?></label>
+                <input type="password" id="password_confirm" name="password_confirm" 
+                    class="form-control <?= $resetPasswordForm->hasError('password_confirm') ? 'is-invalid' : '' ?>"
                     placeholder="<?= _('Digite novamente a nova senha') ?>" required>
-                <div class="invalid-feedback"><?= $errors['confirm_password'] ?></div>
+                <div class="invalid-feedback">
+                    <?= $resetPasswordForm->hasError('password_confirm') ? $resetPasswordForm->getFirstError('password_confirm') : '' ?>
+                </div>
             </div>
 
             <div class="form-input pt-30">

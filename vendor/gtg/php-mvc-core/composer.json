@@ -4,7 +4,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "GTG\\MVC\\": "src/"
+            "GTG\\MVC\\": "."
         }
     },
     "authors": [

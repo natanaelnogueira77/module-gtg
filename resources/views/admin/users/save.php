@@ -28,14 +28,24 @@
         <div class="card-body">
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="name"><?= _('Nome') ?></label>
+                    <label for="name">
+                        <?= _('Nome') ?>
+                        <span data-toggle="tooltip" data-placement="top" title="<?= _('Digite o nome e sobrenome.') ?>">
+                            <i class="icofont-question-circle" style="font-size: 1.1rem;"></i>
+                        </span>
+                    </label>
                     <input type="text" id="name" name="name" placeholder="<?= _('Informe um nome...') ?>"
                         class="form-control" value="<?= $dbUser ? $dbUser->name : '' ?>" maxlength="50">
                     <div class="invalid-feedback"></div>
                 </div>
                 
                 <div class="form-group col-md-6">
-                    <label for="slug"><?= _('Apelido') ?></label>
+                    <label for="slug">
+                        <?= _('Apelido') ?>
+                        <span data-toggle="tooltip" data-placement="top" title="<?= _('Digite um apelido.') ?>">
+                            <i class="icofont-question-circle" style="font-size: 1.1rem;"></i>
+                        </span>
+                    </label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">@</span>
@@ -50,14 +60,24 @@
 
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="email"><?= _('Email') ?></label>
+                    <label for="email">
+                        <?= _('Email') ?>
+                        <span data-toggle="tooltip" data-placement="top" title="<?= _('Digite um email válido.') ?>">
+                            <i class="icofont-question-circle" style="font-size: 1.1rem;"></i>
+                        </span>
+                    </label>
                     <input type="email" id="email" name="email" placeholder="<?= _('Informe um email...') ?>"
                         class="form-control" value="<?= $dbUser ? $dbUser->email : '' ?>" maxlength="100">
                     <div class="invalid-feedback"></div>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label for="utip_id"><?= _('Nível do Usuário') ?></label>
+                    <label for="utip_id">
+                        <?= _('Nível do Usuário') ?>
+                        <span data-toggle="tooltip" data-placement="top" title="<?= _('Escolha o nível do usuário.') ?>">
+                            <i class="icofont-question-circle" style="font-size: 1.1rem;"></i>
+                        </span>
+                    </label>
                     <select id="utip_id" name="utip_id" class="form-control">
                         <option value=""><?= _('Selecionar...') ?></option>
                         <?php 
@@ -98,15 +118,25 @@
             
             <div class="form-row" id="password" style="<?= $dbUser ? 'display: none' : '' ?>">
                 <div class="form-group col-md-6">
-                    <label for="password"><?= _('Senha') ?></label>
+                    <label for="password">
+                        <?= _('Senha') ?>
+                        <span data-toggle="tooltip" data-placement="top" title="<?= _('Digite a nova senha de acesso à conta.') ?>">
+                            <i class="icofont-question-circle" style="font-size: 1.1rem;"></i>
+                        </span>
+                    </label>
                     <input type="password" id="password" name="password" 
                         placeholder="<?= _('Digite uma senha...') ?>" class="form-control">
                     <div class="invalid-feedback"></div>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label for="confirm_password"><?= _('Confirmar Senha') ?></label>
-                    <input type="password" id="confirm_password" name="confirm_password" 
+                    <label for="password_confirm">
+                        <?= _('Confirmar Senha') ?>
+                        <span data-toggle="tooltip" data-placement="top" title="<?= _('Digite novamente a nova senha de acesso à conta.') ?>">
+                            <i class="icofont-question-circle" style="font-size: 1.1rem;"></i>
+                        </span>
+                    </label>
+                    <input type="password" id="password_confirm" name="password_confirm" 
                         placeholder="<?= _('Digite novamente a senha...') ?>" class="form-control">
                     <div class="invalid-feedback"></div>
                 </div>

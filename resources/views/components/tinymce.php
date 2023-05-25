@@ -2,7 +2,7 @@
     $(function () {
         tinymce.init({
             selector:'textarea.tinymce',
-            language: <?php echo json_encode(LANG[1] == 'es_ES' ? 'es' : LANG[1]) ?>,
+            language: <?php echo json_encode($session->getLanguage()[1] == 'es_ES' ? 'es' : $session->getLanguage()[1]) ?>,
             plugins: ['image', 'table'],
             relative_urls : false,
             remove_script_host : false,

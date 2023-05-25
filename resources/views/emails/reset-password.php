@@ -17,7 +17,7 @@
 </div>
 <div>
     <p style="text-align: center;">
-        <a href="<?= $router->route('reset-password.verify', ['code' => $user->token]) ?>">
+        <a href="<?= $router->route('resetPassword.verify', ['code' => $user->token]) ?>">
             <?= _('Clique aqui para redefinir a senha') ?>
         </a>
     </p>

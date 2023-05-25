@@ -21,6 +21,10 @@
                         data-placement="bottom" class="<?= $button['class'] ?>">
                         <?php echo $button['html'] ?>
                     </button>
+                    <?php elseif($button['type'] == 'link'): ?>
+                    <a href="<?= $button['url'] ?>" class="<?= $button['class'] ?>">
+                        <?= $button['desc'] ?>
+                    </a>
                     <?php elseif($button['type'] == 'dropdown'): ?>
                     <div class="d-inline-block dropdown">
                         <button type="button" data-toggle="dropdown" aria-haspopup="true" 

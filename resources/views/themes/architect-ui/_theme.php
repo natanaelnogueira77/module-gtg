@@ -4,7 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="<?= url("resources/views/themes/architect-ui/main.css") ?>">
+    <link rel="stylesheet" href="<?= url("public/themes/architect-ui/main.css") ?>">
     <link rel="stylesheet" href="<?= url("public/assets/css/custom.css") ?>">
     <link rel="stylesheet" href="<?= url("public/assets/css/icofont.min.css") ?>">
     <link rel="stylesheet" href="<?= url("public/assets/css/toastr.min.css") ?>">
@@ -49,8 +49,40 @@
             </div>
         </div>
     </div>
+
+    <script src="<?= url("public/assets/js/jquery-3.0.0.min.js") ?>"></script>
+    <script src="<?= url("public/assets/js/bootstrap.min.js") ?>"></script>
+    <script src="<?= url("public/assets/js/bootstrap.bundle.min.js") ?>"></script>
+    <script src="<?= url("public/themes/architect-ui/assets/scripts/main.js") ?>"></script>
+    <script src="<?= url("public/assets/js/toastr.min.js") ?>"></script>
+    <script src="<?= url("public/assets/js/jquery-ui.js") ?>"></script>
+    <script src="<?= url("public/assets/js/jquery.ui.touch-punch.js") ?>"></script>
+    <script src="<?= url("public/assets/js/jquery.maskedinput.min.js") ?>"></script>
+    <script src="<?= url("public/assets/js/tinymce.min.js") ?>"></script>
+    <script src="<?= url("public/assets/js/data-table.js") ?>"></script>
+    <script src="<?= url("public/assets/js/app.js") ?>"></script>
+    <script>
+        $(function () {
+            const app = new App();
+            <?php 
+            foreach(['success', 'error', 'info'] as $type):
+                if($session->getFlash($type)): 
+                ?>
+                app.showMessage(
+                    <?php echo json_encode($session->getFlash($type)) ?>, 
+                    <?php echo json_encode($type) ?>,
+                    5000, 
+                    5000, 
+                    5000, 
+                    'toast-bottom-right'
+                );
+                <?php 
+                endif;  
+            endforeach;
+            ?>
+        });
+    </script>
     <?php 
-        $this->insert("themes/architect-ui/partials/scripts");
         $this->insert("components/tinymce", [
             'mlAdd' => $router->route('mediaLibrary.add'),
             'mlLoad' => $router->route('mediaLibrary.load'),
@@ -58,9 +90,10 @@
             'storeAt' => $storeAt,
             'path' => ROOT
         ]);
+        
         echo $this->section("scripts");
         echo $this->section("modals");
-        $this->insert("themes/messages");
+
         $this->insert("components/media-library", [
             'mlAdd' => $router->route('mediaLibrary.add'),
             'mlLoad' => $router->route('mediaLibrary.load'),
@@ -69,11 +102,11 @@
             'path' => ROOT
         ]);
 
-        if($user) {
+        if($session->getAuth()) {
             $this->insert('components/expired-session', [
-                'action' => $router->route('login.check'),
-                'return' => $router->route('login.index'),
-                'check' => $router->route('login.expired')
+                'action' => $router->route('auth.check'),
+                'return' => $router->route('auth.index'),
+                'check' => $router->route('auth.expired')
             ]);
         }
     ?>

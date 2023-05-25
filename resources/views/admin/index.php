@@ -19,12 +19,12 @@
             <div class="card-header-tab card-header-tab-animation card-header brt-15">    
                 <div class="card-header-title">
                     <i class="header-icon icofont-gear icon-gradient bg-night-sky"> </i>
-                    <?= _('Módulo GTG') ?>
+                    <?= _('Informações da Aplicação') ?>
                 </div>
             </div>
 
             <div class="card-body">
-                <div class="card-text"><?= sprintf(_('Versão: <strong>%s</strong>'), GTG_VERSION) ?></div>
+                <div class="card-text"><?= sprintf(_('Versão: <strong>%s</strong>'), APP_VERSION) ?></div>
             </div>
         </div>
     </div>
@@ -113,7 +113,12 @@
         <div class="card-body">
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="style"><?= _('Tema') ?></label>
+                    <label for="style">
+                        <?= _('Tema') ?>
+                        <span data-toggle="tooltip" data-placement="top" title="<?= _('Escolha o tema de cores do sistema.') ?>">
+                            <i class="icofont-question-circle" style="font-size: 1.1rem;"></i>
+                        </span>
+                    </label>
                     <select id="style" name="style" class="form-control">
                         <option value=""><?= _('Escolha o tema de cores do sistema...') ?></option>
                         <option value="light" <?= $configMetas['style'] == 'light' ? 'selected' : '' ?>>
@@ -127,7 +132,12 @@
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label><?= _('Imagem de Fundo (Login)') ?></label>
+                    <label for="login_img">
+                        <?= _('Imagem de Fundo (Login)') ?>
+                        <span data-toggle="tooltip" data-placement="top" title="<?= _('Escolha a imagem que ficará de fundo na página de login.') ?>">
+                            <i class="icofont-question-circle" style="font-size: 1.1rem;"></i>
+                        </span>
+                    </label>
                     <div class="d-flex justify-content-around">
                         <img id="login_img_view" style="max-height: 100px; max-width: 100%;" 
                             src="<?= url($configMetas['login_img']) ?>">
@@ -145,7 +155,12 @@
 
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label><?= _('Logo') ?></label>
+                    <label for="logo">
+                        <?= _('Logo') ?>
+                        <span data-toggle="tooltip" data-placement="top" title="<?= _('Escolha a imagem que ficará como logo do sistema.') ?>">
+                            <i class="icofont-question-circle" style="font-size: 1.1rem;"></i>
+                        </span>
+                    </label>
                     <div class="d-flex justify-content-around">
                         <img id="logo_view" style="max-height: 100px; max-width: 100%;" 
                             src="<?= url($configMetas['logo']) ?>">
@@ -161,7 +176,12 @@
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label><?= _('Ícone (Tamanho Recomendado: 512 x 512)') ?></label>
+                    <label for="logo_icon">
+                        <?= _('Ícone (Tamanho Recomendado: 512 x 512)') ?>
+                        <span data-toggle="tooltip" data-placement="top" title="<?= _('Escolha a imagem que ficará como ícone do sistema.') ?>">
+                            <i class="icofont-question-circle" style="font-size: 1.1rem;"></i>
+                        </span>
+                    </label>
                     <div class="d-flex justify-content-around">
                         <img id="logo_icon_view" style="max-height: 100px; max-width: 100%;" 
                             src="<?= url($configMetas['logo_icon']) ?>">
