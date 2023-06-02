@@ -34,7 +34,7 @@ class AuthController extends Controller
             }
         }
 
-        $this->render('auth/login', $data + [
+        $this->render('auth/login', [
             'background' => $configMetas && $configMetas['login_img'] ? url($configMetas['login_img']) : null,
             'logo' => $configMetas && $configMetas['logo'] ? url($configMetas['logo']) : null,
             'shortcutIcon' => $configMetas && $configMetas['logo_icon'] ? url($configMetas['logo_icon']) : null,

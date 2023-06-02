@@ -88,7 +88,7 @@
             'mlLoad' => $router->route('mediaLibrary.load'),
             'mlDelete' => $router->route('mediaLibrary.delete'),
             'storeAt' => $storeAt,
-            'path' => ROOT
+            'path' => url()
         ]);
         
         echo $this->section("scripts");
@@ -99,7 +99,7 @@
             'mlLoad' => $router->route('mediaLibrary.load'),
             'mlDelete' => $router->route('mediaLibrary.delete'),
             'storeAt' => $storeAt,
-            'path' => ROOT
+            'path' => url()
         ]);
 
         if($session->getAuth()) {

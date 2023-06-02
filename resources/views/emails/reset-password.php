@@ -5,7 +5,7 @@
                 src="<?= $logo ?>" height="60px">
         </th>
         <th style="text-align: center;">
-            <h1 style="color: rgb(255, 255, 255); text-align: center;"><?= SITE ?></h1>
+            <h1 style="color: rgb(255, 255, 255); text-align: center;"><?= $appData['app_name'] ?></h1>
         </th>
     </thead>
 </table>
@@ -13,7 +13,7 @@
 <div style="margin-top: 20px; padding-bottom: 20px;">
     <h2><?= _('Redefinir Senha') ?></h2>
     <p><?= sprintf(_('Recebemos uma tentativa de recuperação de senha do site "%s" para este e-mail. 
-        Caso não tenha solicitado, desconsidere esse e-mail. Caso contrário, clique no link de verificação abaixo:'), SITE) ?></p>
+        Caso não tenha solicitado, desconsidere esse e-mail. Caso contrário, clique no link de verificação abaixo:'), $appData['app_name']) ?></p>
 </div>
 <div>
     <p style="text-align: center;">

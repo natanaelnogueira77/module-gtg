@@ -32,7 +32,7 @@ class ExcelGenerator
     {
         try {
             if(!$this->data) {
-                throw new AppException('Nenhum dado foi adicionado para a geração do excel!');
+                throw new AppException('No data was added for the excel generation!');
             }
 
             function cleanData(&$str) {

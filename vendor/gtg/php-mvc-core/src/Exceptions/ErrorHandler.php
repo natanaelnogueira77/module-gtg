@@ -2,6 +2,7 @@
 
 namespace GTG\MVC\Exceptions;
 
+use GTG\MVC\Application;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 
@@ -12,11 +13,12 @@ class ErrorHandler
     protected $msg = '';
     protected $file = '';
     protected $line = 0;
+    private static ?string $errorUrl = null;
     
     public function __construct(int $type, string $msg, ?string $file = null, ?int $line = null) 
     {
         $this->monolog = new Logger('web');
-        $this->monolog->pushHandler(new StreamHandler(__DIR__ . '/../../errors.log', Logger::ERROR));
+        $this->monolog->pushHandler(new StreamHandler(Application::$ROOT_DIR . '/errors.log', Logger::ERROR));
         $this->monolog->pushProcessor(function ($record) {
             $record['extra']['HTTP_HOST'] = $_SERVER['HTTP_HOST'];
             $record['extra']['REQUEST_URI'] = $_SERVER['REQUEST_URI'];
@@ -35,54 +37,15 @@ class ErrorHandler
     public static function control(int $type, string $msg, ?string $file = null, ?int $line = null): string 
     {
         $instance = new self($type, $msg, $file, $line);
-        switch($type) {
-            case E_ERROR:
-                $instance->errorControl();
-                return 'E_ERROR';
-            case E_WARNING: 
-                $result = $instance->warningControl();
-                return 'E_WARNING';
-            case E_PARSE: 
-                $instance->errorControl();
-                return 'E_PARSE';
-            case E_NOTICE:
-                $result = $instance->noticeControl();
-                return 'E_NOTICE';
-            case E_CORE_ERROR: 
-                $instance->errorControl();
-                return 'E_CORE_ERROR';
-            case E_CORE_WARNING:
-                $result = $instance->warningControl();
-                return 'E_CORE_WARNING';
-            case E_COMPILE_ERROR:
-                $instance->errorControl();
-                return 'E_COMPILE_ERROR';
-            case E_COMPILE_WARNING: 
-                $result = $instance->warningControl();
-                return 'E_COMPILE_WARNING';
-            case E_USER_ERROR:
-                $instance->errorControl();
-                return 'E_USER_ERROR';
-            case E_USER_WARNING:
-                $result = $instance->warningControl();
-                return 'E_USER_WARNING';
-            case E_USER_NOTICE: 
-                $result = $instance->noticeControl();
-                return 'E_USER_NOTICE';
-            case E_STRICT:
-                $instance->errorControl();
-                return 'E_STRICT';
-            case E_RECOVERABLE_ERROR:
-                $instance->errorControl();
-                return 'E_RECOVERABLE_ERROR';
-            case E_DEPRECATED:
-                $instance->errorControl();
-                return 'E_DEPRECATED';
-            case E_USER_DEPRECATED:
-                $instance->errorControl();
-                return 'E_USER_DEPRECATED';
+        if(in_array($type, [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR, E_USER_ERROR, E_USER_ERROR, E_STRICT, E_RECOVERABLE_ERROR, E_DEPRECATED, E_USER_DEPRECATED])) {
+            $instance->errorControl();
+        } elseif(in_array($type, [E_WARNING, E_CORE_WARNING, E_COMPILE_WARNING, E_USER_WARNING])) {
+            $instance->warningControl();
+        } elseif(in_array($type, [E_NOTICE, E_USER_NOTICE])) {
+            $instance->noticeControl();
         }
-        return '';
+
+        return $type;
     }
 
     public static function shutdown(): void 
@@ -93,25 +56,39 @@ class ErrorHandler
         }
     }
 
-    protected function errorControl(): bool  
+    protected function errorControl(): void  
     {
-        $content = "Arquivo: {$this->file}, Linha: {$this->line}, Mensagem: {$this->msg}";
+        $content = "File: {$this->file}, Line: {$this->line}, Message: {$this->msg}";
         $this->monolog->error($content, ['logger' => true]);
-        header('Location: ' . url('erro/500'));
-        exit();
+        $this->errorRedirect();
+        return;
     }
 
-    protected function warningControl(): bool 
+    protected function warningControl(): void 
     {
-        $content = "Arquivo: {$this->file}, Linha: {$this->line}, Mensagem: {$this->msg}";
+        $content = "File: {$this->file}, Line: {$this->line}, Message: {$this->msg}";
         $this->monolog->warning($content, ['logger' => true]);
-        return true;
+        return;
     }
     
-    protected function noticeControl(): bool 
+    protected function noticeControl(): void 
     {
-        $content = "Arquivo: {$this->file}, Linha: {$this->line}, Mensagem: {$this->msg}";
+        $content = "File: {$this->file}, Line: {$this->line}, Message: {$this->msg}";
         $this->monolog->notice($content, ['logger' => true]);
-        return true;
+        return;
+    }
+
+    private function errorRedirect(): void
+    {
+        if(self::$errorUrl) {
+            header('Location: ' . self::$errorUrl);
+            exit();
+        }
+        return;
+    }
+
+    public static function setErrorUrl(string $url): void 
+    {
+        self::$errorUrl = $url;
     }
 }

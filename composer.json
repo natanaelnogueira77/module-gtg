@@ -6,7 +6,7 @@
         "ext-gd": "*",
         "ext-exif": "*",
         "google/recaptcha": "^1.3",
-        "gtg/php-mvc-core": "v1.0.3"
+        "gtg/php-mvc-core": "dev-main"
     },
     "license": "MIT",
     "autoload": {

@@ -12,7 +12,7 @@ class MediaLibraryController extends Controller
         $callback = [];
 
         $count = 0;
-        $files = scandir($data['root']);
+        $files = scandir($this->getStorageFolderRoot($data['root']));
         $limit = $data['limit'];
         $page = $data['page'];
 
@@ -52,12 +52,12 @@ class MediaLibraryController extends Controller
     public function add(array $data): void
     {
         if(!isset($_FILES) || !isset($data['root'])) {
-            $this->setMessage('error', _('Nenhum arquivo foi escolhido!'))->APIResponse($callback, 422);
+            $this->setMessage('error', _('Nenhum arquivo foi escolhido!'))->APIResponse([], 422);
             return;
         }
 
         $file = $_FILES['file'];
-        $root = $data['root'];
+        $root = $this->getStorageFolderRoot($data['root']);
 
         $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
         $basename = slugify(pathinfo($file['name'], PATHINFO_FILENAME));
@@ -74,8 +74,7 @@ class MediaLibraryController extends Controller
         }
 
         if(!move_uploaded_file($file['tmp_name'], $root . '/' . $filename)) {
-            $this->setMessage('error', _('Lamentamos, mas parece que ocorreu um erro no upload do seu arquivo.'))
-                ->APIResponse($callback, 422);
+            $this->setMessage('error', _('Lamentamos, mas parece que ocorreu um erro no upload do seu arquivo.'))->APIResponse([], 422);
             return;
         }
 
@@ -84,14 +83,12 @@ class MediaLibraryController extends Controller
 
     public function delete(array $data): void 
     {
-        $callback = [];
-
         if(!isset($data['name'])) {
-            $this->setMessage('error', _('Nenhum nome de arquivo foi declarado!'))->APIResponse($callback, 422);
+            $this->setMessage('error', _('Nenhum nome de arquivo foi declarado!'))->APIResponse([], 422);
             return;
         }
         
-        $files = glob($data['root'] . '/' . $data["name"]);
+        $files = glob($this->getStorageFolderRoot($data['root']) . '/' . $data["name"]);
         if(count($files) > 0) {
             foreach($files as $file) {
                 if(is_file($file)) {
@@ -100,6 +97,11 @@ class MediaLibraryController extends Controller
             }
         }
 
-        $this->setMessage('success', _('O arquivo foi excluído com sucesso.'))->APIResponse($callback, 200);
+        $this->setMessage('success', _('O arquivo foi excluído com sucesso.'))->APIResponse([], 200);
+    }
+
+    private function getStorageFolderRoot(string $root): string 
+    {
+        return dirname(__FILE__, 4) . '/' . $root;
     }
 }

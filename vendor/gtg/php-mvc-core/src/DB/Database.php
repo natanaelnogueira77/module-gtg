@@ -4,6 +4,7 @@ namespace GTG\MVC\DB;
 
 use CoffeeCode\DataLayer\Connect;
 use GTG\MVC\Application;
+use GTG\MVC\DB\Schema\Table;
 use PDO;
 use PDOStatement;
 
@@ -12,14 +13,12 @@ class Database
     private array $dbInfo = [];
     private array $migrations;
     private array $seeders;
-    private array $factories;
 
     public function __construct(array $config) 
     {
         $this->dbInfo = $config['pdo'];
         $this->migrations = $config['migrations'];
         $this->seeders = $config['seeders'];
-        $this->factories = $config['factories'];
     }
 
     public function exec(string $sql): int 
@@ -124,7 +123,37 @@ class Database
             $this->log("Seeder {$seeder} applied!");
         }
 
-        $this->log('All seeders were reversed!');
+        $this->log('All seeders were applied!');
+    }
+
+    public function createTable(string $tableName, callable $callback): int 
+    {
+        $table = new Table($tableName);
+        $table->create();
+        $callback($table);
+        return $this->exec($table->build());
+    }
+
+    /* public function alterTable(string $tableName): int 
+    {
+        $table = new Table($tableName);
+        $table->alter();
+        $callback($table);
+        return $this->exec($table->build());
+    } */
+
+    public function dropTable(string $tableName): int 
+    {
+        $table = new Table($tableName);
+        $table->drop();
+        return $this->exec($table->build());
+    }
+
+    public function dropTableIfExists(string $tableName): int 
+    {
+        $table = new Table($tableName);
+        $table->dropIfExists();
+        return $this->exec($table->build());
     }
 
     public function prepare(string $sql): PDOStatement|false

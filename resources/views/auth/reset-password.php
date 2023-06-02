@@ -1,6 +1,6 @@
 <?php 
     $this->layout("themes/courses-master/_theme", [
-        'title' => sprintf(_('Redefinir Senha | %s'), SITE),
+        'title' => sprintf(_('Redefinir Senha | %s'), $appData['app_name']),
         'noHeader' => true,
         'noFooter' => true,
         'shortcutIcon' => $shortcutIcon,
@@ -24,14 +24,14 @@
                 <label for="email"><?= _('Email') ?></label>
                 <input type="email" id="email" name="email" placeholder="<?= _('Digite seu email') ?>" 
                     class="form-control <?= $forgotPasswordForm->hasError('email') ? 'is-invalid' : '' ?>" 
-                    value="<?= $email ?>" required>
+                    value="<?= $forgotPasswordForm->email ?>" required>
                 <div class="invalid-feedback">
                     <?= $forgotPasswordForm->hasError('email') ? $forgotPasswordForm->getFirstError('email') : '' ?>
                 </div>
             </div>
 
             <div class="form-input pt-30">
-                <input type="submit" class="g-recaptcha" data-sitekey="<?= RECAPTCHA['site_key'] ?>"
+                <input type="submit" class="g-recaptcha" data-sitekey="<?= $appData['recaptcha']['site_key'] ?>"
                     data-callback='onSubmit' data-action='submit' value="<?= _('Enviar') ?>">
             </div>
         </form>

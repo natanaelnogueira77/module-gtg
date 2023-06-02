@@ -1,6 +1,6 @@
 <?php 
     $this->layout("themes/courses-master/_theme", [
-        'title' => sprintf(_('Entrar | %s'), SITE),
+        'title' => sprintf(_('Entrar | %s'), $appData['app_name']),
         'noHeader' => true,
         'noFooter' => true,
         'shortcutIcon' => $shortcutIcon,
@@ -24,18 +24,22 @@
 
             <div class="form-input">
                 <input type="email" id="email" name="email" 
-                    placeholder="<?= _('Digite seu email') ?>" value="<?= $email ?>" required>
-                <div class="invalid-feedback"><?= $errors['email'] ?></div>
+                    placeholder="<?= _('Digite seu email') ?>" value="<?= $loginForm->email ?>" required>
+                <div class="invalid-feedback">
+                    <?= $loginForm->hasError('email') ? $loginForm->getFirstError('email') : '' ?>
+                </div>
             </div>
 
             <div class="form-input">
                 <input type="password" id="password" name="password" 
                     placeholder="<?= _('Digite sua senha') ?>" required>
-                <div class="invalid-feedback"><?= $errors['password'] ?></div>
+                <div class="invalid-feedback">
+                    <?= $loginForm->hasError('password') ? $loginForm->getFirstError('password') : '' ?>
+                </div>
             </div>
 
             <div class="form-input pt-10">
-                <input type="submit" class="g-recaptcha" data-sitekey="<?= RECAPTCHA['site_key'] ?>"
+                <input type="submit" class="g-recaptcha" data-sitekey="<?= $appData['recaptcha']['site_key'] ?>"
                     data-callback='onSubmit' data-action='submit' value="<?= _('Entrar') ?>">
             </div>
 

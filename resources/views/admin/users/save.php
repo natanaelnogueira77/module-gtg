@@ -1,6 +1,6 @@
 <?php 
     $this->layout("themes/architect-ui/_theme", [
-        'title' => sprintf($dbUser ? _('Editar Usuário | %s') : _('Criar Usuário | %s'), SITE)
+        'title' => sprintf($dbUser ? _('Editar Usuário | %s') : _('Criar Usuário | %s'), $appData['app_name'])
     ]);
 ?>
 

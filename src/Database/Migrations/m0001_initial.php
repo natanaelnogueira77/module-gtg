@@ -8,60 +8,53 @@ class m0001_initial extends Migration
 {
     public function up(): void
     {
-        $this->exec("
-            CREATE TABLE config (
-                id INT(1) AUTO_INCREMENT PRIMARY KEY,
-                meta VARCHAR(50) NOT NULL,
-                value TEXT NULL
-            );
-            
-            CREATE TABLE social_usuario (
-                id INT(1) AUTO_INCREMENT PRIMARY KEY,
-                usu_id INT(1) NOT NULL,
-                social_id VARCHAR(255),
-                email VARCHAR(150),
-                social VARCHAR(100),
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-            );
-            
-            CREATE TABLE usuario (
-                id INT(1) AUTO_INCREMENT PRIMARY KEY,
-                utip_id INT(1) NOT NULL,
-                name VARCHAR(50) NOT NULL,
-                email VARCHAR(100) NOT NULL,
-                password VARCHAR(100) NOT NULL,
-                token VARCHAR(100) NOT NULL,
-                slug VARCHAR(100) NOT NULL,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-            );
-            
-            CREATE TABLE usuario_meta (
-                id INT(1) AUTO_INCREMENT PRIMARY KEY,
-                usu_id INT(1) NOT NULL,
-                meta VARCHAR(45) NOT NULL,
-                value TEXT NULL
-            );
-            
-            CREATE TABLE usuario_tipo (
-                id INT(1) AUTO_INCREMENT PRIMARY KEY,
-                name_sing VARCHAR(45) NOT NULL,
-                name_plur VARCHAR(45) NOT NULL,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP 
-            );
-        ");
+        $this->db->createTable('config', function ($table) {
+            $table->id();
+            $table->string('meta', 50);
+            $table->text('value')->nullable();
+        });
+
+        $this->db->createTable('social_usuario', function ($table) {
+            $table->id();
+            $table->integer('usu_id');
+            $table->string('social_id', 255)->nullable();
+            $table->string('email', 100)->nullable();
+            $table->string('social', 100)->nullable();
+            $table->timestamps();
+        });
+
+        $this->db->createTable('usuario', function ($table) {
+            $table->id();
+            $table->integer('utip_id');
+            $table->string('name', 50);
+            $table->string('email', 100);
+            $table->string('password', 100);
+            $table->string('token', 100);
+            $table->string('slug', 100);
+            $table->timestamps();
+        });
+
+        $this->db->createTable('usuario_meta', function ($table) {
+            $table->id();
+            $table->integer('usu_id');
+            $table->string('meta', 50);
+            $table->text('value')->nullable();
+        });
+
+        $this->db->createTable('usuario_tipo', function ($table) {
+            $table->id();
+            $table->string('name_sing', 45);
+            $table->string('name_plur', 45);
+            $table->timestamps();
+        });
     }
 
     public function down(): void
     {
-        $this->exec("
-            DROP TABLE IF EXISTS config; 
-            DROP TABLE IF EXISTS social_usuario; 
-            DROP TABLE IF EXISTS usuario; 
-            DROP TABLE IF EXISTS usuario_meta; 
-            DROP TABLE IF EXISTS usuario_tipo;
-        ");
+        $this->db->dropTableIfExists('config');
+        $this->db->dropTableIfExists('social_usuario');
+        $this->db->dropTableIfExists('usuario');
+        $this->db->dropTableIfExists('usuario_meta');
+        $this->db->dropTableIfExists('usuario_tipo');
     }
 }

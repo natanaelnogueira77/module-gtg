@@ -88,7 +88,7 @@ class TemplateController extends Controller
             'left' => [
                 'color' => $configMetas['style'] ? $bgColors['left'][$configMetas['style']] : null,
                 'menu' => $leftMenu,
-                'active' => ROOT . filter_input(INPUT_GET, 'route', FILTER_DEFAULT)
+                'active' => url() . filter_input(INPUT_GET, 'route', FILTER_DEFAULT)
             ],
             'header' => [
                 'left' => true,
@@ -117,7 +117,7 @@ class TemplateController extends Controller
                     'avatar_subtitle' => $user->userType->name_sing
                 ]
             ],
-            'footer' => ['rightText' => sprintf(_('Painel %s'), 'v' . APP_VERSION)]
+            'footer' => ['rightText' => sprintf(_('Painel %s'), $this->appData['app_version'])]
         ]);
     }
 }

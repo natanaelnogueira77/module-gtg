@@ -20,22 +20,22 @@ class User extends UserModel
     public $userMetas = [];
     public $userType;
     
-    public function tableName(): string 
+    public static function tableName(): string 
     {
         return 'usuario';
     }
 
-    public function primaryKey(): string 
+    public static function primaryKey(): string 
     {
         return 'id';
     }
 
-    public function attributes(): array 
+    public static function attributes(): array 
     {
         return ['utip_id', 'name', 'email', 'password', 'token', 'slug'];
     }
 
-    public function metaTableData(): ?array 
+    public static function metaTableData(): ?array 
     {
         return [
             'class' => UserMeta::class,
@@ -90,19 +90,11 @@ class User extends UserModel
             return false;
         }
 
-        $email = $this->id 
-            ? (new self())->find('email = :email AND id != :id', "email={$this->email}&id={$this->id}")->count()
-            : (new self())->find('email = :email', "email={$this->email}")->count();
-
-        if($email) {
+        if((new self())->get(['email' => $this->email] + (isset($this->id) ? ['!=' => ['id' => $this->id]] : []))->count()) {
             $this->addError('email', _('O email informado já está em uso! Tente outro.'));
         }
-
-        $slug = $this->id 
-            ? (new self())->find('slug = :slug AND id != :id', "slug={$this->slug}&id={$this->id}")->count()
-            : (new self())->find('slug = :slug', "slug={$this->slug}")->count();
         
-        if($slug) {
+        if((new self())->get(['slug' => $this->slug] + (isset($this->id) ? ['!=' => ['id' => $this->id]] : []))->count()) {
             $this->addError('slug', _('O apelido informado já está em uso! Tente outro.'));
         }
 

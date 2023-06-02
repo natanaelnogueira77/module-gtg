@@ -1,6 +1,6 @@
 <?php 
     $this->layout("themes/architect-ui/_theme", [
-        'title' => sprintf(_('Painel do Usuário | %s'), SITE)
+        'title' => sprintf(_('Painel do Usuário | %s'), $appData['app_name'])
     ]);
 ?>
 

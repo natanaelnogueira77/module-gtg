@@ -56,7 +56,7 @@ class PDFRender
             $this->dompdf = new Dompdf($this->options);
 
             if(!$this->data->html) {
-                throw new Exception(_('O HTML é necessário!'));
+                throw new Exception('The HTML is needed!');
             }
 
             if(!$this->data->paperSize) {

@@ -1,6 +1,6 @@
 <?php 
     $this->layout("themes/architect-ui/_theme", [
-        'title' => sprintf(_('Administrador | %s'), SITE)
+        'title' => sprintf(_('Administrador | %s'), $appData['app_name'])
     ]);
 ?>
 
@@ -24,7 +24,7 @@
             </div>
 
             <div class="card-body">
-                <div class="card-text"><?= sprintf(_('Versão: <strong>%s</strong>'), APP_VERSION) ?></div>
+                <div class="card-text"><?= sprintf(_('Versão: <strong>%s</strong>'), $appData['app_version']) ?></div>
             </div>
         </div>
     </div>
@@ -145,8 +145,12 @@
 
                     <div class="d-block text-center mt-2">
                         <input type="hidden" id="login_img" name="login_img" value="<?= $configMetas['login_img'] ?>">
-                        <button type="button" class="btn btn-outline-primary btn-md btn-block" id="login_img_upload">
+                        <button type="button" class="btn btn-outline-primary btn-md" id="login_img_upload">
                             <i class="icofont-upload-alt"></i> <?= _('Escolher Imagem') ?>
+                        </button>
+                        
+                        <button type="button" class="btn btn-outline-danger btn-md" id="login_img_remove">
+                            <i class="icofont-close"></i> <?= _('Remover Imagem') ?>
                         </button>
                     </div>
                     <small class="text-danger" data-error="login_img"></small>
@@ -168,8 +172,12 @@
 
                     <div class="d-block text-center mt-2">
                         <input type="hidden" id="logo" name="logo" value="<?= $configMetas['logo'] ?>">
-                        <button type="button" class="btn btn-outline-primary btn-md btn-block" id="logo_upload">
+                        <button type="button" class="btn btn-outline-primary btn-md" id="logo_upload">
                             <i class="icofont-upload-alt"></i> <?= _('Escolher Imagem') ?>
+                        </button>
+
+                        <button type="button" class="btn btn-outline-danger btn-md" id="logo_remove">
+                            <i class="icofont-close"></i> <?= _('Remover Imagem') ?>
                         </button>
                     </div>
                     <small class="text-danger" data-error="logo"></small>
@@ -189,8 +197,12 @@
 
                     <div class="d-block text-center mt-2">
                         <input type="hidden" id="logo_icon" name="logo_icon" value="<?= $configMetas['logo_icon'] ?>">
-                        <button type="button" class="btn btn-outline-primary btn-md btn-block" id="logo_icon_upload">
+                        <button type="button" class="btn btn-outline-primary btn-md" id="logo_icon_upload">
                             <i class="icofont-upload-alt"></i> <?= _('Escolher Imagem') ?>
+                        </button>
+                        
+                        <button type="button" class="btn btn-outline-danger btn-md" id="logo_icon_remove">
+                            <i class="icofont-close"></i> <?= _('Remover Imagem') ?>
                         </button>
                     </div>
                     <small class="text-danger" data-error="logo_icon"></small>
@@ -240,6 +252,13 @@
             }).open();
         });
 
+        $("#logo_remove").each(function () {
+            $(this).click(function () {
+                $(this).parent().children("#logo").val('');
+                $(this).parent().parent().find("#logo_view").attr("src", '');
+            });
+        });
+
         $("#logo_icon_upload").click(function () {
             mediaLibrary.setFileTypes(['jpg', 'jpeg', 'png']).setSuccess(function (path) {
                 $("#logo_icon").val(path);
@@ -247,11 +266,25 @@
             }).open();
         });
 
+        $("#logo_icon_remove").each(function () {
+            $(this).click(function () {
+                $(this).parent().children("#logo_icon").val('');
+                $(this).parent().parent().find("#logo_icon_view").attr("src", '');
+            });
+        });
+
         $("#login_img_upload").click(function () {
             mediaLibrary.setFileTypes(['jpg', 'jpeg', 'png']).setSuccess(function (path) {
                 $("#login_img").val(path);
                 $("img#login_img_view").attr("src", `${mediaLibrary.path}/${path}`);
             }).open();
+        });
+
+        $("#login_img_remove").each(function () {
+            $(this).click(function () {
+                $(this).parent().children("#login_img").val('');
+                $(this).parent().parent().find("#login_img_view").attr("src", '');
+            });
         });
 
         app.form($("#system"), function (response) { });

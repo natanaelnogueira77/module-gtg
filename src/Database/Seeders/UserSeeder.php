@@ -3,14 +3,21 @@
 namespace Src\Database\Seeders;
 
 use GTG\MVC\DB\Seeder;
+use Src\Models\User;
 
 class UserSeeder extends Seeder 
 {
     public function run(): void 
     {
-        $this->exec('
-            INSERT INTO usuario (id, utip_id, name, password, email, slug, token) VALUES 
-            (1, 1, "Admin", "$2y$10$ySA6iwTKmK.yfnNTvy3jWuG7jWUSaX.Neu93m5OdNJJtgndviO/ti", "admin@projectexample.com", "adm", "");
-        ');
+        User::insertMany([
+            [
+                'utip_id' => User::USER_TYPE_ADMIN,
+                'name' => 'Admin',
+                'password' => 'starter',
+                'email' => 'admin@projectexample.com',
+                'slug' => 'adm',
+                'token' => md5('admin@projectexample.com')
+            ]
+        ]);
     }
 }

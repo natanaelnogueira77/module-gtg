@@ -14,8 +14,6 @@ abstract class DBModel extends DataLayer
     public const RULE_MIN = 'min';
     public const RULE_REQUIRED = 'required';
 
-    protected static $required = [];
-    protected static $hasTimestamps = false;
     public array $errors = [];
     
     protected $values = [];
@@ -23,19 +21,13 @@ abstract class DBModel extends DataLayer
 
     public function __construct() 
     {
-        parent::__construct(
-            $this->tableName(), 
-            static::$required, 
-            $this->primaryKey(), 
-            static::$hasTimestamps, 
-            Application::$DB_INFO
-        );
+        parent::__construct(static::tableName(), [], static::primaryKey(), false, Application::$DB_INFO);
     }
 
     public function __get($key) 
     {
         parent::__get($key);
-        return $this->values[$key];
+        return isset($this->values[$key]) ? $this->values[$key] : null;
     }
 
     public function __set($key, $value) 
@@ -44,17 +36,18 @@ abstract class DBModel extends DataLayer
         $this->values[$key] = $value;
     }
 
-    abstract public function tableName(): string;
+    abstract public static function tableName(): string;
 
-    abstract public function attributes(): array;
+    abstract public static function attributes(): array;
 
-    abstract public function primaryKey(): string;
+    abstract public static function primaryKey(): string;
 
     abstract public function rules(): array;
 
     public function getData(): array 
     {
-        foreach($this->attributes() as $attr) {
+        $this->values[static::primaryKey()] = $this->data->{static::primaryKey()};
+        foreach(static::attributes() as $attr) {
             $this->values[$attr] = $this->data->$attr;
         }
         return $this->values;
@@ -63,7 +56,7 @@ abstract class DBModel extends DataLayer
     public function loadData(array $data): static 
     {
         foreach($data as $attr => $value) {
-            if(in_array($attr, $this->attributes())) {
+            if(in_array($attr, static::attributes())) {
                 $this->{$attr} = $value;
                 $this->values[$attr] = $value;
             }
@@ -102,7 +95,7 @@ abstract class DBModel extends DataLayer
 
     public function getByIds(array $ids, string $columns = '*'): DataLayer 
     {
-        return $this->find($this->primaryKey() . ' IN (' . implode(',', $ids) . ')', null, $columns);
+        return $this->find(static::primaryKey() . ' IN (' . implode(',', $ids) . ')', null, $columns);
     }
     
     public function join(string $entity, array $filters = []): static 
@@ -176,12 +169,12 @@ abstract class DBModel extends DataLayer
         }
 
         if ($terms) {
-            $this->statement = "SELECT {$columns} FROM {$this->tableName()} {$this->joins} WHERE {$terms}";
+            $this->statement = "SELECT {$columns} FROM " . static::tableName() . " {$this->joins} WHERE {$terms}";
             parse_str($params ? $params : '', $this->params);
             return $this;
         }
 
-        $this->statement = "SELECT {$columns} FROM " . $this->tableName() . " {$this->joins}";
+        $this->statement = "SELECT {$columns} FROM " . static::tableName() . " {$this->joins}";
         return $this;
     }
 
@@ -229,7 +222,7 @@ abstract class DBModel extends DataLayer
         return $this;
     }
 
-    public function metaTableData(): ?array 
+    public static function metaTableData(): ?array 
     {
         return null;
     }
@@ -242,7 +235,7 @@ abstract class DBModel extends DataLayer
 
         $this->encode();
         
-        foreach($this->attributes() as $attr) {
+        foreach(static::attributes() as $attr) {
             if(!is_null($this->$attr)) {
                 $this->$attr = html_entity_decode($this->$attr);
             } else {
@@ -256,97 +249,117 @@ abstract class DBModel extends DataLayer
         }
 
         $this->decode();
-        $this->{$this->primaryKey()} = $this->data->{$this->primaryKey()};
+        $this->{static::primaryKey()} = $this->data->{static::primaryKey()};
         return $result;
     }
 
-    /* public static function insertMany(array $objects): bool 
+    public static function insertMany(array $objects): array|false 
     {
         if(count($objects) === 0) {
             return false;
         }
 
         $vars = [];
-        $sql = 'INSERT INTO ' . $this->tableName() . ' (' . implode(',', $this->attributes()) . ') VALUES ';
+        $sql = 'INSERT INTO ' . static::tableName() . ' (' . implode(',', static::attributes()) . ') VALUES ';
 
-        $errors = false;
-        foreach($objects as $object) {
-            if($object->validate()) {
-                $object->encode();
+        $hasErrors = false;
+        foreach($objects as $index => $object) {
+            if(is_array($objects[$index])) {
+                $objects[$index] = (new static())->loadData($objects[$index]);
+            }
+
+            if($objects[$index]->validate()) {
+                $objects[$index]->encode();
                 $sql .= '(';
-                foreach($this->attributes() as $col) {
-                    $vars[] = $object->$col;
+                foreach(static::attributes() as $attr) {
+                    $vars[] = $objects[$index]->$attr;
                     $sql .= '?,';
                 }
-                $object->decode();
-                
+                $objects[$index]->decode();
+
                 $sql[strlen($sql) - 1] = ' ';
                 $sql .= '),';
             } else {
-                $errors = true;
+                $hasErrors = true;
             }
         }
 
-        if($errors) {
-            return false;
+        if($hasErrors) {
+            return $objects;
         }
 
         $sql[strlen($sql) - 1] = ' ';
         $stmt = Application::$app->db->prepare($sql);
-        return $stmt->execute($vars);
-    } */
+        if(!$stmt->execute($vars)) {
+            return false;
+        }
 
-    public function saveMany(array $objects): bool 
+        return $objects;
+    }
+
+    public static function saveMany(array $objects): array|false 
     {
         if(count($objects) === 0) {
             return false;
         }
 
         $vars = [];
-        $sql = 'INSERT INTO ' . $this->tableName() . ' (' . $this->primaryKey() . ',' 
-            . implode(',', $this->attributes()) . ') VALUES ';
+        $sql = 'INSERT INTO ' . static::tableName() . ' (' . static::primaryKey() . ',' 
+            . implode(',', static::attributes()) . ') VALUES ';
 
-        $errors = false;
-        foreach($objects as $object) {
-            if($object->validate()) {
-                $object->encode();
-                $sql .= '(' . static::getFormatedValue($object->{$this->primaryKey()}) . ',';
-                foreach($this->attributes() as $attr) {
-                    $vars[] = $object->$attr;
+        $hasErrors = false;
+        foreach($objects as $index => $object) {
+            if(is_array($objects[$index])) {
+                $objects[$index] = (new static())->loadData($objects[$index]);
+            }
+
+            if($objects[$index]->validate()) {
+                $objects[$index]->encode();
+                $sql .= '(' . static::getFormatedValue($objects[$index]->{static::primaryKey()} ?? null) . ',';
+                foreach(static::attributes() as $attr) {
+                    $vars[] = $objects[$index]->$attr;
                     $sql .= '?,';
                 }
-                $object->decode();
+                $objects[$index]->decode();
 
                 $sql[strlen($sql) - 1] = ' ';
                 $sql .= '),';
             } else {
-                $errors = true;
+                $hasErrors = true;
             }
         }
 
-        if($errors) {
-            return false;
+        if($hasErrors) {
+            return $objects;
         }
 
         $sql[strlen($sql) - 1] = ' ';
         $sql .= ' ON DUPLICATE KEY UPDATE ';
-        $sql .= $this->primaryKey() . ' = VALUES (' . $this->primaryKey() . '),';
+        $sql .= static::primaryKey() . ' = VALUES (' . static::primaryKey() . '),';    
 
-        foreach($this->attributes() as $attr) {
+        foreach(static::attributes() as $attr) {
             $sql .= " ${attr} = VALUES (${attr}),";
         }
 
         $sql[strlen($sql) - 1] = ' ';
         $stmt = Application::$app->db->prepare($sql);
-        return $stmt->execute($vars);
+        if(!$stmt->execute($vars)) {
+            return false;
+        }
+
+        return $objects;
     }
 
-    public static function deleteMany(array $objects): bool 
+    public static function deleteByIds(array $ids): bool 
     {
-        $sql = "DELETE FROM {$this->tableName()} WHERE {$this->primaryKey()} IN (";
+        if(count($ids) === 0) {
+            return false;
+        }
 
-        foreach($objects as $object) {
-            $sql .= static::getFormatedValue($object->{$this->primaryKey()}) . ',';
+        $sql = 'DELETE FROM ' . static::tableName() . ' WHERE ' . static::primaryKey() . ' IN (';
+
+        foreach($ids as $id) {
+            $sql .= static::getFormatedValue($id) . ',';
         }
         
         $sql[strlen($sql) - 1] = ')';
@@ -357,7 +370,7 @@ abstract class DBModel extends DataLayer
 
     public static function deleteAll(): bool 
     {
-        return Application::$app->db->exec("DELETE FROM {$this->tableName()}");
+        return Application::$app->db->exec('DELETE FROM ' . static::tableName());
     }
 
     private static function getSearch(string $terms = '', array $attributes = []): string 
@@ -419,7 +432,7 @@ abstract class DBModel extends DataLayer
                     if($value['term'] && $value['columns']) {
                         $terms .= static::getSearch($value['term'], $value['columns']) . ' AND ';
                     }
-                } elseif(in_array($column, ['>=', '<=', '<', '>'])) {
+                } elseif(in_array($column, ['>=', '<=', '<', '>', '!='])) {
                     if($value) {
                         foreach($value as $col => $val) {
                             $terms .= "{$col} {$column} " . static::getFormatedValue($val) . ' AND ';
@@ -597,14 +610,14 @@ abstract class DBModel extends DataLayer
 
     public function getMeta(string $meta): mixed
     {
-        $metaInfo = $this->metaTableData();
+        $metaInfo = static::metaTableData();
         if(!$metaInfo || !$metaInfo['class'] || !$metaInfo['meta'] || !$metaInfo['value'] || !$meta) {
             return null;
         }
 
         $filters = [];
         if($metaInfo['entity']) {
-            $filters[$metaInfo['entity']] = $this->{$this->primaryKey()};
+            $filters[$metaInfo['entity']] = $this->{static::primaryKey()};
         }
         $filters[$metaInfo['meta']] = $meta;
 
@@ -614,14 +627,14 @@ abstract class DBModel extends DataLayer
 
     public function getGroupedMetas(array $metas): ?array
     {
-        $metaInfo = $this->metaTableData();
+        $metaInfo = static::metaTableData();
         if(!$metaInfo || !$metaInfo['class'] || !$metaInfo['meta'] || !$metaInfo['value'] || !$metas) {
             return null;
         }
 
         $filters = [];
         if($metaInfo['entity']) {
-            $filters[$metaInfo['entity']] = $this->{$this->primaryKey()};
+            $filters[$metaInfo['entity']] = $this->{static::primaryKey()};
         }
         $filters['in'] = [$metaInfo['meta'] => $metas];
         
@@ -639,14 +652,14 @@ abstract class DBModel extends DataLayer
 
     public function saveMeta(string $meta, mixed $value): bool 
     {
-        $metaInfo = $this->metaTableData();
+        $metaInfo = static::metaTableData();
         if(!$metaInfo || !$metaInfo['class'] || !$metaInfo['meta'] || !$metaInfo['value'] || !$meta) {
             return false;
         }
 
         $filters = [];
         if($metaInfo['entity']) {
-            $filters[$metaInfo['entity']] = $this->{$this->primaryKey()};
+            $filters[$metaInfo['entity']] = $this->{static::primaryKey()};
         }
         $filters[$metaInfo['meta']] = $meta;
 
@@ -654,7 +667,7 @@ abstract class DBModel extends DataLayer
         if(!$object) {
             $object = (new $metaInfo['class']());
             if($metaInfo['entity']) {
-                $object->{$metaInfo['entity']} = $this->{$this->primaryKey()};
+                $object->{$metaInfo['entity']} = $this->{static::primaryKey()};
             }
             $object->{$metaInfo['meta']} = $meta;
         }
@@ -663,16 +676,16 @@ abstract class DBModel extends DataLayer
         return $object->save();
     }
 
-    public function saveManyMetas(array $data): bool 
+    public function saveManyMetas(array $data): array|false 
     {
-        $metaInfo = $this->metaTableData();
+        $metaInfo = static::metaTableData();
         if(!$metaInfo || !$metaInfo['class'] || !$metaInfo['meta'] || !$metaInfo['value'] || !$data) {
             return false;
         }
 
         $filters = [];
         if($metaInfo['entity']) {
-            $filters[$metaInfo['entity']] = $this->{$this->primaryKey()};
+            $filters[$metaInfo['entity']] = $this->{static::primaryKey()};
         }
         $filters['in'] = [$metaInfo['meta'] => array_keys($data)];
 
@@ -686,7 +699,7 @@ abstract class DBModel extends DataLayer
                 $objects[$meta]->{$metaInfo['value']} = $value;
             } else {
                 $objects[$meta] = (new $metaInfo['class']())->setValues([
-                    $metaInfo['entity'] => $this->{$this->primaryKey()},
+                    $metaInfo['entity'] => $this->{static::primaryKey()},
                     $metaInfo['meta'] => $meta,
                     $metaInfo['value'] => $value
                 ]);
@@ -771,6 +784,30 @@ abstract class DBModel extends DataLayer
         foreach($this->errors as $attr => $messages) {
             $errors[$attr] = $messages[0];
         }
+        return $errors;
+    }
+
+    public static function getErrorsFromMany(array $objects, bool $isMeta = false): ?array 
+    {
+        $errors = null;
+        if($isMeta) {
+            foreach($objects as $object) {
+                if($object->hasErrors()) {
+                    foreach($object->getFirstErrors() as $attr => $message) {
+                        $errors[$attr] = $message;
+                    }
+                }
+            }
+        } else {
+            foreach($objects as $index => $object) {
+                if($object->hasErrors()) {
+                    foreach($object->getFirstErrors() as $attr => $message) {
+                        $errors["{$attr}_{$index}"] = $message;
+                    }
+                }
+            }
+        }
+
         return $errors;
     }
 

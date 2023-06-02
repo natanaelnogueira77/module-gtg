@@ -1,6 +1,6 @@
 <?php 
     $this->layout("themes/architect-ui/_theme", [
-        'title' => sprintf(_('Editar Conta | %s'), SITE)
+        'title' => sprintf(_('Editar Conta | %s'), $appData['app_name'])
     ]);
 ?>
 

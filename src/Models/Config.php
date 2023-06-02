@@ -6,22 +6,22 @@ use GTG\MVC\DB\DBModel;
 
 class Config extends DBModel 
 {
-    public function tableName(): string 
+    public static function tableName(): string 
     {
         return 'config';
     }
 
-    public function primaryKey(): string 
+    public static function primaryKey(): string 
     {
         return 'id';
     }
 
-    public function attributes(): array 
+    public static function attributes(): array 
     {
         return ['meta', 'value'];
     }
 
-    public function metaTableData(): ?array 
+    public static function metaTableData(): ?array 
     {
         return [
             'class' => self::class,
@@ -36,9 +36,6 @@ class Config extends DBModel
             'meta' => [
                 [self::RULE_REQUIRED, 'message' => _('O metadado é obrigatório!')],
                 [self::RULE_MAX, 'max' => 50, 'message' => sprintf(_('O metadado deve conter no máximo %s caractéres!'), 50)]
-            ],
-            'value' => [
-                [self::RULE_REQUIRED, 'message' => _('O valor é obrigatório!')]
             ]
         ];
     }

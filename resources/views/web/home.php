@@ -1,6 +1,6 @@
 <?php 
     $this->layout("themes/courses-master/_theme", [
-        'title' => sprintf(_('Principal | %s'), SITE)
+        'title' => sprintf(_('Principal | %s'), $appData['app_name'])
     ]);
 ?>
 

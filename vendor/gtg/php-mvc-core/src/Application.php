@@ -17,6 +17,8 @@ class Application
     public static ?array $DB_INFO;
     public static ?array $SMTP_INFO;
     public static Application $app;
+    public ?array $appData;
+    public ?array $errorHandler;
     public ?Auth $auth;
     public Controller $controller;
     public ?Database $db;
@@ -29,9 +31,11 @@ class Application
     public function __construct(string $rootPath, array $config) 
     {
         self::$ROOT_DIR = $rootPath;
-        self::$DB_INFO = $config['db']['pdo'];
-        self::$SMTP_INFO = $config['smtp'];
+        self::$DB_INFO = isset($config['db']['pdo']) ? $config['db']['pdo'] : null;
+        self::$SMTP_INFO = isset($config['smtp']) ? $config['smtp'] : null;
         self::$app = $this;
+        $this->appData = $config['data'] ?? null;
+        $this->errorHandler = $config['errorHandler'] ?? null;
         $this->request = new Request();
         $this->response = new Response();
         $this->session = isset($config['session']) ? new Session($config['session']) : null;
@@ -46,7 +50,9 @@ class Application
         $this->router->dispatch();
         if($this->router->error()) {
             $this->response->setStatusCode($this->router->error());
-            $this->router->redirect("/erro/{$this->router->error()}");
+            if($this->errorHandler && $this->errorHandler['url']) {
+                $this->router->redirect(sprintf($this->errorHandler['url'], $this->router->error()));
+            }
         }
     }
 

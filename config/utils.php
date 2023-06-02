@@ -7,10 +7,10 @@ function url(?string $uri = null): string
             return $uri;
         }
 
-        return ROOT . "/{$uri}";
+        return ENV['app_url'] . "/{$uri}";
     }
 
-    return ROOT;
+    return ENV['app_url'];
 }
 
 function generatePassword(

@@ -9,17 +9,17 @@ class UserType extends DBModel
 {
     public $users = [];
 
-    public function tableName(): string 
+    public static function tableName(): string 
     {
         return 'usuario_tipo';
     }
 
-    public function primaryKey(): string 
+    public static function primaryKey(): string 
     {
         return 'id';
     }
 
-    public function attributes(): array 
+    public static function attributes(): array 
     {
         return ['name_sing', 'name_plur'];
     }

@@ -5,25 +5,12 @@ if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'on' && $_SERVER['HTTP_HOST'
     exit();
 }
 
+if(file_exists($maintenance = __DIR__ . '/../maintenance.php')) {
+    require $maintenance;
+}
+
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../config/config.php';
-
-$app = new \GTG\MVC\Application(dirname(__DIR__), [
-    'projectUrl' => APP_URL,
-    'session' => SESSION_INFO,
-    'view' => ['path' => __DIR__ . '/../resources/views'],
-    'db' => DB_INFO,
-    'smtp' => SMTP_INFO
-]);
-
-setlocale(LC_ALL, $app->session->getLanguage()[1]);
-putenv('LANGUAGE=' . $app->session->getLanguage()[1]);
-
-bindtextdomain('messages', dirname(__FILE__, 2) . '/lang');
-bind_textdomain_codeset('messages', 'UTF-8');
-textdomain('messages');
-
-date_default_timezone_set('America/Recife');
+$app = require_once __DIR__ . '/../config/app.php';
 
 $app->router->namespace('Src\App\Controllers\Web');
 

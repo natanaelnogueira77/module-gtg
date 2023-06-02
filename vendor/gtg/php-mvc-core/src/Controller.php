@@ -14,6 +14,7 @@ use GTG\MVC\View;
 
 class Controller 
 {
+    protected ?array $appData;
     protected Request $request;
     protected Response $response;
     protected ?Router $router;
@@ -24,6 +25,7 @@ class Controller
 
     public function __construct() 
     {
+        $this->appData = Application::$app->appData;
         $this->request = Application::$app->request;
         $this->response = Application::$app->response;
         $this->router = Application::$app->router;
@@ -34,6 +36,7 @@ class Controller
     protected function render(string $view, array $params = []): void  
     {
         $this->view->addData([
+            'appData' => $this->appData,
             'router' => $this->router,
             'session' => $this->session
         ]);
@@ -43,6 +46,7 @@ class Controller
     protected function getView(string $view, array $params = []): string  
     {
         $this->view->addData([
+            'appData' => $this->appData,
             'router' => $this->router,
             'session' => $this->session
         ]);

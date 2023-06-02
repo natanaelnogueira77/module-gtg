@@ -5,7 +5,7 @@
                 src="<?= $logo ?>" height="60px">
         </th>
         <th style="text-align: center;">
-            <h1 style="color: rgb(255, 255, 255); text-align: center;"><?= SITE ?></h1>
+            <h1 style="color: rgb(255, 255, 255); text-align: center;"><?= $appData['app_name'] ?></h1>
         </th>
     </thead>
 </table>

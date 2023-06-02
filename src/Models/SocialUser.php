@@ -9,41 +9,23 @@ class SocialUser extends DBModel
 {
     public $user;
 
-    public function tableName(): string 
+    public static function tableName(): string 
     {
         return 'social_usuario';
     }
 
-    public function primaryKey(): string 
+    public static function primaryKey(): string 
     {
         return 'id';
     }
 
-    public function attributes(): array 
+    public static function attributes(): array 
     {
         return ['usu_id', 'social_id', 'email', 'social'];
     }
 
     public function rules(): array 
     {
-        if($this->social && !in_array($this->social, self::getSocialNames())) {
-            $this->addError('social', _('O nome da rede social é inválido!'));
-        }
-
-        if($this->email) {
-            $email = $this->id 
-                ? (new self())
-                    ->find('email = :email AND id != :id', "email={$this->email}&id={$this->id}")
-                    ->count()
-                : (new self())
-                    ->find('email = :email', "email={$this->email}")
-                    ->count();
-
-            if($email) {
-                $this->addError('email', _('O email informado já está em uso! Tente outro.'));
-            }
-        }
-
         return [
             'usu_id' => [
                 [self::RULE_REQUIRED, 'message' => _('O usuário é obrigatório!')]
@@ -60,6 +42,36 @@ class SocialUser extends DBModel
                 [self::RULE_MAX, 'max' => 100, 'message' => sprintf(_('O email precisa ter no máximo %s caractéres!'), 100)]
             ]
         ];
+    }
+
+    public function validate(): bool 
+    {
+        if(!parent::validate()) {
+            return false;
+        }
+
+        if($this->social && !in_array($this->social, self::getSocialNames())) {
+            $this->addError('social', _('O nome da rede social é inválido!'));
+        }
+
+        if($this->email) {
+            if((new self())->get(['email' => $this->email] + (isset($this->id) ? ['!=' => ['id' => $this->id]] : []))->count()) {
+                $this->addError('email', _('O email informado já está em uso! Tente outro.'));
+            }
+            $email = $this->id 
+                ? (new self())
+                    ->find('email = :email AND id != :id', "email={$this->email}&id={$this->id}")
+                    ->count()
+                : (new self())
+                    ->find('email = :email', "email={$this->email}")
+                    ->count();
+
+            if($email) {
+                $this->addError('email', _('O email informado já está em uso! Tente outro.'));
+            }
+        }
+
+        return !$this->hasErrors();
     }
 
     public function user(string $columns = '*'): ?User

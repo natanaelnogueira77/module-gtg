@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-05-25 08:54-0300\n"
-"PO-Revision-Date: 2023-05-25 09:01-0300\n"
+"POT-Creation-Date: 2023-06-02 00:29-0300\n"
+"PO-Revision-Date: 2023-06-02 00:30-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -94,32 +94,37 @@ msgstr "Background Image (Login)"
 msgid "Escolha a imagem que ficará de fundo na página de login."
 msgstr "Choose the image that will be the background on the login page."
 
-#: resources/views/admin/index.php:149 resources/views/admin/index.php:172
-#: resources/views/admin/index.php:193
+#: resources/views/admin/index.php:149 resources/views/admin/index.php:176
+#: resources/views/admin/index.php:201
 msgid "Escolher Imagem"
 msgstr "Choose Image"
 
-#: resources/views/admin/index.php:159
+#: resources/views/admin/index.php:153 resources/views/admin/index.php:180
+#: resources/views/admin/index.php:205
+msgid "Remover Imagem"
+msgstr "Remove Image"
+
+#: resources/views/admin/index.php:163
 msgid "Logo"
 msgstr "Logo"
 
-#: resources/views/admin/index.php:160
+#: resources/views/admin/index.php:164
 msgid "Escolha a imagem que ficará como logo do sistema."
 msgstr "Choose the image that will be the system logo."
 
-#: resources/views/admin/index.php:180
+#: resources/views/admin/index.php:188
 msgid "Ícone (Tamanho Recomendado: 512 x 512)"
 msgstr "Icon (Recommended Size: 512 x 512)"
 
-#: resources/views/admin/index.php:181
+#: resources/views/admin/index.php:189
 msgid "Escolha a imagem que ficará como ícone do sistema."
 msgstr "Choose the image that will remain as the system icon."
 
-#: resources/views/admin/index.php:202
+#: resources/views/admin/index.php:214
 msgid "Salvar Configurações"
 msgstr "Save Settings"
 
-#: resources/views/admin/index.php:224 resources/views/admin/users/index.php:72
+#: resources/views/admin/index.php:236 resources/views/admin/users/index.php:72
 msgid "Deseja realmente excluir este usuário?"
 msgstr "Do you really want to delete this user?"
 
@@ -283,7 +288,7 @@ msgstr "Return"
 msgid "Entrar | %s"
 msgstr "Login | %s"
 
-#: resources/views/auth/login.php:23 resources/views/auth/login.php:39
+#: resources/views/auth/login.php:23 resources/views/auth/login.php:43
 #: resources/views/components/expired-session.php:62
 #: src/App/Controllers/Web/TemplateController.php:48
 msgid "Entrar"
@@ -294,11 +299,11 @@ msgstr "Login"
 msgid "Digite seu email"
 msgstr "Enter your email"
 
-#: resources/views/auth/login.php:33
+#: resources/views/auth/login.php:35
 msgid "Digite sua senha"
 msgstr "Enter your password"
 
-#: resources/views/auth/login.php:43
+#: resources/views/auth/login.php:47
 msgid "Esqueceu a senha?"
 msgstr "Forgot password?"
 
@@ -609,7 +614,11 @@ msgstr "Send us your question anytime!"
 msgid "Principal | %s"
 msgstr "Main | %s"
 
-#: src/App/Controllers/Admin/AdminController.php:48
+#: src/App/Controllers/Admin/AdminController.php:38
+msgid "Lamentamos, mas ocorreu algum erro na requisição!"
+msgstr "Sorry, there was a request error!"
+
+#: src/App/Controllers/Admin/AdminController.php:43
 #: src/App/Controllers/Admin/UsersController.php:34
 #: src/App/Controllers/Admin/UsersController.php:41
 #: src/App/Controllers/Admin/UsersController.php:100
@@ -622,7 +631,7 @@ msgstr "Main | %s"
 msgid "Erros de validação! Verifique os campos."
 msgstr "Validation errors! Check the fields."
 
-#: src/App/Controllers/Admin/AdminController.php:53
+#: src/App/Controllers/Admin/AdminController.php:47
 msgid "Configurações atualizadas com sucesso!"
 msgstr "Settings updated successfully!"
 
@@ -793,15 +802,15 @@ msgstr "No file was chosen!"
 msgid "Lamentamos, mas parece que ocorreu um erro no upload do seu arquivo."
 msgstr "We're sorry, but it looks like there was an error uploading your file."
 
-#: src/App/Controllers/MediaLibraryController.php:82
+#: src/App/Controllers/MediaLibraryController.php:81
 msgid "O arquivo foi carregado com sucesso!"
 msgstr "The file has been uploaded successfully!"
 
-#: src/App/Controllers/MediaLibraryController.php:90
+#: src/App/Controllers/MediaLibraryController.php:87
 msgid "Nenhum nome de arquivo foi declarado!"
 msgstr "No filename has been declared!"
 
-#: src/App/Controllers/MediaLibraryController.php:103
+#: src/App/Controllers/MediaLibraryController.php:100
 msgid "O arquivo foi excluído com sucesso."
 msgstr "The file has been successfully deleted."
 
@@ -822,48 +831,44 @@ msgstr "You need to be authenticated as an administrator to access this area!"
 msgid "Você precisa estar autenticado para acessar essa área!"
 msgstr "You need to be authenticated to access this area!"
 
-#: src/Models/Config.php:37 src/Models/UserMeta.php:44
+#: src/Models/Config.php:37 src/Models/UserMeta.php:32
 msgid "O metadado é obrigatório!"
 msgstr "The metadata is required!"
 
-#: src/Models/Config.php:38 src/Models/UserMeta.php:45
+#: src/Models/Config.php:38 src/Models/UserMeta.php:33
 #, php-format
 msgid "O metadado deve conter no máximo %s caractéres!"
 msgstr "The metadata must contain a maximum of %s characters!"
 
-#: src/Models/Config.php:41 src/Models/UserMeta.php:48
-msgid "O valor é obrigatório!"
-msgstr "The value is required!"
-
-#: src/Models/Config.php:54
+#: src/Models/Config.php:51
 msgid "A imagem de fundo do login é obrigatória!"
 msgstr "The login background image is required!"
 
-#: src/Models/Config.php:56
+#: src/Models/Config.php:53
 msgid "A imagem de fundo não é uma imagem válida!"
 msgstr "The background image is not a valid image!"
 
-#: src/Models/Config.php:60
+#: src/Models/Config.php:57
 msgid "O logo é obrigatório!"
 msgstr "The logo is required!"
 
-#: src/Models/Config.php:62
+#: src/Models/Config.php:59
 msgid "O logo não é uma imagem válida!"
 msgstr "The logo is not a valid image!"
 
-#: src/Models/Config.php:66
+#: src/Models/Config.php:63
 msgid "O ícone é obrigatório!"
 msgstr "The icon is required!"
 
-#: src/Models/Config.php:68
+#: src/Models/Config.php:65
 msgid "O ícone não é uma imagem válida!"
 msgstr "The icon is not a valid image!"
 
-#: src/Models/Config.php:72
+#: src/Models/Config.php:69
 msgid "O tema é obrigatório!"
 msgstr "The theme is required!"
 
-#: src/Models/Config.php:74
+#: src/Models/Config.php:71
 msgid "O tema é inválido!"
 msgstr "The theme is invalid!"
 
@@ -878,19 +883,19 @@ msgid "O nome precisa ter no máximo %s caractéres!"
 msgstr "The name must have a maximum of %s characters!"
 
 #: src/Models/ContactForm.php:23 src/Models/ForgotPasswordForm.php:16
-#: src/Models/LoginForm.php:17 src/Models/SocialUser.php:58
+#: src/Models/LoginForm.php:17 src/Models/SocialUser.php:40
 #: src/Models/User.php:72 src/Models/UserForm.php:30
 msgid "O email é obrigatório!"
 msgstr "The email is required!"
 
 #: src/Models/ContactForm.php:24 src/Models/ForgotPasswordForm.php:17
-#: src/Models/LoginForm.php:18 src/Models/SocialUser.php:59
+#: src/Models/LoginForm.php:18 src/Models/SocialUser.php:41
 #: src/Models/User.php:73 src/Models/UserForm.php:31
 msgid "O email é inválido!"
 msgstr "The email is invalid!"
 
 #: src/Models/ContactForm.php:25 src/Models/ForgotPasswordForm.php:18
-#: src/Models/SocialUser.php:60
+#: src/Models/SocialUser.php:42
 #, php-format
 msgid "O email precisa ter no máximo %s caractéres!"
 msgstr "The email must have a maximum of %s characters!"
@@ -952,26 +957,26 @@ msgstr "The password confirmation is required!"
 msgid "As senhas não correspondem!"
 msgstr "Passwords do not match!"
 
-#: src/Models/SocialUser.php:30
-msgid "O nome da rede social é inválido!"
-msgstr "The social network name is invalid!"
-
-#: src/Models/SocialUser.php:43 src/Models/User.php:98
-#: src/Models/UserForm.php:65
-msgid "O email informado já está em uso! Tente outro."
-msgstr "The given email is already in use! Try another."
-
-#: src/Models/SocialUser.php:49
+#: src/Models/SocialUser.php:31
 msgid "O usuário é obrigatório!"
 msgstr "The user is required!"
 
-#: src/Models/SocialUser.php:52
+#: src/Models/SocialUser.php:34
 msgid "O ID da rede social é obrigatório!"
 msgstr "The social network ID is required!"
 
-#: src/Models/SocialUser.php:55
+#: src/Models/SocialUser.php:37
 msgid "O nome da rede social é obrigatório!"
 msgstr "The social network name is required!"
+
+#: src/Models/SocialUser.php:54
+msgid "O nome da rede social é inválido!"
+msgstr "The social network name is invalid!"
+
+#: src/Models/SocialUser.php:59 src/Models/SocialUser.php:70
+#: src/Models/User.php:94 src/Models/UserForm.php:65
+msgid "O email informado já está em uso! Tente outro."
+msgstr "The given email is already in use! Try another."
 
 #: src/Models/User.php:65 src/Models/UserForm.php:23
 msgid "O tipo de usuário é obrigatório!"
@@ -996,11 +1001,11 @@ msgstr "The nickname is required!"
 msgid "O apelido deve conter no máximo %s caractéres!"
 msgstr "The nickname must have a maximum of %s characters!"
 
-#: src/Models/User.php:106 src/Models/UserForm.php:73
+#: src/Models/User.php:98 src/Models/UserForm.php:73
 msgid "O apelido informado já está em uso! Tente outro."
 msgstr "The given nickname is already in use! Try another."
 
-#: src/Models/User.php:168
+#: src/Models/User.php:160
 msgid ""
 "Vai por mim, isso vai dar ruim! Você não pode excluir o administrador do "
 "sistema."
@@ -1008,23 +1013,23 @@ msgstr ""
 "Trust me, this is going to go bad! You cannot delete the system "
 "administrator."
 
-#: src/Models/User.php:171
+#: src/Models/User.php:163
 msgid "Você não pode excluir um usuário vinculado à uma rede social!"
 msgstr "You cannot delete a user linked to a social network!"
 
-#: src/Models/User.php:174
+#: src/Models/User.php:166
 msgid "Você não pode excluir um usuário com dados armazenados!"
 msgstr "You cannot delete a user with stored data!"
 
-#: src/Models/UserMeta.php:32
+#: src/Models/UserMeta.php:46
 msgid "A linguagem é obrigatória!"
 msgstr "The language is required!"
 
-#: src/Models/UserMeta.php:36
+#: src/Models/UserMeta.php:50
 msgid "A data da última alteração de senha é obrigatória!"
 msgstr "The last password change date is required!"
 
-#: src/Models/UserMeta.php:38
+#: src/Models/UserMeta.php:52
 msgid ""
 "A data da última alteração de senha deve seguir o padrão dd/mm/aaaa hh:mm:ss!"
 msgstr ""
@@ -1052,6 +1057,9 @@ msgstr "The plural name must contain a maximum of %s characters!"
 msgid "Você não pode excluir um tipo de usuário vinculado à um usuário!"
 msgstr "You cannot delete a user type linked to a user!"
 
+#~ msgid "O valor é obrigatório!"
+#~ msgstr "The value is required!"
+
 #~ msgid "Módulo GTG"
 #~ msgstr "Module GTG"
 
@@ -1073,9 +1081,6 @@ msgstr "You cannot delete a user type linked to a user!"
 #~ msgstr ""
 #~ "An unexpected error occurred while you performed this action! Inform the "
 #~ "administrator."
-
-#~ msgid "Lamentamos, mas houve um erro de requisição! Resolveremos em breve."
-#~ msgstr "Sorry, there was a request error! We will solve it soon."
 
 #~ msgid "Buscar"
 #~ msgstr "Search"

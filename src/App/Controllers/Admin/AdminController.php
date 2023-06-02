@@ -29,27 +29,21 @@ class AdminController extends TemplateController
 
     public function system(array $data): void 
     {
-        $callback = [];
-        $objects = [];
-
-        foreach(['style', 'logo', 'logo_icon', 'login_img'] as $attr) {
-            $objects[] = (new Config())->loadData([
-                'meta' => $attr,
-                'value' => $data[$attr]
-            ]);
+        if(!$objects = (new Config())->saveManyMetas([
+            'style' => $data['style'],
+            'logo' => $data['logo'],
+            'logo_icon' => $data['logo_icon'],
+            'login_img' => $data['login_img']
+        ])) {
+            $this->setMessage('error', _('Lamentamos, mas ocorreu algum erro na requisição!'))->APIResponse([], 422);
+            return;
         }
 
-        if(!(new Config())->saveMany($objects)) {
-            $errors = [];
-            foreach($objects as $object) {
-                $errors[$object->meta] = $object->getFirstError($object->meta);
-            }
-
-            $this->setMessage('error', _('Erros de validação! Verifique os campos.'))
-                ->setErrors($errors)->APIResponse($callback, 422);
+        if($errors = Config::getErrorsFromMany($objects, true)) {
+            $this->setMessage('error', _('Erros de validação! Verifique os campos.'))->setErrors($errors)->APIResponse([], 422);
             return;
         }
         
-        $this->setMessage('success', _('Configurações atualizadas com sucesso!'))->APIResponse($callback, 200);
+        $this->setMessage('success', _('Configurações atualizadas com sucesso!'))->APIResponse([], 200);
     }
 }

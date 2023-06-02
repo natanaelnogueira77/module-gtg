@@ -10,23 +10,37 @@ class UserMeta extends DBModel
 {
     public $user;
 
-    public function tableName(): string 
+    public static function tableName(): string 
     {
         return 'usuario_meta';
     }
 
-    public function primaryKey(): string 
+    public static function primaryKey(): string 
     {
         return 'id';
     }
 
-    public function attributes(): array 
+    public static function attributes(): array 
     {
         return ['usu_id', 'meta', 'value'];
     }
 
     public function rules(): array 
     {
+        return [
+            'meta' => [
+                [self::RULE_REQUIRED, 'message' => _('O metadado é obrigatório!')],
+                [self::RULE_MAX, 'max' => 50, 'message' => sprintf(_('O metadado deve conter no máximo %s caractéres!'), 50)]
+            ]
+        ];
+    }
+
+    public function validate(): bool 
+    {
+        if(!parent::validate()) {
+            return false;
+        }
+
         if($this->meta == 'lang') {
             if(!$this->value) {
                 $this->addError('lang', _('A linguagem é obrigatória!'));
@@ -39,15 +53,7 @@ class UserMeta extends DBModel
             }
         }
 
-        return [
-            'meta' => [
-                [self::RULE_REQUIRED, 'message' => _('O metadado é obrigatório!')],
-                [self::RULE_MAX, 'max' => 50, 'message' => sprintf(_('O metadado deve conter no máximo %s caractéres!'), 50)]
-            ],
-            'value' => [
-                [self::RULE_REQUIRED, 'message' => _('O valor é obrigatório!')]
-            ]
-        ];
+        return !$this->hasErrors();
     }
 
     public function user(string $columns = '*'): ?User

@@ -1,6 +1,6 @@
 <?php 
     $this->layout("themes/courses-master/_theme", [
-        'title' => sprintf(_('Contato | %s'), SITE)
+        'title' => sprintf(_('Contato | %s'), $appData['app_name'])
     ]);
 ?>
 
@@ -86,7 +86,7 @@
                         </div>
                         
                         <div class="form-group mt-3">
-                            <input type="submit" data-sitekey="<?= RECAPTCHA['site_key'] ?>"
+                            <input type="submit" data-sitekey="<?= $appData['recaptcha']['site_key'] ?>"
                                 data-callback='onSubmit' data-action='submit' 
                                 class="g-recaptcha button button-contactForm boxed-btn" value="<?= _('Enviar') ?>">
                         </div>
