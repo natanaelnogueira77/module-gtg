@@ -1,5 +1,5 @@
 <?php 
 
 return [
-    'url' => '/erro/%s'
+    'url' => ENV['app_url'] . '/erro/%s'
 ];

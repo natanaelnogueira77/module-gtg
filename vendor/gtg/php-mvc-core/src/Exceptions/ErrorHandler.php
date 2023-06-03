@@ -81,7 +81,7 @@ class ErrorHandler
     private function errorRedirect(): void
     {
         if(self::$errorUrl) {
-            header('Location: ' . self::$errorUrl);
+            header('Location: ' . sprintf(self::$errorUrl, '500'));
             exit();
         }
         return;
