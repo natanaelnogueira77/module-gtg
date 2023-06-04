@@ -134,13 +134,13 @@ class Database
         return $this->exec($table->build());
     }
 
-    /* public function alterTable(string $tableName): int 
+    public function alterTable(string $tableName, callable $callback): int 
     {
         $table = new Table($tableName);
         $table->alter();
         $callback($table);
         return $this->exec($table->build());
-    } */
+    }
 
     public function dropTable(string $tableName): int 
     {

@@ -3,7 +3,7 @@
         'name' => 'gtg/mvc-example',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '4586cf1e9367d7b83418f9b2efb30aa8c75cb864',
+        'reference' => '4ead8dd55ee7f24d1a719dcb32e4ef0230837a56',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -49,7 +49,7 @@
         'gtg/mvc-example' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '4586cf1e9367d7b83418f9b2efb30aa8c75cb864',
+            'reference' => '4ead8dd55ee7f24d1a719dcb32e4ef0230837a56',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -58,7 +58,7 @@
         'gtg/php-mvc-core' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'a5c034bdde9645b32462d04706abb9c1b7cfeeda',
+            'reference' => '20c2a2ed2b206805d16aa7dfaf582d3b3ba5762d',
             'type' => 'library',
             'install_path' => __DIR__ . '/../gtg/php-mvc-core',
             'aliases' => array(

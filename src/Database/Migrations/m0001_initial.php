@@ -43,8 +43,8 @@ class m0001_initial extends Migration
 
         $this->db->createTable('usuario_tipo', function ($table) {
             $table->id();
-            $table->string('name_sing', 45);
-            $table->string('name_plur', 45);
+            $table->string('name_sing', 50);
+            $table->string('name_plur', 50);
             $table->timestamps();
         });
     }

@@ -235,12 +235,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/natanaelnogueira77/gtg-mvc-core.git",
-                "reference": "a5c034bdde9645b32462d04706abb9c1b7cfeeda"
+                "reference": "20c2a2ed2b206805d16aa7dfaf582d3b3ba5762d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/natanaelnogueira77/gtg-mvc-core/zipball/a5c034bdde9645b32462d04706abb9c1b7cfeeda",
-                "reference": "a5c034bdde9645b32462d04706abb9c1b7cfeeda",
+                "url": "https://api.github.com/repos/natanaelnogueira77/gtg-mvc-core/zipball/20c2a2ed2b206805d16aa7dfaf582d3b3ba5762d",
+                "reference": "20c2a2ed2b206805d16aa7dfaf582d3b3ba5762d",
                 "shasum": ""
             },
             "require": {
@@ -252,7 +252,7 @@
                 "php": ">=8.1",
                 "phpmailer/phpmailer": "^6.6"
             },
-            "time": "2023-05-28T10:02:35+00:00",
+            "time": "2023-06-03T03:13:32+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "source",
@@ -273,7 +273,7 @@
             ],
             "support": {
                 "issues": "https://github.com/natanaelnogueira77/gtg-mvc-core/issues",
-                "source": "https://github.com/natanaelnogueira77/gtg-mvc-core/tree/v1.0.4"
+                "source": "https://github.com/natanaelnogueira77/gtg-mvc-core/tree/v1.0.5a"
             },
             "install-path": "../gtg/php-mvc-core"
         },

@@ -8,6 +8,8 @@ class Table
 {
     protected string $table;
     protected string $action;
+    protected string $columnAction;
+    protected array $columnParams = [];
     protected array $columns = [];
 
     public function __construct(string $table) 
@@ -27,11 +29,11 @@ class Table
         return $this;
     }
 
-    /* public function alter(): static 
+    public function alter(): static 
     {
         $this->setAction('alter');
         return $this;
-    } */
+    }
 
     public function drop(): static 
     {
@@ -127,27 +129,62 @@ class Table
         return $this;
     }
 
-    private function addColumn(string $columnName, string $type, array $params = []): ColumnDefinition 
+    private function addColumn(string $columnName, string $type = '', array $params = []): ColumnDefinition 
     {
+        if($this->action == 'alter') {
+            if(isset($this->columnAction)) {
+                $params['command'] = $this->columnAction;
+            } else {
+                $params['command'] = 'add_column';
+            }
+
+            if($this->columnParams) {
+                $params = array_merge($params, $this->columnParams);
+            }
+            $this->columnParams = [];
+        }
+
         $definition = new ColumnDefinition($columnName, $type, $params);
         $this->columns[] = $definition;
         return $definition;
     }
 
-    /* public function modifyColumn(string $from, string $to): static 
+    public function modifyColumn(): static 
     {
+        $this->setColumnAction('modify_column');
         return $this;
     }
 
-    public function changeColumn(string $columnName): static 
+    public function changeColumn(string $from): static 
     {
+        $this->setColumnAction('change_column');
+        $this->setColumnParams(['from' => $from]);
         return $this;
     }
 
-    public function dropColumn(string $columnName): static 
+    public function dropColumn(string $columnName): ColumnDefinition 
     {
+        $this->setColumnAction('drop_column');
+        return $this->addColumn($columnName);
+    }
+
+    public function renameTable(string $tableName): ColumnDefinition 
+    {
+        $this->setColumnAction('rename_table');
+        return $this->addColumn($tableName);
+    }
+
+    private function setColumnAction(string $action): static 
+    {
+        $this->columnAction = $action;
         return $this;
-    } */
+    }
+
+    private function setColumnParams(array $params = []): static 
+    {
+        $this->columnParams = $params;
+        return $this;
+    }
 
     private function toMySQL(): string 
     {
@@ -162,6 +199,10 @@ class Table
             $sql .= ';';
         } elseif($this->action == 'alter') {
             $sql .= "ALTER TABLE `{$this->table}`";
+            foreach($this->columns as $column) {
+                $sql .= $column->build() . ',';
+            }
+            $sql[strlen($sql) - 1] = ';';
         } elseif($this->action == 'drop') {
             $sql .= "DROP TABLE `{$this->table}`";
         } elseif($this->action == 'drop_if_exists') {
