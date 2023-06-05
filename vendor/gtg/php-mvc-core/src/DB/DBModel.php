@@ -698,7 +698,7 @@ abstract class DBModel extends DataLayer
             if(isset($objects[$meta])) {
                 $objects[$meta]->{$metaInfo['value']} = $value;
             } else {
-                $objects[$meta] = (new $metaInfo['class']())->setValues([
+                $objects[$meta] = (new $metaInfo['class']())->loadData([
                     $metaInfo['entity'] => $this->{static::primaryKey()},
                     $metaInfo['meta'] => $meta,
                     $metaInfo['value'] => $value

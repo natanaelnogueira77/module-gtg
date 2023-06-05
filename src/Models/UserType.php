@@ -29,11 +29,11 @@ class UserType extends DBModel
         return [
             'name_sing' => [
                 [self::RULE_REQUIRED, 'message' => _('O nome no singular é obrigatório!')],
-                [self::RULE_MAX, 'max' => 45, 'message' => sprintf(_('O nome no singular deve conter no máximo %s caractéres!'), 45)]
+                [self::RULE_MAX, 'max' => 50, 'message' => sprintf(_('O nome no singular deve conter no máximo %s caractéres!'), 50)]
             ],
             'name_plur' => [
                 [self::RULE_REQUIRED, 'message' => _('O nome no plural é obrigatório!')],
-                [self::RULE_MAX, 'max' => 45, 'message' => sprintf(_('O nome no plural deve conter no máximo %s caractéres!'), 45)]
+                [self::RULE_MAX, 'max' => 50, 'message' => sprintf(_('O nome no plural deve conter no máximo %s caractéres!'), 50)]
             ]
         ];
     }

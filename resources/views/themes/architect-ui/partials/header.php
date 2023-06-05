@@ -85,6 +85,8 @@
                 </div>
             </div>
             <?php endif; ?>
+
+            <?php if($right['avatar']): ?>
             <div class="header-btn-lg pr-0">
                 <div class="widget-content p-0">
                     <div class="widget-content-wrapper">
@@ -124,6 +126,7 @@
                     </div>
                 </div>
             </div>
+            <?php endif; ?>
         </div>
         <?php endif; ?>
     </div>
