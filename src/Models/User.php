@@ -86,16 +86,18 @@ class User extends UserModel
 
     public function validate(): bool 
     {
-        if(!parent::validate()) {
-            return false;
-        }
+        parent::validate();
 
-        if((new self())->get(['email' => $this->email] + (isset($this->id) ? ['!=' => ['id' => $this->id]] : []))->count()) {
-            $this->addError('email', _('O email informado já está em uso! Tente outro.'));
+        if(!$this->hasError('email')) {
+            if((new self())->get(['email' => $this->email] + (isset($this->id) ? ['!=' => ['id' => $this->id]] : []))->count()) {
+                $this->addError('email', _('O email informado já está em uso! Tente outro.'));
+            }
         }
         
-        if((new self())->get(['slug' => $this->slug] + (isset($this->id) ? ['!=' => ['id' => $this->id]] : []))->count()) {
-            $this->addError('slug', _('O apelido informado já está em uso! Tente outro.'));
+        if(!$this->hasError('slug')) {
+            if((new self())->get(['slug' => $this->slug] + (isset($this->id) ? ['!=' => ['id' => $this->id]] : []))->count()) {
+                $this->addError('slug', _('O apelido informado já está em uso! Tente outro.'));
+            }
         }
 
         return !$this->hasErrors();

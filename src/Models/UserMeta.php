@@ -8,6 +8,9 @@ use Src\Models\User;
 
 class UserMeta extends DBModel 
 {
+    const LANG_KEY = 'lang';
+    const LAST_PASS_REQUEST_KEY = 'last_pass_request';
+
     public $user;
 
     public static function tableName(): string 
@@ -37,19 +40,19 @@ class UserMeta extends DBModel
 
     public function validate(): bool 
     {
-        if(!parent::validate()) {
-            return false;
-        }
+        parent::validate();
 
-        if($this->meta == 'lang') {
-            if(!$this->value) {
-                $this->addError('lang', _('A linguagem é obrigatória!'));
-            }
-        } elseif($this->meta == 'last_pass_request') {
-            if(!$this->value) {
-                $this->addError('last_pass_request', _('A data da última alteração de senha é obrigatória!'));
-            } elseif(!DateTime::createFromFormat('Y-m-d H:i:s', $this->value)) {
-                $this->addError('last_pass_request', _('A data da última alteração de senha deve seguir o padrão dd/mm/aaaa hh:mm:ss!'));
+        if(!$this->hasError('meta')) {
+            if($this->meta == self::LANG_KEY) {
+                if(!$this->value) {
+                    $this->addError(self::LANG_KEY, _('A linguagem é obrigatória!'));
+                }
+            } elseif($this->meta == self::LAST_PASS_REQUEST_KEY) {
+                if(!$this->value) {
+                    $this->addError(self::LAST_PASS_REQUEST_KEY, _('A data da última alteração de senha é obrigatória!'));
+                } elseif(!DateTime::createFromFormat('Y-m-d H:i:s', $this->value)) {
+                    $this->addError(self::LAST_PASS_REQUEST_KEY, _('A data da última alteração de senha deve seguir o padrão dd/mm/aaaa hh:mm:ss!'));
+                }
             }
         }
 

@@ -53,24 +53,18 @@ class UserForm extends Model
 
     public function validate(): bool 
     {
-        if(!parent::validate()) {
-            return false;
+        parent::validate();
+
+        if(!$this->hasError('email')) {
+            if((new User())->get(['email' => $this->email] + (isset($this->id) ? ['!=' => ['id' => $this->id]] : []))->count()) {
+                $this->addError('email', _('O email informado já está em uso! Tente outro.'));
+            }
         }
-
-        $email = $this->id 
-            ? (new User())->find('email = :email AND id != :id', "email={$this->email}&id={$this->id}")->count()
-            : (new User())->find('email = :email', "email={$this->email}")->count();
-
-        if($email) {
-            $this->addError('email', _('O email informado já está em uso! Tente outro.'));
-        }
-
-        $slug = $this->id 
-            ? (new User())->find('slug = :slug AND id != :id', "slug={$this->slug}&id={$this->id}")->count()
-            : (new User())->find('slug = :slug', "slug={$this->slug}")->count();
         
-        if($slug) {
-            $this->addError('slug', _('O apelido informado já está em uso! Tente outro.'));
+        if(!$this->hasError('slug')) {
+            if((new User())->get(['slug' => $this->slug] + (isset($this->id) ? ['!=' => ['id' => $this->id]] : []))->count()) {
+                $this->addError('slug', _('O apelido informado já está em uso! Tente outro.'));
+            }
         }
 
         return !$this->hasErrors();

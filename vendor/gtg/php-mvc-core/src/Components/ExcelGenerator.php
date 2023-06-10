@@ -6,9 +6,9 @@ use GTG\MVC\Exceptions\AppException;
 
 class ExcelGenerator 
 {
-    private $data;
-    private $filename;
-    private $content = '';
+    private ?array $data;
+    private ?string $filename;
+    private string $content = '';
 
     public function __construct(?array $data = null, ?string $filename = null)
     {

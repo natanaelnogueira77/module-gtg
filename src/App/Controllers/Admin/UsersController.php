@@ -123,7 +123,6 @@ class UsersController extends TemplateController
     public function list(array $data): void 
     {
         $data = array_merge($data, filter_input_array(INPUT_GET, FILTER_DEFAULT));
-        $callback = [];
 
         $content = [];
         $filters = [];
@@ -201,36 +200,35 @@ class UsersController extends TemplateController
             }
         }
 
-        $callback['content'] = [
-            'table' => $this->getView('components/data-table', [
-                'headers' => [
-                    'actions' => ['text' => _('Ações')],
-                    'id' => ['text' => _('ID'), 'sort' => true],
-                    'name' => ['text' => _('Nome'), 'sort' => true],
-                    'email' => ['text' => _('Email'), 'sort' => true],
-                    'created_at' => ['text' => _('Criado em'), 'sort' => true]
-                ],
-                'order' => [
-                    'selected' => $order,
-                    'type' => $orderType
-                ],
-                'data' => $content
-            ]),
-            'pagination' => $this->getView('components/pagination', [
-                'pages' => $pages,
-                'currPage' => $page,
-                'results' => $count,
-                'limit' => $limit
-            ])
-        ];
-
-        $this->APIResponse($callback, 200);
+        $this->APIResponse([
+            'content' => [
+                'table' => $this->getView('components/data-table', [
+                    'headers' => [
+                        'actions' => ['text' => _('Ações')],
+                        'id' => ['text' => _('ID'), 'sort' => true],
+                        'name' => ['text' => _('Nome'), 'sort' => true],
+                        'email' => ['text' => _('Email'), 'sort' => true],
+                        'created_at' => ['text' => _('Criado em'), 'sort' => true]
+                    ],
+                    'order' => [
+                        'selected' => $order,
+                        'type' => $orderType
+                    ],
+                    'data' => $content
+                ]),
+                'pagination' => $this->getView('components/pagination', [
+                    'pages' => $pages,
+                    'currPage' => $page,
+                    'results' => $count,
+                    'limit' => $limit
+                ])
+            ]
+        ], 200);
     }
 
     public function delete(array $data): void 
     {
-        $dbUser = (new User())->findById(intval($data['user_id']));
-        if(!$dbUser) {
+        if(!$dbUser = (new User())->findById(intval($data['user_id']))) {
             $this->setMessage('error', _('Nenhum usuário foi encontrado!'))->APIResponse([], 404);
             return;
         } elseif(!$dbUser->destroy()) {

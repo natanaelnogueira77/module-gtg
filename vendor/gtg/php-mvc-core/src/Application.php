@@ -19,7 +19,6 @@ class Application
     public static Application $app;
     public ?array $appData;
     public ?array $errorHandler;
-    public ?Auth $auth;
     public Controller $controller;
     public ?Database $db;
     public Request $request;
@@ -39,19 +38,21 @@ class Application
         $this->request = new Request();
         $this->response = new Response();
         $this->session = isset($config['session']) ? new Session($config['session']) : null;
-        $this->router = isset($config['projectUrl']) ? new Router($config['projectUrl']) : null;
+        $this->router = isset($config['projectUrl']) && isset($_SERVER['REQUEST_METHOD']) ? new Router($config['projectUrl']) : null;
         $this->db = isset($config['db']) ? new Database($config['db']) : null;
         $this->view = isset($config['view']) ? new View($config['view']) : null;
         $this->controller = new Controller();
     }
 
-    public function run() 
+    public function run(): void 
     {
-        $this->router->dispatch();
-        if($this->router->error()) {
-            $this->response->setStatusCode($this->router->error());
-            if($this->errorHandler && $this->errorHandler['url']) {
-                $this->router->redirect(sprintf($this->errorHandler['url'], $this->router->error()));
+        if($this->router) {
+            $this->router->dispatch();
+            if($this->router->error()) {
+                $this->response->setStatusCode($this->router->error());
+                if($this->errorHandler && $this->errorHandler['url']) {
+                    $this->router->redirect(sprintf($this->errorHandler['url'], $this->router->error()));
+                }
             }
         }
     }

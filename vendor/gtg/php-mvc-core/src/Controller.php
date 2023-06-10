@@ -3,8 +3,6 @@
 namespace GTG\MVC;
 
 use DateTime;
-use GTG\MVC\Components\Auth;
-use GTG\MVC\Components\Email;
 use GTG\MVC\Application;
 use GTG\MVC\Request;
 use GTG\MVC\Response;
@@ -55,7 +53,7 @@ class Controller
 
     protected function getRoute(string $route, array $params = []): ?string 
     {
-        return $this->router->route($route, $params);
+        return $this->router?->route($route, $params);
     }
 
     protected function addViewData(array $params): void 

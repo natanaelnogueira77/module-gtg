@@ -46,27 +46,14 @@ class SocialUser extends DBModel
 
     public function validate(): bool 
     {
-        if(!parent::validate()) {
-            return false;
-        }
+        parent::validate();
 
-        if($this->social && !in_array($this->social, self::getSocialNames())) {
+        if(!$this->hasError('social') && !in_array($this->social, self::getSocialNames())) {
             $this->addError('social', _('O nome da rede social é inválido!'));
         }
 
-        if($this->email) {
+        if(!$this->hasError('email')) {
             if((new self())->get(['email' => $this->email] + (isset($this->id) ? ['!=' => ['id' => $this->id]] : []))->count()) {
-                $this->addError('email', _('O email informado já está em uso! Tente outro.'));
-            }
-            $email = $this->id 
-                ? (new self())
-                    ->find('email = :email AND id != :id', "email={$this->email}&id={$this->id}")
-                    ->count()
-                : (new self())
-                    ->find('email = :email', "email={$this->email}")
-                    ->count();
-
-            if($email) {
                 $this->addError('email', _('O email informado já está em uso! Tente outro.'));
             }
         }

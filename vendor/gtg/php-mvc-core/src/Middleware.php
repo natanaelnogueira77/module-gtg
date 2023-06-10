@@ -22,7 +22,7 @@ class Middleware
 
     protected function getRoute(string $route, array $params = []): ?string 
     {
-        return $this->router->route($route, $params);
+        return $this->router?->route($route, $params);
     }
 
     protected function redirect(string $routeKey, array $params = []): void 

@@ -3,11 +3,14 @@
 namespace GTG\MVC\DB;
 
 use CoffeeCode\DataLayer\DataLayer;
+use DateTime;
 use GTG\MVC\Application;
 
 abstract class DBModel extends DataLayer 
 {
+    public const RULE_DATETIME = 'date';
     public const RULE_EMAIL = 'email';
+    public const RULE_IN = 'in';
     public const RULE_INT = 'int';
     public const RULE_MATCH = 'match';
     public const RULE_MAX = 'max';
@@ -741,6 +744,14 @@ abstract class DBModel extends DataLayer
 
                 if($ruleName === self::RULE_MATCH && $value !== $this->{$rule['match']}) {
                     $this->addErrorForRule($attribute, self::RULE_MATCH, $rule);
+                }
+
+                if($ruleName === self::RULE_IN && $value && !in_array($value, $rule['values'])) {
+                    $this->addErrorForRule($attribute, self::RULE_IN, $rule);
+                }
+
+                if($ruleName === self::RULE_DATETIME && $value && !DateTime::createFromFormat($rule['pattern'], $value)) {
+                    $this->addErrorForRule($attribute, self::RULE_DATETIME, $rule);
                 }
             }
         }

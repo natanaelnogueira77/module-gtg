@@ -10,14 +10,13 @@ use stdClass;
 
 class PDFRender 
 {
-    private $dompdf;
-    private $options;
-    private $data;
-    private $error;
+    private ?Dompdf $dompdf = null;
+    private ?Options $options = null;
+    private stdClass $data;
+    private ?Exception $error = null;
 
     public function __construct(?array $options = ['isRemoteEnabled' => true, 'isPhpEnabled' => true]) 
     {
-        $this->options = null;
         if($options) {
             $this->options = new Options();
             foreach($options as $option => $value) {
@@ -78,7 +77,7 @@ class PDFRender
         }
     }
 
-    public function stream(string $filename, array $options)
+    public function stream(string $filename, array $options): void 
     {
         $this->dompdf->stream($filename, $options);
     }

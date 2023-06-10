@@ -6,6 +6,11 @@ use GTG\MVC\DB\DBModel;
 
 class Config extends DBModel 
 {
+    const LOGIN_IMG_KEY = 'login_img';
+    const LOGO_KEY = 'logo';
+    const LOGO_ICON_KEY = 'logo_icon';
+    const STYLE_KEY = 'style';
+
     public static function tableName(): string 
     {
         return 'config';
@@ -42,33 +47,33 @@ class Config extends DBModel
 
     public function validate(): bool 
     {
-        if(!parent::validate()) {
-            return false;
-        }
+        parent::validate();
 
-        if($this->meta == 'login_img') {
-            if(!$this->value) {
-                $this->addError('login_img', _('A imagem de fundo do login é obrigatória!'));
-            } elseif(!in_array(pathinfo($this->value, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png'])) {
-                $this->addError('login_img', _('A imagem de fundo não é uma imagem válida!'));
-            }
-        } elseif($this->meta == 'logo') {
-            if(!$this->value) {
-                $this->addError('logo', _('O logo é obrigatório!'));
-            } elseif(!in_array(pathinfo($this->value, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png'])) {
-                $this->addError('logo', _('O logo não é uma imagem válida!'));
-            }
-        } elseif($this->meta == 'logo_icon') {
-            if(!$this->value) {
-                $this->addError('logo_icon', _('O ícone é obrigatório!'));
-            } elseif(!in_array(pathinfo($this->value, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png'])) {
-                $this->addError('logo_icon', _('O ícone não é uma imagem válida!'));
-            }
-        } elseif($this->meta == 'style') {
-            if(!$this->value) {
-                $this->addError('style', _('O tema é obrigatório!'));
-            } elseif(!in_array($this->value, ['light', 'dark'])) {
-                $this->addError('style', _('O tema é inválido!'));
+        if(!$this->hasError('meta')) {
+            if($this->meta == self::LOGIN_IMG_KEY) {
+                if(!$this->value) {
+                    $this->addError(self::LOGIN_IMG_KEY, _('A imagem de fundo do login é obrigatória!'));
+                } elseif(!in_array(pathinfo($this->value, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png'])) {
+                    $this->addError(self::LOGIN_IMG_KEY, _('A imagem de fundo não é uma imagem válida!'));
+                }
+            } elseif($this->meta == self::LOGO_KEY) {
+                if(!$this->value) {
+                    $this->addError(self::LOGO_KEY, _('O logo é obrigatório!'));
+                } elseif(!in_array(pathinfo($this->value, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png'])) {
+                    $this->addError(self::LOGO_KEY, _('O logo não é uma imagem válida!'));
+                }
+            } elseif($this->meta == self::LOGO_ICON_KEY) {
+                if(!$this->value) {
+                    $this->addError(self::LOGO_ICON_KEY, _('O ícone é obrigatório!'));
+                } elseif(!in_array(pathinfo($this->value, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png'])) {
+                    $this->addError(self::LOGO_ICON_KEY, _('O ícone não é uma imagem válida!'));
+                }
+            } elseif($this->meta == self::STYLE_KEY) {
+                if(!$this->value) {
+                    $this->addError(self::STYLE_KEY, _('O tema é obrigatório!'));
+                } elseif(!in_array($this->value, ['light', 'dark'])) {
+                    $this->addError(self::STYLE_KEY, _('O tema é inválido!'));
+                }
             }
         }
 
