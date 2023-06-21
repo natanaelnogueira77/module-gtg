@@ -17,15 +17,13 @@ class ResetPasswordController extends Controller
         $forgotPasswordForm = new ForgotPasswordForm();
 
         if($this->request->isPost()) {
-            $forgotPasswordForm->loadData($data);
-            if($user = $forgotPasswordForm->user()) {
+            if($user = $forgotPasswordForm->loadData($data)->user()) {
                 $user->saveMeta('last_pass_request', date('Y-m-d H:i:s'));
-                    
-                $logo = (new Config())->getMeta('logo');
+
                 $email = new Email();
                 $email->add(_('Redefinir Senha'), $this->getView('emails/reset-password', [
                     'user' => $user,
-                    'logo' => $logo ? url($logo) : ''
+                    'logo' => url((new Config())->getMeta('logo'))
                 ]), $user->name, $user->email);
                 
                 if(!$email->send()) {
@@ -53,16 +51,14 @@ class ResetPasswordController extends Controller
     {
         $configMetas = (new Config())->getGroupedMetas(['logo', 'logo_icon', 'login_img']);
         
-        $user = User::getByToken($data['code']);
-        if(!$user) {
+        if(!$user = User::getByToken($data['code'])) {
             $this->session->setFlash(_('A chave de verificação é inválida!'));
             $this->redirect('auth.index');
         }
         
         $resetPasswordForm = new ResetPasswordForm();
         if($this->request->isPost()) {
-            $resetPasswordForm->loadData($data);
-            if($resetPasswordForm->validate()) {
+            if($resetPasswordForm->loadData($data)->validate()) {
                 $user->password = $this->password;
                 $user->save();
 

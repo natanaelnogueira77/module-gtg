@@ -43,14 +43,13 @@ class UsersController extends TemplateController
             return;
         }
 
-        $logo = (new Config())->getMeta('logo');
         $email = new Email();
         $email->add(
             _('Você se Registrou com Sucesso!'), 
             $this->getView('emails/user-register', [
                 'user' => $dbUser,
                 'password' => $data['password'],
-                'logo' => $logo ? url($logo) : ''
+                'logo' => url((new Config())->getMeta('logo'))
             ]), 
             $dbUser->name, 
             $dbUser->email
@@ -74,8 +73,7 @@ class UsersController extends TemplateController
     {
         $this->addData();
 
-        $dbUser = (new User())->findById(intval($data['user_id']));
-        if(!$dbUser) {
+        if(!$dbUser = (new User())->findById(intval($data['user_id']))) {
             $this->session->setFlash('error', _('Nenhum usuário foi encontrado!'));
             $this->redirect('admin.users.index');
         }
@@ -88,14 +86,12 @@ class UsersController extends TemplateController
 
     public function update(array $data): void 
     {
-        $dbUser = (new User())->findById(intval($data['user_id']));
-        if(!$dbUser) {
+        if(!$dbUser = (new User())->findById(intval($data['user_id']))) {
             $this->setMessage('error', _('Nenhum usuário foi encontrado!'))->APIResponse([], 422);
             return;
         }
 
-        $userForm = new UserForm();
-        $userForm->loadData(['id' => $dbUser->id] + $data);
+        $userForm = (new UserForm())->loadData(['id' => $dbUser->id] + $data);
         if(!$userForm->validate()) {
             $this->setMessage('error', _('Erros de validação! Verifique os campos.'))
                 ->setErrors($userForm->getFirstErrors())->APIResponse([], 422);
@@ -147,8 +143,7 @@ class UsersController extends TemplateController
         $count = $users->count();
         $pages = ceil($count / $limit);
         
-        $objects = $users->fetch(true);
-        if($objects) {
+        if($objects = $users->fetch(true)) {
             User::withUserType($objects);
             foreach($objects as $user) {
                 $params = ['user_id' => $user->id];

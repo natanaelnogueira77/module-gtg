@@ -11,7 +11,7 @@ class UserSeeder extends Seeder
     {
         User::insertMany([
             [
-                'utip_id' => User::USER_TYPE_ADMIN,
+                'utip_id' => User::UT_ADMIN,
                 'name' => 'Admin',
                 'password' => 'starter',
                 'email' => 'admin@projectexample.com',

@@ -13,8 +13,7 @@ class ContactController extends TemplateController
 
         $contactForm = new ContactForm();
         if($this->request->isPost()) {
-            $contactForm->loadData($data);
-            if($contactForm->send()) {
+            if($contactForm->loadData($data)->send()) {
                 $this->session->setFlash('success', _('Sua mensagem foi enviada com sucesso!'));
                 $this->redirect('contact.index');
             } else {

@@ -29,8 +29,7 @@ class LoginForm extends Model
             return null;
         }
 
-        $user = $user = User::getByEmail($this->email);
-        if(!$user) {
+        if(!$user = User::getByEmail($this->email)) {
             $this->addError('email', _('Este email não foi encontrado!'));
             return null;
         }

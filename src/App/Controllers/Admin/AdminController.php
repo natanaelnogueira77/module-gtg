@@ -13,8 +13,7 @@ class AdminController extends TemplateController
     {
         $this->addData();
 
-        $dbUserCounts = (new User())->get([], 'utip_id, COUNT(*) as users_count')->group('utip_id')->fetch('count');
-        if($dbUserCounts) {
+        if($dbUserCounts = (new User())->get([], 'utip_id, COUNT(*) as users_count')->group('utip_id')->fetch('count')) {
             foreach($dbUserCounts as $dbUserCount) {
                 $usersCount[$dbUserCount->utip_id] = $dbUserCount->users_count;
             }

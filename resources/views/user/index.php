@@ -20,6 +20,9 @@
         <a href="<?= $block['url'] ?>" style="text-decoration: none;">
             <div class="card shadow br-15" card-link>
                 <div class="card-body text-dark">
+                    <div class="text-center">
+                        <i class="<?= $block['icon'] ?> text-info" style="font-size: 3rem;"></i>
+                    </div>
                     <h3 class="text-center"><?= $block['title'] ?></h3>
                     <p class="text-center"><?= $block['text'] ?></p>
                 </div>

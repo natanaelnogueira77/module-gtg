@@ -16,8 +16,7 @@ class AuthController extends Controller
 
         $loginForm = new LoginForm();
         if($this->request->isPost()) {
-            $loginForm->loadData($data);
-            if($user = $loginForm->login()) {
+            if($user = $loginForm->loadData($data)->login()) {
                 $this->session->setAuth($user);
                 $this->session->setFlash('success', sprintf(_("Seja bem-vindo(a), %s!"), $user->name));
                 if(isset($data['redirect'])) {
@@ -46,8 +45,7 @@ class AuthController extends Controller
     public function check(array $data): void 
     {
         $loginForm = new LoginForm();
-        $loginForm->loadData($data);
-        if($user = $loginForm->login()) {
+        if($user = $loginForm->loadData($data)->login()) {
             $this->session->setAuth($user);
             $this->APIResponse([], 200);
         } else {

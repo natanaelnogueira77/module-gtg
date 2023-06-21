@@ -9,12 +9,8 @@ use Src\Models\UserType;
 
 class User extends UserModel 
 {
-    const STATUS_INACTIVE = 0;
-    const STATUS_ACTIVE = 1;
-    const STATUS_DELETED = 2;
-
-    const USER_TYPE_ADMIN = 1;
-    const USER_TYPE_STANDARD = 2;
+    const UT_ADMIN = 1;
+    const UT_STANDARD = 2;
 
     public $socialUser;
     public $userMetas = [];
@@ -43,19 +39,6 @@ class User extends UserModel
             'meta' => 'meta',
             'value' => 'value'
         ];
-    }
-
-    public function encode(): static 
-    {
-        $this->slug = is_string($this->slug) ? slugify($this->slug) : null;
-        $this->email = strtolower($this->email);
-        $this->token = is_string($this->email) ? md5($this->email) : null;
-
-        if(!password_get_info($this->password)['algo']) {
-            $this->password = password_hash($this->password, PASSWORD_DEFAULT);
-        }
-
-        return $this;
     }
 
     public function rules(): array 
@@ -103,6 +86,65 @@ class User extends UserModel
         return !$this->hasErrors();
     }
 
+    public function save(): bool 
+    {
+        $this->slug = is_string($this->slug) ? slugify($this->slug) : null;
+        $this->email = strtolower($this->email);
+        $this->token = is_string($this->email) ? md5($this->email) : null;
+
+        return parent::save();
+    }
+
+    public static function insertMany(array $objects): array|false 
+    {
+        if(count($objects) > 0) {
+            foreach($objects as $object) {
+                $object->slug = is_string($object->slug) ? slugify($object->slug) : null;
+                $object->email = strtolower($object->email);
+                $object->token = is_string($object->email) ? md5($object->email) : null;
+            }
+        }
+
+        return parent::insertMany($object);
+    }
+
+    public static function saveMany(array $objects): array|false 
+    {
+        if(count($objects) > 0) {
+            foreach($objects as $object) {
+                $object->slug = is_string($object->slug) ? slugify($object->slug) : null;
+                $object->email = strtolower($object->email);
+                $object->token = is_string($object->email) ? md5($object->email) : null;
+            }
+        }
+
+        return parent::saveMany($object);
+    }
+
+    public function encode(): static 
+    {
+        if(!password_get_info($this->password)['algo']) {
+            $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+        }
+
+        return $this;
+    }
+
+    public function destroy(): bool 
+    {
+        if($this->isAdmin()) {
+            $this->addError('destroy', _('Vai por mim, isso vai dar ruim! Você não pode excluir o administrador do sistema.'));
+            return false;
+        } elseif((new SocialUser())->get(['usu_id' => $this->id])->count()) {
+            $this->addError('destroy', _('Você não pode excluir um usuário vinculado à uma rede social!'));
+            return false;
+        } elseif((new UserMeta())->get(['usu_id' => $this->id])->count()) {
+            $this->addError('destroy', _('Você não pode excluir um usuário com dados armazenados!'));
+            return false;
+        }
+        return parent::destroy();
+    }
+
     public function socialUser(string $columns = '*'): ?SocialUser 
     {
         $this->socialUser = $this->hasOne(SocialUser::class, 'usu_id', 'id', $columns)->fetch(false);
@@ -133,7 +175,7 @@ class User extends UserModel
 
     public function isAdmin(): bool
     {
-        return $this->utip_id == self::USER_TYPE_ADMIN;
+        return $this->utip_id == self::UT_ADMIN;
     }
 
     public static function getBySlug(string $slug, string $columns = '*'): ?self 
@@ -154,20 +196,5 @@ class User extends UserModel
     public function verifyPassword(string $password): bool 
     {
         return $this->password ? password_verify($password, $this->password) : false;
-    }
-
-    public function destroy(): bool 
-    {
-        if($this->isAdmin()) {
-            $this->addError('destroy', _('Vai por mim, isso vai dar ruim! Você não pode excluir o administrador do sistema.'));
-            return false;
-        } elseif((new SocialUser())->get(['usu_id' => $this->id])->count()) {
-            $this->addError('destroy', _('Você não pode excluir um usuário vinculado à uma rede social!'));
-            return false;
-        } elseif((new UserMeta())->get(['usu_id' => $this->id])->count()) {
-            $this->addError('destroy', _('Você não pode excluir um usuário com dados armazenados!'));
-            return false;
-        }
-        return parent::destroy();
     }
 }

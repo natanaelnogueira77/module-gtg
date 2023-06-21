@@ -10,14 +10,8 @@ class UserTypeSeeder extends Seeder
     public function run(): void 
     {
         UserType::insertMany([
-            [
-                'name_sing' => 'Administrador',
-                'name_plur' => 'Administradores'
-            ],
-            [
-                'name_sing' => 'Usuário',
-                'name_plur' => 'Usuários'
-            ]
+            ['name_sing' => 'Administrador', 'name_plur' => 'Administradores'],
+            ['name_sing' => 'Usuário', 'name_plur' => 'Usuários']
         ]);
     }
 }

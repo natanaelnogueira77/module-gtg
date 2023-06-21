@@ -16,14 +16,11 @@ class EditController extends TemplateController
 
     public function update(array $data): void 
     {
-        $callback = [];
-        
         $user = $this->session->getAuth();
         $userForm = new UserForm();
-        $userForm->loadData(['id' => $user->id, 'utip_id' => $user->utip_id] + $data);
-        if(!$userForm->validate()) {
+        if(!$userForm->loadData(['id' => $user->id, 'utip_id' => $user->utip_id] + $data)->validate()) {
             $this->setMessage('error', _('Erros de validação! Verifique os campos.'))
-                ->setErrors($userForm->getFirstErrors())->APIResponse($callback, 422);
+                ->setErrors($userForm->getFirstErrors())->APIResponse([], 422);
             return;
         }
 
@@ -37,12 +34,12 @@ class EditController extends TemplateController
 
         if(!$dbUser->save()) {
             $this->setMessage('error', _('Erros de validação! Verifique os campos.'))
-                ->setErrors($dbUser->getFirstErrors())->APIResponse($callback, 422);
+                ->setErrors($dbUser->getFirstErrors())->APIResponse([], 422);
             return;
         }
 
         $this->session->setAuth($dbUser);
-        $this->setMessage('success', _('Seus dados foram atualizados com sucesso!'))->APIResponse($callback, 200);
+        $this->setMessage('success', _('Seus dados foram atualizados com sucesso!'))->APIResponse([], 200);
         return;
     }
 }

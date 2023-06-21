@@ -26,8 +26,7 @@ class ForgotPasswordForm extends Model
             return null;
         }
 
-        $user = User::getByEmail($this->email);
-        if(!$user) {
+        if(!$user = User::getByEmail($this->email)) {
             $this->addError('email', _('O email não foi encontrado!'));
             return null;
         } elseif($lastRequest = $user->getMeta('last_pass_request')) {
