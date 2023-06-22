@@ -95,32 +95,6 @@ class User extends UserModel
         return parent::save();
     }
 
-    public static function insertMany(array $objects): array|false 
-    {
-        if(count($objects) > 0) {
-            foreach($objects as $object) {
-                $object->slug = is_string($object->slug) ? slugify($object->slug) : null;
-                $object->email = strtolower($object->email);
-                $object->token = is_string($object->email) ? md5($object->email) : null;
-            }
-        }
-
-        return parent::insertMany($object);
-    }
-
-    public static function saveMany(array $objects): array|false 
-    {
-        if(count($objects) > 0) {
-            foreach($objects as $object) {
-                $object->slug = is_string($object->slug) ? slugify($object->slug) : null;
-                $object->email = strtolower($object->email);
-                $object->token = is_string($object->email) ? md5($object->email) : null;
-            }
-        }
-
-        return parent::saveMany($object);
-    }
-
     public function encode(): static 
     {
         if(!password_get_info($this->password)['algo']) {

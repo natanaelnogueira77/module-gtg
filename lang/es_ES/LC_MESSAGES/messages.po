@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-06-21 16:52-0300\n"
-"PO-Revision-Date: 2023-06-21 16:53-0300\n"
+"POT-Creation-Date: 2023-06-22 11:56-0300\n"
+"PO-Revision-Date: 2023-06-22 11:56-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -124,7 +124,7 @@ msgstr "Elige la imagen que quedará como icono del sistema."
 msgid "Salvar Configurações"
 msgstr "Guardar Ajustes"
 
-#: resources/views/admin/index.php:236 resources/views/admin/users/index.php:75
+#: resources/views/admin/index.php:233 resources/views/admin/users/index.php:75
 msgid "Deseja realmente excluir este usuário?"
 msgstr "¿Realmente desea eliminar este usuario?"
 
@@ -1010,7 +1010,7 @@ msgstr "¡El apellido debe contener un máximo de %s caracteres!"
 msgid "O apelido informado já está em uso! Tente outro."
 msgstr "¡El apellido dado ya está en uso! Prueba otro."
 
-#: src/Models/User.php:136
+#: src/Models/User.php:110
 msgid ""
 "Vai por mim, isso vai dar ruim! Você não pode excluir o administrador do "
 "sistema."
@@ -1018,11 +1018,11 @@ msgstr ""
 "¡Confía en mí, esto va a salir mal! No puede eliminar el administrador del "
 "sistema."
 
-#: src/Models/User.php:139
+#: src/Models/User.php:113
 msgid "Você não pode excluir um usuário vinculado à uma rede social!"
 msgstr "¡No puedes eliminar un usuario vinculado a una red social!"
 
-#: src/Models/User.php:142
+#: src/Models/User.php:116
 msgid "Você não pode excluir um usuário com dados armazenados!"
 msgstr "¡No puede eliminar un usuario con datos almacenados!"
 

@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-sm-12 col-md-5">
+    <div class="col-sm-12 col-md-4">
         <div>
             <?= 
                 sprintf(
@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    <div class="col-sm-12 col-md-7">
+    <div class="col-sm-12 col-md-8">
         <nav>
             <ul class="pagination justify-content-end flex-wrap">
                 <li class="page-item <?= $currPage > 1 ? '' : 'disabled' ?>">
@@ -25,7 +25,7 @@
                         $i = $currPage - 5 >= 1 
                         ? (
                             $currPage >= $pages - 5 
-                            ? $pages - 10
+                            ? ($pages > 10 ? $pages - 10 : 1)
                             : $currPage - 5
                         ) : 1; 
                         $i <= $pages 
