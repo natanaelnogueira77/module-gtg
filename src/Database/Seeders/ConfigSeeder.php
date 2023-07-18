@@ -13,7 +13,7 @@ class ConfigSeeder extends Seeder
             ['meta' => 'style', 'value' => 'light'],
             ['meta' => 'logo', 'value' => 'public/storage/users/user1/logo.png'],
             ['meta' => 'logo_icon', 'value' => 'public/storage/users/user1/logo-icon.png'],
-            ['meta' => 'login_img', 'value' => 'public/storage/users/user1/plain-blue-background.jpg']
+            ['meta' => 'login_img', 'value' => 'public/storage/users/user1/login-img.jpg']
         ]);
     }
 }

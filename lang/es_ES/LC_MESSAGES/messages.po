@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-06-22 11:56-0300\n"
-"PO-Revision-Date: 2023-06-22 11:56-0300\n"
+"POT-Creation-Date: 2023-07-18 10:37-0300\n"
+"PO-Revision-Date: 2023-07-18 10:37-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.3.2\n"
 "X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SearchPath-0: src\n"
 "X-Poedit-SearchPath-1: resources\n"
@@ -210,7 +210,7 @@ msgstr "Introduce un apellido..."
 
 #: resources/views/admin/users/save.php:64
 #: resources/views/auth/reset-password.php:24
-#: resources/views/components/expired-session.php:48
+#: resources/views/components/expired-session.php:47
 #: resources/views/user/edit.php:64
 #: src/App/Controllers/Admin/UsersController.php:205
 msgid "Email"
@@ -249,7 +249,7 @@ msgid "Não"
 msgstr "No"
 
 #: resources/views/admin/users/save.php:122
-#: resources/views/components/expired-session.php:55
+#: resources/views/components/expired-session.php:54
 #: resources/views/user/edit.php:100
 msgid "Senha"
 msgstr "Contraseña"
@@ -279,7 +279,7 @@ msgid "Atualizar Usuário"
 msgstr "Actualizar Usuario"
 
 #: resources/views/admin/users/save.php:150
-#: resources/views/components/expired-session.php:64
+#: resources/views/components/expired-session.php:63
 #: resources/views/error/index.php:11 resources/views/user/edit.php:127
 msgid "Voltar"
 msgstr "Volver"
@@ -290,7 +290,7 @@ msgid "Entrar | %s"
 msgstr "Entrar | %s"
 
 #: resources/views/auth/login.php:23 resources/views/auth/login.php:43
-#: resources/views/components/expired-session.php:62
+#: resources/views/components/expired-session.php:61
 #: src/App/Controllers/Web/TemplateController.php:48
 msgid "Entrar"
 msgstr "Entrar"
@@ -368,15 +368,15 @@ msgstr "Búsqueda por"
 msgid "Nenhum dado correspondente foi encontrado!"
 msgstr "¡No se encontraron datos coincidentes!"
 
-#: resources/views/components/expired-session.php:43
+#: resources/views/components/expired-session.php:42
 msgid "Sessão expirada, faça login"
 msgstr "Sesión caducada, inicie sesión"
 
-#: resources/views/components/expired-session.php:50
+#: resources/views/components/expired-session.php:49
 msgid "Informe seu email..."
 msgstr "Informa tu email..."
 
-#: resources/views/components/expired-session.php:56
+#: resources/views/components/expired-session.php:55
 msgid "Informe sua senha..."
 msgstr "Informa tu contraseña..."
 
@@ -845,35 +845,35 @@ msgstr "¡El metadado es obligatorio!"
 msgid "O metadado deve conter no máximo %s caractéres!"
 msgstr "¡Los metadatos deben contener un máximo de %s caracteres!"
 
-#: src/Models/Config.php:55
+#: src/Models/Config.php:50
 msgid "A imagem de fundo do login é obrigatória!"
 msgstr "¡La imagen de fondo de inicio de sesión es obligatoria!"
 
-#: src/Models/Config.php:57
+#: src/Models/Config.php:52
 msgid "A imagem de fundo não é uma imagem válida!"
 msgstr "¡La imagen de fondo no es una imagen válida!"
 
-#: src/Models/Config.php:61
+#: src/Models/Config.php:56
 msgid "O logo é obrigatório!"
 msgstr "¡El logo es obligatorio!"
 
-#: src/Models/Config.php:63
+#: src/Models/Config.php:58
 msgid "O logo não é uma imagem válida!"
 msgstr "¡El logo no es una imagen válida!"
 
-#: src/Models/Config.php:67
+#: src/Models/Config.php:62
 msgid "O ícone é obrigatório!"
 msgstr "¡El icono es obligatorio!"
 
-#: src/Models/Config.php:69
+#: src/Models/Config.php:64
 msgid "O ícone não é uma imagem válida!"
 msgstr "¡El icono no es una imagen válida!"
 
-#: src/Models/Config.php:73
+#: src/Models/Config.php:68
 msgid "O tema é obrigatório!"
 msgstr "¡El tema es obligatorio!"
 
-#: src/Models/Config.php:75
+#: src/Models/Config.php:70
 msgid "O tema é inválido!"
 msgstr "¡El tema no es válido!"
 
@@ -974,12 +974,12 @@ msgstr "¡El ID de red social es obligatorio!"
 msgid "O nome da rede social é obrigatório!"
 msgstr "¡El nombre de la red social es obligatorio!"
 
-#: src/Models/SocialUser.php:52
+#: src/Models/SocialUser.php:47
 msgid "O nome da rede social é inválido!"
 msgstr "¡El nombre de la red social no es válido!"
 
-#: src/Models/SocialUser.php:57 src/Models/User.php:76
-#: src/Models/UserForm.php:60
+#: src/Models/SocialUser.php:52 src/Models/User.php:71
+#: src/Models/UserForm.php:55
 msgid "O email informado já está em uso! Tente outro."
 msgstr "¡El email dado ya está en uso! Prueba otro."
 
@@ -1006,11 +1006,11 @@ msgstr "¡El apellido es obligatorio!"
 msgid "O apelido deve conter no máximo %s caractéres!"
 msgstr "¡El apellido debe contener un máximo de %s caracteres!"
 
-#: src/Models/User.php:82 src/Models/UserForm.php:66
+#: src/Models/User.php:77 src/Models/UserForm.php:61
 msgid "O apelido informado já está em uso! Tente outro."
 msgstr "¡El apellido dado ya está en uso! Prueba otro."
 
-#: src/Models/User.php:110
+#: src/Models/User.php:106
 msgid ""
 "Vai por mim, isso vai dar ruim! Você não pode excluir o administrador do "
 "sistema."
@@ -1018,23 +1018,23 @@ msgstr ""
 "¡Confía en mí, esto va a salir mal! No puede eliminar el administrador del "
 "sistema."
 
-#: src/Models/User.php:113
+#: src/Models/User.php:109
 msgid "Você não pode excluir um usuário vinculado à uma rede social!"
 msgstr "¡No puedes eliminar un usuario vinculado a una red social!"
 
-#: src/Models/User.php:116
+#: src/Models/User.php:112
 msgid "Você não pode excluir um usuário com dados armazenados!"
 msgstr "¡No puede eliminar un usuario con datos almacenados!"
 
-#: src/Models/UserMeta.php:48
+#: src/Models/UserMeta.php:43
 msgid "A linguagem é obrigatória!"
 msgstr "¡El idioma es obligatorio!"
 
-#: src/Models/UserMeta.php:52
+#: src/Models/UserMeta.php:47
 msgid "A data da última alteração de senha é obrigatória!"
 msgstr "¡La última fecha de cambio de contraseña es obligatoria!"
 
-#: src/Models/UserMeta.php:54
+#: src/Models/UserMeta.php:49
 msgid ""
 "A data da última alteração de senha deve seguir o padrão dd/mm/aaaa hh:mm:ss!"
 msgstr ""

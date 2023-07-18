@@ -41,42 +41,38 @@ class Config extends DBModel
             'meta' => [
                 [self::RULE_REQUIRED, 'message' => _('O metadado é obrigatório!')],
                 [self::RULE_MAX, 'max' => 50, 'message' => sprintf(_('O metadado deve conter no máximo %s caractéres!'), 50)]
+            ],
+            self::RULE_RAW => [
+                function ($object) {
+                    if(!$object->hasError('meta')) {
+                        if($object->meta == self::LOGIN_IMG_KEY) {
+                            if(!$object->value) {
+                                $object->addError(self::LOGIN_IMG_KEY, _('A imagem de fundo do login é obrigatória!'));
+                            } elseif(!in_array(pathinfo($object->value, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png'])) {
+                                $object->addError(self::LOGIN_IMG_KEY, _('A imagem de fundo não é uma imagem válida!'));
+                            }
+                        } elseif($object->meta == self::LOGO_KEY) {
+                            if(!$object->value) {
+                                $object->addError(self::LOGO_KEY, _('O logo é obrigatório!'));
+                            } elseif(!in_array(pathinfo($object->value, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png'])) {
+                                $object->addError(self::LOGO_KEY, _('O logo não é uma imagem válida!'));
+                            }
+                        } elseif($object->meta == self::LOGO_ICON_KEY) {
+                            if(!$object->value) {
+                                $object->addError(self::LOGO_ICON_KEY, _('O ícone é obrigatório!'));
+                            } elseif(!in_array(pathinfo($object->value, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png'])) {
+                                $object->addError(self::LOGO_ICON_KEY, _('O ícone não é uma imagem válida!'));
+                            }
+                        } elseif($object->meta == self::STYLE_KEY) {
+                            if(!$object->value) {
+                                $object->addError(self::STYLE_KEY, _('O tema é obrigatório!'));
+                            } elseif(!in_array($object->value, ['light', 'dark'])) {
+                                $object->addError(self::STYLE_KEY, _('O tema é inválido!'));
+                            }
+                        }
+                    }
+                }
             ]
         ];
-    }
-
-    public function validate(): bool 
-    {
-        parent::validate();
-
-        if(!$this->hasError('meta')) {
-            if($this->meta == self::LOGIN_IMG_KEY) {
-                if(!$this->value) {
-                    $this->addError(self::LOGIN_IMG_KEY, _('A imagem de fundo do login é obrigatória!'));
-                } elseif(!in_array(pathinfo($this->value, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png'])) {
-                    $this->addError(self::LOGIN_IMG_KEY, _('A imagem de fundo não é uma imagem válida!'));
-                }
-            } elseif($this->meta == self::LOGO_KEY) {
-                if(!$this->value) {
-                    $this->addError(self::LOGO_KEY, _('O logo é obrigatório!'));
-                } elseif(!in_array(pathinfo($this->value, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png'])) {
-                    $this->addError(self::LOGO_KEY, _('O logo não é uma imagem válida!'));
-                }
-            } elseif($this->meta == self::LOGO_ICON_KEY) {
-                if(!$this->value) {
-                    $this->addError(self::LOGO_ICON_KEY, _('O ícone é obrigatório!'));
-                } elseif(!in_array(pathinfo($this->value, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png'])) {
-                    $this->addError(self::LOGO_ICON_KEY, _('O ícone não é uma imagem válida!'));
-                }
-            } elseif($this->meta == self::STYLE_KEY) {
-                if(!$this->value) {
-                    $this->addError(self::STYLE_KEY, _('O tema é obrigatório!'));
-                } elseif(!in_array($this->value, ['light', 'dark'])) {
-                    $this->addError(self::STYLE_KEY, _('O tema é inválido!'));
-                }
-            }
-        }
-
-        return !$this->hasErrors();
     }
 }

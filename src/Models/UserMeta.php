@@ -34,29 +34,25 @@ class UserMeta extends DBModel
             'meta' => [
                 [self::RULE_REQUIRED, 'message' => _('O metadado é obrigatório!')],
                 [self::RULE_MAX, 'max' => 50, 'message' => sprintf(_('O metadado deve conter no máximo %s caractéres!'), 50)]
+            ],
+            self::RULE_RAW => [
+                function ($object) {
+                    if(!$object->hasError('meta')) {
+                        if($object->meta == self::LANG_KEY) {
+                            if(!$object->value) {
+                                $object->addError(self::LANG_KEY, _('A linguagem é obrigatória!'));
+                            }
+                        } elseif($object->meta == self::LAST_PASS_REQUEST_KEY) {
+                            if(!$object->value) {
+                                $object->addError(self::LAST_PASS_REQUEST_KEY, _('A data da última alteração de senha é obrigatória!'));
+                            } elseif(!DateTime::createFromFormat('Y-m-d H:i:s', $object->value)) {
+                                $object->addError(self::LAST_PASS_REQUEST_KEY, _('A data da última alteração de senha deve seguir o padrão dd/mm/aaaa hh:mm:ss!'));
+                            }
+                        }
+                    }
+                }
             ]
         ];
-    }
-
-    public function validate(): bool 
-    {
-        parent::validate();
-
-        if(!$this->hasError('meta')) {
-            if($this->meta == self::LANG_KEY) {
-                if(!$this->value) {
-                    $this->addError(self::LANG_KEY, _('A linguagem é obrigatória!'));
-                }
-            } elseif($this->meta == self::LAST_PASS_REQUEST_KEY) {
-                if(!$this->value) {
-                    $this->addError(self::LAST_PASS_REQUEST_KEY, _('A data da última alteração de senha é obrigatória!'));
-                } elseif(!DateTime::createFromFormat('Y-m-d H:i:s', $this->value)) {
-                    $this->addError(self::LAST_PASS_REQUEST_KEY, _('A data da última alteração de senha deve seguir o padrão dd/mm/aaaa hh:mm:ss!'));
-                }
-            }
-        }
-
-        return !$this->hasErrors();
     }
 
     public function user(string $columns = '*'): ?User

@@ -47,26 +47,22 @@ class UserForm extends Model
             'slug' => [
                 [self::RULE_REQUIRED, 'message' => _('O apelido é obrigatório!')],
                 [self::RULE_MAX, 'max' => 100, 'message' => sprintf(_('O apelido deve conter no máximo %s caractéres!'), 100)]
+            ],
+            self::RULE_RAW => [
+                function ($object) {
+                    if(!$object->hasError('email')) {
+                        if((new User())->get(['email' => $object->email] + (isset($object->id) ? ['!=' => ['id' => $object->id]] : []))->count()) {
+                            $object->addError('email', _('O email informado já está em uso! Tente outro.'));
+                        }
+                    }
+                    
+                    if(!$object->hasError('slug')) {
+                        if((new User())->get(['slug' => $object->slug] + (isset($object->id) ? ['!=' => ['id' => $object->id]] : []))->count()) {
+                            $this->addError('slug', _('O apelido informado já está em uso! Tente outro.'));
+                        }
+                    }
+                }
             ]
         ];
-    }
-
-    public function validate(): bool 
-    {
-        parent::validate();
-
-        if(!$this->hasError('email')) {
-            if((new User())->get(['email' => $this->email] + (isset($this->id) ? ['!=' => ['id' => $this->id]] : []))->count()) {
-                $this->addError('email', _('O email informado já está em uso! Tente outro.'));
-            }
-        }
-        
-        if(!$this->hasError('slug')) {
-            if((new User())->get(['slug' => $this->slug] + (isset($this->id) ? ['!=' => ['id' => $this->id]] : []))->count()) {
-                $this->addError('slug', _('O apelido informado já está em uso! Tente outro.'));
-            }
-        }
-
-        return !$this->hasErrors();
     }
 }

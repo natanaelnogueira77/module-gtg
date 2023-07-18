@@ -144,7 +144,7 @@ class App {
                     object.load("close");
                 }
             }
-        })
+        });
     }
 
     load(action) {
@@ -270,6 +270,18 @@ class App {
         elem.find("input, textarea, select").each(function () {
             if($(this).attr("type") !== "submit") {
                 $(this).val(``);
+            }
+        });
+    }
+
+    populateForm(elem, content = {}, attr = 'id') {
+        elem.find("input, textarea, select").each(function () {
+            if($(this).attr("type") !== "submit") {
+                if(content[$(this).attr(attr)] != '') {
+                    $(this).val(content[$(this).attr(attr)]);
+                } else {
+                    $(this).val(``);
+                }
             }
         });
     }
