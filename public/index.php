@@ -12,19 +12,19 @@ if(file_exists($maintenance = __DIR__ . '/../maintenance.php')) {
 require_once __DIR__ . '/../vendor/autoload.php';
 $app = require_once __DIR__ . '/../config/app.php';
 
-$app->router->namespace('Src\App\Controllers\Web');
+$app->router->namespace('Src\App\Controllers\Auth');
 
 $app->router->group(null);
-$app->router->get('/', 'HomeController:index', 'home.index', \Src\App\Middlewares\GuestMiddleware::class);
-$app->router->post('/', 'HomeController:index', 'home.index', \Src\App\Middlewares\GuestMiddleware::class);
+$app->router->get('/', 'AuthController:index', 'home.index', \Src\App\Middlewares\GuestMiddleware::class);
+$app->router->post('/', 'AuthController:index', 'home.index', \Src\App\Middlewares\GuestMiddleware::class);
 
-$app->router->namespace('Src\App\Controllers\Auth');
+$app->router->group('login');
+$app->router->post('/expired', 'AuthController:expired', 'auth.expired');
+$app->router->post('/check', 'AuthController:check', 'auth.check');
 
 $app->router->group('entrar', \Src\App\Middlewares\GuestMiddleware::class);
 $app->router->get('/', 'AuthController:index', 'auth.index');
 $app->router->post('/', 'AuthController:index', 'auth.index');
-$app->router->post('/expired', 'AuthController:expired', 'auth.expired');
-$app->router->post('/check', 'AuthController:check', 'auth.check');
 
 $app->router->group('redefinir-senha', \Src\App\Middlewares\GuestMiddleware::class);
 $app->router->get('/', 'ResetPasswordController:index', 'resetPassword.index');

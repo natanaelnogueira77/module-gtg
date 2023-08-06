@@ -3,7 +3,7 @@
         'name' => 'gtg/mvc-example',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '4ead8dd55ee7f24d1a719dcb32e4ef0230837a56',
+        'reference' => '55849372c40fbf1d875b87bf8c2ab141d0d69fa0',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -49,7 +49,7 @@
         'gtg/mvc-example' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '4ead8dd55ee7f24d1a719dcb32e4ef0230837a56',
+            'reference' => '55849372c40fbf1d875b87bf8c2ab141d0d69fa0',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -58,7 +58,7 @@
         'gtg/php-mvc-core' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '20c2a2ed2b206805d16aa7dfaf582d3b3ba5762d',
+            'reference' => '43741a2705dc8e948b776b27737a627ecf624f6e',
             'type' => 'library',
             'install_path' => __DIR__ . '/../gtg/php-mvc-core',
             'aliases' => array(
@@ -76,9 +76,9 @@
             'dev_requirement' => false,
         ),
         'masterminds/html5' => array(
-            'pretty_version' => '2.8.0',
-            'version' => '2.8.0.0',
-            'reference' => '3c5d5a56d56f48a1ca08a0670f0f80c1dad368f3',
+            'pretty_version' => '2.8.1',
+            'version' => '2.8.1.0',
+            'reference' => 'f47dcf3c70c584de14f21143c55d9939631bc6cf',
             'type' => 'library',
             'install_path' => __DIR__ . '/../masterminds/html5',
             'aliases' => array(),

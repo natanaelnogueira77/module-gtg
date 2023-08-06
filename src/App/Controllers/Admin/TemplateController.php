@@ -56,7 +56,7 @@ class TemplateController extends Controller
                 'level' => 1, 
                 'icon' => 'metismenu-icon pe-7s-user', 
                 'url' => $this->getRoute('admin.users.create'), 
-                'desc' => _('Criar Usuário')
+                'desc' => _('Cadastrar Usuário')
             ]
         ];
 
@@ -100,9 +100,9 @@ class TemplateController extends Controller
                         'heading' => _('Linguagens'),
                         'curr_img' => url("public/imgs/flags/{$this->session->getLanguage()[1]}.png"),
                         'items' => [
-                            ['url' => $this->getRoute('language.index', ['lang' => 'pt']),'desc' => _('Português')],
-                            ['url' => $this->getRoute('language.index', ['lang' => 'en']),'desc' => _('Inglês')],
-                            ['url' => $this->getRoute('language.index', ['lang' => 'es']),'desc' => _('Espanhol')]
+                            ['url' => $this->getRoute('language.index', ['lang' => 'pt']), 'desc' => _('Português')],
+                            ['url' => $this->getRoute('language.index', ['lang' => 'en']), 'desc' => _('Inglês')],
+                            ['url' => $this->getRoute('language.index', ['lang' => 'es']), 'desc' => _('Espanhol')]
                         ]
                     ],
                     'items' => [

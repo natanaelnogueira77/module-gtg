@@ -103,11 +103,7 @@
         ]);
 
         if($session->getAuth()) {
-            $this->insert('components/expired-session', [
-                'action' => $router->route('auth.check'),
-                'return' => $router->route('auth.index'),
-                'check' => $router->route('auth.expired')
-            ]);
+            $this->insert('components/expired-session');
         }
     ?>
 </body>

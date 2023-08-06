@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-07-18 10:36-0300\n"
-"PO-Revision-Date: 2023-07-18 10:36-0300\n"
+"POT-Creation-Date: 2023-08-05 21:11-0300\n"
+"PO-Revision-Date: 2023-08-05 21:12-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -62,69 +62,69 @@ msgstr "Nível de Usuário"
 msgid "Todos os Usuários"
 msgstr "Todos os Usuários"
 
-#: resources/views/admin/index.php:108
+#: resources/views/admin/index.php:115
 msgid "Configurações do Sistema"
 msgstr "Configurações do Sistema"
 
-#: resources/views/admin/index.php:117
+#: resources/views/admin/index.php:124
 msgid "Tema"
 msgstr "Tema"
 
-#: resources/views/admin/index.php:118
+#: resources/views/admin/index.php:125
 msgid "Escolha o tema de cores do sistema."
 msgstr "Escolha o tema de cores do sistema."
 
-#: resources/views/admin/index.php:123
+#: resources/views/admin/index.php:130
 msgid "Escolha o tema de cores do sistema..."
 msgstr "Escolha o tema de cores do sistema..."
 
-#: resources/views/admin/index.php:125
+#: resources/views/admin/index.php:132
 msgid "Tema Claro"
 msgstr "Tema Claro"
 
-#: resources/views/admin/index.php:128
+#: resources/views/admin/index.php:135
 msgid "Tema Escuro"
 msgstr "Tema Escuro"
 
-#: resources/views/admin/index.php:136
+#: resources/views/admin/index.php:143
 msgid "Imagem de Fundo (Login)"
 msgstr "Imagem de Fundo (Login)"
 
-#: resources/views/admin/index.php:137
+#: resources/views/admin/index.php:144
 msgid "Escolha a imagem que ficará de fundo na página de login."
 msgstr "Escolha a imagem que ficará de fundo na página de login."
 
-#: resources/views/admin/index.php:149 resources/views/admin/index.php:176
-#: resources/views/admin/index.php:201
+#: resources/views/admin/index.php:156 resources/views/admin/index.php:183
+#: resources/views/admin/index.php:208
 msgid "Escolher Imagem"
 msgstr "Escolher Imagem"
 
-#: resources/views/admin/index.php:153 resources/views/admin/index.php:180
-#: resources/views/admin/index.php:205
+#: resources/views/admin/index.php:160 resources/views/admin/index.php:187
+#: resources/views/admin/index.php:212
 msgid "Remover Imagem"
 msgstr "Remover Imagem"
 
-#: resources/views/admin/index.php:163
+#: resources/views/admin/index.php:170
 msgid "Logo"
 msgstr "Logo"
 
-#: resources/views/admin/index.php:164
+#: resources/views/admin/index.php:171
 msgid "Escolha a imagem que ficará como logo do sistema."
 msgstr "Escolha a imagem que ficará como logo do sistema."
 
-#: resources/views/admin/index.php:188
+#: resources/views/admin/index.php:195
 msgid "Ícone (Tamanho Recomendado: 512 x 512)"
 msgstr "Ícone (Tamanho Recomendado: 512 x 512)"
 
-#: resources/views/admin/index.php:189
+#: resources/views/admin/index.php:196
 msgid "Escolha a imagem que ficará como ícone do sistema."
 msgstr "Escolha a imagem que ficará como ícone do sistema."
 
-#: resources/views/admin/index.php:214
+#: resources/views/admin/index.php:221
 msgid "Salvar Configurações"
 msgstr "Salvar Configurações"
 
-#: resources/views/admin/index.php:233 resources/views/admin/users/index.php:75
+#: resources/views/admin/index.php:240 resources/views/admin/users/index.php:75
 msgid "Deseja realmente excluir este usuário?"
 msgstr "Deseja realmente excluir este usuário?"
 
@@ -145,8 +145,8 @@ msgstr "Segue abaixo a lista de usuários do sistema"
 #: resources/views/admin/users/save.php:9
 #: resources/views/admin/users/save.php:148
 #: src/App/Controllers/Admin/TemplateController.php:59
-msgid "Criar Usuário"
-msgstr "Criar Usuário"
+msgid "Cadastrar Usuário"
+msgstr "Cadastrar Usuário"
 
 #: resources/views/admin/users/save.php:3
 #, php-format
@@ -155,8 +155,8 @@ msgstr "Editar Usuário | %s"
 
 #: resources/views/admin/users/save.php:3
 #, php-format
-msgid "Criar Usuário | %s"
-msgstr "Criar Usuário | %s"
+msgid "Cadastrar Usuário | %s"
+msgstr "Cadastrar Usuário | %s"
 
 #: resources/views/admin/users/save.php:9
 #, php-format
@@ -173,11 +173,11 @@ msgstr ""
 
 #: resources/views/admin/users/save.php:12
 msgid ""
-"Preencha os dados abaixo para criar um usuário, e então clique em \"Criar "
-"Usuário\""
+"Preencha os dados abaixo para cadastrar um usuário, e então clique em "
+"\"Cadastrar Usuário\""
 msgstr ""
-"Preencha os dados abaixo para criar um usuário, e então clique em \"Criar "
-"Usuário\""
+"Preencha os dados abaixo para cadastrar um usuário, e então clique em "
+"\"Cadastrar Usuário\""
 
 #: resources/views/admin/users/save.php:24 resources/views/user/edit.php:21
 msgid "Informações da Conta"
@@ -610,11 +610,6 @@ msgstr "Digite sua mensagem"
 #: resources/views/web/contact.php:100
 msgid "Envie-nos sua dúvida a qualquer hora!"
 msgstr "Envie-nos sua dúvida a qualquer hora!"
-
-#: resources/views/web/home.php:3
-#, php-format
-msgid "Principal | %s"
-msgstr "Principal | %s"
 
 #: src/App/Controllers/Admin/AdminController.php:37
 msgid "Lamentamos, mas ocorreu algum erro na requisição!"
@@ -1059,6 +1054,10 @@ msgstr "O nome no plural deve conter no máximo %s caractéres!"
 #: src/Models/UserType.php:50
 msgid "Você não pode excluir um tipo de usuário vinculado à um usuário!"
 msgstr "Você não pode excluir um tipo de usuário vinculado à um usuário!"
+
+#, php-format
+#~ msgid "Principal | %s"
+#~ msgstr "Principal | %s"
 
 #~ msgid "O valor é obrigatório!"
 #~ msgstr "O valor é obrigatório!"

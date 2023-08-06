@@ -235,12 +235,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/natanaelnogueira77/gtg-mvc-core.git",
-                "reference": "20c2a2ed2b206805d16aa7dfaf582d3b3ba5762d"
+                "reference": "43741a2705dc8e948b776b27737a627ecf624f6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/natanaelnogueira77/gtg-mvc-core/zipball/20c2a2ed2b206805d16aa7dfaf582d3b3ba5762d",
-                "reference": "20c2a2ed2b206805d16aa7dfaf582d3b3ba5762d",
+                "url": "https://api.github.com/repos/natanaelnogueira77/gtg-mvc-core/zipball/43741a2705dc8e948b776b27737a627ecf624f6e",
+                "reference": "43741a2705dc8e948b776b27737a627ecf624f6e",
                 "shasum": ""
             },
             "require": {
@@ -252,7 +252,7 @@
                 "php": ">=8.1",
                 "phpmailer/phpmailer": "^6.6"
             },
-            "time": "2023-06-03T03:13:32+00:00",
+            "time": "2023-07-18T13:35:51+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "source",
@@ -273,7 +273,7 @@
             ],
             "support": {
                 "issues": "https://github.com/natanaelnogueira77/gtg-mvc-core/issues",
-                "source": "https://github.com/natanaelnogueira77/gtg-mvc-core/tree/v1.0.5a"
+                "source": "https://github.com/natanaelnogueira77/gtg-mvc-core/tree/v1.0.8"
             },
             "install-path": "../gtg/php-mvc-core"
         },
@@ -346,17 +346,17 @@
         },
         {
             "name": "masterminds/html5",
-            "version": "2.8.0",
-            "version_normalized": "2.8.0.0",
+            "version": "2.8.1",
+            "version_normalized": "2.8.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Masterminds/html5-php.git",
-                "reference": "3c5d5a56d56f48a1ca08a0670f0f80c1dad368f3"
+                "reference": "f47dcf3c70c584de14f21143c55d9939631bc6cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/3c5d5a56d56f48a1ca08a0670f0f80c1dad368f3",
-                "reference": "3c5d5a56d56f48a1ca08a0670f0f80c1dad368f3",
+                "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/f47dcf3c70c584de14f21143c55d9939631bc6cf",
+                "reference": "f47dcf3c70c584de14f21143c55d9939631bc6cf",
                 "shasum": ""
             },
             "require": {
@@ -366,7 +366,7 @@
             "require-dev": {
                 "phpunit/phpunit": "^4.8.35 || ^5.7.21 || ^6 || ^7 || ^8"
             },
-            "time": "2023-04-26T07:27:39+00:00",
+            "time": "2023-05-10T11:58:31+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -410,7 +410,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Masterminds/html5-php/issues",
-                "source": "https://github.com/Masterminds/html5-php/tree/2.8.0"
+                "source": "https://github.com/Masterminds/html5-php/tree/2.8.1"
             },
             "install-path": "../masterminds/html5"
         },

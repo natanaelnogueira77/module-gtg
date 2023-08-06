@@ -7,9 +7,9 @@
 
         var is_session_expired = false;
 
-        function check_session(url) {
+        function check_session() {
             app.callAjax({
-                url: url,
+                url: <?php echo json_encode($router->route('auth.expired')) ?>,
                 type: 'post',
                 success: function (response) {
                     if(response.success) {
@@ -22,7 +22,7 @@
         }
         
         var count_interval = setInterval(function () {
-            check_session(<?php echo json_encode($router->route('auth.expired')) ?>);
+            check_session();
             if(is_session_expired == true) {
                 clearInterval(count_interval);
             }
@@ -59,7 +59,7 @@
                 </div>
                 <div class="modal-footer d-block text-center">
                     <input type="submit" class="btn btn-lg btn-primary" value="<?= _('Entrar') ?>">
-                    <a href="<?= $return ?>" class="btn btn-lg btn-secondary">
+                    <a href="<?= $router->route('auth.index') ?>" class="btn btn-lg btn-secondary">
                         <?= _('Voltar') ?>
                     </a>
                 </div>

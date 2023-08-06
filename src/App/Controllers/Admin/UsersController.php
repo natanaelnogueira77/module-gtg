@@ -91,8 +91,8 @@ class UsersController extends TemplateController
             return;
         }
 
-        $userForm = (new UserForm())->loadData(['id' => $dbUser->id] + $data);
-        if(!$userForm->validate()) {
+        $userForm = new UserForm();
+        if(!$userForm->loadData(['id' => $dbUser->id] + $data)->validate()) {
             $this->setMessage('error', _('Erros de validação! Verifique os campos.'))
                 ->setErrors($userForm->getFirstErrors())->APIResponse([], 422);
             return;
