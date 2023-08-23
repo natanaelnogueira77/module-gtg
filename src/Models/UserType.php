@@ -44,6 +44,11 @@ class UserType extends DBModel
         return $this->users;
     }
 
+    public static function withUsers(array $objects, array $filters = [], string $columns = '*'): array
+    {
+        return self::withHasMany($objects, User::class, 'utip_id', 'users', 'id', $filters, $columns);
+    }
+
     public function destroy(): bool 
     {
         if((new User())->get(['utip_id' => $this->id])->count()) {

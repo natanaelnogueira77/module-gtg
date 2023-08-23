@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-08-05 21:11-0300\n"
-"PO-Revision-Date: 2023-08-05 21:12-0300\n"
+"POT-Creation-Date: 2023-08-23 11:39-0300\n"
+"PO-Revision-Date: 2023-08-23 11:39-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -1051,7 +1051,7 @@ msgstr "O nome no plural é obrigatório!"
 msgid "O nome no plural deve conter no máximo %s caractéres!"
 msgstr "O nome no plural deve conter no máximo %s caractéres!"
 
-#: src/Models/UserType.php:50
+#: src/Models/UserType.php:55
 msgid "Você não pode excluir um tipo de usuário vinculado à um usuário!"
 msgstr "Você não pode excluir um tipo de usuário vinculado à um usuário!"
 
