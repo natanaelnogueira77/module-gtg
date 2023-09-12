@@ -2,6 +2,7 @@
 
 namespace Src\Models;
 
+use DateTime;
 use GTG\MVC\DB\UserModel;
 use Src\Models\SocialUser;
 use Src\Models\UserMeta;
@@ -12,9 +13,9 @@ class User extends UserModel
     const UT_ADMIN = 1;
     const UT_STANDARD = 2;
 
-    public $socialUser;
-    public $userMetas = [];
-    public $userType;
+    public ?SocialUser $socialUser = null;
+    public ?array $userMetas = [];
+    public ?UserType $userType = null;
     
     public static function tableName(): string 
     {
@@ -65,16 +66,16 @@ class User extends UserModel
                 [self::RULE_MAX, 'max' => 100, 'message' => sprintf(_('O apelido deve conter no máximo %s caractéres!'), 100)]
             ],
             self::RULE_RAW => [
-                function ($object) {
-                    if(!$object->hasError('email')) {
-                        if((new self())->get(['email' => $object->email] + (isset($object->id) ? ['!=' => ['id' => $object->id]] : []))->count()) {
-                            $object->addError('email', _('O email informado já está em uso! Tente outro.'));
+                function ($model) {
+                    if(!$model->hasError('email')) {
+                        if((new self())->get(['email' => $model->email] + (isset($model->id) ? ['!=' => ['id' => $model->id]] : []))->count()) {
+                            $model->addError('email', _('O email informado já está em uso! Tente outro.'));
                         }
                     }
                     
-                    if(!$object->hasError('slug')) {
-                        if((new self())->get(['slug' => $object->slug] + (isset($object->id) ? ['!=' => ['id' => $object->id]] : []))->count()) {
-                            $object->addError('slug', _('O apelido informado já está em uso! Tente outro.'));
+                    if(!$model->hasError('slug')) {
+                        if((new self())->get(['slug' => $model->slug] + (isset($model->id) ? ['!=' => ['id' => $model->id]] : []))->count()) {
+                            $model->addError('slug', _('O apelido informado já está em uso! Tente outro.'));
                         }
                     }
                 }
@@ -84,7 +85,7 @@ class User extends UserModel
 
     public function save(): bool 
     {
-        $this->slug = is_string($this->slug) ? slugify($this->slug) : null;
+        $this->slug = is_string($this->slug) ? slugify($this->slug) : $this->getSlugByName();
         $this->email = strtolower($this->email);
         $this->token = is_string($this->email) ? md5($this->email) : null;
 
@@ -166,5 +167,10 @@ class User extends UserModel
     public function verifyPassword(string $password): bool 
     {
         return $this->password ? password_verify($password, $this->password) : false;
+    }
+
+    public function getSlugByName(): ?string 
+    {
+        return is_string($this->name) ? slugify($this->name . (new DateTime())->getTimestamp()) : null;
     }
 }

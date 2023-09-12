@@ -38,12 +38,12 @@
             <ul class="header-menu nav">
                 <?php 
                 if($menu):
-                    foreach($menu as $item):
+                    foreach($menu as $menuItem):
                     ?>
                     <li class="btn-group nav-item">
-                        <a href="<?= url($item['url']) ?>" class="nav-link">
-                            <i class="<?= $item['icon'] ?>"></i>
-                            <?= $item['desc'] ?>
+                        <a href="<?= $menuItem->getURL() ?>" class="nav-link">
+                            <i class="<?= $menuItem->getIcon() ?>"></i>
+                            <?= $menuItem->getText() ?>
                         </a>
                     </li>
                     <?php 
@@ -99,11 +99,11 @@
                                 <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
                                     <?php 
                                     if($right["items"]):
-                                        foreach($right["items"] as $item):
-                                            if(!isset($item["divider"])): 
+                                        foreach($right["items"] as $menuItem):
+                                            if(!isset($menuItem->getMetadata()['divider'])): 
                                             ?>
-                                            <a href="<?= $item["url"] ?>" tabindex="0" class="dropdown-item">
-                                                <?= $item["desc"] ?>
+                                            <a href="<?= $menuItem->getURL() ?>" tabindex="0" class="dropdown-item">
+                                                <?= $menuItem->getText() ?>
                                             </a>
                                             <?php else: ?>
                                             <div tabindex="-1" class="dropdown-divider"></div>

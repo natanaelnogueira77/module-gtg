@@ -7,14 +7,13 @@ use Src\Models\User;
 
 class UserForm extends Model 
 {
-    public $id = null;
-    public $utip_id = 0;
-    public $name = '';
-    public $email = '';
-    public $password = '';
-    public $password_confirm = '';
-    public $update_password = '';
-    public $slug = '';
+    public ?int $id = null;
+    public ?int $utip_id = null;
+    public ?string $name = null;
+    public ?string $email = null;
+    public ?string $password = null;
+    public ?string $password_confirm = null;
+    public bool $update_password = false;
 
     public function rules(): array 
     {
@@ -44,21 +43,11 @@ class UserForm extends Model
                 ]
             ] : []
         ) + [
-            'slug' => [
-                [self::RULE_REQUIRED, 'message' => _('O apelido é obrigatório!')],
-                [self::RULE_MAX, 'max' => 100, 'message' => sprintf(_('O apelido deve conter no máximo %s caractéres!'), 100)]
-            ],
             self::RULE_RAW => [
-                function ($object) {
-                    if(!$object->hasError('email')) {
-                        if((new User())->get(['email' => $object->email] + (isset($object->id) ? ['!=' => ['id' => $object->id]] : []))->count()) {
-                            $object->addError('email', _('O email informado já está em uso! Tente outro.'));
-                        }
-                    }
-                    
-                    if(!$object->hasError('slug')) {
-                        if((new User())->get(['slug' => $object->slug] + (isset($object->id) ? ['!=' => ['id' => $object->id]] : []))->count()) {
-                            $this->addError('slug', _('O apelido informado já está em uso! Tente outro.'));
+                function ($model) {
+                    if(!$model->hasError('email')) {
+                        if((new User())->get(['email' => $model->email] + (isset($model->id) ? ['!=' => ['id' => $model->id]] : []))->count()) {
+                            $model->addError('email', _('O email informado já está em uso! Tente outro.'));
                         }
                     }
                 }

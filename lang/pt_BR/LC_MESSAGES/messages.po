@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-08-23 11:39-0300\n"
-"PO-Revision-Date: 2023-08-23 11:39-0300\n"
+"POT-Creation-Date: 2023-09-12 20:31-0300\n"
+"PO-Revision-Date: 2023-09-12 20:31-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -49,8 +49,7 @@ msgid "Ver %s"
 msgstr "Ver %s"
 
 #: resources/views/admin/index.php:77 resources/views/admin/users/index.php:20
-#: src/App/Controllers/Admin/TemplateController.php:45
-#: src/App/Controllers/Admin/TemplateController.php:52
+#: src/Data/MenuData.php:41 src/Data/MenuData.php:46
 msgid "Usuários"
 msgstr "Usuários"
 
@@ -143,8 +142,7 @@ msgstr "Segue abaixo a lista de usuários do sistema"
 
 #: resources/views/admin/users/index.php:26
 #: resources/views/admin/users/save.php:9
-#: resources/views/admin/users/save.php:148
-#: src/App/Controllers/Admin/TemplateController.php:59
+#: resources/views/admin/users/save.php:130 src/Data/MenuData.php:51
 msgid "Cadastrar Usuário"
 msgstr "Cadastrar Usuário"
 
@@ -184,7 +182,7 @@ msgid "Informações da Conta"
 msgstr "Informações da Conta"
 
 #: resources/views/admin/users/save.php:32 resources/views/user/edit.php:33
-#: src/App/Controllers/Admin/UsersController.php:204
+#: src/App/Controllers/Admin/UsersController.php:215
 msgid "Nome"
 msgstr "Nome"
 
@@ -196,89 +194,77 @@ msgstr "Digite o nome e sobrenome."
 msgid "Informe um nome..."
 msgstr "Informe um nome..."
 
-#: resources/views/admin/users/save.php:44 resources/views/user/edit.php:45
-msgid "Apelido"
-msgstr "Apelido"
-
-#: resources/views/admin/users/save.php:45
-msgid "Digite um apelido."
-msgstr "Digite um apelido."
-
-#: resources/views/admin/users/save.php:54 resources/views/user/edit.php:54
-msgid "Informe um apelido..."
-msgstr "Informe um apelido..."
-
-#: resources/views/admin/users/save.php:64
+#: resources/views/admin/users/save.php:44
 #: resources/views/auth/reset-password.php:24
 #: resources/views/components/expired-session.php:47
 #: resources/views/user/edit.php:64
-#: src/App/Controllers/Admin/UsersController.php:205
+#: src/App/Controllers/Admin/UsersController.php:216
 msgid "Email"
 msgstr "Email"
 
-#: resources/views/admin/users/save.php:65
+#: resources/views/admin/users/save.php:45
 msgid "Digite um email válido."
 msgstr "Digite um email válido."
 
-#: resources/views/admin/users/save.php:69 resources/views/user/edit.php:69
+#: resources/views/admin/users/save.php:49 resources/views/user/edit.php:69
 msgid "Informe um email..."
 msgstr "Informe um email..."
 
-#: resources/views/admin/users/save.php:76
+#: resources/views/admin/users/save.php:58
 msgid "Nível do Usuário"
 msgstr "Nível do Usuário"
 
-#: resources/views/admin/users/save.php:77
+#: resources/views/admin/users/save.php:59
 msgid "Escolha o nível do usuário."
 msgstr "Escolha o nível do usuário."
 
-#: resources/views/admin/users/save.php:82
+#: resources/views/admin/users/save.php:64
 msgid "Selecionar..."
 msgstr "Selecionar..."
 
-#: resources/views/admin/users/save.php:98 resources/views/user/edit.php:79
+#: resources/views/admin/users/save.php:80 resources/views/user/edit.php:79
 msgid "Deseja alterar a senha?"
 msgstr "Deseja alterar a senha?"
 
-#: resources/views/admin/users/save.php:103 resources/views/user/edit.php:84
+#: resources/views/admin/users/save.php:85 resources/views/user/edit.php:84
 msgid "Sim"
 msgstr "Sim"
 
-#: resources/views/admin/users/save.php:111 resources/views/user/edit.php:90
+#: resources/views/admin/users/save.php:93 resources/views/user/edit.php:90
 msgid "Não"
 msgstr "Não"
 
-#: resources/views/admin/users/save.php:122
+#: resources/views/admin/users/save.php:104
 #: resources/views/components/expired-session.php:54
 #: resources/views/user/edit.php:100
 msgid "Senha"
 msgstr "Senha"
 
-#: resources/views/admin/users/save.php:123
+#: resources/views/admin/users/save.php:105
 msgid "Digite a nova senha de acesso à conta."
 msgstr "Digite a nova senha de acesso à conta."
 
-#: resources/views/admin/users/save.php:128 resources/views/user/edit.php:106
+#: resources/views/admin/users/save.php:110 resources/views/user/edit.php:106
 msgid "Digite uma senha..."
 msgstr "Digite uma senha..."
 
-#: resources/views/admin/users/save.php:134 resources/views/user/edit.php:112
+#: resources/views/admin/users/save.php:116 resources/views/user/edit.php:112
 msgid "Confirmar Senha"
 msgstr "Confirmar Senha"
 
-#: resources/views/admin/users/save.php:135
+#: resources/views/admin/users/save.php:117
 msgid "Digite novamente a nova senha de acesso à conta."
 msgstr "Digite novamente a nova senha de acesso à conta."
 
-#: resources/views/admin/users/save.php:140 resources/views/user/edit.php:118
+#: resources/views/admin/users/save.php:122 resources/views/user/edit.php:118
 msgid "Digite novamente a senha..."
 msgstr "Digite novamente a senha..."
 
-#: resources/views/admin/users/save.php:148
+#: resources/views/admin/users/save.php:130
 msgid "Atualizar Usuário"
 msgstr "Atualizar Usuário"
 
-#: resources/views/admin/users/save.php:150
+#: resources/views/admin/users/save.php:132
 #: resources/views/components/expired-session.php:63
 #: resources/views/error/index.php:11 resources/views/user/edit.php:127
 msgid "Voltar"
@@ -290,8 +276,7 @@ msgid "Entrar | %s"
 msgstr "Entrar | %s"
 
 #: resources/views/auth/login.php:23 resources/views/auth/login.php:43
-#: resources/views/components/expired-session.php:61
-#: src/App/Controllers/Web/TemplateController.php:48
+#: resources/views/components/expired-session.php:61 src/Data/MenuData.php:75
 msgid "Entrar"
 msgstr "Entrar"
 
@@ -315,7 +300,7 @@ msgstr "Redefinir Senha | %s"
 
 #: resources/views/auth/reset-password.php:19
 #: resources/views/emails/reset-password.php:14
-#: src/App/Controllers/Auth/ResetPasswordController.php:24
+#: src/App/Controllers/Auth/ResetPasswordController.php:30
 msgid "Redefinir Senha"
 msgstr "Redefinir Senha"
 
@@ -534,9 +519,17 @@ msgstr ""
 msgid "Digite o seu nome e sobrenome."
 msgstr "Digite o seu nome e sobrenome."
 
+#: resources/views/user/edit.php:45
+msgid "Apelido"
+msgstr "Apelido"
+
 #: resources/views/user/edit.php:46
 msgid "Digite um apelido seu."
 msgstr "Digite um apelido seu."
+
+#: resources/views/user/edit.php:54
+msgid "Informe um apelido..."
+msgstr "Informe um apelido..."
 
 #: resources/views/user/edit.php:65
 msgid "Digite um email válido seu."
@@ -572,10 +565,7 @@ msgstr "Informações sobre sua atividade no sistema"
 msgid "Contato | %s"
 msgstr "Contato | %s"
 
-#: resources/views/web/contact.php:11
-#: src/App/Controllers/Admin/TemplateController.php:76
-#: src/App/Controllers/User/TemplateController.php:59
-#: src/App/Controllers/Web/TemplateController.php:29
+#: resources/views/web/contact.php:11 src/Data/MenuData.php:23
 msgid "Contato"
 msgstr "Contato"
 
@@ -611,103 +601,51 @@ msgstr "Digite sua mensagem"
 msgid "Envie-nos sua dúvida a qualquer hora!"
 msgstr "Envie-nos sua dúvida a qualquer hora!"
 
-#: src/App/Controllers/Admin/AdminController.php:37
-msgid "Lamentamos, mas ocorreu algum erro na requisição!"
-msgstr "Lamentamos, mas ocorreu algum erro na requisição!"
-
-#: src/App/Controllers/Admin/AdminController.php:42
-#: src/App/Controllers/Admin/UsersController.php:34
-#: src/App/Controllers/Admin/UsersController.php:41
-#: src/App/Controllers/Admin/UsersController.php:96
-#: src/App/Controllers/Admin/UsersController.php:110
-#: src/App/Controllers/Auth/ResetPasswordController.php:38
-#: src/App/Controllers/Auth/ResetPasswordController.php:69
-#: src/App/Controllers/User/EditController.php:22
-#: src/App/Controllers/User/EditController.php:36
-#: src/App/Controllers/Web/ContactController.php:20
-msgid "Erros de validação! Verifique os campos."
-msgstr "Erros de validação! Verifique os campos."
-
-#: src/App/Controllers/Admin/AdminController.php:46
+#: src/App/Controllers/Admin/AdminController.php:47
 msgid "Configurações atualizadas com sucesso!"
 msgstr "Configurações atualizadas com sucesso!"
 
-#: src/App/Controllers/Admin/TemplateController.php:34
-#: src/App/Controllers/User/TemplateController.php:35
-msgid "Painéis"
-msgstr "Painéis"
-
-#: src/App/Controllers/Admin/TemplateController.php:41
-#: src/App/Controllers/Admin/TemplateController.php:109
-#: src/App/Controllers/User/TemplateController.php:42
-#: src/App/Controllers/User/TemplateController.php:92
-#: src/App/Controllers/Web/TemplateController.php:37
-msgid "Painel Principal"
-msgstr "Painel Principal"
-
-#: src/App/Controllers/Admin/TemplateController.php:69
-#: src/App/Controllers/User/TemplateController.php:52
-#: src/App/Controllers/Web/TemplateController.php:23
-msgid "Início"
-msgstr "Início"
-
-#: src/App/Controllers/Admin/TemplateController.php:85
-#: src/App/Controllers/User/TemplateController.php:68
-#: src/App/Controllers/Web/TemplateController.php:57
+#: src/App/Controllers/Admin/TemplateController.php:38
+#: src/App/Controllers/User/TemplateController.php:38
+#: src/App/Controllers/Web/TemplateController.php:29
 msgid "Aguarde, carregando..."
 msgstr "Aguarde, carregando..."
 
-#: src/App/Controllers/Admin/TemplateController.php:100
-#: src/App/Controllers/User/TemplateController.php:83
-#: src/App/Controllers/Web/TemplateController.php:64
+#: src/App/Controllers/Admin/TemplateController.php:53
+#: src/App/Controllers/User/TemplateController.php:53
+#: src/App/Controllers/Web/TemplateController.php:36
 msgid "Linguagens"
 msgstr "Linguagens"
 
-#: src/App/Controllers/Admin/TemplateController.php:103
-#: src/App/Controllers/User/TemplateController.php:86
-#: src/App/Controllers/Web/TemplateController.php:67
+#: src/App/Controllers/Admin/TemplateController.php:56
+#: src/App/Controllers/User/TemplateController.php:56
+#: src/App/Controllers/Web/TemplateController.php:39
 msgid "Português"
 msgstr "Português"
 
-#: src/App/Controllers/Admin/TemplateController.php:104
-#: src/App/Controllers/User/TemplateController.php:87
-#: src/App/Controllers/Web/TemplateController.php:68
+#: src/App/Controllers/Admin/TemplateController.php:57
+#: src/App/Controllers/User/TemplateController.php:57
+#: src/App/Controllers/Web/TemplateController.php:40
 msgid "Inglês"
 msgstr "Inglês"
 
-#: src/App/Controllers/Admin/TemplateController.php:105
-#: src/App/Controllers/User/TemplateController.php:88
-#: src/App/Controllers/Web/TemplateController.php:69
+#: src/App/Controllers/Admin/TemplateController.php:58
+#: src/App/Controllers/User/TemplateController.php:58
+#: src/App/Controllers/Web/TemplateController.php:41
 msgid "Espanhol"
 msgstr "Espanhol"
 
-#: src/App/Controllers/Admin/TemplateController.php:110
-#: src/App/Controllers/User/TemplateController.php:93
-msgid "Editar meus Dados"
-msgstr "Editar meus Dados"
-
-#: src/App/Controllers/Admin/TemplateController.php:111
-#: src/App/Controllers/User/TemplateController.php:94
-msgid "Voltar ao Início"
-msgstr "Voltar ao Início"
-
-#: src/App/Controllers/Admin/TemplateController.php:113
-#: src/App/Controllers/User/TemplateController.php:96
-#: src/App/Controllers/Web/TemplateController.php:41
-msgid "Sair"
-msgstr "Sair"
-
-#: src/App/Controllers/Admin/TemplateController.php:120
-#: src/App/Controllers/User/TemplateController.php:103
+#: src/App/Controllers/Admin/TemplateController.php:67
+#: src/App/Controllers/User/TemplateController.php:67
 #, php-format
 msgid "Painel %s"
 msgstr "Painel %s"
 
-#: src/App/Controllers/Admin/UsersController.php:48
+#: src/App/Controllers/Admin/UsersController.php:53
 msgid "Você se Registrou com Sucesso!"
 msgstr "Você se Registrou com Sucesso!"
 
-#: src/App/Controllers/Admin/UsersController.php:61
+#: src/App/Controllers/Admin/UsersController.php:66
 #, php-format
 msgid ""
 "O usuário \"%s\" foi cadastrado com sucesso! Porém não foi possível enviar "
@@ -716,74 +654,79 @@ msgstr ""
 "O usuário \"%s\" foi cadastrado com sucesso! Porém não foi possível enviar "
 "uma notificação no email dele."
 
-#: src/App/Controllers/Admin/UsersController.php:66
+#: src/App/Controllers/Admin/UsersController.php:71
 #, php-format
 msgid "O usuário \"%s\" foi criado com sucesso!"
 msgstr "O usuário \"%s\" foi criado com sucesso!"
 
-#: src/App/Controllers/Admin/UsersController.php:77
-#: src/App/Controllers/Admin/UsersController.php:90
-#: src/App/Controllers/Admin/UsersController.php:227
+#: src/App/Controllers/Admin/UsersController.php:82
+#: src/App/Controllers/Admin/UsersController.php:95
+#: src/App/Controllers/Admin/UsersController.php:238
 msgid "Nenhum usuário foi encontrado!"
 msgstr "Nenhum usuário foi encontrado!"
 
-#: src/App/Controllers/Admin/UsersController.php:115
+#: src/App/Controllers/Admin/UsersController.php:126
 #, php-format
 msgid "Os dados do usuário \"%s\" foram alterados com sucesso!"
 msgstr "Os dados do usuário \"%s\" foram alterados com sucesso!"
 
-#: src/App/Controllers/Admin/UsersController.php:177
-#: src/App/Controllers/Admin/UsersController.php:180
-#: src/App/Controllers/Admin/UsersController.php:202
+#: src/App/Controllers/Admin/UsersController.php:188
+#: src/App/Controllers/Admin/UsersController.php:191
+#: src/App/Controllers/Admin/UsersController.php:213
 msgid "Ações"
 msgstr "Ações"
 
-#: src/App/Controllers/Admin/UsersController.php:183
+#: src/App/Controllers/Admin/UsersController.php:194
 msgid "Editar Usuário"
 msgstr "Editar Usuário"
 
-#: src/App/Controllers/Admin/UsersController.php:189
+#: src/App/Controllers/Admin/UsersController.php:200
 msgid "Excluir Usuário"
 msgstr "Excluir Usuário"
 
-#: src/App/Controllers/Admin/UsersController.php:203
+#: src/App/Controllers/Admin/UsersController.php:214
 msgid "ID"
 msgstr "ID"
 
-#: src/App/Controllers/Admin/UsersController.php:206
+#: src/App/Controllers/Admin/UsersController.php:217
 msgid "Criado em"
 msgstr "Criado em"
 
-#: src/App/Controllers/Admin/UsersController.php:230
+#: src/App/Controllers/Admin/UsersController.php:241
 msgid "Não foi possível excluir o usuário!"
 msgstr "Não foi possível excluir o usuário!"
 
-#: src/App/Controllers/Admin/UsersController.php:234
+#: src/App/Controllers/Admin/UsersController.php:245
 #, php-format
 msgid "O usuário \"%s\" foi excluído com sucesso."
 msgstr "O usuário \"%s\" foi excluído com sucesso."
 
-#: src/App/Controllers/Auth/AuthController.php:21
+#: src/App/Controllers/Auth/AuthController.php:29
 #, php-format
 msgid "Seja bem-vindo(a), %s!"
 msgstr "Seja bem-vindo(a), %s!"
 
-#: src/App/Controllers/Auth/AuthController.php:32
-#: src/App/Controllers/Auth/AuthController.php:52
+#: src/App/Controllers/Auth/AuthController.php:40
+#: src/App/Controllers/Auth/AuthController.php:63
 msgid "Usuário e/ou senha inválidos!"
 msgstr "Usuário e/ou senha inválidos!"
 
-#: src/App/Controllers/Auth/ResetPasswordController.php:34
+#: src/App/Controllers/Auth/ResetPasswordController.php:40
 #, php-format
 msgid "Um email foi enviado para %s. Verifique para poder redefinir sua senha."
 msgstr ""
 "Um email foi enviado para %s. Verifique para poder redefinir sua senha."
 
-#: src/App/Controllers/Auth/ResetPasswordController.php:55
+#: src/App/Controllers/Auth/ResetPasswordController.php:44
+#: src/Utils/ErrorMessages.php:33
+msgid "Erros de validação! Verifique os campos."
+msgstr "Erros de validação! Verifique os campos."
+
+#: src/App/Controllers/Auth/ResetPasswordController.php:65
 msgid "A chave de verificação é inválida!"
 msgstr "A chave de verificação é inválida!"
 
-#: src/App/Controllers/Auth/ResetPasswordController.php:66
+#: src/App/Controllers/Auth/ResetPasswordController.php:80
 msgid "A senha foi redefinida com sucesso!"
 msgstr "A senha foi redefinida com sucesso!"
 
@@ -811,11 +754,11 @@ msgstr "Nenhum nome de arquivo foi declarado!"
 msgid "O arquivo foi excluído com sucesso."
 msgstr "O arquivo foi excluído com sucesso."
 
-#: src/App/Controllers/User/EditController.php:42
+#: src/App/Controllers/User/EditController.php:49
 msgid "Seus dados foram atualizados com sucesso!"
 msgstr "Seus dados foram atualizados com sucesso!"
 
-#: src/App/Controllers/Web/ContactController.php:17
+#: src/App/Controllers/Web/ContactController.php:24
 msgid "Sua mensagem foi enviada com sucesso!"
 msgstr "Sua mensagem foi enviada com sucesso!"
 
@@ -828,6 +771,30 @@ msgstr ""
 #: src/App/Middlewares/UserMiddleware.php:12
 msgid "Você precisa estar autenticado para acessar essa área!"
 msgstr "Você precisa estar autenticado para acessar essa área!"
+
+#: src/Data/MenuData.php:18
+msgid "Início"
+msgstr "Início"
+
+#: src/Data/MenuData.php:33
+msgid "Painéis"
+msgstr "Painéis"
+
+#: src/Data/MenuData.php:38 src/Data/MenuData.php:61
+msgid "Painel Principal"
+msgstr "Painel Principal"
+
+#: src/Data/MenuData.php:64
+msgid "Editar meus Dados"
+msgstr "Editar meus Dados"
+
+#: src/Data/MenuData.php:67
+msgid "Voltar ao Início"
+msgstr "Voltar ao Início"
+
+#: src/Data/MenuData.php:70
+msgid "Sair"
+msgstr "Sair"
 
 #: src/Models/Config.php:42 src/Models/UserMeta.php:35
 msgid "O metadado é obrigatório!"
@@ -870,8 +837,8 @@ msgstr "O tema é obrigatório!"
 msgid "O tema é inválido!"
 msgstr "O tema é inválido!"
 
-#: src/Models/ContactForm.php:19 src/Models/User.php:51
-#: src/Models/UserForm.php:26
+#: src/Models/ContactForm.php:19 src/Models/User.php:52
+#: src/Models/UserForm.php:25
 msgid "O nome é obrigatório!"
 msgstr "O nome é obrigatório!"
 
@@ -880,19 +847,19 @@ msgstr "O nome é obrigatório!"
 msgid "O nome precisa ter no máximo %s caractéres!"
 msgstr "O nome precisa ter no máximo %s caractéres!"
 
-#: src/Models/ContactForm.php:23 src/Models/ForgotPasswordForm.php:16
+#: src/Models/ContactForm.php:23 src/Models/ForgotPasswordForm.php:17
 #: src/Models/LoginForm.php:17 src/Models/SocialUser.php:40
-#: src/Models/User.php:55 src/Models/UserForm.php:30
+#: src/Models/User.php:56 src/Models/UserForm.php:29
 msgid "O email é obrigatório!"
 msgstr "O email é obrigatório!"
 
-#: src/Models/ContactForm.php:24 src/Models/ForgotPasswordForm.php:17
+#: src/Models/ContactForm.php:24 src/Models/ForgotPasswordForm.php:18
 #: src/Models/LoginForm.php:18 src/Models/SocialUser.php:41
-#: src/Models/User.php:56 src/Models/UserForm.php:31
+#: src/Models/User.php:57 src/Models/UserForm.php:30
 msgid "O email é inválido!"
 msgstr "O email é inválido!"
 
-#: src/Models/ContactForm.php:25 src/Models/ForgotPasswordForm.php:18
+#: src/Models/ContactForm.php:25 src/Models/ForgotPasswordForm.php:19
 #: src/Models/SocialUser.php:42
 #, php-format
 msgid "O email precisa ter no máximo %s caractéres!"
@@ -916,11 +883,11 @@ msgstr "O corpo da mensagem é obrigatório!"
 msgid "A mensagem precisa ter no máximo %s caractéres!"
 msgstr "A mensagem precisa ter no máximo %s caractéres!"
 
-#: src/Models/ForgotPasswordForm.php:30
+#: src/Models/ForgotPasswordForm.php:31
 msgid "O email não foi encontrado!"
 msgstr "O email não foi encontrado!"
 
-#: src/Models/ForgotPasswordForm.php:34
+#: src/Models/ForgotPasswordForm.php:35
 msgid ""
 "Uma requisição já foi enviada para este email! Espere 1 hora para poder "
 "enviar outra."
@@ -929,7 +896,7 @@ msgstr ""
 "enviar outra."
 
 #: src/Models/LoginForm.php:21 src/Models/ResetPasswordForm.php:17
-#: src/Models/User.php:60 src/Models/UserForm.php:38
+#: src/Models/User.php:61 src/Models/UserForm.php:37
 msgid "A senha é obrigatória!"
 msgstr "A senha é obrigatória!"
 
@@ -941,17 +908,17 @@ msgstr "Este email não foi encontrado!"
 msgid "A senha está incorreta!"
 msgstr "A senha está incorreta!"
 
-#: src/Models/ResetPasswordForm.php:18 src/Models/User.php:61
-#: src/Models/UserForm.php:39
+#: src/Models/ResetPasswordForm.php:18 src/Models/User.php:62
+#: src/Models/UserForm.php:38
 #, php-format
 msgid "A senha deve conter no mínimo %s caractéres!"
 msgstr "A senha deve conter no mínimo %s caractéres!"
 
-#: src/Models/ResetPasswordForm.php:21 src/Models/UserForm.php:42
+#: src/Models/ResetPasswordForm.php:21 src/Models/UserForm.php:41
 msgid "A confirmação de senha é obrigatória!"
 msgstr "A confirmação de senha é obrigatória!"
 
-#: src/Models/ResetPasswordForm.php:22 src/Models/UserForm.php:43
+#: src/Models/ResetPasswordForm.php:22 src/Models/UserForm.php:42
 msgid "As senhas não correspondem!"
 msgstr "As senhas não correspondem!"
 
@@ -971,39 +938,39 @@ msgstr "O nome da rede social é obrigatório!"
 msgid "O nome da rede social é inválido!"
 msgstr "O nome da rede social é inválido!"
 
-#: src/Models/SocialUser.php:52 src/Models/User.php:71
-#: src/Models/UserForm.php:55
+#: src/Models/SocialUser.php:52 src/Models/User.php:72
+#: src/Models/UserForm.php:50
 msgid "O email informado já está em uso! Tente outro."
 msgstr "O email informado já está em uso! Tente outro."
 
-#: src/Models/User.php:48 src/Models/UserForm.php:23
+#: src/Models/User.php:49 src/Models/UserForm.php:22
 msgid "O tipo de usuário é obrigatório!"
 msgstr "O tipo de usuário é obrigatório!"
 
-#: src/Models/User.php:52 src/Models/UserForm.php:27
+#: src/Models/User.php:53 src/Models/UserForm.php:26
 #, php-format
 msgid "O nome deve conter no máximo %s caractéres!"
 msgstr "O nome deve conter no máximo %s caractéres!"
 
-#: src/Models/User.php:57 src/Models/UserForm.php:32
+#: src/Models/User.php:58 src/Models/UserForm.php:31
 #, php-format
 msgid "O email deve conter no máximo %s caractéres!"
 msgstr "O email deve conter no máximo %s caractéres!"
 
-#: src/Models/User.php:64 src/Models/UserForm.php:48
+#: src/Models/User.php:65
 msgid "O apelido é obrigatório!"
 msgstr "O apelido é obrigatório!"
 
-#: src/Models/User.php:65 src/Models/UserForm.php:49
+#: src/Models/User.php:66
 #, php-format
 msgid "O apelido deve conter no máximo %s caractéres!"
 msgstr "O apelido deve conter no máximo %s caractéres!"
 
-#: src/Models/User.php:77 src/Models/UserForm.php:61
+#: src/Models/User.php:78
 msgid "O apelido informado já está em uso! Tente outro."
 msgstr "O apelido informado já está em uso! Tente outro."
 
-#: src/Models/User.php:106
+#: src/Models/User.php:107
 msgid ""
 "Vai por mim, isso vai dar ruim! Você não pode excluir o administrador do "
 "sistema."
@@ -1011,11 +978,11 @@ msgstr ""
 "Vai por mim, isso vai dar ruim! Você não pode excluir o administrador do "
 "sistema."
 
-#: src/Models/User.php:109
+#: src/Models/User.php:110
 msgid "Você não pode excluir um usuário vinculado à uma rede social!"
 msgstr "Você não pode excluir um usuário vinculado à uma rede social!"
 
-#: src/Models/User.php:112
+#: src/Models/User.php:113
 msgid "Você não pode excluir um usuário com dados armazenados!"
 msgstr "Você não pode excluir um usuário com dados armazenados!"
 
@@ -1054,6 +1021,37 @@ msgstr "O nome no plural deve conter no máximo %s caractéres!"
 #: src/Models/UserType.php:55
 msgid "Você não pode excluir um tipo de usuário vinculado à um usuário!"
 msgstr "Você não pode excluir um tipo de usuário vinculado à um usuário!"
+
+#: src/Utils/ErrorMessages.php:10
+msgid "A requisição não pôde ser processada devido a algum erro do cliente!"
+msgstr "A requisição não pôde ser processada devido a algum erro do cliente!"
+
+#: src/Utils/ErrorMessages.php:12
+msgid "Você não tem permissão de acessar!"
+msgstr "Você não tem permissão de acessar!"
+
+#: src/Utils/ErrorMessages.php:14
+msgid "A página ou recurso não pôde ser encontrado!"
+msgstr "A página ou recurso não pôde ser encontrado!"
+
+#: src/Utils/ErrorMessages.php:16
+msgid "O método utilizado não é permitido para essa URL!"
+msgstr "O método utilizado não é permitido para essa URL!"
+
+#: src/Utils/ErrorMessages.php:18
+msgid "O seu pedido foi recebido pelo servidor, mas não pôde ser processado!"
+msgstr "O seu pedido foi recebido pelo servidor, mas não pôde ser processado!"
+
+#: src/Utils/ErrorMessages.php:20
+msgid "Lamentamos, mas houve algum erro interno de servidor!"
+msgstr "Lamentamos, mas houve algum erro interno de servidor!"
+
+#: src/Utils/ErrorMessages.php:23 src/Utils/ErrorMessages.php:28
+msgid "Lamentamos, mas houve algum erro na requisição!"
+msgstr "Lamentamos, mas houve algum erro na requisição!"
+
+#~ msgid "Digite um apelido."
+#~ msgstr "Digite um apelido."
 
 #, php-format
 #~ msgid "Principal | %s"

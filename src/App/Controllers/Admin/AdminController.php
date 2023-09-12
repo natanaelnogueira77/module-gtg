@@ -6,6 +6,7 @@ use Src\App\Controllers\Admin\TemplateController;
 use Src\Models\Config;
 use Src\Models\User;
 use Src\Models\UserType;
+use Src\Utils\ErrorMessages;
 
 class AdminController extends TemplateController  
 {
@@ -29,17 +30,17 @@ class AdminController extends TemplateController
     public function system(array $data): void 
     {
         if(!$objects = (new Config())->saveManyMetas([
-            'style' => $data['style'],
-            'logo' => $data['logo'],
-            'logo_icon' => $data['logo_icon'],
-            'login_img' => $data['login_img']
+            Config::KEY_STYLE => $data['style'],
+            Config::KEY_LOGO => $data['logo'],
+            Config::KEY_LOGO_ICON => $data['logo_icon'],
+            Config::KEY_LOGIN_IMG => $data['login_img']
         ])) {
-            $this->setMessage('error', _('Lamentamos, mas ocorreu algum erro na requisição!'))->APIResponse([], 422);
+            $this->setMessage('error', ErrorMessages::requisition())->APIResponse([], 500);
             return;
         }
 
         if($errors = Config::getErrorsFromMany($objects, true)) {
-            $this->setMessage('error', _('Erros de validação! Verifique os campos.'))->setErrors($errors)->APIResponse([], 422);
+            $this->setMessage('error', ErrorMessages::form())->setErrors($errors)->APIResponse([], 422);
             return;
         }
         
