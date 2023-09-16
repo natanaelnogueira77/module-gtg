@@ -3,8 +3,9 @@
 namespace Src\App\Controllers\Web;
 
 use GTG\MVC\Controller;
-use Src\Models\Config;
+use Src\Components\Theme;
 use Src\Data\MenuData;
+use Src\Models\Config;
 
 class TemplateController extends Controller 
 {
@@ -16,38 +17,31 @@ class TemplateController extends Controller
             Config::KEY_STYLE
         ]);
 
-        $logo = url($configMetas[Config::KEY_LOGO] ?? '');
-        $logoIcon = url($configMetas[Config::KEY_LOGO_ICON] ?? '');
-
-        $user = $this->session->getAuth();
-        $headerMenu = MenuData::getHeaderMenuItems($this->router, $user);
+        $user = $this->session->getAuth() ? $this->session->getAuth() : null;
 
         $this->addViewData([
-            'user' => $user,
-            'logo' => $logo,
-            'shortcutIcon' => $logoIcon,
-            'loadingText' => _('Aguarde, carregando...'),
-            'preloader' => ['logo' => $logo],
-            'header' => [
-                'menu' => $headerMenu,
-                'right' => [
-                    'items' => MenuData::getRightMenuItems($this->router, $user),
-                    'languages' => [
-                        'heading' => _('Linguagens'),
-                        'curr_img' => url("public/imgs/flags/{$this->session->getLanguage()[1]}.png"),
-                        'items' => [
-                            ['url' => $this->getRoute('language.index', ['lang' => 'pt']), 'desc' => _('Português')],
-                            ['url' => $this->getRoute('language.index', ['lang' => 'en']), 'desc' => _('Inglês')],
-                            ['url' => $this->getRoute('language.index', ['lang' => 'es']), 'desc' => _('Espanhol')]
+            'theme' => (new Theme())->loadData([
+                'logo' => $configMetas && $configMetas[Config::KEY_LOGO] ? url($configMetas[Config::KEY_LOGO]) : '',
+                'logo_icon' => $configMetas && $configMetas[Config::KEY_LOGO_ICON] ? url($configMetas[Config::KEY_LOGO_ICON]) : '',
+                'loading_text' => _('Aguarde, carregando...'),
+                'has_header' => true,
+                'has_footer' => true,
+                'header' => [
+                    'menu' => MenuData::getHeaderMenuItems($this->router, $user),
+                    'right' => [
+                        'items' => MenuData::getRightMenuItems($this->router, $user),
+                        'languages' => [
+                            'heading' => _('Linguagens'),
+                            'curr_img' => url("public/imgs/flags/{$this->session->getLanguage()[1]}.png"),
+                            'items' => [
+                                ['url' => $this->getRoute('language.index', ['lang' => 'pt']), 'desc' => _('Português')],
+                                ['url' => $this->getRoute('language.index', ['lang' => 'en']), 'desc' => _('Inglês')],
+                                ['url' => $this->getRoute('language.index', ['lang' => 'es']), 'desc' => _('Espanhol')]
+                            ]
                         ]
                     ]
                 ]
-            ],
-            'footer' => [
-                'logo' => $logo,
-                'socials' => [],
-                'items' => $headerMenu
-            ]
+            ])
         ]);
     }
 }

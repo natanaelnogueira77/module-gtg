@@ -21,7 +21,10 @@ class UserType extends DBModel
 
     public static function attributes(): array 
     {
-        return ['name_sing', 'name_plur'];
+        return [
+            'name_sing', 
+            'name_plur'
+        ];
     }
 
     public function rules(): array 
@@ -46,7 +49,15 @@ class UserType extends DBModel
 
     public static function withUsers(array $objects, array $filters = [], string $columns = '*'): array
     {
-        return self::withHasMany($objects, User::class, 'utip_id', 'users', 'id', $filters, $columns);
+        return self::withHasMany(
+            $objects, 
+            User::class, 
+            'utip_id', 
+            'users', 
+            'id', 
+            $filters, 
+            $columns
+        );
     }
 
     public function destroy(): bool 

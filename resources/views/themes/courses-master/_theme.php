@@ -22,23 +22,23 @@
     <link rel="stylesheet" href="<?= url("public/assets/css/toastr.min.css") ?>">
     <link rel="stylesheet" href="<?= url("public/assets/css/custom.css") ?>">
     <?= $this->section("css"); ?>
-    <link rel="shortcut icon" href="<?= $shortcutIcon ?>" type="image/png">
-    <title><?= $title ?></title>
+    <link rel="shortcut icon" href="<?= $theme->logo_icon ?>" type="image/png">
+    <title><?= $theme->title ?></title>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
     <?php 
-        $this->insert("themes/courses-master/partials/preloader", $preloader);
-        if(!$noHeader) {
-            $this->insert("themes/courses-master/partials/header", $header);
+        $this->insert("themes/courses-master/partials/preloader", ['theme' => $theme]);
+        if($theme->has_header) {
+            $this->insert("themes/courses-master/partials/header", ['theme' => $theme]);
         }
     ?>
 
     <?= $this->section("content"); ?>
 
     <?php 
-        if(!$noFooter) {
-            $this->insert("themes/courses-master/partials/footer", $footer);
+        if($theme->has_footer) {
+            $this->insert("themes/courses-master/partials/footer", ['theme' => $theme]);
         }
     ?>
 

@@ -1,7 +1,6 @@
 <?php 
-    $this->layout("themes/courses-master/_theme", [
-        'title' => sprintf(_('Contato | %s'), $appData['app_name'])
-    ]);
+    $theme->title = sprintf(_('Contato | %s'), $appData['app_name']);
+    $this->layout("themes/courses-master/_theme", ['theme' => $theme]);
 ?>
 
 <?php 

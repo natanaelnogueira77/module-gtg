@@ -3,8 +3,10 @@
 namespace Src\App\Controllers\Admin;
 
 use GTG\MVC\Controller;
-use Src\Models\Config;
+use Src\Components\Theme;
+use Src\Data\ColorsData;
 use Src\Data\MenuData;
+use Src\Models\Config;
 
 class TemplateController extends Controller 
 {
@@ -19,52 +21,43 @@ class TemplateController extends Controller
         $user = $this->session->getAuth();
         $user->userType();
 
-        $bgColors = [
-            'left' => [
-                'light' => 'bg-heavy-rain sidebar-text-dark',
-                'dark' => 'bg-slick-carbon sidebar-text-light'
-            ],
-            'header' => [
-                'light' => 'bg-heavy-rain header-text-dark',
-                'dark' => 'bg-slick-carbon header-text-light'
-            ]
-        ];
-
         $this->view->addData([
-            'user' => $user,
-            'storeAt' => 'public/storage/users/user' . $user->id,
-            'logo' => $configMetas && $configMetas[Config::KEY_LOGO] ? url($configMetas[Config::KEY_LOGO]) : '',
-            'shortcutIcon' => $configMetas && $configMetas[Config::KEY_LOGO_ICON] ? url($configMetas[Config::KEY_LOGO_ICON]) : '',
-            'loadingText' => _('Aguarde, carregando...'),
-            'noLeft' => false,
-            'noFooter' => false,
-            'left' => [
-                'color' => $configMetas[Config::KEY_STYLE] ? $bgColors['left'][$configMetas[Config::KEY_STYLE]] : null,
-                'menu' => MenuData::getLeftMenuItems($this->router, $user),
-                'active' => url() . filter_input(INPUT_GET, 'route', FILTER_DEFAULT)
-            ],
-            'header' => [
-                'left' => true,
-                'color' => $configMetas[Config::KEY_STYLE] ? $bgColors['header'][$configMetas[Config::KEY_STYLE]] : null,
-                'menu' => MenuData::getHeaderMenuItems($this->router, $user),
-                'right' => [
-                    'show' => true,
-                    'languages' => [
-                        'heading' => _('Linguagens'),
-                        'curr_img' => url("public/imgs/flags/{$this->session->getLanguage()[1]}.png"),
-                        'items' => [
-                            ['url' => $this->getRoute('language.index', ['lang' => 'pt']), 'desc' => _('Português')],
-                            ['url' => $this->getRoute('language.index', ['lang' => 'en']), 'desc' => _('Inglês')],
-                            ['url' => $this->getRoute('language.index', ['lang' => 'es']), 'desc' => _('Espanhol')]
-                        ]
-                    ],
-                    'items' => MenuData::getRightMenuItems($this->router, $user),
-                    'avatar' => 'https://www.gravatar.com/avatar/' . md5(strtolower(trim($user->email))),
-                    'avatar_title' => $user->name,
-                    'avatar_subtitle' => $user->userType->name_sing
+            'theme' => (new Theme())->loadData([
+                'logo' => url($configMetas[Config::KEY_LOGO]),
+                'logo_icon' => url($configMetas[Config::KEY_LOGO_ICON]),
+                'loading_text' => _('Aguarde, carregando...'),
+                'store_at' => 'public/storage/users/user' . $user->id,
+                'has_header' => true,
+                'has_left' => true,
+                'has_footer' => false,
+                'header' => [
+                    'left' => true,
+                    'color' => ColorsData::header($configMetas[Config::KEY_STYLE]),
+                    'menu' => MenuData::getHeaderMenuItems($this->router, $user),
+                    'right' => [
+                        'show' => true,
+                        'items' => MenuData::getRightMenuItems($this->router, $user),
+                        'languages' => [
+                            'heading' => _('Linguagens'),
+                            'curr_img' => url("public/imgs/flags/{$this->session->getLanguage()[1]}.png"),
+                            'items' => [
+                                ['url' => $this->getRoute('language.index', ['lang' => 'pt']), 'desc' => _('Português')],
+                                ['url' => $this->getRoute('language.index', ['lang' => 'en']), 'desc' => _('Inglês')],
+                                ['url' => $this->getRoute('language.index', ['lang' => 'es']), 'desc' => _('Espanhol')]
+                            ]
+                        ],
+                        'items' => MenuData::getRightMenuItems($this->router, $user),
+                        'avatar' => 'https://www.gravatar.com/avatar/' . md5(strtolower(trim($user->email))),
+                        'avatar_title' => $user->name,
+                        'avatar_subtitle' => $user->userType->name_sing
+                    ]
+                ],
+                'left' => [
+                    'color' => ColorsData::left($configMetas[Config::KEY_STYLE]),
+                    'menu' => MenuData::getLeftMenuItems($this->router, $user),
+                    'active' => url() . filter_input(INPUT_GET, 'route', FILTER_DEFAULT)
                 ]
-            ],
-            'footer' => ['rightText' => sprintf(_('Painel %s'), $this->appData['app_version'])]
+            ])
         ]);
     }
 }

@@ -29,7 +29,14 @@ class User extends UserModel
 
     public static function attributes(): array 
     {
-        return ['utip_id', 'name', 'email', 'password', 'token', 'slug'];
+        return [
+            'utip_id', 
+            'name', 
+            'email', 
+            'password', 
+            'token', 
+            'slug'
+        ];
     }
 
     public static function metaTableData(): ?array 
@@ -136,12 +143,28 @@ class User extends UserModel
 
     public static function withSocialUser(array $objects, array $filters = [], string $columns = '*'): array
     {
-        return self::withHasOne($objects, UserType::class, 'usu_id', 'socialUser', 'id', $filters, $columns);
+        return self::withHasOne(
+            $objects, 
+            UserType::class, 
+            'usu_id', 
+            'socialUser', 
+            'id', 
+            $filters, 
+            $columns
+        );
     }
 
     public static function withUserType(array $objects, array $filters = [], string $columns = '*'): array
     {
-        return self::withBelongsTo($objects, UserType::class, 'utip_id', 'userType', 'id', $filters, $columns);
+        return self::withBelongsTo(
+            $objects, 
+            UserType::class, 
+            'utip_id', 
+            'userType', 
+            'id', 
+            $filters, 
+            $columns
+        );
     }
 
     public function isAdmin(): bool

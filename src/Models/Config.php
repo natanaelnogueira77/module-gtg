@@ -23,7 +23,10 @@ class Config extends DBModel
 
     public static function attributes(): array 
     {
-        return ['meta', 'value'];
+        return [
+            'meta', 
+            'value'
+        ];
     }
 
     public static function metaTableData(): ?array 

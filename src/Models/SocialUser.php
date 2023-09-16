@@ -21,7 +21,12 @@ class SocialUser extends DBModel
 
     public static function attributes(): array 
     {
-        return ['usu_id', 'social_id', 'email', 'social'];
+        return [
+            'usu_id', 
+            'social_id', 
+            'email', 
+            'social'
+        ];
     }
 
     public function rules(): array 
@@ -65,7 +70,15 @@ class SocialUser extends DBModel
 
     public static function withUser(array $objects, array $filters = [], string $columns = '*'): array
     {
-        return self::withBelongsTo($objects, User::class, 'usu_id', 'user', 'id', $filters, $columns);
+        return self::withBelongsTo(
+            $objects, 
+            User::class, 
+            'usu_id', 
+            'user', 
+            'id', 
+            $filters, 
+            $columns
+        );
     }
 
     public static function getByUserId(int $userId, string $columns = '*'): ?array 

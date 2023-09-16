@@ -25,7 +25,11 @@ class UserMeta extends DBModel
 
     public static function attributes(): array 
     {
-        return ['usu_id', 'meta', 'value'];
+        return [
+            'usu_id', 
+            'meta', 
+            'value'
+        ];
     }
 
     public function rules(): array 
