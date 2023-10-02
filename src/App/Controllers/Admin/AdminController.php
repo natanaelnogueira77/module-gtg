@@ -21,7 +21,12 @@ class AdminController extends TemplateController
         }
 
         $this->render('admin/index', [
-            'configMetas' => (new Config())->getGroupedMetas(['login_img', 'logo', 'logo_icon', 'style']),
+            'configMetas' => (new Config())->getGroupedMetas([
+                Config::KEY_STYLE,
+                Config::KEY_LOGO,
+                Config::KEY_LOGO_ICON,
+                Config::KEY_LOGIN_IMG
+            ]),
             'userTypes' => (new UserType())->get()->fetch(true),
             'usersCount' => $usersCount
         ]);

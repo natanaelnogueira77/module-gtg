@@ -1,9 +1,7 @@
 <?php 
     $theme->title = sprintf($dbUser ? _('Editar Usuário | %s') : _('Cadastrar Usuário | %s'), $appData['app_name']);
     $this->layout("themes/architect-ui/_theme", ['theme' => $theme]);
-?>
 
-<?php 
     $this->insert('themes/architect-ui/components/title', [
         'title' => ($dbUser ? sprintf(_("Editar Usuário \"%s\""), $dbUser->name) : _('Cadastrar Usuário')),
         'subtitle' => $dbUser 

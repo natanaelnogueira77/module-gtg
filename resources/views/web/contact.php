@@ -1,9 +1,7 @@
 <?php 
     $theme->title = sprintf(_('Contato | %s'), $appData['app_name']);
     $this->layout("themes/courses-master/_theme", ['theme' => $theme]);
-?>
 
-<?php 
     $this->insert('themes/courses-master/components/title', [
         'bg_color' => '#6DB3F2',
         'title' => [
