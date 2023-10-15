@@ -54,7 +54,7 @@ class UsersController extends TemplateController
             $this->getView('emails/user-register', [
                 'user' => $dbUser,
                 'password' => $data['password'],
-                'logo' => url((new Config())->getMeta('logo'))
+                'logo' => url((new Config())->getMeta(Config::KEY_LOGO))
             ]), 
             $dbUser->name, 
             $dbUser->email
@@ -208,7 +208,7 @@ class UsersController extends TemplateController
 
         $this->APIResponse([
             'content' => [
-                'table' => $this->getView('components/data-table', [
+                'table' => $this->getView('_components/data-table', [
                     'headers' => [
                         'actions' => ['text' => _('Ações')],
                         'id' => ['text' => _('ID'), 'sort' => true],
@@ -222,7 +222,7 @@ class UsersController extends TemplateController
                     ],
                     'data' => $content
                 ]),
-                'pagination' => $this->getView('components/pagination', [
+                'pagination' => $this->getView('_components/pagination', [
                     'pages' => $pages,
                     'currPage' => $page,
                     'results' => $count,

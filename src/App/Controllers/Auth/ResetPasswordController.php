@@ -41,7 +41,7 @@ class ResetPasswordController extends Controller
                 );
                 $this->redirect('auth.index');
             } else {
-                $this->session->setFlash('error', _('Erros de validação! Verifique os campos.'));
+                $this->session->setFlash('error', ErrorMessages::form());
             }
         }
 

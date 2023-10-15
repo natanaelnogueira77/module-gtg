@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-10-02 10:23-0300\n"
-"PO-Revision-Date: 2023-10-02 10:23-0300\n"
+"POT-Creation-Date: 2023-10-15 00:07-0300\n"
+"PO-Revision-Date: 2023-10-15 00:07-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -15,6 +15,162 @@ msgstr ""
 "X-Poedit-SearchPath-0: src\n"
 "X-Poedit-SearchPath-1: resources\n"
 "X-Poedit-SearchPathExcluded-0: resources/views/themes\n"
+
+#: resources/views/_components/data-table-buttons.php:3
+msgid "Filtrar"
+msgstr "Filter"
+
+#: resources/views/_components/data-table-buttons.php:6
+msgid "Limpar"
+msgstr "Clean"
+
+#: resources/views/_components/data-table-filters.php:5
+msgid "Mostrar"
+msgstr "Show"
+
+#: resources/views/_components/data-table-filters.php:13
+msgid "Linhas"
+msgstr "Rows"
+
+#: resources/views/_components/data-table-filters.php:20
+msgid "Buscar por"
+msgstr "Search for"
+
+#: resources/views/_components/data-table.php:39
+msgid "Nenhum dado correspondente foi encontrado!"
+msgstr "No matching data found!"
+
+#: resources/views/_components/expired-session.php:42
+msgid "Sessão expirada, faça login"
+msgstr "Session expired, please login"
+
+#: resources/views/_components/expired-session.php:47
+#: resources/views/admin/users/save.php:41
+#: resources/views/auth/reset-password.php:26 resources/views/user/edit.php:61
+#: src/App/Controllers/Admin/UsersController.php:216
+msgid "Email"
+msgstr "Email"
+
+#: resources/views/_components/expired-session.php:49
+msgid "Informe seu email..."
+msgstr "Enter your email..."
+
+#: resources/views/_components/expired-session.php:54
+#: resources/views/admin/users/save.php:101 resources/views/user/edit.php:97
+msgid "Senha"
+msgstr "Password"
+
+#: resources/views/_components/expired-session.php:55
+msgid "Informe sua senha..."
+msgstr "Enter your password..."
+
+#: resources/views/_components/expired-session.php:61
+#: resources/views/auth/login.php:25 resources/views/auth/login.php:45
+#: src/Data/MenuData.php:75
+msgid "Entrar"
+msgstr "Login"
+
+#: resources/views/_components/expired-session.php:63
+#: resources/views/admin/users/save.php:129 resources/views/error/index.php:11
+#: resources/views/user/edit.php:124
+msgid "Voltar"
+msgstr "Return"
+
+#: resources/views/_components/media-library.php:84
+#, php-format
+msgid "Tamanho máximo permitido: %sMB"
+msgstr "Maximum size allowed: %sMB"
+
+#: resources/views/_components/media-library.php:138
+#, php-format
+msgid ""
+"A extensão do arquivo que você selecionou não é permitida aqui! Extensões "
+"permitidas: %s"
+msgstr ""
+"The file extension you tried to upload is not allowed here! Allowed "
+"extensions: %s"
+
+#: resources/views/_components/media-library.php:167
+#, php-format
+msgid "O arquivo que você tentou enviar é maior do que %sMB!"
+msgstr "The file you tried to upload is larger than %sMB!"
+
+#: resources/views/_components/media-library.php:212
+msgid "Lamentamos, mas houve uma falha na leitura do arquivo!"
+msgstr "Sorry, there was a failure while reading the file!"
+
+#: resources/views/_components/media-library.php:231
+#, php-format
+msgid ""
+"A extensão do arquivo que você tentou enviar não é permitida aqui! Extensões "
+"permitidas: %s"
+msgstr ""
+"The file extension you tried to upload is not allowed here! Allowed "
+"extensions: %s"
+
+#: resources/views/_components/media-library.php:419
+#: resources/views/_components/media-library.php:422
+#: resources/views/_components/pagination.php:19
+msgid "Anterior"
+msgstr "Previous"
+
+#: resources/views/_components/media-library.php:454
+#: resources/views/_components/media-library.php:457
+#: resources/views/_components/pagination.php:46
+msgid "Próxima"
+msgstr "Next"
+
+#: resources/views/_components/media-library.php:491
+#: resources/views/_components/media-library.php:503
+msgid "Biblioteca de Mídia"
+msgstr "Media Library"
+
+#: resources/views/_components/media-library.php:498
+msgid "Upload de Arquivos"
+msgstr "Files Upload"
+
+#: resources/views/_components/media-library.php:515
+msgid "Clique para selecionar ou"
+msgstr "Click to select or"
+
+#: resources/views/_components/media-library.php:516
+msgid "arraste o(s) arquivo(s)"
+msgstr "drag the file(s)"
+
+#: resources/views/_components/media-library.php:535
+msgid "Pesquisar..."
+msgstr "Search..."
+
+#: resources/views/_components/media-library.php:552
+msgid "Escolher"
+msgstr "Choose"
+
+#: resources/views/_components/media-library.php:555
+msgid "Cancelar"
+msgstr "Cancel"
+
+#: resources/views/_components/pagination.php:6
+#, php-format
+msgid "Mostrando %s à %s de %s resultado(s)"
+msgstr "Showing %s to %s of %s result(s)"
+
+#: resources/views/_components/tinymce.php:27
+#: resources/views/_components/tinymce.php:32
+msgid "Erro de HTTP: "
+msgstr "HTTP Error: "
+
+#: resources/views/_components/tinymce.php:39
+msgid "JSON Inválido: "
+msgstr "Invalid JSON: "
+
+#: resources/views/_components/tinymce.php:47
+msgid "O upload da imagem falhou! Código: "
+msgstr "Image upload failed! Code: "
+
+#: resources/views/admin/_scripts/index.js.php:14
+#: resources/views/admin/users/_scripts/index.js.php:13
+msgid "Deseja realmente excluir este usuário?"
+msgstr "Do you really want to delete this user?"
 
 #: resources/views/admin/index.php:2
 #, php-format
@@ -123,10 +279,6 @@ msgstr "Choose the image that will remain as the system icon."
 msgid "Salvar Configurações"
 msgstr "Save Settings"
 
-#: resources/views/admin/index.php:237 resources/views/admin/users/index.php:72
-msgid "Deseja realmente excluir este usuário?"
-msgstr "Do you really want to delete this user?"
-
 #: resources/views/admin/users/index.php:2
 #, php-format
 msgid "Usuários | %s"
@@ -193,14 +345,6 @@ msgstr "Enter the first and last name."
 msgid "Informe um nome..."
 msgstr "Enter a name..."
 
-#: resources/views/admin/users/save.php:41
-#: resources/views/auth/reset-password.php:26
-#: resources/views/components/expired-session.php:47
-#: resources/views/user/edit.php:61
-#: src/App/Controllers/Admin/UsersController.php:216
-msgid "Email"
-msgstr "Email"
-
 #: resources/views/admin/users/save.php:42
 msgid "Digite um email válido."
 msgstr "Enter a valid email address."
@@ -233,12 +377,6 @@ msgstr "Yes"
 msgid "Não"
 msgstr "No"
 
-#: resources/views/admin/users/save.php:101
-#: resources/views/components/expired-session.php:54
-#: resources/views/user/edit.php:97
-msgid "Senha"
-msgstr "Password"
-
 #: resources/views/admin/users/save.php:102
 msgid "Digite a nova senha de acesso à conta."
 msgstr "Enter the new account access password."
@@ -263,21 +401,10 @@ msgstr "Enter the password again..."
 msgid "Atualizar Usuário"
 msgstr "Update User"
 
-#: resources/views/admin/users/save.php:129
-#: resources/views/components/expired-session.php:63
-#: resources/views/error/index.php:11 resources/views/user/edit.php:124
-msgid "Voltar"
-msgstr "Return"
-
 #: resources/views/auth/login.php:5
 #, php-format
 msgid "Entrar | %s"
 msgstr "Login | %s"
-
-#: resources/views/auth/login.php:25 resources/views/auth/login.php:45
-#: resources/views/components/expired-session.php:61 src/Data/MenuData.php:75
-msgid "Entrar"
-msgstr "Login"
 
 #: resources/views/auth/login.php:29 resources/views/auth/reset-password.php:27
 #: resources/views/web/contact.php:62 resources/views/web/contact.php:63
@@ -327,133 +454,6 @@ msgstr "Re-enter the new password"
 #: resources/views/auth/reset-password.php:63
 msgid "Redefinir"
 msgstr "Reset"
-
-#: resources/views/components/data-table-buttons.php:3
-msgid "Filtrar"
-msgstr "Filter"
-
-#: resources/views/components/data-table-buttons.php:6
-msgid "Limpar"
-msgstr "Clean"
-
-#: resources/views/components/data-table-filters.php:5
-msgid "Mostrar"
-msgstr "Show"
-
-#: resources/views/components/data-table-filters.php:13
-msgid "Linhas"
-msgstr "Rows"
-
-#: resources/views/components/data-table-filters.php:20
-msgid "Buscar por"
-msgstr "Search for"
-
-#: resources/views/components/data-table.php:39
-msgid "Nenhum dado correspondente foi encontrado!"
-msgstr "No matching data found!"
-
-#: resources/views/components/expired-session.php:42
-msgid "Sessão expirada, faça login"
-msgstr "Session expired, please login"
-
-#: resources/views/components/expired-session.php:49
-msgid "Informe seu email..."
-msgstr "Enter your email..."
-
-#: resources/views/components/expired-session.php:55
-msgid "Informe sua senha..."
-msgstr "Enter your password..."
-
-#: resources/views/components/media-library.php:84
-#, php-format
-msgid "Tamanho máximo permitido: %sMB"
-msgstr "Maximum size allowed: %sMB"
-
-#: resources/views/components/media-library.php:138
-#, php-format
-msgid ""
-"A extensão do arquivo que você selecionou não é permitida aqui! Extensões "
-"permitidas: %s"
-msgstr ""
-"The file extension you tried to upload is not allowed here! Allowed "
-"extensions: %s"
-
-#: resources/views/components/media-library.php:167
-#, php-format
-msgid "O arquivo que você tentou enviar é maior do que %sMB!"
-msgstr "The file you tried to upload is larger than %sMB!"
-
-#: resources/views/components/media-library.php:212
-msgid "Lamentamos, mas houve uma falha na leitura do arquivo!"
-msgstr "Sorry, there was a failure while reading the file!"
-
-#: resources/views/components/media-library.php:231
-#, php-format
-msgid ""
-"A extensão do arquivo que você tentou enviar não é permitida aqui! Extensões "
-"permitidas: %s"
-msgstr ""
-"The file extension you tried to upload is not allowed here! Allowed "
-"extensions: %s"
-
-#: resources/views/components/media-library.php:419
-#: resources/views/components/media-library.php:422
-#: resources/views/components/pagination.php:19
-msgid "Anterior"
-msgstr "Previous"
-
-#: resources/views/components/media-library.php:454
-#: resources/views/components/media-library.php:457
-#: resources/views/components/pagination.php:46
-msgid "Próxima"
-msgstr "Next"
-
-#: resources/views/components/media-library.php:491
-#: resources/views/components/media-library.php:503
-msgid "Biblioteca de Mídia"
-msgstr "Media Library"
-
-#: resources/views/components/media-library.php:498
-msgid "Upload de Arquivos"
-msgstr "Files Upload"
-
-#: resources/views/components/media-library.php:515
-msgid "Clique para selecionar ou"
-msgstr "Click to select or"
-
-#: resources/views/components/media-library.php:516
-msgid "arraste o(s) arquivo(s)"
-msgstr "drag the file(s)"
-
-#: resources/views/components/media-library.php:535
-msgid "Pesquisar..."
-msgstr "Search..."
-
-#: resources/views/components/media-library.php:552
-msgid "Escolher"
-msgstr "Choose"
-
-#: resources/views/components/media-library.php:555
-msgid "Cancelar"
-msgstr "Cancel"
-
-#: resources/views/components/pagination.php:6
-#, php-format
-msgid "Mostrando %s à %s de %s resultado(s)"
-msgstr "Showing %s to %s of %s result(s)"
-
-#: resources/views/components/tinymce.php:27
-#: resources/views/components/tinymce.php:32
-msgid "Erro de HTTP: "
-msgstr "HTTP Error: "
-
-#: resources/views/components/tinymce.php:39
-msgid "JSON Inválido: "
-msgstr "Invalid JSON: "
-
-#: resources/views/components/tinymce.php:47
-msgid "O upload da imagem falhou! Código: "
-msgstr "Image upload failed! Code: "
 
 #: resources/views/emails/reset-password.php:15
 #, php-format
@@ -707,11 +707,6 @@ msgstr "Invalid username and/or password!"
 #, php-format
 msgid "Um email foi enviado para %s. Verifique para poder redefinir sua senha."
 msgstr "An email has been sent to %s. Check to be able to reset your password."
-
-#: src/App/Controllers/Auth/ResetPasswordController.php:44
-#: src/Utils/ErrorMessages.php:33
-msgid "Erros de validação! Verifique os campos."
-msgstr "Validation errors! Check the fields."
 
 #: src/App/Controllers/Auth/ResetPasswordController.php:65
 msgid "A chave de verificação é inválida!"
@@ -1040,6 +1035,10 @@ msgstr "We're sorry, but there has been some internal server error!"
 #: src/Utils/ErrorMessages.php:23 src/Utils/ErrorMessages.php:28
 msgid "Lamentamos, mas houve algum erro na requisição!"
 msgstr "We're sorry, but there was an error in the request!"
+
+#: src/Utils/ErrorMessages.php:33
+msgid "Erros de validação! Verifique os campos."
+msgstr "Validation errors! Check the fields."
 
 #, php-format
 #~ msgid "Painel %s"

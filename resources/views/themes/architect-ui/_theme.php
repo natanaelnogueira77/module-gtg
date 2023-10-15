@@ -28,13 +28,13 @@
     <div class="app-container app-theme-white body-tabs-shadow <?= $theme->has_left ? 'fixed-sidebar' : '' ?> fixed-header">
         <?php 
             if($theme->has_header) {
-                $this->insert("themes/architect-ui/partials/header", ['theme' => $theme]);
+                $this->insert("themes/architect-ui/_partials/header", ['theme' => $theme]);
             }
         ?>
         <div class="app-main">
             <?php 
                 if($theme->has_left) {
-                    $this->insert("themes/architect-ui/partials/left", ['theme' => $theme]); 
+                    $this->insert("themes/architect-ui/_partials/left", ['theme' => $theme]); 
                 }
             ?>
             <div class="app-main__outer">
@@ -43,7 +43,7 @@
                 </div>
                 <?php 
                     if($theme->has_footer) {
-                        $this->insert("themes/architect-ui/partials/footer", ['theme' => $theme]);
+                        $this->insert("themes/architect-ui/_partials/footer", ['theme' => $theme]);
                     }
                 ?>
             </div>
@@ -83,7 +83,7 @@
         });
     </script>
     <?php 
-        $this->insert("components/tinymce", [
+        $this->insert('_components/tinymce', [
             'mlAdd' => $router->route('mediaLibrary.add'),
             'mlLoad' => $router->route('mediaLibrary.load'),
             'mlDelete' => $router->route('mediaLibrary.delete'),
@@ -94,7 +94,7 @@
         echo $this->section("scripts");
         echo $this->section("modals");
 
-        $this->insert("components/media-library", [
+        $this->insert("_components/media-library", [
             'mlAdd' => $router->route('mediaLibrary.add'),
             'mlLoad' => $router->route('mediaLibrary.load'),
             'mlDelete' => $router->route('mediaLibrary.delete'),
@@ -103,7 +103,7 @@
         ]);
 
         if($session->getAuth()) {
-            $this->insert('components/expired-session');
+            $this->insert('_components/expired-session');
         }
     ?>
 </body>

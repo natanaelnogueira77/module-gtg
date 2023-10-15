@@ -28,9 +28,9 @@
 </head>
 <body>
     <?php 
-        $this->insert("themes/courses-master/partials/preloader", ['theme' => $theme]);
+        $this->insert("themes/courses-master/_partials/preloader", ['theme' => $theme]);
         if($theme->has_header) {
-            $this->insert("themes/courses-master/partials/header", ['theme' => $theme]);
+            $this->insert("themes/courses-master/_partials/header", ['theme' => $theme]);
         }
     ?>
 
@@ -38,7 +38,7 @@
 
     <?php 
         if($theme->has_footer) {
-            $this->insert("themes/courses-master/partials/footer", ['theme' => $theme]);
+            $this->insert("themes/courses-master/_partials/footer", ['theme' => $theme]);
         }
     ?>
 
@@ -109,7 +109,7 @@
             ?>
         });
     </script>
-    <?php $this->insert("components/tinymce"); ?>
+    <?php $this->insert('_components/tinymce'); ?>
 
     <?= $this->section("scripts"); ?>
     <?= $this->section("modals"); ?>
