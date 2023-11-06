@@ -166,11 +166,11 @@ class DynamicForm
     {
         const object = this;
         if(DynamicForm._defaultActions) {
-            DynamicForm._defaultActions(this);
+            DynamicForm._defaultActions(object);
         }
 
         if(object._actions) {
-            object._actions(this);
+            object._actions(object);
         }
 
         object.form.submit(function (e) {
