@@ -55,6 +55,43 @@
 
         <?php if($theme->header['right']["show"]): ?>
         <div class="app-header-right">
+            <?php if($theme->header['right']['bell']): ?>
+            <div class="header-btn-lg pr-2">
+                <div class="widget-content p-0">
+                    <div class="widget-content-wrapper">
+                        <div class="widget-content-left">
+                            <div class="btn-group">
+                                <a id="bell-notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" 
+                                    class="p-0 btn">
+                                    <?php if($theme->header['right']['bell']['notifications_count']): ?>
+                                    <div class="badge badge-pill badge-danger position-absolute p-1 ml-0">
+                                        <?= $theme->header['right']['bell']['notifications_count'] ?>
+                                    </div>
+                                    <?php endif; ?>
+                                    <i class="icofont-alarm" style="font-size: 2.4rem;"></i>
+                                </a>
+                                <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
+                                    <h6 tabindex="-1" class="dropdown-header"><?= $theme->header['right']['bell']['title'] ?></h6>
+                                    <?php 
+                                    if($theme->header['right']['bell']['notifications']):
+                                        foreach($theme->header['right']['bell']['notifications'] as $notification):
+                                        ?>
+                                        <div tabindex="-1" class="dropdown-divider my-0 <?= $notification->wasRead() ? 'bg-light' : '' ?>"></div>
+                                        <p class="px-3 py-2 mb-0 <?= $notification->wasRead() ? 'bg-light' : '' ?>">
+                                            <?= $notification->getContent() ?>
+                                        </p>
+                                        <?php 
+                                        endforeach;
+                                    endif;
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php endif; ?>
+
             <?php if($theme->header['right']['languages']): ?>
             <div class="header-btn-lg pr-2">
                 <div class="widget-content p-0">

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-10-15 00:07-0300\n"
-"PO-Revision-Date: 2023-10-15 00:07-0300\n"
+"POT-Creation-Date: 2023-11-06 15:38-0300\n"
+"PO-Revision-Date: 2023-11-06 15:39-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.4.1\n"
 "X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SearchPath-0: src\n"
 "X-Poedit-SearchPath-1: resources\n"
@@ -40,112 +40,93 @@ msgstr "Search for"
 msgid "Nenhum dado correspondente foi encontrado!"
 msgstr "No matching data found!"
 
-#: resources/views/_components/expired-session.php:42
+#: resources/views/_components/expired-session.php:7
 msgid "Sessão expirada, faça login"
 msgstr "Session expired, please login"
 
-#: resources/views/_components/expired-session.php:47
+#: resources/views/_components/expired-session.php:12
 #: resources/views/admin/users/save.php:41
 #: resources/views/auth/reset-password.php:26 resources/views/user/edit.php:61
-#: src/App/Controllers/Admin/UsersController.php:216
+#: src/App/Controllers/Admin/UsersController.php:229
 msgid "Email"
 msgstr "Email"
 
-#: resources/views/_components/expired-session.php:49
+#: resources/views/_components/expired-session.php:14
 msgid "Informe seu email..."
 msgstr "Enter your email..."
 
-#: resources/views/_components/expired-session.php:54
+#: resources/views/_components/expired-session.php:19
 #: resources/views/admin/users/save.php:101 resources/views/user/edit.php:97
 msgid "Senha"
 msgstr "Password"
 
-#: resources/views/_components/expired-session.php:55
+#: resources/views/_components/expired-session.php:20
 msgid "Informe sua senha..."
 msgstr "Enter your password..."
 
-#: resources/views/_components/expired-session.php:61
+#: resources/views/_components/expired-session.php:26
 #: resources/views/auth/login.php:25 resources/views/auth/login.php:45
 #: src/Data/MenuData.php:75
 msgid "Entrar"
 msgstr "Login"
 
-#: resources/views/_components/expired-session.php:63
+#: resources/views/_components/expired-session.php:28
+#: resources/views/_components/media-library.php:135
 #: resources/views/admin/users/save.php:129 resources/views/error/index.php:11
 #: resources/views/user/edit.php:124
 msgid "Voltar"
 msgstr "Return"
 
-#: resources/views/_components/media-library.php:84
-#, php-format
-msgid "Tamanho máximo permitido: %sMB"
-msgstr "Maximum size allowed: %sMB"
-
-#: resources/views/_components/media-library.php:138
-#, php-format
-msgid ""
-"A extensão do arquivo que você selecionou não é permitida aqui! Extensões "
-"permitidas: %s"
-msgstr ""
-"The file extension you tried to upload is not allowed here! Allowed "
-"extensions: %s"
-
-#: resources/views/_components/media-library.php:167
-#, php-format
-msgid "O arquivo que você tentou enviar é maior do que %sMB!"
-msgstr "The file you tried to upload is larger than %sMB!"
-
-#: resources/views/_components/media-library.php:212
-msgid "Lamentamos, mas houve uma falha na leitura do arquivo!"
-msgstr "Sorry, there was a failure while reading the file!"
-
-#: resources/views/_components/media-library.php:231
-#, php-format
-msgid ""
-"A extensão do arquivo que você tentou enviar não é permitida aqui! Extensões "
-"permitidas: %s"
-msgstr ""
-"The file extension you tried to upload is not allowed here! Allowed "
-"extensions: %s"
-
-#: resources/views/_components/media-library.php:419
-#: resources/views/_components/media-library.php:422
-#: resources/views/_components/pagination.php:19
-msgid "Anterior"
-msgstr "Previous"
-
-#: resources/views/_components/media-library.php:454
-#: resources/views/_components/media-library.php:457
-#: resources/views/_components/pagination.php:46
-msgid "Próxima"
-msgstr "Next"
-
-#: resources/views/_components/media-library.php:491
-#: resources/views/_components/media-library.php:503
+#: resources/views/_components/media-library.php:7
+#: resources/views/_components/media-library.php:24
 msgid "Biblioteca de Mídia"
 msgstr "Media Library"
 
-#: resources/views/_components/media-library.php:498
-msgid "Upload de Arquivos"
-msgstr "Files Upload"
+#: resources/views/_components/media-library.php:14
+msgid "Upload"
+msgstr "Upload"
 
-#: resources/views/_components/media-library.php:515
+#: resources/views/_components/media-library.php:19
+msgid "Tirar Foto"
+msgstr "Take Photo"
+
+#: resources/views/_components/media-library.php:36
 msgid "Clique para selecionar ou"
 msgstr "Click to select or"
 
-#: resources/views/_components/media-library.php:516
+#: resources/views/_components/media-library.php:37
 msgid "arraste o(s) arquivo(s)"
 msgstr "drag the file(s)"
 
-#: resources/views/_components/media-library.php:535
+#: resources/views/_components/media-library.php:57
+msgid "Selecione a Câmera"
+msgstr "Select the Camera"
+
+#: resources/views/_components/media-library.php:64
+msgid "Câmera Atual"
+msgstr "Current Camera"
+
+#: resources/views/_components/media-library.php:73
+msgid "Capturar"
+msgstr "Capture"
+
+#: resources/views/_components/media-library.php:77
+msgid "Salvar Captura"
+msgstr "Save Capture"
+
+#: resources/views/_components/media-library.php:83
+msgid "Foto Capturada"
+msgstr "Captured Photo"
+
+#: resources/views/_components/media-library.php:96
 msgid "Pesquisar..."
 msgstr "Search..."
 
-#: resources/views/_components/media-library.php:552
+#: resources/views/_components/media-library.php:123
 msgid "Escolher"
 msgstr "Choose"
 
-#: resources/views/_components/media-library.php:555
+#: resources/views/_components/media-library.php:127
 msgid "Cancelar"
 msgstr "Cancel"
 
@@ -154,21 +135,65 @@ msgstr "Cancel"
 msgid "Mostrando %s à %s de %s resultado(s)"
 msgstr "Showing %s to %s of %s result(s)"
 
-#: resources/views/_components/tinymce.php:27
-#: resources/views/_components/tinymce.php:32
+#: resources/views/_components/pagination.php:19
+#: resources/views/_scripts/media-library.js.php:612
+#: resources/views/_scripts/media-library.js.php:615
+msgid "Anterior"
+msgstr "Previous"
+
+#: resources/views/_components/pagination.php:46
+#: resources/views/_scripts/media-library.js.php:647
+#: resources/views/_scripts/media-library.js.php:650
+msgid "Próxima"
+msgstr "Next"
+
+#: resources/views/_components/tinymce.php:29
+#: resources/views/_components/tinymce.php:34
 msgid "Erro de HTTP: "
 msgstr "HTTP Error: "
 
-#: resources/views/_components/tinymce.php:39
+#: resources/views/_components/tinymce.php:41
 msgid "JSON Inválido: "
 msgstr "Invalid JSON: "
 
-#: resources/views/_components/tinymce.php:47
+#: resources/views/_components/tinymce.php:49
 msgid "O upload da imagem falhou! Código: "
 msgstr "Image upload failed! Code: "
 
-#: resources/views/admin/_scripts/index.js.php:14
-#: resources/views/admin/users/_scripts/index.js.php:13
+#: resources/views/_scripts/media-library.js.php:128
+#, php-format
+msgid "Tamanho máximo permitido: %sMB"
+msgstr "Maximum size allowed: %sMB"
+
+#: resources/views/_scripts/media-library.js.php:194
+#, php-format
+msgid ""
+"A extensão do arquivo que você selecionou não é permitida aqui! Extensões "
+"permitidas: %s"
+msgstr ""
+"The file extension you tried to upload is not allowed here! Allowed "
+"extensions: %s"
+
+#: resources/views/_scripts/media-library.js.php:349
+#, php-format
+msgid "O arquivo que você tentou enviar é maior do que %sMB!"
+msgstr "The file you tried to upload is larger than %sMB!"
+
+#: resources/views/_scripts/media-library.js.php:394
+msgid "Lamentamos, mas houve uma falha na leitura do arquivo!"
+msgstr "Sorry, there was a failure while reading the file!"
+
+#: resources/views/_scripts/media-library.js.php:415
+#, php-format
+msgid ""
+"A extensão do arquivo que você tentou enviar não é permitida aqui! Extensões "
+"permitidas: %s"
+msgstr ""
+"The file extension you tried to upload is not allowed here! Allowed "
+"extensions: %s"
+
+#: resources/views/admin/_scripts/index.js.php:49
+#: resources/views/admin/users/_scripts/index.js.php:12
 msgid "Deseja realmente excluir este usuário?"
 msgstr "Do you really want to delete this user?"
 
@@ -249,33 +274,23 @@ msgstr "Background Image (Login)"
 msgid "Escolha a imagem que ficará de fundo na página de login."
 msgstr "Choose the image that will be the background on the login page."
 
-#: resources/views/admin/index.php:153 resources/views/admin/index.php:180
-#: resources/views/admin/index.php:205
-msgid "Escolher Imagem"
-msgstr "Choose Image"
-
-#: resources/views/admin/index.php:157 resources/views/admin/index.php:184
-#: resources/views/admin/index.php:209
-msgid "Remover Imagem"
-msgstr "Remove Image"
-
-#: resources/views/admin/index.php:167
+#: resources/views/admin/index.php:153
 msgid "Logo"
 msgstr "Logo"
 
-#: resources/views/admin/index.php:168
+#: resources/views/admin/index.php:154
 msgid "Escolha a imagem que ficará como logo do sistema."
 msgstr "Choose the image that will be the system logo."
 
-#: resources/views/admin/index.php:192
+#: resources/views/admin/index.php:164
 msgid "Ícone (Tamanho Recomendado: 512 x 512)"
 msgstr "Icon (Recommended Size: 512 x 512)"
 
-#: resources/views/admin/index.php:193
+#: resources/views/admin/index.php:165
 msgid "Escolha a imagem que ficará como ícone do sistema."
 msgstr "Choose the image that will remain as the system icon."
 
-#: resources/views/admin/index.php:218
+#: resources/views/admin/index.php:176
 msgid "Salvar Configurações"
 msgstr "Save Settings"
 
@@ -333,7 +348,7 @@ msgid "Informações da Conta"
 msgstr "Account Details"
 
 #: resources/views/admin/users/save.php:29 resources/views/user/edit.php:30
-#: src/App/Controllers/Admin/UsersController.php:215
+#: src/App/Controllers/Admin/UsersController.php:228
 msgid "Nome"
 msgstr "Name"
 
@@ -609,35 +624,35 @@ msgstr "Settings updated successfully!"
 msgid "Aguarde, carregando..."
 msgstr "Wait, loading..."
 
-#: src/App/Controllers/Admin/TemplateController.php:41
-#: src/App/Controllers/User/TemplateController.php:41
+#: src/App/Controllers/Admin/TemplateController.php:40
+#: src/App/Controllers/User/TemplateController.php:40
 #: src/App/Controllers/Web/TemplateController.php:34
 msgid "Linguagens"
 msgstr "Languages"
 
-#: src/App/Controllers/Admin/TemplateController.php:44
-#: src/App/Controllers/User/TemplateController.php:44
+#: src/App/Controllers/Admin/TemplateController.php:43
+#: src/App/Controllers/User/TemplateController.php:43
 #: src/App/Controllers/Web/TemplateController.php:37
 msgid "Português"
 msgstr "Portuguese"
 
-#: src/App/Controllers/Admin/TemplateController.php:45
-#: src/App/Controllers/User/TemplateController.php:45
+#: src/App/Controllers/Admin/TemplateController.php:44
+#: src/App/Controllers/User/TemplateController.php:44
 #: src/App/Controllers/Web/TemplateController.php:38
 msgid "Inglês"
 msgstr "English"
 
-#: src/App/Controllers/Admin/TemplateController.php:46
-#: src/App/Controllers/User/TemplateController.php:46
+#: src/App/Controllers/Admin/TemplateController.php:45
+#: src/App/Controllers/User/TemplateController.php:45
 #: src/App/Controllers/Web/TemplateController.php:39
 msgid "Espanhol"
 msgstr "Spanish"
 
-#: src/App/Controllers/Admin/UsersController.php:53
+#: src/App/Controllers/Admin/UsersController.php:57
 msgid "Você se Registrou com Sucesso!"
 msgstr "You Have Successfully Registered!"
 
-#: src/App/Controllers/Admin/UsersController.php:66
+#: src/App/Controllers/Admin/UsersController.php:70
 #, php-format
 msgid ""
 "O usuário \"%s\" foi cadastrado com sucesso! Porém não foi possível enviar "
@@ -646,49 +661,49 @@ msgstr ""
 "The user \"%s\" was successfully registered! However, it was not possible to "
 "send a notification to his email."
 
-#: src/App/Controllers/Admin/UsersController.php:71
+#: src/App/Controllers/Admin/UsersController.php:77
 #, php-format
 msgid "O usuário \"%s\" foi criado com sucesso!"
 msgstr "The user \"%s\" was successfully created!"
 
-#: src/App/Controllers/Admin/UsersController.php:82
-#: src/App/Controllers/Admin/UsersController.php:95
-#: src/App/Controllers/Admin/UsersController.php:238
+#: src/App/Controllers/Admin/UsersController.php:89
+#: src/App/Controllers/Admin/UsersController.php:102
+#: src/App/Controllers/Admin/UsersController.php:251
 msgid "Nenhum usuário foi encontrado!"
 msgstr "No users found!"
 
-#: src/App/Controllers/Admin/UsersController.php:126
+#: src/App/Controllers/Admin/UsersController.php:139
 #, php-format
 msgid "Os dados do usuário \"%s\" foram alterados com sucesso!"
 msgstr "User \"%s\" data has been changed successfully!"
 
-#: src/App/Controllers/Admin/UsersController.php:188
-#: src/App/Controllers/Admin/UsersController.php:191
-#: src/App/Controllers/Admin/UsersController.php:213
+#: src/App/Controllers/Admin/UsersController.php:201
+#: src/App/Controllers/Admin/UsersController.php:204
+#: src/App/Controllers/Admin/UsersController.php:226
 msgid "Ações"
 msgstr "Actions"
 
-#: src/App/Controllers/Admin/UsersController.php:194
+#: src/App/Controllers/Admin/UsersController.php:207
 msgid "Editar Usuário"
 msgstr "Edit User"
 
-#: src/App/Controllers/Admin/UsersController.php:200
+#: src/App/Controllers/Admin/UsersController.php:213
 msgid "Excluir Usuário"
 msgstr "Delete User"
 
-#: src/App/Controllers/Admin/UsersController.php:214
+#: src/App/Controllers/Admin/UsersController.php:227
 msgid "ID"
 msgstr "ID"
 
-#: src/App/Controllers/Admin/UsersController.php:217
+#: src/App/Controllers/Admin/UsersController.php:230
 msgid "Criado em"
 msgstr "Created at"
 
-#: src/App/Controllers/Admin/UsersController.php:241
+#: src/App/Controllers/Admin/UsersController.php:254
 msgid "Não foi possível excluir o usuário!"
 msgstr "Unable to delete user!"
 
-#: src/App/Controllers/Admin/UsersController.php:245
+#: src/App/Controllers/Admin/UsersController.php:258
 #, php-format
 msgid "O usuário \"%s\" foi excluído com sucesso."
 msgstr "The user \"%s\" has been successfully deleted."
@@ -703,16 +718,16 @@ msgstr "Welcome, %s!"
 msgid "Usuário e/ou senha inválidos!"
 msgstr "Invalid username and/or password!"
 
-#: src/App/Controllers/Auth/ResetPasswordController.php:40
+#: src/App/Controllers/Auth/ResetPasswordController.php:41
 #, php-format
 msgid "Um email foi enviado para %s. Verifique para poder redefinir sua senha."
 msgstr "An email has been sent to %s. Check to be able to reset your password."
 
-#: src/App/Controllers/Auth/ResetPasswordController.php:65
+#: src/App/Controllers/Auth/ResetPasswordController.php:66
 msgid "A chave de verificação é inválida!"
 msgstr "The verification key is invalid!"
 
-#: src/App/Controllers/Auth/ResetPasswordController.php:80
+#: src/App/Controllers/Auth/ResetPasswordController.php:81
 msgid "A senha foi redefinida com sucesso!"
 msgstr "The password has been successfully reset!"
 
@@ -725,23 +740,23 @@ msgstr ""
 msgid "Nenhum arquivo foi escolhido!"
 msgstr "No file was chosen!"
 
-#: src/App/Controllers/MediaLibraryController.php:77
+#: src/App/Controllers/MediaLibraryController.php:81
 msgid "Lamentamos, mas parece que ocorreu um erro no upload do seu arquivo."
 msgstr "We're sorry, but it looks like there was an error uploading your file."
 
-#: src/App/Controllers/MediaLibraryController.php:81
+#: src/App/Controllers/MediaLibraryController.php:85
 msgid "O arquivo foi carregado com sucesso!"
 msgstr "The file has been uploaded successfully!"
 
-#: src/App/Controllers/MediaLibraryController.php:87
+#: src/App/Controllers/MediaLibraryController.php:91
 msgid "Nenhum nome de arquivo foi declarado!"
 msgstr "No filename has been declared!"
 
-#: src/App/Controllers/MediaLibraryController.php:100
+#: src/App/Controllers/MediaLibraryController.php:104
 msgid "O arquivo foi excluído com sucesso."
 msgstr "The file has been successfully deleted."
 
-#: src/App/Controllers/User/EditController.php:49
+#: src/App/Controllers/User/EditController.php:55
 msgid "Seus dados foram atualizados com sucesso!"
 msgstr "Your data has been successfully updated!"
 
@@ -834,19 +849,19 @@ msgid "O nome precisa ter no máximo %s caractéres!"
 msgstr "The name must have a maximum of %s characters!"
 
 #: src/Models/ContactForm.php:23 src/Models/ForgotPasswordForm.php:17
-#: src/Models/LoginForm.php:17 src/Models/SocialUser.php:45
+#: src/Models/LoginForm.php:17 src/Models/SocialUser.php:46
 #: src/Models/User.php:63 src/Models/UserForm.php:29
 msgid "O email é obrigatório!"
 msgstr "The email is required!"
 
 #: src/Models/ContactForm.php:24 src/Models/ForgotPasswordForm.php:18
-#: src/Models/LoginForm.php:18 src/Models/SocialUser.php:46
+#: src/Models/LoginForm.php:18 src/Models/SocialUser.php:47
 #: src/Models/User.php:64 src/Models/UserForm.php:30
 msgid "O email é inválido!"
 msgstr "The email is invalid!"
 
 #: src/Models/ContactForm.php:25 src/Models/ForgotPasswordForm.php:19
-#: src/Models/SocialUser.php:47
+#: src/Models/SocialUser.php:48
 #, php-format
 msgid "O email precisa ter no máximo %s caractéres!"
 msgstr "The email must have a maximum of %s characters!"
@@ -908,23 +923,23 @@ msgstr "The password confirmation is required!"
 msgid "As senhas não correspondem!"
 msgstr "Passwords do not match!"
 
-#: src/Models/SocialUser.php:36
+#: src/Models/SocialUser.php:37
 msgid "O usuário é obrigatório!"
 msgstr "The user is required!"
 
-#: src/Models/SocialUser.php:39
+#: src/Models/SocialUser.php:40
 msgid "O ID da rede social é obrigatório!"
 msgstr "The social network ID is required!"
 
-#: src/Models/SocialUser.php:42
+#: src/Models/SocialUser.php:43
 msgid "O nome da rede social é obrigatório!"
 msgstr "The social network name is required!"
 
-#: src/Models/SocialUser.php:52
+#: src/Models/SocialUser.php:53
 msgid "O nome da rede social é inválido!"
 msgstr "The social network name is invalid!"
 
-#: src/Models/SocialUser.php:57 src/Models/User.php:79
+#: src/Models/SocialUser.php:58 src/Models/User.php:79
 #: src/Models/UserForm.php:50
 msgid "O email informado já está em uso! Tente outro."
 msgstr "The given email is already in use! Try another."
@@ -986,25 +1001,25 @@ msgid ""
 msgstr ""
 "The last password change date must follow the pattern dd/mm/yyyy hh:mm:ss!"
 
-#: src/Models/UserType.php:34
+#: src/Models/UserType.php:35
 msgid "O nome no singular é obrigatório!"
 msgstr "The singular name is required!"
 
-#: src/Models/UserType.php:35
+#: src/Models/UserType.php:36
 #, php-format
 msgid "O nome no singular deve conter no máximo %s caractéres!"
 msgstr "The singular name must contain a maximum of %s characters!"
 
-#: src/Models/UserType.php:38
+#: src/Models/UserType.php:39
 msgid "O nome no plural é obrigatório!"
 msgstr "The plural name is required!"
 
-#: src/Models/UserType.php:39
+#: src/Models/UserType.php:40
 #, php-format
 msgid "O nome no plural deve conter no máximo %s caractéres!"
 msgstr "The plural name must contain a maximum of %s characters!"
 
-#: src/Models/UserType.php:66
+#: src/Models/UserType.php:67
 msgid "Você não pode excluir um tipo de usuário vinculado à um usuário!"
 msgstr "You cannot delete a user type linked to a user!"
 
@@ -1039,6 +1054,27 @@ msgstr "We're sorry, but there was an error in the request!"
 #: src/Utils/ErrorMessages.php:33
 msgid "Erros de validação! Verifique os campos."
 msgstr "Validation errors! Check the fields."
+
+#: src/Utils/ErrorMessages.php:38
+msgid "Lamentamos, mas o excel não pôde ser gerado!"
+msgstr "We're sorry, but the excel could not be generated!"
+
+#: src/Utils/ErrorMessages.php:43
+msgid "Lamentamos, mas o PDF não pôde ser gerado!"
+msgstr "We're sorry, but the PDF could not be generated!"
+
+#: src/Utils/ErrorMessages.php:48
+msgid "Lamentamos, mas houveram erros na importação do CSV!"
+msgstr "We're sorry, but there were errors importing the CSV!"
+
+#~ msgid "Escolher Imagem"
+#~ msgstr "Choose Image"
+
+#~ msgid "Remover Imagem"
+#~ msgstr "Remove Image"
+
+#~ msgid "Upload de Arquivos"
+#~ msgstr "Files Upload"
 
 #, php-format
 #~ msgid "Painel %s"

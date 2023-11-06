@@ -1,10 +1,8 @@
 <script>
     $(function () {
-        const app = new App();
-
-        app.form($("#save-user"), function (response) {
+        App.form($("#save-user"), function (response) {
             if(response.link) window.location.href = response.link;
-        });
+        }).apply();
 
         $("input[name$='update_password']").change(function(){
             if($('#update_password1').is(':checked')) {

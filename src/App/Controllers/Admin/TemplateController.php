@@ -26,7 +26,6 @@ class TemplateController extends Controller
                 'logo' => url($configMetas[Config::KEY_LOGO]),
                 'logo_icon' => url($configMetas[Config::KEY_LOGO_ICON]),
                 'loading_text' => _('Aguarde, carregando...'),
-                'store_at' => 'public/storage/users/user' . $user->id,
                 'has_header' => true,
                 'has_left' => true,
                 'has_footer' => false,

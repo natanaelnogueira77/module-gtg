@@ -1,6 +1,5 @@
 <script>
     $(function () {
-        const app = new App();
         const form = $("#save-user");
         const update_password = $("input[name$='update_password']");
         const password_area = $("#password");
@@ -15,8 +14,8 @@
             }
         });
 
-        app.form(form, function (response) {
+        App.form(form, function (response) {
             if(response.link) window.location.href = response.link;
-        });
+        }).apply();
     });
 </script>

@@ -36,7 +36,8 @@ class ResetPasswordController extends Controller
                     $this->session->setFlash('error', $email->error()->getMessage());
                 }
 
-                $this->session->setFlash('success', 
+                $this->session->setFlash(
+                    'success', 
                     sprintf(_("Um email foi enviado para %s. Verifique para poder redefinir sua senha."), $user->email)
                 );
                 $this->redirect('auth.index');

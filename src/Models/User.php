@@ -196,4 +196,14 @@ class User extends UserModel
     {
         return is_string($this->name) ? slugify($this->name . (new DateTime())->getTimestamp()) : null;
     }
+
+    public function getCreatedAtDateTime(): DateTime 
+    {
+        return new DateTime($this->created_at);
+    }
+
+    public function getUpdatedAtDateTime(): DateTime 
+    {
+        return new DateTime($this->updated_at);
+    }
 }

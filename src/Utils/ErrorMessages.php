@@ -32,4 +32,19 @@ class ErrorMessages
     {
         return _('Erros de validação! Verifique os campos.');
     }
+
+    public static function excel(): string 
+    {
+        return _('Lamentamos, mas o excel não pôde ser gerado!');
+    }
+
+    public static function pdf(): string 
+    {
+        return _('Lamentamos, mas o PDF não pôde ser gerado!');
+    }
+
+    public static function csvImport(): string 
+    {
+        return _('Lamentamos, mas houveram erros na importação do CSV!');
+    }
 }

@@ -38,13 +38,17 @@ class UsersController extends TemplateController
             'password_confirm' => $data['password_confirm']
         ]);
         if(!$userForm->validate()) {
-            $this->setMessage('error', ErrorMessages::form())->setErrors($userForm->getFirstErrors())->APIResponse([], 422);
+            $this->setMessage('error', ErrorMessages::form())->setErrors(
+                $userForm->getFirstErrors()
+            )->APIResponse([], 422);
             return;
         }
 
         $dbUser = new User();
         if(!$dbUser->loadData($data)->save()) {
-            $this->setMessage('error', ErrorMessages::form())->setErrors($dbUser->getFirstErrors())->APIResponse([], 422);
+            $this->setMessage('error', ErrorMessages::form())->setErrors(
+                $dbUser->getFirstErrors()
+            )->APIResponse([], 422);
             return;
         }
 
@@ -68,7 +72,10 @@ class UsersController extends TemplateController
                 )
             );
         } else {
-            $this->session->setFlash('success', sprintf(_('O usuário "%s" foi criado com sucesso!'), $dbUser->name));
+            $this->session->setFlash(
+                'success', 
+                sprintf(_('O usuário "%s" foi criado com sucesso!'), $dbUser->name)
+            );
         }
 
         $this->APIResponse(['link' => $this->getRoute('admin.users.edit', ['user_id' => $dbUser->id])], 200);
@@ -106,7 +113,9 @@ class UsersController extends TemplateController
             'update_password' => $data['update_password'] ? true : false
         ]);
         if(!$userForm->validate()) {
-            $this->setMessage('error', ErrorMessages::form())->setErrors($userForm->getFirstErrors())->APIResponse([], 422);
+            $this->setMessage('error', ErrorMessages::form())->setErrors(
+                $userForm->getFirstErrors()
+            )->APIResponse([], 422);
             return;
         }
 
@@ -119,12 +128,16 @@ class UsersController extends TemplateController
         ]);
 
         if(!$dbUser->save()) {
-            $this->setMessage('error', ErrorMessages::form())->setErrors($dbUser->getFirstErrors())->APIResponse([], 422);
+            $this->setMessage('error', ErrorMessages::form())->setErrors(
+                $dbUser->getFirstErrors()
+            )->APIResponse([], 422);
             return;
         }
 
-        $this->setMessage('success', sprintf(_('Os dados do usuário "%s" foram alterados com sucesso!'), $dbUser->name))
-            ->APIResponse([], 200);
+        $this->setMessage(
+            'success', 
+            printf(_('Os dados do usuário "%s" foram alterados com sucesso!'), $dbUser->name)
+        )->APIResponse([], 200);
     }
 
     public function list(array $data): void 
@@ -180,7 +193,7 @@ class UsersController extends TemplateController
                         </div>
                     ",
                     'email' => $user->email,
-                    'created_at' => $this->getDateTime($user->created_at)->format('d/m/Y'),
+                    'created_at' => $user->getCreatedAtDateTime()->format('d/m/Y'),
                     'actions' => "
                         <div class=\"dropup d-inline-block\">
                             <button type=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\" 

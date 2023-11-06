@@ -28,7 +28,9 @@ class EditController extends TemplateController
             'update_password' => $data['update_password'] ? true : false
         ]);
         if(!$userForm->validate()) {
-            $this->setMessage('error', ErrorMessages::form())->setErrors($userForm->getFirstErrors())->APIResponse([], 422);
+            $this->setMessage('error', ErrorMessages::form())->setErrors(
+                $userForm->getFirstErrors()
+            )->APIResponse([], 422);
             return;
         }
 
@@ -41,12 +43,17 @@ class EditController extends TemplateController
         ]);
 
         if(!$dbUser->save()) {
-            $this->setMessage('error', ErrorMessages::form())->setErrors($dbUser->getFirstErrors())->APIResponse([], 422);
+            $this->setMessage('error', ErrorMessages::form())->setErrors(
+                $dbUser->getFirstErrors()
+            )->APIResponse([], 422);
             return;
         }
 
         $this->session->setAuth($dbUser);
-        $this->setMessage('success', _('Seus dados foram atualizados com sucesso!'))->APIResponse([], 200);
+        $this->setMessage(
+            'success', 
+            _('Seus dados foram atualizados com sucesso!')
+        )->APIResponse([], 200);
         return;
     }
 }

@@ -239,6 +239,11 @@ class Database
         return $this->exec($trigger->build());
     }
 
+    public function getConnection(): ?PDO 
+    {
+        return Connect::getInstance($this->dbInfo);
+    }
+
     public function prepare(string $sql): PDOStatement|false
     {
         $pdo = Connect::getInstance($this->dbInfo);

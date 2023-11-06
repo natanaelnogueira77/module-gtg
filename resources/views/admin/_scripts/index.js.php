@@ -1,18 +1,53 @@
 <script>
     $(function () {
-        const app = new App();
         const table = $("#users");
         const filters_form = $("#filters");
 
         const mediaLibrary = new MediaLibrary();
-        const dataTable = app.table(table, table.data('action'));
-        dataTable.defaultParams(app.objectifyForm(filters_form)).filtersForm(filters_form)
-        .setMsgFunc((msg) => app.showMessage(msg.message, msg.type)).loadOnChange().addAction((table) => {
+        const FSLogo = (new FileSelector(
+            '#logo-area', 
+            mediaLibrary.setFileTypes(['jpg', 'jpeg', 'png'])
+        ))
+        <?php if($configMetas['logo']): ?>
+        .loadFiles({
+            uri: <?php echo json_encode($configMetas['logo']) ?>,
+            url: <?php echo json_encode(url($configMetas['logo'])) ?>
+        })
+        <?php endif; ?>
+        .render();
+
+        const FSLogoIcon = (new FileSelector(
+            '#logo-icon-area', 
+            mediaLibrary.setFileTypes(['jpg', 'jpeg', 'png'])
+        ))
+        <?php if($configMetas['logo_icon']): ?>
+        .loadFiles({
+            uri: <?php echo json_encode($configMetas['logo_icon']) ?>,
+            url: <?php echo json_encode(url($configMetas['logo_icon'])) ?>
+        })
+        <?php endif; ?>
+        .render();
+
+        const FSLoginImg = (new FileSelector(
+            '#login-img-area', 
+            mediaLibrary.setFileTypes(['jpg', 'jpeg', 'png'])
+        ))
+        <?php if($configMetas['login_img']): ?>
+        .loadFiles({
+            uri: <?php echo json_encode($configMetas['login_img']) ?>,
+            url: <?php echo json_encode(url($configMetas['login_img'])) ?>
+        })
+        <?php endif; ?>
+        .render();
+
+        const dataTable = App.table(table, table.data('action'));
+        dataTable.defaultParams(App.form(filters_form).objectify()).filtersForm(filters_form)
+        .setMsgFunc((msg) => App.showMessage(msg.message, msg.type)).loadOnChange().addAction((table) => {
             table.find("[data-act=delete]").click(function () {
                 var data = $(this).data();
 
                 if(confirm(<?php echo json_encode(_('Deseja realmente excluir este usuário?')) ?>)) {
-                    app.callAjax({
+                    App.callAjax({
                         url: data.action,
                         type: data.method,
                         success: function (response) {
@@ -23,61 +58,22 @@
             });
         }).load();
 
-        $("#logo_upload").click(function () {
-            mediaLibrary.setFileTypes(['jpg', 'jpeg', 'png']).setSuccess(function (path) {
-                $("#logo").val(path);
-                $("img#logo_view").attr("src", `${mediaLibrary.path}/${path}`);
-            }).open();
-        });
-
-        $("#logo_remove").each(function () {
-            $(this).click(function () {
-                $(this).parent().children("#logo").val('');
-                $(this).parent().parent().find("#logo_view").attr("src", '');
-            });
-        });
-
-        $("#logo_icon_upload").click(function () {
-            mediaLibrary.setFileTypes(['jpg', 'jpeg', 'png']).setSuccess(function (path) {
-                $("#logo_icon").val(path);
-                $("img#logo_icon_view").attr("src", `${mediaLibrary.path}/${path}`);
-            }).open();
-        });
-
-        $("#logo_icon_remove").each(function () {
-            $(this).click(function () {
-                $(this).parent().children("#logo_icon").val('');
-                $(this).parent().parent().find("#logo_icon_view").attr("src", '');
-            });
-        });
-
-        $("#login_img_upload").click(function () {
-            mediaLibrary.setFileTypes(['jpg', 'jpeg', 'png']).setSuccess(function (path) {
-                $("#login_img").val(path);
-                $("img#login_img_view").attr("src", `${mediaLibrary.path}/${path}`);
-            }).open();
-        });
-
-        $("#login_img_remove").each(function () {
-            $(this).click(function () {
-                $(this).parent().children("#login_img").val('');
-                $(this).parent().parent().find("#login_img_view").attr("src", '');
-            });
-        });
-
-        app.form($("#system"), function (response) { });
+        const DFSystem = App.form($("#system")).setBeforeAjax(function () {
+            this.formData['logo'] = FSLogo.getURIList();
+            this.formData['logo_icon'] = FSLogoIcon.getURIList();
+            this.formData['login_img'] = FSLoginImg.getURIList();
+            return this;
+        }).setObjectify(true).setSuccessCallback(function (instance, response) {
+            window.location.reload();
+        }).apply();
 
         $("[data-info=users]").click(function() {
             var data = $(this).data();
             $("#panel_users").show('fast');
             
-            dataTable.params({
-                user_type: data.id
-            }).load();
+            dataTable.params({ user_type: data.id }).load();
 
-            $('html,body').animate({
-                scrollTop: $("#panels_top").offset().top},
-                'slow');
+            $('html,body').animate({ scrollTop: $("#panels_top").offset().top }, 'slow');
         });
     });
 </script>
