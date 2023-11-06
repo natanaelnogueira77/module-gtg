@@ -4,7 +4,6 @@ class DynamicForm
     static _defaultErrorCallback = null;
     static _defaultActions = null;
     static _defaultAjaxParams = {};
-    _form = null;
     _successCallback = null;
     _errorCallback = null;
     _feedbackCallback = null;
@@ -12,6 +11,7 @@ class DynamicForm
     _ajaxParams = {};
     _beforeAjax = null;
     _objectify = false;
+    form = null;
     formData = {};
 
     constructor(
@@ -21,7 +21,7 @@ class DynamicForm
         objectify = false
     ) 
     {
-        this._form = form;
+        this.form = form;
         this._successCallback = successCallback;
         this._errorCallback = errorCallback;
         this._objectify = objectify;
@@ -49,7 +49,7 @@ class DynamicForm
 
     setForm(form) 
     {
-        this._form = form;
+        this.form = form;
         return this;
     }
 
@@ -98,7 +98,7 @@ class DynamicForm
     objectify() 
     {
         var data = {};
-        var serializedData = this._form.serializeArray();
+        var serializedData = this.form.serializeArray();
         if(serializedData) {
             for(var i = 0; i < serializedData.length; i++){
                 data[serializedData[i]["name"]] = serializedData[i]["value"];
@@ -110,12 +110,12 @@ class DynamicForm
 
     clean() 
     {
-        if(!this._form) {
+        if(!this.form) {
             console.error(new Error("Form wasn't settled!"));
             return this;
         }
 
-        this._form.find("input, textarea, select").each(function () {
+        this.form.find("input, textarea, select").each(function () {
             if($(this).attr("type") !== "submit" 
                 && $(this).attr("type") !== "checkbox" 
                 && $(this).attr("type") !== "radio") {
@@ -130,12 +130,12 @@ class DynamicForm
 
     loadData(content = {}, attr = 'id') 
     {
-        if(!this._form) {
+        if(!this.form) {
             console.error(new Error("Form wasn't settled!"));
             return this;
         }
         
-        this._form.find("input, textarea, select").each(function () {
+        this.form.find("input, textarea, select").each(function () {
             if($(this).attr("type") !== "submit" 
                 && $(this).attr("type") !== "checkbox" 
                 && $(this).attr("type") !== "radio") {
@@ -173,17 +173,17 @@ class DynamicForm
             object._actions(this);
         }
 
-        object._form.submit(function (e) {
+        object.form.submit(function (e) {
             e.preventDefault();
 
-            object.formData = object._objectify ? object.objectify() : object._form.serialize();
+            object.formData = object._objectify ? object.objectify() : object.form.serialize();
             if(object._beforeAjax) {
                 object._beforeAjax();
             }
 
             $.ajax({
-                url: object._form.attr("action"),
-                type: object._form.attr("method"),
+                url: object.form.attr("action"),
+                type: object.form.attr("method"),
                 data: object.formData,
                 dataType: 'json',
                 success: function (response) {
