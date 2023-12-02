@@ -2,39 +2,48 @@
 
 define('ENV', parse_ini_file(realpath(dirname(__FILE__, 2) . '/env.ini')));
 
-$app = new \GTG\MVC\Application(dirname(__DIR__), [
-    'projectUrl' => ENV['app_url'],
-    'session' => require_once __DIR__ . '/session.php',
-    'db' => require_once __DIR__ . '/database.php',
-    'smtp' => require_once __DIR__ . '/smtp.php',
-    'view' => require_once __DIR__ . '/view.php',
-    'errorHandler' => require_once __DIR__ . '/error-handler.php',
-    'data' => require_once __DIR__ . '/app-data.php'
-]);
-
-if($app->errorHandler) {
-    GTG\MVC\Exceptions\ErrorHandler::setErrorUrl($app->errorHandler['url']);
-}
-
-ini_set('display_errors', 0);
-ini_set('display_startup_errors', 1);
-ini_set('ignore_repeated_source', true);
-ini_set('log_errors', true);
-error_reporting( E_ALL );
-
-set_error_handler(array('GTG\MVC\Exceptions\ErrorHandler', 'control'), E_ALL);
-register_shutdown_function(array('GTG\MVC\Exceptions\ErrorHandler', 'shutdown'));
+$app = new \GTG\MVC\Application(dirname(__DIR__));
+$app->setRouter(ENV['app_url']);
+$app->setSessionParams(
+    ENV['session_auth'], 
+    ENV['session_flash'], 
+    ENV['session_lang']
+);
+$app->setDatabaseConnection(
+    ENV['db_driver'], 
+    ENV['db_name'], 
+    ENV['db_host'], 
+    ENV['db_port'], 
+    ENV['db_username'], 
+    ENV['db_password'],
+    [
+        PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
+        PDO::ATTR_CASE => PDO::CASE_NATURAL
+    ]
+);
+$app->setMigrations(
+    'src/Database/Migrations', 
+    'Src\Database\Migrations'
+);
+$app->setSeeders(
+    'src/Database/Seeders', 
+    'Src\Database\Seeders'
+);
+$app->setSMTP(
+    ENV['smtp_host'],
+    ENV['smtp_port'],
+    ENV['smtp_username'],
+    ENV['smtp_password'],
+    ENV['smtp_name'],
+    ENV['smtp_email']
+);
+$app->setViews(__DIR__ . '/../resources/views', 'error/index');
+$app->setAppData(require_once __DIR__ . '/app-data.php');
+$app->apply();
 
 require_once(realpath(dirname(__FILE__) . '/date-utils.php'));
 require_once(realpath(dirname(__FILE__) . '/utils.php'));
-
-setlocale(LC_ALL, $app->session->getLanguage()[1]);
-putenv('LANGUAGE=' . $app->session->getLanguage()[1]);
-
-bindtextdomain('messages', dirname(__FILE__, 2) . '/lang');
-bind_textdomain_codeset('messages', 'UTF-8');
-textdomain('messages');
-
-date_default_timezone_set('America/Recife');
 
 return $app;

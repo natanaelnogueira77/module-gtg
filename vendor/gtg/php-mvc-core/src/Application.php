@@ -14,34 +14,134 @@ use GTG\MVC\View;
 class Application 
 {
     public static string $ROOT_DIR;
-    public static ?array $DB_INFO;
-    public static ?array $SMTP_INFO;
+    public static ?array $DB_INFO = null;
+    public static ?array $SMTP_INFO = null;
     public static Application $app;
-    public ?array $appData;
-    public ?array $errorHandler;
+    public ?array $appData = null;
+    public ?string $errorView = null;
     public Controller $controller;
-    public ?Database $db;
+    public ?Database $db = null;
     public Request $request;
     public Response $response;
-    public ?Router $router;
-    public ?Session $session;
-    public ?View $view;
+    public ?Router $router = null;
+    public ?Session $session = null;
+    public ?View $view = null;
 
-    public function __construct(string $rootPath, array $config) 
+    public function __construct(string $rootPath) 
     {
         self::$ROOT_DIR = $rootPath;
-        self::$DB_INFO = isset($config['db']['pdo']) ? $config['db']['pdo'] : null;
-        self::$SMTP_INFO = isset($config['smtp']) ? $config['smtp'] : null;
         self::$app = $this;
-        $this->appData = $config['data'] ?? null;
-        $this->errorHandler = $config['errorHandler'] ?? null;
+    }
+
+    public function setRouter(string $appUrl): self 
+    {
+        $this->router = isset($_SERVER['REQUEST_METHOD']) ? new Router($appUrl) : null;
+        return $this;
+    }
+
+    public function setSessionParams(string $authKey, string $flashKey, string $languageKey): self 
+    {
+        $this->session = new Session($authKey, $flashKey, $languageKey);
+        return $this;
+    }
+
+    public function setDatabaseConnection(
+        string $driver,
+        string $dbname,
+        string $host,
+        string $port,
+        string $username,
+        string $password,
+        ?array $options = null
+    ): self 
+    {
+        self::$DB_INFO = [
+            'driver' => $driver,
+            'dbname' => $dbname,
+            'host' => $host,
+            'port' => $port,
+            'username' => $username,
+            'passwd' => $password,
+            'options' => $options
+        ];
+        $this->db = new Database(self::$DB_INFO);
+        return $this;
+    }
+
+    public function setMigrations(string $relativePath, string $namespace): self 
+    {
+        if($this->db) {
+            $this->db->setMigrations($relativePath, $namespace);
+        }
+        return $this;
+    }
+
+    public function setSeeders(string $relativePath, string $namespace): self 
+    {
+        if($this->db) {
+            $this->db->setSeeders($relativePath, $namespace);
+        }
+        return $this;
+    }
+
+    public function setSMTP(
+        string $host,
+        string $port,
+        string $username,
+        string $password,
+        string $name,
+        string $email
+    ): self 
+    {
+        self::$SMTP_INFO = [
+            'host' => $host,
+            'port' => $port,
+            'username' => $username,
+            'password' => $password,
+            'name' => $name,
+            'email' => $email
+        ];
+        return $this;
+    }
+
+    public function setViews(string $viewPath, ?string $errorView = null): self 
+    {
+        $this->view = new View($viewPath);
+        $this->errorView = $errorView;
+        return $this;
+    }
+
+    public function setAppData(array $data): self 
+    {
+        $this->appData = $data;
+        return $this;
+    }
+
+    public function apply(): void 
+    {
         $this->request = new Request();
         $this->response = new Response();
-        $this->session = isset($config['session']) ? new Session($config['session']) : null;
-        $this->router = isset($config['projectUrl']) && isset($_SERVER['REQUEST_METHOD']) ? new Router($config['projectUrl']) : null;
-        $this->db = isset($config['db']) ? new Database($config['db']) : null;
-        $this->view = isset($config['view']) ? new View($config['view']) : null;
         $this->controller = new Controller();
+
+        ini_set('display_errors', 0);
+        ini_set('display_startup_errors', 1);
+        ini_set('ignore_repeated_source', true);
+        ini_set('log_errors', true);
+        error_reporting( E_ALL );
+
+        set_error_handler(array('GTG\MVC\Exceptions\ErrorHandler', 'control'), E_ALL);
+        register_shutdown_function(array('GTG\MVC\Exceptions\ErrorHandler', 'shutdown'));
+
+        setlocale(LC_ALL, $this->session->getLanguage()[1]);
+        putenv('LANGUAGE=' . $this->session->getLanguage()[1]);
+
+        bindtextdomain('messages', self::$ROOT_DIR . '/lang');
+        bind_textdomain_codeset('messages', 'UTF-8');
+        textdomain('messages');
+
+        date_default_timezone_set('America/Recife');
+
+        return;
     }
 
     public function run(): void 
@@ -50,11 +150,17 @@ class Application
             $this->router->dispatch();
             if($this->router->error()) {
                 $this->response->setStatusCode($this->router->error());
-                if($this->errorHandler && $this->errorHandler['url']) {
-                    $this->router->redirect(sprintf($this->errorHandler['url'], $this->router->error()));
+                if($this->errorView) {
+                    echo $this->view->render($this->errorView, [
+                        'appData' => $this->appData,
+                        'router' => $this->router,
+                        'session' => $this->session,
+                        'code' => $this->router->error()
+                    ]);
                 }
             }
         }
+        return;
     }
 
     public function getController(): Controller 

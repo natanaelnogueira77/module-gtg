@@ -14,14 +14,30 @@ use PDOStatement;
 class Database 
 {
     private array $dbInfo = [];
-    private array $migrations;
-    private array $seeders;
+    private ?array $migrations = null;
+    private ?array $seeders = null;
 
-    public function __construct(array $config) 
+    public function __construct(array $pdoConfig) 
     {
-        $this->dbInfo = $config['pdo'];
-        $this->migrations = $config['migrations'];
-        $this->seeders = $config['seeders'];
+        $this->dbInfo = $pdoConfig;
+    }
+
+    public function setMigrations(string $relativePath, string $namespace): self 
+    {
+        $this->migrations = [
+            'path' => $relativePath,
+            'namespace' => $namespace
+        ];
+        return $this;
+    }
+
+    public function setSeeders(string $relativePath, string $namespace): self 
+    {
+        $this->seeders = [
+            'path' => $relativePath,
+            'namespace' => $namespace
+        ];
+        return $this;
     }
 
     public function exec(string $sql): int 

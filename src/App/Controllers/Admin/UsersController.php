@@ -65,7 +65,8 @@ class UsersController extends TemplateController
         );
 
         if(!$email->send()) {
-            $this->session->setFlash('success', 
+            $this->session->setFlash(
+                'success', 
                 sprintf(
                     _('O usuário "%s" foi cadastrado com sucesso! Porém não foi possível enviar uma notificação no email dele.'), 
                     $dbUser->name
@@ -74,11 +75,16 @@ class UsersController extends TemplateController
         } else {
             $this->session->setFlash(
                 'success', 
-                sprintf(_('O usuário "%s" foi criado com sucesso!'), $dbUser->name)
+                sprintf(
+                    _('O usuário "%s" foi criado com sucesso!'), 
+                    $dbUser->name
+                )
             );
         }
 
-        $this->APIResponse(['link' => $this->getRoute('admin.users.edit', ['user_id' => $dbUser->id])], 200);
+        $this->APIResponse([
+            'link' => $this->getRoute('admin.users.edit', ['user_id' => $dbUser->id])
+        ], 200);
     }
 
     public function edit(array $data): void 
@@ -136,7 +142,10 @@ class UsersController extends TemplateController
 
         $this->setMessage(
             'success', 
-            printf(_('Os dados do usuário "%s" foram alterados com sucesso!'), $dbUser->name)
+            sprintf(
+                _('Os dados do usuário "%s" foram alterados com sucesso!'), 
+                $dbUser->name
+            )
         )->APIResponse([], 200);
     }
 
@@ -144,7 +153,6 @@ class UsersController extends TemplateController
     {
         $data = array_merge($data, filter_input_array(INPUT_GET, FILTER_DEFAULT));
 
-        $content = [];
         $filters = [];
 
         $limit = $data['limit'] ? intval($data['limit']) : 10;
@@ -168,72 +176,15 @@ class UsersController extends TemplateController
         $pages = ceil($count / $limit);
         
         if($objects = $users->fetch(true)) {
-            User::withUserType($objects);
-            foreach($objects as $user) {
-                $params = ['user_id' => $user->id];
-                $content[] = [
-                    'id' => '#' . $user->id,
-                    'name' => "
-                        <div class=\"widget-content p-0\">
-                            <div class=\"widget-content-wrapper\">
-                                <div class=\"widget-content-left mr-3\">
-                                    <div class=\"widget-content-left\">
-                                        <img width=\"40\" class=\"rounded-circle\" 
-                                            src=\"https://www.gravatar.com/avatar/"
-                                            . md5(strtolower(trim($user->email))) . "\">
-                                    </div>
-                                </div>
-                                <div class=\"widget-content-left\">
-                                    <div class=\"widget-heading\">{$user->name}</div>
-                                    <div class=\"widget-subheading opacity-7\">
-                                        {$user->userType->name_sing}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    ",
-                    'email' => $user->email,
-                    'created_at' => $user->getCreatedAtDateTime()->format('d/m/Y'),
-                    'actions' => "
-                        <div class=\"dropup d-inline-block\">
-                            <button type=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\" 
-                                data-toggle=\"dropdown\" class=\"dropdown-toggle btn btn-sm btn-primary\">
-                                " . _('Ações') . "
-                            </button>
-                            <div tabindex=\"-1\" role=\"menu\" aria-hidden=\"true\" class=\"dropdown-menu\">
-                                <h6 tabindex=\"-1\" class=\"dropdown-header\">" . _('Ações') . "</h6>
-                                <a href=\"{$this->getRoute('admin.users.edit', $params)}\" 
-                                    type=\"button\" tabindex=\"0\" class=\"dropdown-item\">
-                                    " . _('Editar Usuário') . "
-                                </a>
-
-                                <button type=\"button\" tabindex=\"0\" class=\"dropdown-item\" 
-                                    data-act=\"delete\" data-method=\"delete\" 
-                                    data-action=\"{$this->getRoute('admin.users.delete', $params)}\">
-                                    " . _('Excluir Usuário') . "
-                                </button>
-                            </div>
-                        </div>
-                    "
-                ];
-            }
+            $objects = User::withUserType($objects);
         }
 
         $this->APIResponse([
             'content' => [
-                'table' => $this->getView('_components/data-table', [
-                    'headers' => [
-                        'actions' => ['text' => _('Ações')],
-                        'id' => ['text' => _('ID'), 'sort' => true],
-                        'name' => ['text' => _('Nome'), 'sort' => true],
-                        'email' => ['text' => _('Email'), 'sort' => true],
-                        'created_at' => ['text' => _('Criado em'), 'sort' => true]
-                    ],
-                    'order' => [
-                        'selected' => $order,
-                        'type' => $orderType
-                    ],
-                    'data' => $content
+                'table' => $this->getView('admin/users/_partials/data-table', [
+                    'data' => $objects,
+                    'order' => $order,
+                    'orderType' => $orderType
                 ]),
                 'pagination' => $this->getView('_components/pagination', [
                     'pages' => $pages,
@@ -255,7 +206,12 @@ class UsersController extends TemplateController
             return;
         }
 
-        $this->setMessage('success', sprintf(_('O usuário "%s" foi excluído com sucesso.'), $dbUser->name))
-            ->APIResponse([], 200);
+        $this->setMessage(
+            'success', 
+            sprintf(
+                _('O usuário "%s" foi excluído com sucesso.'), 
+                $dbUser->name
+            )
+        )->APIResponse([], 200);
     }
 }

@@ -41,9 +41,6 @@ $app->router->get('/', 'AuthController:logout', 'auth.logout');
 
 $app->router->namespace('Src\App\Controllers');
 
-$app->router->group('erro');
-$app->router->get('/{code}', 'ErrorController:index', 'error.index');
-
 $app->router->group('ml');
 $app->router->post('/add', 'MediaLibraryController:add', 'mediaLibrary.add');
 $app->router->get('/load', 'MediaLibraryController:load', 'mediaLibrary.load');

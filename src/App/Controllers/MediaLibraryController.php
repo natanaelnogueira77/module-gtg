@@ -78,11 +78,17 @@ class MediaLibraryController extends Controller
         }
 
         if(!move_uploaded_file($file['tmp_name'], $root . '/' . $filename)) {
-            $this->setMessage('error', _('Lamentamos, mas parece que ocorreu um erro no upload do seu arquivo.') . $filename)->APIResponse([], 422);
+            $this->setMessage(
+                'error', 
+                _('Lamentamos, mas parece que ocorreu um erro no upload do seu arquivo.')
+            )->APIResponse([], 422);
             return;
         }
 
-        $this->setMessage('success', _('O arquivo foi carregado com sucesso!'))->APIResponse(['filename' => $filename], 200);
+        $this->setMessage(
+            'success',
+            _('O arquivo foi carregado com sucesso!')
+        )->APIResponse(['filename' => $filename], 200);
     }
 
     public function delete(array $data): void 

@@ -46,7 +46,7 @@ class TemplateController extends Controller
                             ]
                         ],
                         'items' => MenuData::getRightMenuItems($this->router, $user),
-                        'avatar' => 'https://www.gravatar.com/avatar/' . md5(strtolower(trim($user->email))),
+                        'avatar' => $user->getAvatarURL(),
                         'avatar_title' => $user->name,
                         'avatar_subtitle' => $user->userType->name_sing
                     ]

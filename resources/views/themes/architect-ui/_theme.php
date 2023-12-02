@@ -22,7 +22,7 @@
         }
     </style>
     <?php endif; ?>
-    <link rel="stylesheet" href="https//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <?= $this->section('css'); ?>
     <link rel="shortcut icon" href="<?= $theme->logo_icon ?>" type="image/png">
     <title><?= $theme->title ?></title>

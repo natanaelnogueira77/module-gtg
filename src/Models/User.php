@@ -206,4 +206,9 @@ class User extends UserModel
     {
         return new DateTime($this->updated_at);
     }
+
+    public function getAvatarURL(): string 
+    {
+        return 'https://www.gravatar.com/avatar/' . md5(strtolower(trim($this->email)));
+    }
 }

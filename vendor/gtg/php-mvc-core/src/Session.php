@@ -8,13 +8,13 @@ class Session
     protected string $authKey;
     protected string $langKey;
 
-    public function __construct(array $config) 
+    public function __construct(string $authKey, string $flashKey, string $languageKey) 
     {
         session_start();
         
-        $this->authKey = $config['auth_key'];
-        $this->langKey = $config['lang_key'];
-        $this->flashKey = $config['flash_key'];
+        $this->authKey = $authKey;
+        $this->flashKey = $flashKey;
+        $this->langKey = $languageKey;
         $flashMessages = $_SESSION[$this->flashKey] ?? [];
         foreach($flashMessages as $key => &$flashMessage) {
             $flashMessage['remove'] = true;

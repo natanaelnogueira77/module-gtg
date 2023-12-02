@@ -45,7 +45,9 @@ class AdminController extends TemplateController
         }
 
         if($errors = Config::getErrorsFromMany($objects, true)) {
-            $this->setMessage('error', ErrorMessages::form())->setErrors($errors)->APIResponse([], 422);
+            $this->setMessage('error', ErrorMessages::form())->setErrors(
+                $errors
+            )->APIResponse([], 422);
             return;
         }
         

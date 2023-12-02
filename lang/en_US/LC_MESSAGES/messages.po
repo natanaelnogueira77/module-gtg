@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-11-06 15:38-0300\n"
-"PO-Revision-Date: 2023-11-06 15:39-0300\n"
+"POT-Creation-Date: 2023-12-02 13:31-0300\n"
+"PO-Revision-Date: 2023-12-02 13:31-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -36,7 +36,7 @@ msgstr "Rows"
 msgid "Buscar por"
 msgstr "Search for"
 
-#: resources/views/_components/data-table.php:39
+#: resources/views/_components/data-table-tbody.php:12
 msgid "Nenhum dado correspondente foi encontrado!"
 msgstr "No matching data found!"
 
@@ -45,9 +45,9 @@ msgid "Sessão expirada, faça login"
 msgstr "Session expired, please login"
 
 #: resources/views/_components/expired-session.php:12
+#: resources/views/admin/users/_partials/data-table.php:9
 #: resources/views/admin/users/save.php:41
 #: resources/views/auth/reset-password.php:26 resources/views/user/edit.php:61
-#: src/App/Controllers/Admin/UsersController.php:229
 msgid "Email"
 msgstr "Email"
 
@@ -72,7 +72,7 @@ msgstr "Login"
 
 #: resources/views/_components/expired-session.php:28
 #: resources/views/_components/media-library.php:135
-#: resources/views/admin/users/save.php:129 resources/views/error/index.php:11
+#: resources/views/admin/users/save.php:129 resources/views/error/index.php:12
 #: resources/views/user/edit.php:124
 msgid "Voltar"
 msgstr "Return"
@@ -294,6 +294,40 @@ msgstr "Choose the image that will remain as the system icon."
 msgid "Salvar Configurações"
 msgstr "Save Settings"
 
+#: resources/views/admin/users/_partials/data-table.php:6
+#: resources/views/admin/users/_partials/data-table.php:27
+#: resources/views/admin/users/_partials/data-table.php:30
+msgid "Ações"
+msgstr "Actions"
+
+#: resources/views/admin/users/_partials/data-table.php:7
+msgid "ID"
+msgstr "ID"
+
+#: resources/views/admin/users/_partials/data-table.php:8
+#: resources/views/admin/users/save.php:29 resources/views/user/edit.php:30
+msgid "Nome"
+msgstr "Name"
+
+#: resources/views/admin/users/_partials/data-table.php:10
+msgid "Criado em"
+msgstr "Created at"
+
+#: resources/views/admin/users/_partials/data-table.php:33
+msgid "Editar Usuário"
+msgstr "Edit User"
+
+#: resources/views/admin/users/_partials/data-table.php:39
+msgid "Excluir Usuário"
+msgstr "Delete User"
+
+#: resources/views/admin/users/_partials/data-table.php:68
+#: src/App/Controllers/Admin/UsersController.php:95
+#: src/App/Controllers/Admin/UsersController.php:108
+#: src/App/Controllers/Admin/UsersController.php:202
+msgid "Nenhum usuário foi encontrado!"
+msgstr "No users found!"
+
 #: resources/views/admin/users/index.php:2
 #, php-format
 msgid "Usuários | %s"
@@ -346,11 +380,6 @@ msgstr ""
 #: resources/views/admin/users/save.php:21 resources/views/user/edit.php:18
 msgid "Informações da Conta"
 msgstr "Account Details"
-
-#: resources/views/admin/users/save.php:29 resources/views/user/edit.php:30
-#: src/App/Controllers/Admin/UsersController.php:228
-msgid "Nome"
-msgstr "Name"
 
 #: resources/views/admin/users/save.php:30
 msgid "Digite o nome e sobrenome."
@@ -614,7 +643,7 @@ msgstr "Enter your message"
 msgid "Envie-nos sua dúvida a qualquer hora!"
 msgstr "Send us your question anytime!"
 
-#: src/App/Controllers/Admin/AdminController.php:52
+#: src/App/Controllers/Admin/AdminController.php:54
 msgid "Configurações atualizadas com sucesso!"
 msgstr "Settings updated successfully!"
 
@@ -652,7 +681,7 @@ msgstr "Spanish"
 msgid "Você se Registrou com Sucesso!"
 msgstr "You Have Successfully Registered!"
 
-#: src/App/Controllers/Admin/UsersController.php:70
+#: src/App/Controllers/Admin/UsersController.php:71
 #, php-format
 msgid ""
 "O usuário \"%s\" foi cadastrado com sucesso! Porém não foi possível enviar "
@@ -661,49 +690,21 @@ msgstr ""
 "The user \"%s\" was successfully registered! However, it was not possible to "
 "send a notification to his email."
 
-#: src/App/Controllers/Admin/UsersController.php:77
+#: src/App/Controllers/Admin/UsersController.php:79
 #, php-format
 msgid "O usuário \"%s\" foi criado com sucesso!"
 msgstr "The user \"%s\" was successfully created!"
 
-#: src/App/Controllers/Admin/UsersController.php:89
-#: src/App/Controllers/Admin/UsersController.php:102
-#: src/App/Controllers/Admin/UsersController.php:251
-msgid "Nenhum usuário foi encontrado!"
-msgstr "No users found!"
-
-#: src/App/Controllers/Admin/UsersController.php:139
+#: src/App/Controllers/Admin/UsersController.php:146
 #, php-format
 msgid "Os dados do usuário \"%s\" foram alterados com sucesso!"
 msgstr "User \"%s\" data has been changed successfully!"
 
-#: src/App/Controllers/Admin/UsersController.php:201
-#: src/App/Controllers/Admin/UsersController.php:204
-#: src/App/Controllers/Admin/UsersController.php:226
-msgid "Ações"
-msgstr "Actions"
-
-#: src/App/Controllers/Admin/UsersController.php:207
-msgid "Editar Usuário"
-msgstr "Edit User"
-
-#: src/App/Controllers/Admin/UsersController.php:213
-msgid "Excluir Usuário"
-msgstr "Delete User"
-
-#: src/App/Controllers/Admin/UsersController.php:227
-msgid "ID"
-msgstr "ID"
-
-#: src/App/Controllers/Admin/UsersController.php:230
-msgid "Criado em"
-msgstr "Created at"
-
-#: src/App/Controllers/Admin/UsersController.php:254
+#: src/App/Controllers/Admin/UsersController.php:205
 msgid "Não foi possível excluir o usuário!"
 msgstr "Unable to delete user!"
 
-#: src/App/Controllers/Admin/UsersController.php:258
+#: src/App/Controllers/Admin/UsersController.php:212
 #, php-format
 msgid "O usuário \"%s\" foi excluído com sucesso."
 msgstr "The user \"%s\" has been successfully deleted."
@@ -731,28 +732,23 @@ msgstr "The verification key is invalid!"
 msgid "A senha foi redefinida com sucesso!"
 msgstr "The password has been successfully reset!"
 
-#: src/App/Controllers/ErrorController.php:13
-msgid "Lamentamos, mas ocorreu um erro inesperado. Clique abaixo para voltar."
-msgstr ""
-"We're sorry, but an unexpected error has occurred. Click below to go back."
-
 #: src/App/Controllers/MediaLibraryController.php:55
 msgid "Nenhum arquivo foi escolhido!"
 msgstr "No file was chosen!"
 
-#: src/App/Controllers/MediaLibraryController.php:81
+#: src/App/Controllers/MediaLibraryController.php:83
 msgid "Lamentamos, mas parece que ocorreu um erro no upload do seu arquivo."
 msgstr "We're sorry, but it looks like there was an error uploading your file."
 
-#: src/App/Controllers/MediaLibraryController.php:85
+#: src/App/Controllers/MediaLibraryController.php:90
 msgid "O arquivo foi carregado com sucesso!"
 msgstr "The file has been uploaded successfully!"
 
-#: src/App/Controllers/MediaLibraryController.php:91
+#: src/App/Controllers/MediaLibraryController.php:97
 msgid "Nenhum nome de arquivo foi declarado!"
 msgstr "No filename has been declared!"
 
-#: src/App/Controllers/MediaLibraryController.php:104
+#: src/App/Controllers/MediaLibraryController.php:110
 msgid "O arquivo foi excluído com sucesso."
 msgstr "The file has been successfully deleted."
 
@@ -1066,6 +1062,11 @@ msgstr "We're sorry, but the PDF could not be generated!"
 #: src/Utils/ErrorMessages.php:48
 msgid "Lamentamos, mas houveram erros na importação do CSV!"
 msgstr "We're sorry, but there were errors importing the CSV!"
+
+#~ msgid ""
+#~ "Lamentamos, mas ocorreu um erro inesperado. Clique abaixo para voltar."
+#~ msgstr ""
+#~ "We're sorry, but an unexpected error has occurred. Click below to go back."
 
 #~ msgid "Escolher Imagem"
 #~ msgstr "Choose Image"

@@ -13,7 +13,7 @@ class ErrorHandler
     protected $msg = '';
     protected $file = '';
     protected $line = 0;
-    private static ?string $errorUrl = null;
+    private static ?string $errorView = null;
     
     public function __construct(
         int $type, 
@@ -70,7 +70,7 @@ class ErrorHandler
     {
         $content = "File: {$this->file}, Line: {$this->line}, Message: {$this->msg}";
         $this->monolog->error($content, ['logger' => true]);
-        $this->errorRedirect();
+        $this->errorRender();
         return;
     }
 
@@ -88,11 +88,14 @@ class ErrorHandler
         return;
     }
 
-    private function errorRedirect(): void
+    private function errorRender(): void
     {
-        if(self::$errorUrl) {
-            header('Location: ' . sprintf(self::$errorUrl, '500'));
-            exit();
+        if(self::$errorView) {
+            echo Application::$app->view->render(self::$errorView, [
+                'appData' => Application::$app->appData,
+                'router' => Application::$app->router,
+                'session' => Application::$app->session
+            ]);
         }
         return;
     }

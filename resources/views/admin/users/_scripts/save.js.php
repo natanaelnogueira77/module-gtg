@@ -14,7 +14,7 @@
             }
         });
 
-        App.form(form, function (response) {
+        App.form(form, function (instance, response) {
             if(response.link) window.location.href = response.link;
         }).apply();
     });
