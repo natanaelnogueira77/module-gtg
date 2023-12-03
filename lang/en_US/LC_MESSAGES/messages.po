@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-12-02 13:31-0300\n"
-"PO-Revision-Date: 2023-12-02 13:31-0300\n"
+"POT-Creation-Date: 2023-12-02 20:52-0300\n"
+"PO-Revision-Date: 2023-12-02 21:00-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -678,8 +678,8 @@ msgid "Espanhol"
 msgstr "Spanish"
 
 #: src/App/Controllers/Admin/UsersController.php:57
-msgid "Você se Registrou com Sucesso!"
-msgstr "You Have Successfully Registered!"
+msgid "Você foi registrado com sucesso!"
+msgstr "You have been successfully registered!"
 
 #: src/App/Controllers/Admin/UsersController.php:71
 #, php-format
@@ -1019,6 +1019,82 @@ msgstr "The plural name must contain a maximum of %s characters!"
 msgid "Você não pode excluir um tipo de usuário vinculado à um usuário!"
 msgstr "You cannot delete a user type linked to a user!"
 
+#: src/Utils/DateUtils.php:14
+msgid "Janeiro"
+msgstr "January"
+
+#: src/Utils/DateUtils.php:15
+msgid "Fevereiro"
+msgstr "February"
+
+#: src/Utils/DateUtils.php:16
+msgid "Março"
+msgstr "March"
+
+#: src/Utils/DateUtils.php:17
+msgid "Abril"
+msgstr "April"
+
+#: src/Utils/DateUtils.php:18
+msgid "Maio"
+msgstr "May"
+
+#: src/Utils/DateUtils.php:19
+msgid "Junho"
+msgstr "June"
+
+#: src/Utils/DateUtils.php:20
+msgid "Julho"
+msgstr "July"
+
+#: src/Utils/DateUtils.php:21
+msgid "Agosto"
+msgstr "August"
+
+#: src/Utils/DateUtils.php:22
+msgid "Setembro"
+msgstr "September"
+
+#: src/Utils/DateUtils.php:23
+msgid "Outubro"
+msgstr "October"
+
+#: src/Utils/DateUtils.php:24
+msgid "Novembro"
+msgstr "November"
+
+#: src/Utils/DateUtils.php:25
+msgid "Dezembro"
+msgstr "December"
+
+#: src/Utils/DateUtils.php:32
+msgid "Domingo"
+msgstr "Sunday"
+
+#: src/Utils/DateUtils.php:33
+msgid "Segunda-feira"
+msgstr "Monday"
+
+#: src/Utils/DateUtils.php:34
+msgid "Terça-feira"
+msgstr "Tuesday"
+
+#: src/Utils/DateUtils.php:35
+msgid "Quarta-feira"
+msgstr "Wednesday"
+
+#: src/Utils/DateUtils.php:36
+msgid "Quinta-feira"
+msgstr "Thursday"
+
+#: src/Utils/DateUtils.php:37
+msgid "Sexta-feira"
+msgstr "Friday"
+
+#: src/Utils/DateUtils.php:38
+msgid "Sábado"
+msgstr "Saturday"
+
 #: src/Utils/ErrorMessages.php:10
 msgid "A requisição não pôde ser processada devido a algum erro do cliente!"
 msgstr "The request could not be processed due to a client error!"
@@ -1062,6 +1138,212 @@ msgstr "We're sorry, but the PDF could not be generated!"
 #: src/Utils/ErrorMessages.php:48
 msgid "Lamentamos, mas houveram erros na importação do CSV!"
 msgstr "We're sorry, but there were errors importing the CSV!"
+
+#: src/Utils/NumberUtils.php:14 src/Utils/NumberUtils.php:15
+msgid "mil"
+msgstr "thousand"
+
+#: src/Utils/NumberUtils.php:14
+msgid "milhão"
+msgstr "million"
+
+#: src/Utils/NumberUtils.php:14
+msgid "bilhão"
+msgstr "billion"
+
+#: src/Utils/NumberUtils.php:14
+msgid "trilhão"
+msgstr "trillion"
+
+#: src/Utils/NumberUtils.php:14
+msgid "quatrilhão"
+msgstr "quadrillion"
+
+#: src/Utils/NumberUtils.php:14
+msgid "quintilhão"
+msgstr "quintillion"
+
+#: src/Utils/NumberUtils.php:14
+msgid "sextilhão"
+msgstr "sextillion"
+
+#: src/Utils/NumberUtils.php:15
+msgid "milhões"
+msgstr "millions"
+
+#: src/Utils/NumberUtils.php:15
+msgid "bilhões"
+msgstr "billions"
+
+#: src/Utils/NumberUtils.php:15
+msgid "trilhões"
+msgstr "trillions"
+
+#: src/Utils/NumberUtils.php:15
+msgid "quatrilhões"
+msgstr "quadrillions"
+
+#: src/Utils/NumberUtils.php:15
+msgid "quintilhões"
+msgstr "quintillions"
+
+#: src/Utils/NumberUtils.php:15
+msgid "sextilhões"
+msgstr "sextillions"
+
+#: src/Utils/NumberUtils.php:18
+msgid "um"
+msgstr "one"
+
+#: src/Utils/NumberUtils.php:18
+msgid "dois"
+msgstr "two"
+
+#: src/Utils/NumberUtils.php:18
+msgid "três"
+msgstr "three"
+
+#: src/Utils/NumberUtils.php:18
+msgid "quatro"
+msgstr "four"
+
+#: src/Utils/NumberUtils.php:18
+msgid "cinco"
+msgstr "five"
+
+#: src/Utils/NumberUtils.php:18
+msgid "seis"
+msgstr "six"
+
+#: src/Utils/NumberUtils.php:18
+msgid "sete"
+msgstr "seven"
+
+#: src/Utils/NumberUtils.php:18
+msgid "oito"
+msgstr "eight"
+
+#: src/Utils/NumberUtils.php:18
+msgid "nove"
+msgstr "nine"
+
+#: src/Utils/NumberUtils.php:19 src/Utils/NumberUtils.php:20
+msgid "dez"
+msgstr "ten"
+
+#: src/Utils/NumberUtils.php:19
+msgid "onze"
+msgstr "eleven"
+
+#: src/Utils/NumberUtils.php:19
+msgid "doze"
+msgstr "twelve"
+
+#: src/Utils/NumberUtils.php:19
+msgid "treze"
+msgstr "thirteen"
+
+#: src/Utils/NumberUtils.php:19
+msgid "quatorze"
+msgstr "fourteen"
+
+#: src/Utils/NumberUtils.php:19
+msgid "quinze"
+msgstr "fifteen"
+
+#: src/Utils/NumberUtils.php:19
+msgid "dezesseis"
+msgstr "sixteen"
+
+#: src/Utils/NumberUtils.php:19
+msgid "dezesete"
+msgstr "seventeen"
+
+#: src/Utils/NumberUtils.php:19
+msgid "dezoito"
+msgstr "eighteen"
+
+#: src/Utils/NumberUtils.php:19
+msgid "dezenove"
+msgstr "nineteen"
+
+#: src/Utils/NumberUtils.php:20
+msgid "vinte"
+msgstr "twenty"
+
+#: src/Utils/NumberUtils.php:20
+msgid "trinta"
+msgstr "thirty"
+
+#: src/Utils/NumberUtils.php:20
+msgid "quarenta"
+msgstr "forty"
+
+#: src/Utils/NumberUtils.php:20
+msgid "cinquenta"
+msgstr "fifty"
+
+#: src/Utils/NumberUtils.php:20
+msgid "sessenta"
+msgstr "sixty"
+
+#: src/Utils/NumberUtils.php:20
+msgid "setenta"
+msgstr "seventy"
+
+#: src/Utils/NumberUtils.php:20
+msgid "oitenta"
+msgstr "eighty"
+
+#: src/Utils/NumberUtils.php:20
+msgid "noventa"
+msgstr "ninety"
+
+#: src/Utils/NumberUtils.php:21
+msgid "cento"
+msgstr "hundred"
+
+#: src/Utils/NumberUtils.php:21
+msgid "duzentos"
+msgstr "two-hundred"
+
+#: src/Utils/NumberUtils.php:21
+msgid "trezentos"
+msgstr "three-hundred"
+
+#: src/Utils/NumberUtils.php:21
+msgid "quatrocentos"
+msgstr "four-hundred"
+
+#: src/Utils/NumberUtils.php:21
+msgid "quinhentos"
+msgstr "five-hundred"
+
+#: src/Utils/NumberUtils.php:21
+msgid "seiscentos"
+msgstr "six-hundred"
+
+#: src/Utils/NumberUtils.php:21
+msgid "setecentos"
+msgstr "seven-hundred"
+
+#: src/Utils/NumberUtils.php:21
+msgid "oitocentos"
+msgstr "eight-hundred"
+
+#: src/Utils/NumberUtils.php:21
+msgid "novecentos"
+msgstr "nive-hundred"
+
+#: src/Utils/NumberUtils.php:36 src/Utils/NumberUtils.php:42
+#: src/Utils/NumberUtils.php:56 src/Utils/NumberUtils.php:62
+#: src/Utils/NumberUtils.php:85
+msgid " e "
+msgstr " and "
+
+#: src/Utils/NumberUtils.php:62
+msgid "cem"
+msgstr "hundred"
 
 #~ msgid ""
 #~ "Lamentamos, mas ocorreu um erro inesperado. Clique abaixo para voltar."

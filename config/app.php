@@ -43,7 +43,6 @@ $app->setViews(__DIR__ . '/../resources/views', 'error/index');
 $app->setAppData(require_once __DIR__ . '/app-data.php');
 $app->apply();
 
-require_once(realpath(dirname(__FILE__) . '/date-utils.php'));
 require_once(realpath(dirname(__FILE__) . '/utils.php'));
 
 return $app;

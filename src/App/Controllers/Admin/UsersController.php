@@ -54,7 +54,7 @@ class UsersController extends TemplateController
 
         $email = new Email();
         $email->add(
-            _('Você se Registrou com Sucesso!'), 
+            _('Você foi registrado com sucesso!'), 
             $this->getView('emails/user-register', [
                 'user' => $dbUser,
                 'password' => $data['password'],
