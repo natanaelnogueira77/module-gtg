@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.8.0] - 2023-12-02
 ### Added
-- GTG MVC Core v1.1.0.
+- GTG MVC Core v1.1.1.
 
 ## [1.7.9] - 2023-11-06
 ### Added

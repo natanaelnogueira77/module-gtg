@@ -13,7 +13,6 @@ class ErrorHandler
     protected $msg = '';
     protected $file = '';
     protected $line = 0;
-    private static ?string $errorView = null;
     
     public function __construct(
         int $type, 
@@ -90,11 +89,12 @@ class ErrorHandler
 
     private function errorRender(): void
     {
-        if(self::$errorView) {
-            echo Application::$app->view->render(self::$errorView, [
+        if(Application::$app->errorView) {
+            echo Application::$app->view->render(Application::$app->errorView, [
                 'appData' => Application::$app->appData,
                 'router' => Application::$app->router,
-                'session' => Application::$app->session
+                'session' => Application::$app->session,
+                'code' => 500
             ]);
         }
         return;

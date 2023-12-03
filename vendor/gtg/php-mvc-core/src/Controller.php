@@ -86,6 +86,16 @@ class Controller
         echo json_encode($callback);
     }
 
+    protected function getMessage(): ?array 
+    {
+        return $this->message;
+    }
+
+    protected function getErrors(): ?array 
+    {
+        return $this->errors;
+    }
+
     protected function setMessage(string $type, string $message): static 
     {
         $this->message = [$type, $message];
