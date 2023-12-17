@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-12-02 21:00-0300\n"
-"PO-Revision-Date: 2023-12-02 21:03-0300\n"
+"POT-Creation-Date: 2023-12-16 21:21-0300\n"
+"PO-Revision-Date: 2023-12-16 21:21-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -136,14 +136,14 @@ msgid "Mostrando %s à %s de %s resultado(s)"
 msgstr "Mostrando %s à %s de %s resultado(s)"
 
 #: resources/views/_components/pagination.php:19
-#: resources/views/_scripts/media-library.js.php:612
-#: resources/views/_scripts/media-library.js.php:615
+#: resources/views/_scripts/media-library.js.php:599
+#: resources/views/_scripts/media-library.js.php:602
 msgid "Anterior"
 msgstr "Anterior"
 
 #: resources/views/_components/pagination.php:46
-#: resources/views/_scripts/media-library.js.php:647
-#: resources/views/_scripts/media-library.js.php:650
+#: resources/views/_scripts/media-library.js.php:634
+#: resources/views/_scripts/media-library.js.php:637
 msgid "Próxima"
 msgstr "Próxima"
 
@@ -160,12 +160,12 @@ msgstr "JSON Inválido: "
 msgid "O upload da imagem falhou! Código: "
 msgstr "O upload da imagem falhou! Código: "
 
-#: resources/views/_scripts/media-library.js.php:128
+#: resources/views/_scripts/media-library.js.php:118
 #, php-format
 msgid "Tamanho máximo permitido: %sMB"
 msgstr "Tamanho máximo permitido: %sMB"
 
-#: resources/views/_scripts/media-library.js.php:194
+#: resources/views/_scripts/media-library.js.php:184
 #, php-format
 msgid ""
 "A extensão do arquivo que você selecionou não é permitida aqui! Extensões "
@@ -174,16 +174,16 @@ msgstr ""
 "A extensão do arquivo que você selecionou não é permitida aqui! Extensões "
 "permitidas: %s"
 
-#: resources/views/_scripts/media-library.js.php:349
+#: resources/views/_scripts/media-library.js.php:337
 #, php-format
 msgid "O arquivo que você tentou enviar é maior do que %sMB!"
 msgstr "O arquivo que você tentou enviar é maior do que %sMB!"
 
-#: resources/views/_scripts/media-library.js.php:394
+#: resources/views/_scripts/media-library.js.php:381
 msgid "Lamentamos, mas houve uma falha na leitura do arquivo!"
 msgstr "Lamentamos, mas houve uma falha na leitura do arquivo!"
 
-#: resources/views/_scripts/media-library.js.php:415
+#: resources/views/_scripts/media-library.js.php:402
 #, php-format
 msgid ""
 "A extensão do arquivo que você tentou enviar não é permitida aqui! Extensões "
@@ -322,9 +322,9 @@ msgid "Excluir Usuário"
 msgstr "Excluir Usuário"
 
 #: resources/views/admin/users/_partials/data-table.php:68
-#: src/App/Controllers/Admin/UsersController.php:95
-#: src/App/Controllers/Admin/UsersController.php:108
-#: src/App/Controllers/Admin/UsersController.php:202
+#: src/App/Controllers/Admin/UsersController.php:96
+#: src/App/Controllers/Admin/UsersController.php:109
+#: src/App/Controllers/Admin/UsersController.php:203
 msgid "Nenhum usuário foi encontrado!"
 msgstr "Nenhum usuário foi encontrado!"
 
@@ -471,7 +471,7 @@ msgstr "Redefinir Senha | %s"
 
 #: resources/views/auth/reset-password.php:21
 #: resources/views/emails/reset-password.php:14
-#: src/App/Controllers/Auth/ResetPasswordController.php:30
+#: src/App/Controllers/Auth/ResetPasswordController.php:31
 msgid "Redefinir Senha"
 msgstr "Redefinir Senha"
 
@@ -645,45 +645,45 @@ msgstr "Digite sua mensagem"
 msgid "Envie-nos sua dúvida a qualquer hora!"
 msgstr "Envie-nos sua dúvida a qualquer hora!"
 
-#: src/App/Controllers/Admin/AdminController.php:54
+#: src/App/Controllers/Admin/AdminController.php:69
 msgid "Configurações atualizadas com sucesso!"
 msgstr "Configurações atualizadas com sucesso!"
 
-#: src/App/Controllers/Admin/TemplateController.php:28
-#: src/App/Controllers/User/TemplateController.php:28
-#: src/App/Controllers/Web/TemplateController.php:26
+#: src/App/Controllers/Admin/TemplateController.php:29
+#: src/App/Controllers/User/TemplateController.php:29
+#: src/App/Controllers/Web/TemplateController.php:27
 msgid "Aguarde, carregando..."
 msgstr "Aguarde, carregando..."
 
-#: src/App/Controllers/Admin/TemplateController.php:40
-#: src/App/Controllers/User/TemplateController.php:40
-#: src/App/Controllers/Web/TemplateController.php:34
+#: src/App/Controllers/Admin/TemplateController.php:41
+#: src/App/Controllers/User/TemplateController.php:41
+#: src/App/Controllers/Web/TemplateController.php:35
 msgid "Linguagens"
 msgstr "Linguagens"
-
-#: src/App/Controllers/Admin/TemplateController.php:43
-#: src/App/Controllers/User/TemplateController.php:43
-#: src/App/Controllers/Web/TemplateController.php:37
-msgid "Português"
-msgstr "Português"
 
 #: src/App/Controllers/Admin/TemplateController.php:44
 #: src/App/Controllers/User/TemplateController.php:44
 #: src/App/Controllers/Web/TemplateController.php:38
-msgid "Inglês"
-msgstr "Inglês"
+msgid "Português"
+msgstr "Português"
 
 #: src/App/Controllers/Admin/TemplateController.php:45
 #: src/App/Controllers/User/TemplateController.php:45
 #: src/App/Controllers/Web/TemplateController.php:39
+msgid "Inglês"
+msgstr "Inglês"
+
+#: src/App/Controllers/Admin/TemplateController.php:46
+#: src/App/Controllers/User/TemplateController.php:46
+#: src/App/Controllers/Web/TemplateController.php:40
 msgid "Espanhol"
 msgstr "Espanhol"
 
-#: src/App/Controllers/Admin/UsersController.php:57
+#: src/App/Controllers/Admin/UsersController.php:58
 msgid "Você foi registrado com sucesso!"
 msgstr "Você foi registrado com sucesso!"
 
-#: src/App/Controllers/Admin/UsersController.php:71
+#: src/App/Controllers/Admin/UsersController.php:72
 #, php-format
 msgid ""
 "O usuário \"%s\" foi cadastrado com sucesso! Porém não foi possível enviar "
@@ -692,66 +692,62 @@ msgstr ""
 "O usuário \"%s\" foi cadastrado com sucesso! Porém não foi possível enviar "
 "uma notificação no email dele."
 
-#: src/App/Controllers/Admin/UsersController.php:79
+#: src/App/Controllers/Admin/UsersController.php:80
 #, php-format
 msgid "O usuário \"%s\" foi criado com sucesso!"
 msgstr "O usuário \"%s\" foi criado com sucesso!"
 
-#: src/App/Controllers/Admin/UsersController.php:146
+#: src/App/Controllers/Admin/UsersController.php:147
 #, php-format
 msgid "Os dados do usuário \"%s\" foram alterados com sucesso!"
 msgstr "Os dados do usuário \"%s\" foram alterados com sucesso!"
 
-#: src/App/Controllers/Admin/UsersController.php:205
+#: src/App/Controllers/Admin/UsersController.php:206
 msgid "Não foi possível excluir o usuário!"
 msgstr "Não foi possível excluir o usuário!"
 
-#: src/App/Controllers/Admin/UsersController.php:212
+#: src/App/Controllers/Admin/UsersController.php:213
 #, php-format
 msgid "O usuário \"%s\" foi excluído com sucesso."
 msgstr "O usuário \"%s\" foi excluído com sucesso."
 
-#: src/App/Controllers/Auth/AuthController.php:29
+#: src/App/Controllers/Auth/AuthController.php:30
 #, php-format
 msgid "Seja bem-vindo(a), %s!"
 msgstr "Seja bem-vindo(a), %s!"
 
-#: src/App/Controllers/Auth/AuthController.php:40
-#: src/App/Controllers/Auth/AuthController.php:63
+#: src/App/Controllers/Auth/AuthController.php:41
+#: src/App/Controllers/Auth/AuthController.php:64
 msgid "Usuário e/ou senha inválidos!"
 msgstr "Usuário e/ou senha inválidos!"
 
-#: src/App/Controllers/Auth/ResetPasswordController.php:41
+#: src/App/Controllers/Auth/ResetPasswordController.php:42
 #, php-format
 msgid "Um email foi enviado para %s. Verifique para poder redefinir sua senha."
 msgstr ""
 "Um email foi enviado para %s. Verifique para poder redefinir sua senha."
 
-#: src/App/Controllers/Auth/ResetPasswordController.php:66
+#: src/App/Controllers/Auth/ResetPasswordController.php:67
 msgid "A chave de verificação é inválida!"
 msgstr "A chave de verificação é inválida!"
 
-#: src/App/Controllers/Auth/ResetPasswordController.php:81
+#: src/App/Controllers/Auth/ResetPasswordController.php:82
 msgid "A senha foi redefinida com sucesso!"
 msgstr "A senha foi redefinida com sucesso!"
 
-#: src/App/Controllers/MediaLibraryController.php:55
+#: src/App/Controllers/MediaLibraryController.php:59
 msgid "Nenhum arquivo foi escolhido!"
 msgstr "Nenhum arquivo foi escolhido!"
-
-#: src/App/Controllers/MediaLibraryController.php:83
-msgid "Lamentamos, mas parece que ocorreu um erro no upload do seu arquivo."
-msgstr "Lamentamos, mas parece que ocorreu um erro no upload do seu arquivo."
 
 #: src/App/Controllers/MediaLibraryController.php:90
 msgid "O arquivo foi carregado com sucesso!"
 msgstr "O arquivo foi carregado com sucesso!"
 
-#: src/App/Controllers/MediaLibraryController.php:97
+#: src/App/Controllers/MediaLibraryController.php:99
 msgid "Nenhum nome de arquivo foi declarado!"
 msgstr "Nenhum nome de arquivo foi declarado!"
 
-#: src/App/Controllers/MediaLibraryController.php:110
+#: src/App/Controllers/MediaLibraryController.php:107
 msgid "O arquivo foi excluído com sucesso."
 msgstr "O arquivo foi excluído com sucesso."
 
@@ -772,6 +768,14 @@ msgstr ""
 #: src/App/Middlewares/UserMiddleware.php:12
 msgid "Você precisa estar autenticado para acessar essa área!"
 msgstr "Você precisa estar autenticado para acessar essa área!"
+
+#: src/Components/LocalStorage.php:51
+msgid "Lamentamos, mas não foi possível criar o caminho para o arquivo!"
+msgstr "Lamentamos, mas não foi possível criar o caminho para o arquivo!"
+
+#: src/Components/LocalStorage.php:57
+msgid "Lamentamos, mas parece que ocorreu um erro no upload do arquivo!"
+msgstr "Lamentamos, mas parece que ocorreu um erro no upload do arquivo!"
 
 #: src/Data/MenuData.php:18
 msgid "Início"

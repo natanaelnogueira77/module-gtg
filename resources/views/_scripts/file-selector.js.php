@@ -187,19 +187,19 @@
             return this;
         }
 
-        addToSelector(path) 
+        addToSelector(uri, url) 
         {
-            this.#addFile(this.#getNextId(), path, `${this.mediaLibrary.path}/${path}`);
-            this.#addToList(this.#getCurrentId(), path, `${this.mediaLibrary.path}/${path}`);
+            this.#addFile(this.#getNextId(), uri, url);
+            this.#addToList(this.#getCurrentId(), uri, url);
 
             return this;
         }
 
-        updateOnSelector(elem, id, path) 
+        updateOnSelector(elem, id, uri, url) 
         {
             elem.children(":last").remove();
-            elem.append(this.#getFilePreview(path, `${this.mediaLibrary.path}/${path}`));
-            this.#editFromList(id, path, `${this.mediaLibrary.path}/${path}`);
+            elem.append(this.#getFilePreview(uri, url));
+            this.#editFromList(id, uri, url);
 
             return this;
         }
@@ -291,11 +291,11 @@
                     if(object.#onEdit) {
                         object.#onEdit(object, elem, id);
                     } else {
-                        object.mediaLibrary.setSuccess(function (path) {
+                        object.mediaLibrary.setSuccess(function (uri, url) {
                             if(object.#onEditSuccess) {
-                                object.#onEditSuccess(object, elem, id, path);
+                                object.#onEditSuccess(object, elem, id, uri, url);
                             } else {
-                                object.updateOnSelector(elem, id, path);
+                                object.updateOnSelector(elem, id, uri, url);
                             }
                         }).open();
                     }
@@ -316,11 +316,11 @@
                     if(object.#onEdit) {
                         object.#onEdit(object, elem, id);
                     } else {
-                        object.mediaLibrary.setSuccess(function (path) {
+                        object.mediaLibrary.setSuccess(function (uri, url) {
                             if(object.#onEditSuccess) {
-                                object.#onEditSuccess(object, elem, id, path);
+                                object.#onEditSuccess(object, elem, id, uri, url);
                             } else {
-                                object.updateOnSelector(elem, id, path);
+                                object.updateOnSelector(elem, id, uri, url);
                             }
                         }).open();
                     }
@@ -363,7 +363,7 @@
 
         #getFilePreview(fileURI, fileURL) 
         {
-            var extension = fileURL.split(".").pop();
+            var extension = fileURI.split(".").pop();
             if(['jpg', 'jpeg', 'png', 'gif'].includes(extension)) {
                 return $(`
                     <div>
@@ -397,11 +397,11 @@
                 if(object.#onAdd) {
                     object.#onAdd(object, elem, object.#getNextId());
                 } else {
-                    object.mediaLibrary.setSuccess(function (path) {
+                    object.mediaLibrary.setSuccess(function (uri, url) {
                         if(object.#onAddSuccess) {
-                            object.#onAddSuccess(object, elem, path);
+                            object.#onAddSuccess(object, elem, uri, url);
                         } else {
-                            object.addToSelector(path);
+                            object.addToSelector(uri, url);
                         }
                     }).open();
                 }

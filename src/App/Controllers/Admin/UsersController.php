@@ -4,6 +4,7 @@ namespace Src\App\Controllers\Admin;
 
 use GTG\MVC\Components\Email;
 use Src\App\Controllers\Admin\TemplateController;
+use Src\Components\FileSystem;
 use Src\Models\Config;
 use Src\Models\User;
 use Src\Models\UserForm;
@@ -58,7 +59,7 @@ class UsersController extends TemplateController
             $this->getView('emails/user-register', [
                 'user' => $dbUser,
                 'password' => $data['password'],
-                'logo' => url((new Config())->getMeta(Config::KEY_LOGO))
+                'logo' => FileSystem::getLink((new Config())->getMeta(Config::KEY_LOGO))
             ]), 
             $dbUser->name, 
             $dbUser->email

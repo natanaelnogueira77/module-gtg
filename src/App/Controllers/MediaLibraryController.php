@@ -2,26 +2,30 @@
 
 namespace Src\App\Controllers;
 
+use GTG\MVC\Application;
 use GTG\MVC\Controller;
+use Src\Components\Constants;
+use Src\Components\FileSystem;
 
 class MediaLibraryController extends Controller
 {
+    private function getUserFiles(): array 
+    {
+        return $this->session->getAuth() ? FileSystem::listFiles(
+            Constants::getUserStorageFolder($this->session->getAuth())
+        ) : [];
+    }
+
     public function load(array $data): void 
     {
         $data = array_merge($data, filter_input_array(INPUT_GET, FILTER_UNSAFE_RAW));
         $callback = [];
+        
+        $files = $this->getUserFiles();
 
         $count = 0;
-        $files = scandir($this->getStorageFolderRoot($data['root']));
         $limit = $data['limit'];
         $page = $data['page'];
-
-        $files = $files ? array_map(
-            function ($o) { return $o; }, 
-            array_filter($files, function ($e) {
-                return !in_array($e, ['.', '..']);
-            })
-        ) : [];
         
         if(isset($data['search'])) {
             $search = $data['search'];
@@ -43,29 +47,27 @@ class MediaLibraryController extends Controller
             $count++;
         }
 
-        $callback['pages'] = ceil(count($files) / $limit);
-
+        $callback['pages'] = $limit != 0 ? ceil(count($files) / $limit) : 0;
         $callback['success'] = true;
+
         $this->APIResponse($callback, 200);
     }
 
     public function add(array $data): void
     {
-        if(!isset($_FILES) || !isset($data['root'])) {
+        if(!isset($_FILES)) {
             $this->setMessage('error', _('Nenhum arquivo foi escolhido!'))->APIResponse([], 422);
             return;
         }
 
         $file = $_FILES['file'];
-        $root = $this->getStorageFolderRoot($data['root']);
 
         if($file['name'] == 'blob') {
             $filename = $this->getImageCaptureFilename();
         } else {
             $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
             $basename = slugify(pathinfo($file['name'], PATHINFO_FILENAME));
-    
-            $files = scandir($root);
+            $files = $this->getUserFiles();
             while($files && in_array($basename . '.' . $extension, $files)) {
                 $basename .= '-1';
             }
@@ -73,22 +75,22 @@ class MediaLibraryController extends Controller
             $filename = $basename . '.' . $extension;
         }
 
-        if(!is_dir($root)) {
-            mkdir($root);
-        }
+        $file = FileSystem::uploadFile(
+            Constants::getUserStorageFolder($this->session->getAuth()) . '/' . $filename, 
+            $file['tmp_name']
+        );
 
-        if(!move_uploaded_file($file['tmp_name'], $root . '/' . $filename)) {
-            $this->setMessage(
-                'error', 
-                _('Lamentamos, mas parece que ocorreu um erro no upload do seu arquivo.')
-            )->APIResponse([], 422);
+        if(FileSystem::error()) {
+            $this->setMessage('error', FileSystem::error()->getMessage())->APIResponse([], 422);
             return;
         }
 
         $this->setMessage(
-            'success',
+            'success', 
             _('O arquivo foi carregado com sucesso!')
-        )->APIResponse(['filename' => $filename], 200);
+        )->APIResponse([
+            'file' => $file
+        ], 200);
     }
 
     public function delete(array $data): void 
@@ -98,21 +100,11 @@ class MediaLibraryController extends Controller
             return;
         }
         
-        $files = glob($this->getStorageFolderRoot($data['root']) . '/' . $data["name"]);
-        if(count($files) > 0) {
-            foreach($files as $file) {
-                if(is_file($file)) {
-                    unlink($file);
-                }
-            }
-        }
+        FileSystem::deleteFile(
+            Constants::getUserStorageFolder($this->session->getAuth()) . '/' . $data["name"]
+        );
 
         $this->setMessage('success', _('O arquivo foi excluído com sucesso.'))->APIResponse([], 200);
-    }
-
-    private function getStorageFolderRoot(string $root): string 
-    {
-        return dirname(__FILE__, 4) . '/' . $root;
     }
 
     private function getImageCaptureFilename(): string 

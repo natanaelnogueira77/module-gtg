@@ -43,6 +43,9 @@ $app->setViews(__DIR__ . '/../resources/views', 'error/index');
 $app->setAppData(require_once __DIR__ . '/app-data.php');
 $app->apply();
 
+Src\Components\FileSystem::setStorageDriver($app->appData['storage_driver']);
+Src\Components\FileSystem::setCredentials($app->appData['dropbox']);
+
 require_once(realpath(dirname(__FILE__) . '/utils.php'));
 
 return $app;

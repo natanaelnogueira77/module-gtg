@@ -125,10 +125,10 @@
                     </label>
                     <select id="style" name="style" class="form-control">
                         <option value=""><?= _('Escolha o tema de cores do sistema...') ?></option>
-                        <option value="light" <?= $configMetas['style'] == 'light' ? 'selected' : '' ?>>
+                        <option value="light" <?= $configData['style'] == 'light' ? 'selected' : '' ?>>
                             <?= _('Tema Claro') ?>
                         </option>
-                        <option value="dark" <?= $configMetas['style'] == 'dark' ? 'selected' : '' ?>>
+                        <option value="dark" <?= $configData['style'] == 'dark' ? 'selected' : '' ?>>
                             <?= _('Tema Escuro') ?>
                         </option>
                     </select>
@@ -181,7 +181,7 @@
 <?php 
     $this->start('scripts'); 
     $this->insert('admin/_scripts/index.js', [
-        'configMetas' => $configMetas
+        'configData' => $configData
     ]);
     $this->end(); 
 

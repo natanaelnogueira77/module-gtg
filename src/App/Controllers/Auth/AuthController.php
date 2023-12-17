@@ -3,6 +3,7 @@
 namespace Src\App\Controllers\Auth;
 
 use GTG\MVC\Controller;
+use Src\Components\FileSystem;
 use Src\Models\Config;
 use Src\Models\LoginForm;
 use Src\Models\SocialUser;
@@ -42,9 +43,9 @@ class AuthController extends Controller
         }
 
         $this->render('auth/login', [
-            'background' => $configMetas && $configMetas[Config::KEY_LOGIN_IMG] ? url($configMetas[Config::KEY_LOGIN_IMG]) : null,
-            'logo' => $configMetas && $configMetas[Config::KEY_LOGO] ? url($configMetas[Config::KEY_LOGO]) : null,
-            'shortcutIcon' => $configMetas && $configMetas[Config::KEY_LOGO_ICON] ? url($configMetas[Config::KEY_LOGO_ICON]) : null,
+            'background' => FileSystem::getLink($configMetas[Config::KEY_LOGIN_IMG]),
+            'logo' => FileSystem::getLink($configMetas[Config::KEY_LOGO]),
+            'shortcutIcon' => FileSystem::getLink($configMetas[Config::KEY_LOGO_ICON]),
             'redirect' => $_GET['redirect'],
             'loginForm' => $loginForm
         ]);

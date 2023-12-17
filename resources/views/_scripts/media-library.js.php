@@ -1,14 +1,11 @@
-<?php use Src\Components\Constants; ?>
 <script>
     class MediaLibrary 
     {
-        root = <?php echo json_encode($session->getAuth() ? Constants::getUserStorageRoot($session->getAuth()) : '') ?>;
-        path = <?php echo json_encode(url()) ?>;
         filepath = '';
         maxSize = 2;
         pageLimit = 30;
         fileTypes = ['jpeg', 'jpg', 'png', 'gif'];
-        success = function(path) {};
+        success = function(uri, url) {};
         typesList = {
             jpeg: {
                 type: "icofont-file-jpg", 
@@ -68,7 +65,6 @@
             this.form = document.getElementById('ml-images-list');
             this.list = document.getElementById('ml-list-group');
             this.maxSizeText = document.getElementById('ml-maxsize');
-            this.choosenFile = document.getElementById('ml-choosen-file').value;
             this.chooseButton = document.getElementById('ml-choose');
             this.cancelButton = document.getElementById('ml-cancel');
             this.progressPercentage = document.getElementById('ml-progress');
@@ -90,12 +86,6 @@
             this.addEvents();
         }
 
-        setRoot(value) 
-        {
-            this.root = value;
-            return this;
-        }
-
         setMaxSize(value) 
         {
             this.maxSize = value;
@@ -114,7 +104,7 @@
             return this;
         }
 
-        setSuccess(value = function(path) {}) 
+        setSuccess(value = function(uri, url) {}) 
         {
             this.success = value;
             return this;
@@ -182,9 +172,9 @@
 
             this.chooseButton.onclick = () => {
                 if(this.chooseButton.disabled == false) {
-                    if(this.checkFileExtension(this.choosenFile)) {
-                        this.filepath = this.returnFilePath(this.choosenFile);
-                        this.success(this.filepath);
+                    if(this.checkFileExtension(this.choosenFile.name)) {
+                        this.filepath = this.choosenFile;
+                        this.success(this.choosenFile.path, this.choosenFile.link);
                         this.modal.modal('toggle');
                     } else {
                         var str = this.fileTypes.join(", ");
@@ -260,11 +250,9 @@
                             type: mimeString
                         });
                         file.name = 'image-capture.png';
-                        file.full_path = 'image-capture.png';
     
                         var formData = new FormData();
                         formData.append('file', file);
-                        formData.append('root', object.root);
     
                         $.ajax({
                             url: <?php echo json_encode($router->route('mediaLibrary.add')) ?>,
@@ -275,9 +263,9 @@
                                 if(response.message) {
                                     App.showMessage(response.message[1], response.message[0]);
                                 }
-    
+
                                 object.addFileToList(response.filename);
-                                object.chooseFile(response.filename);
+                                object.chooseFile(response.file);
                                 object.openMediaLibraryTab();
                             },
                             error: function (response) {
@@ -359,7 +347,6 @@
                         var formData = new FormData();
 
                         formData.append('file', file);
-                        formData.append('root', object.root);
 
                         $.ajax({
                             url: <?php echo json_encode($router->route('mediaLibrary.add')) ?>,
@@ -371,8 +358,8 @@
                                     App.showMessage(response.message[1], response.message[0]);
                                 }
 
-                                object.addFileToList(response.filename);
-                                object.chooseFile(response.filename);
+                                object.addFileToList(response.file);
+                                object.chooseFile(response.file);
                                 object.openMediaLibraryTab();
 
                                 object.progressPercentage.innerHTML = "";
@@ -428,10 +415,7 @@
             $.ajax({
                 url: <?php echo json_encode($router->route('mediaLibrary.delete')) ?>,
                 type: "delete",
-                data: { 
-                    root: this.root,
-                    name: filename 
-                },
+                data: { name: filename },
                 dataType: 'json',
                 success: function (response) {
                     if(response.message) {
@@ -439,7 +423,7 @@
                     }
                     
                     object.deleteFileFromList(filename);
-                    if(object.choosenFile == filename) {
+                    if(object.choosenFile?.name == filename) {
                         object.choosenFile = null;
                         object.setButtonStatus();
                     }
@@ -452,15 +436,15 @@
             });
         }
 
-        chooseFile(filename) 
+        chooseFile(file) 
         {
             var allFiles = this.list.querySelectorAll("div[img-name]");
             allFiles.forEach(function (elem) {
                 elem.querySelector("div.file-border").classList.remove("border-primary", "border");
             });
 
-            this.choosenFile = filename;
-            var file = this.list.querySelector("div[img-name='" + this.choosenFile + "']");
+            this.choosenFile = file;
+            var file = this.list.querySelector("div[img-name='" + this.choosenFile.name + "']");
             file.querySelector("div.file-border").classList.add('border-primary', 'border');
 
             this.setButtonStatus();
@@ -477,10 +461,10 @@
             }
         }
 
-        addFileToList(file_name) 
+        addFileToList(file) 
         {
-            if(this.checkFileExtension(file_name)) {
-                var fileType = file_name.split(".").pop();
+            if(this.checkFileExtension(file.name)) {
+                var fileType = file.name.split(".").pop();
                 var imagesTypes = ['jpg', 'jpeg', 'png', 'gif'];
                 var object = this;
 
@@ -497,7 +481,7 @@
                 if(imagesTypes.includes(fileType)) {
                     content = document.createElement('img');
 
-                    content.setAttribute('src', `${this.path ? this.path + '/' : ''}${this.root}/${file_name}`);
+                    content.setAttribute('src', file.link);
                     content.setAttribute('class', 'img-thumbnail');
                     content.style.width = "112px";
                     content.style.height = "112px";
@@ -516,7 +500,7 @@
                 div2.style.display = 'none';
         
                 div1.setAttribute('class', 'mb-2 mr-2');
-                div1.setAttribute('img-name', file_name);
+                div1.setAttribute('img-name', file.name);
                 div1.style.position = 'relative';
                 div1.style.cursor = 'pointer';
                 div1.style.width = "120px";
@@ -524,7 +508,7 @@
                 div3.setAttribute('class', 'file-border d-flex align-items-center align-middle');
                 div3.style.width = "114px";
                 div3.style.height = "114px";
-                small.innerHTML = file_name;
+                small.innerHTML = file.name;
         
                 div2.appendChild(icon);
                 div3.appendChild(content);
@@ -542,14 +526,18 @@
         
                 div2.addEventListener('click', function () {
                     div1.classList.add("bg-transparent");
-                    object.deleteFile(file_name);
+                    object.deleteFile(file.name);
                 });
         
                 div1.addEventListener('click', function () {
-                    var filename = div1.getAttribute("img-name");
-                    object.chooseFile(filename);
+                    var imageName = div1.getAttribute("img-name");
+                    object.chooseFile({
+                        name: imageName,
+                        path: file.path,
+                        link: file.link
+                    });
                 });
-        
+
                 this.list.insertBefore(div1, this.list.firstChild);
             }
         }
@@ -568,7 +556,6 @@
                 url: <?php echo json_encode($router->route('mediaLibrary.load')) ?>,
                 type: "get",
                 data: { 
-                    root: object.root,
                     search: search,
                     page: page,
                     limit: object.pageLimit
@@ -670,11 +657,6 @@
             } else {
                 this.chooseButton.disabled = true;
             }
-        }
-
-        returnFilePath(filename) 
-        {
-            return this.root + "/" + filename;
         }
     }
 </script>

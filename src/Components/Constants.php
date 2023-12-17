@@ -24,8 +24,8 @@ class Constants
         return self::getUsersStorageURL() . '/user' . $user->id;
     }
 
-    public static function getUserStorageRoot(User $user): string 
+    public static function getUserStorageFolder(User $user): string 
     {
-        return self::STORAGE_PATH . '/' . self::USERS_STORAGE_FOLDER . '/user' . $user->id;
+        return self::USERS_STORAGE_FOLDER . '/user' . $user->id;
     }
 }

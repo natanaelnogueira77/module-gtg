@@ -8,10 +8,10 @@
             '#logo-area', 
             mediaLibrary.setFileTypes(['jpg', 'jpeg', 'png'])
         ))
-        <?php if($configMetas['logo']): ?>
+        <?php if($configData['logo']): ?>
         .loadFiles({
-            uri: <?php echo json_encode($configMetas['logo']) ?>,
-            url: <?php echo json_encode(url($configMetas['logo'])) ?>
+            uri: <?php echo json_encode($configData['logo']['uri']) ?>,
+            url: <?php echo json_encode($configData['logo']['url']) ?>
         })
         <?php endif; ?>
         .render();
@@ -20,10 +20,10 @@
             '#logo-icon-area', 
             mediaLibrary.setFileTypes(['jpg', 'jpeg', 'png'])
         ))
-        <?php if($configMetas['logo_icon']): ?>
+        <?php if($configData['logo_icon']): ?>
         .loadFiles({
-            uri: <?php echo json_encode($configMetas['logo_icon']) ?>,
-            url: <?php echo json_encode(url($configMetas['logo_icon'])) ?>
+            uri: <?php echo json_encode($configData['logo_icon']['uri']) ?>,
+            url: <?php echo json_encode($configData['logo_icon']['url']) ?>
         })
         <?php endif; ?>
         .render();
@@ -32,10 +32,10 @@
             '#login-img-area', 
             mediaLibrary.setFileTypes(['jpg', 'jpeg', 'png'])
         ))
-        <?php if($configMetas['login_img']): ?>
+        <?php if($configData['login_img']): ?>
         .loadFiles({
-            uri: <?php echo json_encode($configMetas['login_img']) ?>,
-            url: <?php echo json_encode(url($configMetas['login_img'])) ?>
+            uri: <?php echo json_encode($configData['login_img']['uri']) ?>,
+            url: <?php echo json_encode($configData['login_img']['url']) ?>
         })
         <?php endif; ?>
         .render();

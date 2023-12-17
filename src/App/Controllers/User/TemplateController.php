@@ -3,6 +3,7 @@
 namespace Src\App\Controllers\User;
 
 use GTG\MVC\Controller;
+use Src\Components\FileSystem;
 use Src\Components\Theme;
 use Src\Data\ColorsData;
 use Src\Data\MenuData;
@@ -23,8 +24,8 @@ class TemplateController extends Controller
 
         $this->view->addData([
             'theme' => (new Theme())->loadData([
-                'logo' => $configMetas && $configMetas[Config::KEY_LOGO] ? url($configMetas[Config::KEY_LOGO]) : '',
-                'logo_icon' => $configMetas && $configMetas[Config::KEY_LOGO_ICON] ? url($configMetas[Config::KEY_LOGO_ICON]) : '',
+                'logo' => FileSystem::getLink($configMetas[Config::KEY_LOGO]),
+                'logo_icon' => FileSystem::getLink($configMetas[Config::KEY_LOGO_ICON]),
                 'loading_text' => _('Aguarde, carregando...'),
                 'has_header' => true,
                 'has_left' => true,

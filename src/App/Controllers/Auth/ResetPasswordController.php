@@ -4,6 +4,7 @@ namespace Src\App\Controllers\Auth;
 
 use GTG\MVC\Components\Email;
 use GTG\MVC\Controller;
+use Src\Components\FileSystem;
 use Src\Models\Config;
 use Src\Models\ForgotPasswordForm;
 use Src\Models\ResetPasswordForm;
@@ -29,7 +30,7 @@ class ResetPasswordController extends Controller
                 $email = new Email();
                 $email->add(_('Redefinir Senha'), $this->getView('emails/reset-password', [
                     'user' => $user,
-                    'logo' => url((new Config())->getMeta(Config::KEY_LOGO))
+                    'logo' => FileSystem::getLink($configMetas[Config::KEY_LOGO])
                 ]), $user->name, $user->email);
                 
                 if(!$email->send()) {
@@ -47,9 +48,9 @@ class ResetPasswordController extends Controller
         }
 
         $this->render('auth/reset-password', [
-            'background' => $configMetas && $configMetas[Config::KEY_LOGIN_IMG] ? url($configMetas[Config::KEY_LOGIN_IMG]) : '',
-            'logo' => $configMetas && $configMetas[Config::KEY_LOGO] ? url($configMetas[Config::KEY_LOGO]) : '',
-            'shortcutIcon' => $configMetas && $configMetas[Config::KEY_LOGO_ICON] ? url($configMetas[Config::KEY_LOGO_ICON]) : '',
+            'background' => FileSystem::getLink($configMetas[Config::KEY_LOGIN_IMG]),
+            'logo' => FileSystem::getLink($configMetas[Config::KEY_LOGO]),
+            'shortcutIcon' => FileSystem::getLink($configMetas[Config::KEY_LOGO_ICON]),
             'forgotPasswordForm' => $forgotPasswordForm
         ]);
     }
@@ -87,9 +88,9 @@ class ResetPasswordController extends Controller
 
         $this->render('auth/reset-password', [
             'code' => $data['code'],
-            'background' => $configMetas && $configMetas[Config::KEY_LOGIN_IMG] ? url($configMetas[Config::KEY_LOGIN_IMG]) : '',
-            'logo' => $configMetas && $configMetas[Config::KEY_LOGO] ? url($configMetas[Config::KEY_LOGO]) : '',
-            'shortcutIcon' => $configMetas && $configMetas[Config::KEY_LOGO_ICON] ? url($configMetas[Config::KEY_LOGO_ICON]) : '',
+            'background' => FileSystem::getLink($configMetas[Config::KEY_LOGIN_IMG]),
+            'logo' => FileSystem::getLink($configMetas[Config::KEY_LOGO]),
+            'shortcutIcon' => FileSystem::getLink($configMetas[Config::KEY_LOGO_ICON]),
             'resetPasswordForm' => $resetPasswordForm
         ]);
     }
