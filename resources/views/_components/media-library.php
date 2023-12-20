@@ -63,7 +63,8 @@
                         <div class="card-body">
                             <h5 class="card-title"><?= _('Câmera Atual') ?></h5>
                             <div class="d-flex justify-content-around">
-                                <video id="ml-video" class="border border-primary" style="max-width: 100%" autoplay></video>
+                                <video id="ml-video" class="border border-primary" style="max-width: 100%" 
+                                    muted autoplay playsinline></video>
                             </div>
                         </div>
                         <hr class="my-0">

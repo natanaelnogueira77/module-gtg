@@ -1,4 +1,4 @@
-<?php $v->insert('_scripts/expired-session.js'); ?>
+<?php $this->insert('_scripts/expired-session.js'); ?>
 <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="login-modal" 
     data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-md">

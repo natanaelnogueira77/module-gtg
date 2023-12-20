@@ -34,7 +34,7 @@ class LocalStorage
             }
         }
 
-        return $files;
+        return $files ? $files : [];
     }
 
     public function upload(string $filepath, string $content): ?array 

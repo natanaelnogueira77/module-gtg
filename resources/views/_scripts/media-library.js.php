@@ -264,7 +264,7 @@
                                     App.showMessage(response.message[1], response.message[0]);
                                 }
 
-                                object.addFileToList(response.filename);
+                                object.addFileToList(response.file);
                                 object.chooseFile(response.file);
                                 object.openMediaLibraryTab();
                             },

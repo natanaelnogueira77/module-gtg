@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-12-16 21:19-0300\n"
-"PO-Revision-Date: 2023-12-16 21:20-0300\n"
+"POT-Creation-Date: 2023-12-19 23:56-0300\n"
+"PO-Revision-Date: 2023-12-19 23:56-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -71,7 +71,7 @@ msgid "Entrar"
 msgstr "Login"
 
 #: resources/views/_components/expired-session.php:28
-#: resources/views/_components/media-library.php:135
+#: resources/views/_components/media-library.php:136
 #: resources/views/admin/users/save.php:129 resources/views/error/index.php:12
 #: resources/views/user/edit.php:124
 msgid "Voltar"
@@ -106,27 +106,27 @@ msgstr "Select the Camera"
 msgid "Câmera Atual"
 msgstr "Current Camera"
 
-#: resources/views/_components/media-library.php:73
+#: resources/views/_components/media-library.php:74
 msgid "Capturar"
 msgstr "Capture"
 
-#: resources/views/_components/media-library.php:77
+#: resources/views/_components/media-library.php:78
 msgid "Salvar Captura"
 msgstr "Save Capture"
 
-#: resources/views/_components/media-library.php:83
+#: resources/views/_components/media-library.php:84
 msgid "Foto Capturada"
 msgstr "Captured Photo"
 
-#: resources/views/_components/media-library.php:96
+#: resources/views/_components/media-library.php:97
 msgid "Pesquisar..."
 msgstr "Search..."
 
-#: resources/views/_components/media-library.php:123
+#: resources/views/_components/media-library.php:124
 msgid "Escolher"
 msgstr "Choose"
 
-#: resources/views/_components/media-library.php:127
+#: resources/views/_components/media-library.php:128
 msgid "Cancelar"
 msgstr "Cancel"
 
@@ -732,19 +732,19 @@ msgstr "The verification key is invalid!"
 msgid "A senha foi redefinida com sucesso!"
 msgstr "The password has been successfully reset!"
 
-#: src/App/Controllers/MediaLibraryController.php:59
+#: src/App/Controllers/MediaLibraryController.php:57
 msgid "Nenhum arquivo foi escolhido!"
 msgstr "No file was chosen!"
 
-#: src/App/Controllers/MediaLibraryController.php:90
+#: src/App/Controllers/MediaLibraryController.php:88
 msgid "O arquivo foi carregado com sucesso!"
 msgstr "The file has been uploaded successfully!"
 
-#: src/App/Controllers/MediaLibraryController.php:99
+#: src/App/Controllers/MediaLibraryController.php:97
 msgid "Nenhum nome de arquivo foi declarado!"
 msgstr "No filename has been declared!"
 
-#: src/App/Controllers/MediaLibraryController.php:107
+#: src/App/Controllers/MediaLibraryController.php:102
 msgid "O arquivo foi excluído com sucesso."
 msgstr "The file has been successfully deleted."
 

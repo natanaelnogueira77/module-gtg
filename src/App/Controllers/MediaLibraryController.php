@@ -9,11 +9,9 @@ use Src\Components\FileSystem;
 
 class MediaLibraryController extends Controller
 {
-    private function getUserFiles(): array 
+    private function getFiles(): array 
     {
-        return $this->session->getAuth() ? FileSystem::listFiles(
-            Constants::getUserStorageFolder($this->session->getAuth())
-        ) : [];
+        return FileSystem::listFiles(Constants::getStorageFolder($this->session));
     }
 
     public function load(array $data): void 
@@ -21,7 +19,7 @@ class MediaLibraryController extends Controller
         $data = array_merge($data, filter_input_array(INPUT_GET, FILTER_UNSAFE_RAW));
         $callback = [];
         
-        $files = $this->getUserFiles();
+        $files = $this->getFiles();
 
         $count = 0;
         $limit = $data['limit'];
@@ -67,7 +65,7 @@ class MediaLibraryController extends Controller
         } else {
             $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
             $basename = slugify(pathinfo($file['name'], PATHINFO_FILENAME));
-            $files = $this->getUserFiles();
+            $files = $this->getFiles();
             while($files && in_array($basename . '.' . $extension, $files)) {
                 $basename .= '-1';
             }
@@ -76,7 +74,7 @@ class MediaLibraryController extends Controller
         }
 
         $file = FileSystem::uploadFile(
-            Constants::getUserStorageFolder($this->session->getAuth()) . '/' . $filename, 
+            Constants::getStorageFolder($this->session) . '/' . $filename, 
             $file['tmp_name']
         );
 
@@ -100,10 +98,7 @@ class MediaLibraryController extends Controller
             return;
         }
         
-        FileSystem::deleteFile(
-            Constants::getUserStorageFolder($this->session->getAuth()) . '/' . $data["name"]
-        );
-
+        FileSystem::deleteFile(Constants::getStorageFolder($this->session) . '/' . $data["name"]);
         $this->setMessage('success', _('O arquivo foi excluído com sucesso.'))->APIResponse([], 200);
     }
 

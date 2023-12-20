@@ -1,6 +1,6 @@
 <script>
     $(function () {
-        App.form($("#save-user"), function (response) {
+        App.form($("#save-user"), function (instance, response) {
             if(response.link) window.location.href = response.link;
         }).apply();
 

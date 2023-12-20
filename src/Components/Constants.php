@@ -2,12 +2,22 @@
 
 namespace Src\Components;
 
+use GTG\MVC\Session;
 use Src\Models\User;
 
 class Constants 
 {
     const STORAGE_PATH = 'public/storage';
     const USERS_STORAGE_FOLDER = 'users';
+
+    public static function getStorageFolder(Session $session): string 
+    {
+        if($session->getAuth()) {
+            return self::getUserStorageFolder($session->getAuth());
+        }
+
+        return [];
+    }
 
     public static function getStorageURL(): string 
     {

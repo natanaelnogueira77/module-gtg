@@ -32,10 +32,6 @@ $app->router->post('/', 'ResetPasswordController:index', 'resetPassword.index');
 $app->router->get('/{code}', 'ResetPasswordController:verify', 'resetPassword.verify');
 $app->router->post('/{code}', 'ResetPasswordController:verify', 'resetPassword.verify');
 
-$app->router->group('criar-conta', \Src\App\Middlewares\GuestMiddleware::class);
-$app->router->get('/', 'RegisterController:index', 'register.index');
-$app->router->post('/', 'RegisterController:index', 'register.index');
-
 $app->router->group('logout', \Src\App\Middlewares\UserMiddleware::class);
 $app->router->get('/', 'AuthController:logout', 'auth.logout');
 
