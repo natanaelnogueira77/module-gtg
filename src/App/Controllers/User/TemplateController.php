@@ -19,8 +19,10 @@ class TemplateController extends Controller
             Config::KEY_STYLE
         ]);
 
-        $user = $this->session->getAuth();
-        $user->userType();
+        if($user = $this->session->getAuth()) {
+            $user->userType();
+            $notifications = $user->notifications(['raw' => "id IS NOT NULL ORDER BY created_at DESC LIMIT 150"]);
+        }
 
         $this->view->addData([
             'theme' => (new Theme())->loadData([
@@ -45,6 +47,11 @@ class TemplateController extends Controller
                                 ['url' => $this->getRoute('language.index', ['lang' => 'en']), 'desc' => _('Inglês')],
                                 ['url' => $this->getRoute('language.index', ['lang' => 'es']), 'desc' => _('Espanhol')]
                             ]
+                        ],
+                        'bell' => [
+                            'title' => _('Notificações'),
+                            'notifications' => $notifications,
+                            'notifications_count' => $notifications ? count(array_filter($notifications, fn($o) => !$o->wasRead())) : 0
                         ],
                         'items' => MenuData::getRightMenuItems($this->router, $user),
                         'avatar' => $user->getAvatarURL(),

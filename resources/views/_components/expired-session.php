@@ -6,7 +6,7 @@
             <div class="modal-header">
                 <h5 class="modal-title"><?= _('Sessão expirada, faça login') ?></h5>
             </div>
-            <form id="login-form" action="<?= $router->route('auth.check') ?>" method="post">
+            <form id="login-form" action="<?= $router->route('api.auth.check') ?>" method="post">
                 <div class="modal-body">
                     <div class="position-relative form-group">
                         <label for="email"><?= _('Email') ?></label>

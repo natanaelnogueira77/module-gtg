@@ -255,7 +255,7 @@
                         formData.append('file', file);
     
                         $.ajax({
-                            url: <?php echo json_encode($router->route('mediaLibrary.add')) ?>,
+                            url: <?php echo json_encode($router->route('api.mediaLibrary.add')) ?>,
                             type: "post",
                             data: formData,
                             dataType: 'json',
@@ -349,7 +349,7 @@
                         formData.append('file', file);
 
                         $.ajax({
-                            url: <?php echo json_encode($router->route('mediaLibrary.add')) ?>,
+                            url: <?php echo json_encode($router->route('api.mediaLibrary.add')) ?>,
                             type: "post",
                             data: formData,
                             dataType: 'json',
@@ -413,7 +413,7 @@
             var object = this;
 
             $.ajax({
-                url: <?php echo json_encode($router->route('mediaLibrary.delete')) ?>,
+                url: <?php echo json_encode($router->route('api.mediaLibrary.delete')) ?>,
                 type: "delete",
                 data: { name: filename },
                 dataType: 'json',
@@ -553,7 +553,7 @@
             var object = this;
 
             $.ajax({
-                url: <?php echo json_encode($router->route('mediaLibrary.load')) ?>,
+                url: <?php echo json_encode($router->route('api.mediaLibrary.load')) ?>,
                 type: "get",
                 data: { 
                     search: search,

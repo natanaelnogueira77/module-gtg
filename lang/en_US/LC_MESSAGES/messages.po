@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-12-19 23:56-0300\n"
-"PO-Revision-Date: 2023-12-19 23:56-0300\n"
+"POT-Creation-Date: 2024-01-02 10:17-0300\n"
+"PO-Revision-Date: 2024-01-02 10:18-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.4.2\n"
 "X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SearchPath-0: src\n"
 "X-Poedit-SearchPath-1: resources\n"
@@ -322,9 +322,8 @@ msgid "Excluir Usuário"
 msgstr "Delete User"
 
 #: resources/views/admin/users/_partials/data-table.php:68
-#: src/App/Controllers/Admin/UsersController.php:96
-#: src/App/Controllers/Admin/UsersController.php:109
-#: src/App/Controllers/Admin/UsersController.php:203
+#: src/API/Controllers/Admin/UsersController.php:20
+#: src/App/Controllers/Admin/UsersController.php:33
 msgid "Nenhum usuário foi encontrado!"
 msgstr "No users found!"
 
@@ -643,45 +642,15 @@ msgstr "Enter your message"
 msgid "Envie-nos sua dúvida a qualquer hora!"
 msgstr "Send us your question anytime!"
 
-#: src/App/Controllers/Admin/AdminController.php:69
+#: src/API/Controllers/Admin/AdminController.php:28
 msgid "Configurações atualizadas com sucesso!"
 msgstr "Settings updated successfully!"
 
-#: src/App/Controllers/Admin/TemplateController.php:29
-#: src/App/Controllers/User/TemplateController.php:29
-#: src/App/Controllers/Web/TemplateController.php:27
-msgid "Aguarde, carregando..."
-msgstr "Wait, loading..."
-
-#: src/App/Controllers/Admin/TemplateController.php:41
-#: src/App/Controllers/User/TemplateController.php:41
-#: src/App/Controllers/Web/TemplateController.php:35
-msgid "Linguagens"
-msgstr "Languages"
-
-#: src/App/Controllers/Admin/TemplateController.php:44
-#: src/App/Controllers/User/TemplateController.php:44
-#: src/App/Controllers/Web/TemplateController.php:38
-msgid "Português"
-msgstr "Portuguese"
-
-#: src/App/Controllers/Admin/TemplateController.php:45
-#: src/App/Controllers/User/TemplateController.php:45
-#: src/App/Controllers/Web/TemplateController.php:39
-msgid "Inglês"
-msgstr "English"
-
-#: src/App/Controllers/Admin/TemplateController.php:46
-#: src/App/Controllers/User/TemplateController.php:46
-#: src/App/Controllers/Web/TemplateController.php:40
-msgid "Espanhol"
-msgstr "Spanish"
-
-#: src/App/Controllers/Admin/UsersController.php:58
+#: src/API/Controllers/Admin/UsersController.php:54
 msgid "Você foi registrado com sucesso!"
 msgstr "You have been successfully registered!"
 
-#: src/App/Controllers/Admin/UsersController.php:72
+#: src/API/Controllers/Admin/UsersController.php:68
 #, php-format
 msgid ""
 "O usuário \"%s\" foi cadastrado com sucesso! Porém não foi possível enviar "
@@ -690,34 +659,93 @@ msgstr ""
 "The user \"%s\" was successfully registered! However, it was not possible to "
 "send a notification to his email."
 
-#: src/App/Controllers/Admin/UsersController.php:80
+#: src/API/Controllers/Admin/UsersController.php:76
 #, php-format
 msgid "O usuário \"%s\" foi criado com sucesso!"
 msgstr "The user \"%s\" was successfully created!"
 
-#: src/App/Controllers/Admin/UsersController.php:147
+#: src/API/Controllers/Admin/UsersController.php:126
 #, php-format
 msgid "Os dados do usuário \"%s\" foram alterados com sucesso!"
 msgstr "User \"%s\" data has been changed successfully!"
 
-#: src/App/Controllers/Admin/UsersController.php:206
+#: src/API/Controllers/Admin/UsersController.php:183
 msgid "Não foi possível excluir o usuário!"
 msgstr "Unable to delete user!"
 
-#: src/App/Controllers/Admin/UsersController.php:213
+#: src/API/Controllers/Admin/UsersController.php:190
 #, php-format
 msgid "O usuário \"%s\" foi excluído com sucesso."
 msgstr "The user \"%s\" has been successfully deleted."
+
+#: src/API/Controllers/Auth/AuthController.php:21
+#: src/App/Controllers/Auth/AuthController.php:41
+msgid "Usuário e/ou senha inválidos!"
+msgstr "Invalid username and/or password!"
+
+#: src/API/Controllers/MediaLibraryController.php:57
+msgid "Nenhum arquivo foi escolhido!"
+msgstr "No file was chosen!"
+
+#: src/API/Controllers/MediaLibraryController.php:88
+msgid "O arquivo foi carregado com sucesso!"
+msgstr "The file has been uploaded successfully!"
+
+#: src/API/Controllers/MediaLibraryController.php:97
+msgid "Nenhum nome de arquivo foi declarado!"
+msgstr "No filename has been declared!"
+
+#: src/API/Controllers/MediaLibraryController.php:102
+msgid "O arquivo foi excluído com sucesso."
+msgstr "The file has been successfully deleted."
+
+#: src/API/Controllers/User/EditController.php:49
+msgid "Seus dados foram atualizados com sucesso!"
+msgstr "Your data has been successfully updated!"
+
+#: src/API/Controllers/User/NotificationsController.php:28
+msgid "Todas as notificações foram marcadas como \"Lidas\"."
+msgstr "All notifications have been marked as \"Read\"."
+
+#: src/App/Controllers/Admin/TemplateController.php:31
+#: src/App/Controllers/User/TemplateController.php:31
+#: src/App/Controllers/Web/TemplateController.php:27
+msgid "Aguarde, carregando..."
+msgstr "Wait, loading..."
+
+#: src/App/Controllers/Admin/TemplateController.php:43
+#: src/App/Controllers/User/TemplateController.php:43
+#: src/App/Controllers/Web/TemplateController.php:35
+msgid "Linguagens"
+msgstr "Languages"
+
+#: src/App/Controllers/Admin/TemplateController.php:46
+#: src/App/Controllers/User/TemplateController.php:46
+#: src/App/Controllers/Web/TemplateController.php:38
+msgid "Português"
+msgstr "Portuguese"
+
+#: src/App/Controllers/Admin/TemplateController.php:47
+#: src/App/Controllers/User/TemplateController.php:47
+#: src/App/Controllers/Web/TemplateController.php:39
+msgid "Inglês"
+msgstr "English"
+
+#: src/App/Controllers/Admin/TemplateController.php:48
+#: src/App/Controllers/User/TemplateController.php:48
+#: src/App/Controllers/Web/TemplateController.php:40
+msgid "Espanhol"
+msgstr "Spanish"
+
+#: src/App/Controllers/Admin/TemplateController.php:52
+#: src/App/Controllers/User/TemplateController.php:52
+msgid "Notificações"
+msgstr "Notifications"
 
 #: src/App/Controllers/Auth/AuthController.php:30
 #, php-format
 msgid "Seja bem-vindo(a), %s!"
 msgstr "Welcome, %s!"
-
-#: src/App/Controllers/Auth/AuthController.php:41
-#: src/App/Controllers/Auth/AuthController.php:64
-msgid "Usuário e/ou senha inválidos!"
-msgstr "Invalid username and/or password!"
 
 #: src/App/Controllers/Auth/ResetPasswordController.php:42
 #, php-format
@@ -731,26 +759,6 @@ msgstr "The verification key is invalid!"
 #: src/App/Controllers/Auth/ResetPasswordController.php:82
 msgid "A senha foi redefinida com sucesso!"
 msgstr "The password has been successfully reset!"
-
-#: src/App/Controllers/MediaLibraryController.php:57
-msgid "Nenhum arquivo foi escolhido!"
-msgstr "No file was chosen!"
-
-#: src/App/Controllers/MediaLibraryController.php:88
-msgid "O arquivo foi carregado com sucesso!"
-msgstr "The file has been uploaded successfully!"
-
-#: src/App/Controllers/MediaLibraryController.php:97
-msgid "Nenhum nome de arquivo foi declarado!"
-msgstr "No filename has been declared!"
-
-#: src/App/Controllers/MediaLibraryController.php:102
-msgid "O arquivo foi excluído com sucesso."
-msgstr "The file has been successfully deleted."
-
-#: src/App/Controllers/User/EditController.php:55
-msgid "Seus dados foram atualizados com sucesso!"
-msgstr "Your data has been successfully updated!"
 
 #: src/App/Controllers/Web/ContactController.php:24
 msgid "Sua mensagem foi enviada com sucesso!"
@@ -797,48 +805,48 @@ msgstr "Return Home"
 msgid "Sair"
 msgstr "Logout"
 
-#: src/Models/Config.php:45 src/Models/UserMeta.php:39
+#: src/Models/Config.php:46 src/Models/UserMeta.php:39
 msgid "O metadado é obrigatório!"
 msgstr "The metadata is required!"
 
-#: src/Models/Config.php:46 src/Models/UserMeta.php:40
+#: src/Models/Config.php:47 src/Models/UserMeta.php:40
 #, php-format
 msgid "O metadado deve conter no máximo %s caractéres!"
 msgstr "The metadata must contain a maximum of %s characters!"
 
-#: src/Models/Config.php:53
+#: src/Models/Config.php:54
 msgid "A imagem de fundo do login é obrigatória!"
 msgstr "The login background image is required!"
 
-#: src/Models/Config.php:55
+#: src/Models/Config.php:56
 msgid "A imagem de fundo não é uma imagem válida!"
 msgstr "The background image is not a valid image!"
 
-#: src/Models/Config.php:59
+#: src/Models/Config.php:60
 msgid "O logo é obrigatório!"
 msgstr "The logo is required!"
 
-#: src/Models/Config.php:61
+#: src/Models/Config.php:62
 msgid "O logo não é uma imagem válida!"
 msgstr "The logo is not a valid image!"
 
-#: src/Models/Config.php:65
+#: src/Models/Config.php:66
 msgid "O ícone é obrigatório!"
 msgstr "The icon is required!"
 
-#: src/Models/Config.php:67
+#: src/Models/Config.php:68
 msgid "O ícone não é uma imagem válida!"
 msgstr "The icon is not a valid image!"
 
-#: src/Models/Config.php:71
+#: src/Models/Config.php:72
 msgid "O tema é obrigatório!"
 msgstr "The theme is required!"
 
-#: src/Models/Config.php:73
+#: src/Models/Config.php:74
 msgid "O tema é inválido!"
 msgstr "The theme is invalid!"
 
-#: src/Models/ContactForm.php:19 src/Models/User.php:59
+#: src/Models/ContactForm.php:19 src/Models/User.php:61
 #: src/Models/UserForm.php:25
 msgid "O nome é obrigatório!"
 msgstr "The name is required!"
@@ -850,13 +858,13 @@ msgstr "The name must have a maximum of %s characters!"
 
 #: src/Models/ContactForm.php:23 src/Models/ForgotPasswordForm.php:17
 #: src/Models/LoginForm.php:17 src/Models/SocialUser.php:46
-#: src/Models/User.php:63 src/Models/UserForm.php:29
+#: src/Models/User.php:65 src/Models/UserForm.php:29
 msgid "O email é obrigatório!"
 msgstr "The email is required!"
 
 #: src/Models/ContactForm.php:24 src/Models/ForgotPasswordForm.php:18
 #: src/Models/LoginForm.php:18 src/Models/SocialUser.php:47
-#: src/Models/User.php:64 src/Models/UserForm.php:30
+#: src/Models/User.php:66 src/Models/UserForm.php:30
 msgid "O email é inválido!"
 msgstr "The email is invalid!"
 
@@ -897,7 +905,7 @@ msgstr ""
 "send another one."
 
 #: src/Models/LoginForm.php:21 src/Models/ResetPasswordForm.php:17
-#: src/Models/User.php:68 src/Models/UserForm.php:37
+#: src/Models/User.php:70 src/Models/UserForm.php:37
 msgid "A senha é obrigatória!"
 msgstr "The password is required!"
 
@@ -909,7 +917,20 @@ msgstr "This email was not found!"
 msgid "A senha está incorreta!"
 msgstr "The password is incorrect!"
 
-#: src/Models/ResetPasswordForm.php:18 src/Models/User.php:69
+#: src/Models/Notification.php:36 src/Models/SocialUser.php:37
+msgid "O usuário é obrigatório!"
+msgstr "The user is required!"
+
+#: src/Models/Notification.php:39
+msgid "O conteúdo é obrigatório!"
+msgstr "The content is required!"
+
+#: src/Models/Notification.php:40
+#, php-format
+msgid "O conteúdo deve conter no máximo %s caractéres!"
+msgstr "The content must contain a maximum of %s characters!"
+
+#: src/Models/ResetPasswordForm.php:18 src/Models/User.php:71
 #: src/Models/UserForm.php:38
 #, php-format
 msgid "A senha deve conter no mínimo %s caractéres!"
@@ -923,10 +944,6 @@ msgstr "The password confirmation is required!"
 msgid "As senhas não correspondem!"
 msgstr "Passwords do not match!"
 
-#: src/Models/SocialUser.php:37
-msgid "O usuário é obrigatório!"
-msgstr "The user is required!"
-
 #: src/Models/SocialUser.php:40
 msgid "O ID da rede social é obrigatório!"
 msgstr "The social network ID is required!"
@@ -939,39 +956,39 @@ msgstr "The social network name is required!"
 msgid "O nome da rede social é inválido!"
 msgstr "The social network name is invalid!"
 
-#: src/Models/SocialUser.php:58 src/Models/User.php:79
+#: src/Models/SocialUser.php:58 src/Models/User.php:81
 #: src/Models/UserForm.php:50
 msgid "O email informado já está em uso! Tente outro."
 msgstr "The given email is already in use! Try another."
 
-#: src/Models/User.php:56 src/Models/UserForm.php:22
+#: src/Models/User.php:58 src/Models/UserForm.php:22
 msgid "O tipo de usuário é obrigatório!"
 msgstr "The user type is required!"
 
-#: src/Models/User.php:60 src/Models/UserForm.php:26
+#: src/Models/User.php:62 src/Models/UserForm.php:26
 #, php-format
 msgid "O nome deve conter no máximo %s caractéres!"
 msgstr "The name must contain a maximum of %s characters!"
 
-#: src/Models/User.php:65 src/Models/UserForm.php:31
+#: src/Models/User.php:67 src/Models/UserForm.php:31
 #, php-format
 msgid "O email deve conter no máximo %s caractéres!"
 msgstr "The email must contain a maximum of %s characters!"
 
-#: src/Models/User.php:72
+#: src/Models/User.php:74
 msgid "O apelido é obrigatório!"
 msgstr "The nickname is required!"
 
-#: src/Models/User.php:73
+#: src/Models/User.php:75
 #, php-format
 msgid "O apelido deve conter no máximo %s caractéres!"
 msgstr "The nickname must have a maximum of %s characters!"
 
-#: src/Models/User.php:85
+#: src/Models/User.php:87
 msgid "O apelido informado já está em uso! Tente outro."
 msgstr "The given nickname is already in use! Try another."
 
-#: src/Models/User.php:114
+#: src/Models/User.php:116
 msgid ""
 "Vai por mim, isso vai dar ruim! Você não pode excluir o administrador do "
 "sistema."
@@ -979,11 +996,11 @@ msgstr ""
 "Trust me, this is going to go bad! You cannot delete the system "
 "administrator."
 
-#: src/Models/User.php:117
+#: src/Models/User.php:119
 msgid "Você não pode excluir um usuário vinculado à uma rede social!"
 msgstr "You cannot delete a user linked to a social network!"
 
-#: src/Models/User.php:120
+#: src/Models/User.php:122
 msgid "Você não pode excluir um usuário com dados armazenados!"
 msgstr "You cannot delete a user with stored data!"
 

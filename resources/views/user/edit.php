@@ -10,7 +10,7 @@
     ]);
 ?>
 
-<form id="save-user" action="<?= $router->route('user.edit.update') ?>" method="put">
+<form id="save-user" action="<?= $router->route('api.user.edit.update') ?>" method="put">
     <div class="card shadow mb-4 br-15">
         <div class="card-header-tab card-header-tab-animation card-header brt-15">    
             <div class="card-header-title">

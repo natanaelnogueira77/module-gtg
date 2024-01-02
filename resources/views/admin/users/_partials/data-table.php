@@ -35,7 +35,7 @@
 
                             <button type="button" tabindex="0" class="dropdown-item" 
                                 data-act="delete" data-method="delete" 
-                                data-action="<?= $router->route('admin.users.delete', $params) ?>">
+                                data-action="<?= $router->route('api.admin.users.delete', $params) ?>">
                                 <?= _('Excluir Usuário') ?>
                             </button>
                         </div>

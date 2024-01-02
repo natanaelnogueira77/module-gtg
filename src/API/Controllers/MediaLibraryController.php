@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\App\Controllers;
+namespace Src\API\Controllers;
 
 use GTG\MVC\Application;
 use GTG\MVC\Controller;

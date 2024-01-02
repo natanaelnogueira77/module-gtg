@@ -12,7 +12,7 @@
     ]);
 ?>
 
-<form action="<?= $dbUser ? $router->route('admin.users.update', ['user_id' => $dbUser->id]) : $router->route('admin.users.store') ?>" 
+<form action="<?= $dbUser ? $router->route('api.admin.users.update', ['user_id' => $dbUser->id]) : $router->route('api.admin.users.store') ?>" 
     method="<?= $dbUser ? 'put' : 'post' ?>" id="save-user">
     <div class="card shadow mb-4 br-15">
         <div class="card-header-tab card-header-tab-animation card-header brt-15">    

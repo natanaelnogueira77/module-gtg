@@ -4,6 +4,7 @@ namespace Src\Models;
 
 use DateTime;
 use GTG\MVC\DB\UserModel;
+use Src\Models\Notification;
 use Src\Models\SocialUser;
 use Src\Models\UserMeta;
 use Src\Models\UserType;
@@ -13,6 +14,7 @@ class User extends UserModel
     const UT_ADMIN = 1;
     const UT_STANDARD = 2;
 
+    public ?array $notifications = [];
     public ?SocialUser $socialUser = null;
     public ?array $userMetas = [];
     public ?UserType $userType = null;
@@ -121,6 +123,12 @@ class User extends UserModel
             return false;
         }
         return parent::destroy();
+    }
+
+    public function notifications(array $filters = [], string $columns = '*'): ?array 
+    {
+        $this->notifications = $this->hasMany(Notification::class, 'usu_id', 'id', $filters, $columns)->fetch(true);
+        return $this->notifications;
     }
 
     public function socialUser(string $columns = '*'): ?SocialUser 

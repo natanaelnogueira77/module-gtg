@@ -3,6 +3,7 @@
 namespace Src\Models;
 
 use GTG\MVC\DB\DBModel;
+use Src\Components\FileSystem;
 
 class Config extends DBModel 
 {
@@ -77,5 +78,20 @@ class Config extends DBModel
                 }
             ]
         ];
+    }
+
+    public static function getLogoURL(): string 
+    {
+        return FileSystem::getLink((new self())->getMeta(self::KEY_LOGO));
+    }
+
+    public static function getLogoIconURL(): string 
+    {
+        return FileSystem::getLink((new self())->getMeta(self::KEY_LOGO_ICON));
+    }
+    
+    public static function getLoginImageURL(): string 
+    {
+        return FileSystem::getLink((new self())->getMeta(self::KEY_LOGIN_IMG));
     }
 }

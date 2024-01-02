@@ -8,7 +8,7 @@
         function check_session() 
         {
             App.callAjax({
-                url: <?php echo json_encode($router->route('auth.expired')) ?>,
+                url: <?php echo json_encode($router->route('api.auth.expired')) ?>,
                 type: 'post',
                 success: function (response) {
                     if(response.success) {

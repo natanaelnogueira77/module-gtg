@@ -64,7 +64,7 @@
                                 <a id="bell-notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" 
                                     class="p-0 btn">
                                     <?php if($theme->header['right']['bell']['notifications_count']): ?>
-                                    <div class="badge badge-pill badge-danger position-absolute p-1 ml-0">
+                                    <div id="notifications-number" class="badge badge-pill badge-danger position-absolute p-1 ml-0">
                                         <?= $theme->header['right']['bell']['notifications_count'] ?>
                                     </div>
                                     <?php endif; ?>
@@ -73,16 +73,9 @@
                                 <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
                                     <h6 tabindex="-1" class="dropdown-header"><?= $theme->header['right']['bell']['title'] ?></h6>
                                     <?php 
-                                    if($theme->header['right']['bell']['notifications']):
-                                        foreach($theme->header['right']['bell']['notifications'] as $notification):
-                                        ?>
-                                        <div tabindex="-1" class="dropdown-divider my-0 <?= $notification->wasRead() ? 'bg-light' : '' ?>"></div>
-                                        <p class="px-3 py-2 mb-0 <?= $notification->wasRead() ? 'bg-light' : '' ?>">
-                                            <?= $notification->getContent() ?>
-                                        </p>
-                                        <?php 
-                                        endforeach;
-                                    endif;
+                                        $this->insert('user/notifications/_components/list', [
+                                            'dbNotifications' => $theme->header['right']['bell']['notifications']
+                                        ]);
                                     ?>
                                 </div>
                             </div>

@@ -14,6 +14,14 @@ class m0001_initial extends Migration
             $table->text('value')->nullable();
         });
 
+        $this->db->createTable('notificacao', function ($table) {
+            $table->id();
+            $table->integer('usu_id');
+            $table->string('content', 1000);
+            $table->tinyInteger('was_read')->default('FALSE');
+            $table->timestamps();
+        });
+
         $this->db->createTable('social_usuario', function ($table) {
             $table->id();
             $table->integer('usu_id');
@@ -52,6 +60,7 @@ class m0001_initial extends Migration
     public function down(): void
     {
         $this->db->dropTableIfExists('config');
+        $this->db->dropTableIfExists('notificacao');
         $this->db->dropTableIfExists('social_usuario');
         $this->db->dropTableIfExists('usuario');
         $this->db->dropTableIfExists('usuario_meta');

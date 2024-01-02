@@ -95,7 +95,7 @@
             </div>
         </form>
         
-        <div id="users" data-action="<?= $router->route('admin.users.list') ?>">
+        <div id="users" data-action="<?= $router->route('api.admin.users.list') ?>">
             <div class="d-flex justify-content-around p-5">
                 <div class="spinner-grow text-secondary" role="status">
                     <span class="visually-hidden"></span>
@@ -113,7 +113,7 @@
         </div>
     </div>
 
-    <form id="system" action="<?= $router->route('admin.system') ?>" method="put">
+    <form id="system" action="<?= $router->route('api.admin.system') ?>" method="put">
         <div class="card-body">
             <div class="form-row">
                 <div class="form-group col-md-6">

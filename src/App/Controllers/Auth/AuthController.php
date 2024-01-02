@@ -6,13 +6,12 @@ use GTG\MVC\Controller;
 use Src\Components\FileSystem;
 use Src\Models\Config;
 use Src\Models\LoginForm;
-use Src\Models\SocialUser;
-use Src\Models\User;
 
 class AuthController extends Controller 
 {
     public function index(array $data): void 
     {
+        $data = array_merge($data, filter_input_array(INPUT_GET, FILTER_DEFAULT));
         $configMetas = (new Config())->getGroupedMetas([
             Config::KEY_LOGO, 
             Config::KEY_LOGO_ICON, 
@@ -25,6 +24,7 @@ class AuthController extends Controller
                 'email' => $data['email'],
                 'password' => $data['password']
             ]);
+
             if($user = $loginForm->login()) {
                 $this->session->setAuth($user);
                 $this->session->setFlash('success', sprintf(_("Seja bem-vindo(a), %s!"), $user->name));
@@ -46,38 +46,14 @@ class AuthController extends Controller
             'background' => FileSystem::getLink($configMetas[Config::KEY_LOGIN_IMG]),
             'logo' => FileSystem::getLink($configMetas[Config::KEY_LOGO]),
             'shortcutIcon' => FileSystem::getLink($configMetas[Config::KEY_LOGO_ICON]),
-            'redirect' => $_GET['redirect'],
+            'redirect' => $data['redirect'],
             'loginForm' => $loginForm
         ]);
-    }
-
-    public function check(array $data): void 
-    {
-        $loginForm = (new LoginForm())->loadData([
-            'email' => $data['email'],
-            'password' => $data['password']
-        ]);
-        if($user = $loginForm->login()) {
-            $this->session->setAuth($user);
-            $this->APIResponse([], 200);
-        } else {
-            $this->setMessage('error', _('Usuário e/ou senha inválidos!'))->APIResponse([], 422);
-        }
     }
 
     public function logout(array $data): void 
     {
         $this->session->removeAuth();
         $this->redirect('auth.index');
-    }
-
-    public function expired(array $data): void 
-    {
-        if(!$this->session->getAuth()) {
-            $this->APIResponse(['success' => true], 200);
-            return;
-        }
-
-        $this->APIResponse(['success' => false], 200);
     }
 }

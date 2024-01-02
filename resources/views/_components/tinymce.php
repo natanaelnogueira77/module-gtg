@@ -16,7 +16,7 @@
 
                 xhr = new XMLHttpRequest();
                 xhr.withCredentials = false;
-                xhr.open('POST', <?php echo json_encode($router->route('mediaLibrary.add')) ?>);
+                xhr.open('POST', <?php echo json_encode($router->route('api.mediaLibrary.add')) ?>);
 
                 xhr.upload.onprogress = function (e) {
                     progress(e.loaded / e.total * 100);
@@ -58,7 +58,7 @@
             image_list: function (list_success) {
                 const images = [];
                 $.ajax({
-                    url: <?php echo json_encode($router->route('mediaLibrary.load')) ?>,
+                    url: <?php echo json_encode($router->route('api.mediaLibrary.load')) ?>,
                     type: 'get',
                     data: {
                         limit: 1000,

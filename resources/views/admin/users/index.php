@@ -46,7 +46,7 @@
             </div>
         </form>
 
-        <div id="users" data-action="<?= $router->route('admin.users.list') ?>">
+        <div id="users" data-action="<?= $router->route('api.admin.users.list') ?>">
             <div class="d-flex justify-content-around p-5">
                 <div class="spinner-grow text-secondary" role="status">
                     <span class="visually-hidden"></span>
