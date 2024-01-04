@@ -47,7 +47,7 @@ class LocalStorage
 
         foreach($pathParts as $index => $part) {
             $path .= $part;
-            if(!$this->createFolder($path)) {
+            if($path && !$this->createFolder($path)) {
                 throw new Exception(_('Lamentamos, mas não foi possível criar o caminho para o arquivo!'));
             }
             $path .= '/';

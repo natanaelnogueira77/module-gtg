@@ -131,7 +131,7 @@ class UsersController extends Controller
 
     public function list(array $data): void 
     {
-        $data = array_merge($data, filter_input_array(INPUT_GET, FILTER_DEFAULT));
+        $data = array_merge($data, filter_input_array(INPUT_GET, FILTER_DEFAULT) ?? []);
 
         $filters = [];
 

@@ -11,7 +11,7 @@ class AuthController extends Controller
 {
     public function index(array $data): void 
     {
-        $data = array_merge($data, filter_input_array(INPUT_GET, FILTER_DEFAULT));
+        $data = array_merge($data, filter_input_array(INPUT_GET, FILTER_DEFAULT) ?? []);
         $configMetas = (new Config())->getGroupedMetas([
             Config::KEY_LOGO, 
             Config::KEY_LOGO_ICON, 
