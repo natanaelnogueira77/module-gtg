@@ -12,6 +12,9 @@ if(file_exists($maintenance = __DIR__ . '/../maintenance.php')) {
 require_once __DIR__ . '/../vendor/autoload.php';
 $app = require_once __DIR__ . '/../config/app.php';
 
+use Src\Models\User;
+use Src\Models\UserType;
+
 // App Routes
 $app->router->namespace('Src\App\Controllers\Auth');
 

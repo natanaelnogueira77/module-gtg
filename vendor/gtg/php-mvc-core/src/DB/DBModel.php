@@ -571,12 +571,18 @@ abstract class DBModel extends DataLayer
         string $property, 
         string $key = 'id', 
         array $filters = [], 
-        string $columns = '*'
+        string $columns = '*',
+        ?callable $transformation = null
     ): array 
     {
         $ids = static::getPropertyValues($objects, $key);
         if($registries = (new $model())->get(['in' => [$foreign => $ids]] + $filters, $columns)->fetch(true)) {
+            if($transformation) {
+                $registries = $transformation($registries);
+            }
+
             $registries = $model::getGroupedBy($registries, $foreign);
+
             foreach($objects as $index => $object) {
                 $objects[$index]->$property = $registries[$object->$key];
             }
@@ -592,11 +598,16 @@ abstract class DBModel extends DataLayer
         string $property, 
         string $key = 'id', 
         array $filters = [], 
-        string $columns = '*'
+        string $columns = '*',
+        ?callable $transformation = null
     ): array 
     {
         $ids = static::getPropertyValues($objects, $key);
         if($registries = (new $model())->get(['in' => [$foreign => $ids]] + $filters, $columns)->fetch(true)) {
+            if($transformation) {
+                $registries = $transformation($registries);
+            }
+
             $registries = $model::getGroupedBy($registries, $foreign, true);
             foreach($objects as $index => $object) {
                 $objects[$index]->$property = $registries[$object->$key];
@@ -613,11 +624,16 @@ abstract class DBModel extends DataLayer
         string $property, 
         string $key = 'id', 
         array $filters = [], 
-        string $columns = '*'
+        string $columns = '*',
+        ?callable $transformation = null
     ): array 
     {
         $ids = static::getPropertyValues($objects, $foreign);
         if($registries = (new $model())->get(['in' => [$key => $ids]] + $filters, $columns)->fetch(true)) {
+            if($transformation) {
+                $registries = $transformation($registries);
+            }
+
             $registries = $model::getGroupedBy($registries);
             foreach($objects as $index => $object) {
                 $objects[$index]->$property = $registries[$object->$foreign];
@@ -639,7 +655,8 @@ abstract class DBModel extends DataLayer
         string $key2 = 'id',
         array $filters = [],
         string $columns = '*', 
-        string $pivotColumns = '*'
+        string $pivotColumns = '*',
+        ?callable $transformation = null
     ): array 
     {
         if($pivots = (new $pivotModel())->get(['in' => [$foreign1 => static::getPropertyValues($objects, $key1)]], $pivotColumns)->fetch(true)) {
@@ -648,6 +665,11 @@ abstract class DBModel extends DataLayer
             $registries = (new $model())->get([
                 'in' => [$key2 => $pivotModel::getPropertyValues($pivots, $foreign2)]
             ] + $filters, $columns)->fetch(true);
+
+            if($transformation) {
+                $registries = $transformation($registries);
+            }
+            
             $registries = $model::getGroupedBy($registries);
 
             $groupedRegistries = [];

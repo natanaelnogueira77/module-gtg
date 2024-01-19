@@ -54,7 +54,12 @@ class Notification extends DBModel
         return $this->user;
     }
 
-    public static function withUser(array $objects, array $filters = [], string $columns = '*'): array
+    public static function withUser(
+        array $objects, 
+        array $filters = [], 
+        string $columns = '*', 
+        ?callable $transformation = null
+    ): array
     {
         return self::withBelongsTo(
             $objects, 
@@ -63,7 +68,8 @@ class Notification extends DBModel
             'user', 
             'id', 
             $filters, 
-            $columns
+            $columns,
+            $transformation
         );
     }
 

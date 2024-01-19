@@ -48,7 +48,12 @@ class UserType extends DBModel
         return $this->users;
     }
 
-    public static function withUsers(array $objects, array $filters = [], string $columns = '*'): array
+    public static function withUsers(
+        array $objects, 
+        array $filters = [],
+        string $columns = '*', 
+        ?callable $transformation = null
+    ): array
     {
         return self::withHasMany(
             $objects, 
@@ -57,7 +62,8 @@ class UserType extends DBModel
             'users', 
             'id', 
             $filters, 
-            $columns
+            $columns,
+            $transformation
         );
     }
 

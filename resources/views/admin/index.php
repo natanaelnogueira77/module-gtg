@@ -186,6 +186,6 @@
     $this->end(); 
 
     $this->start('modals');
-    $this->insert('_components/media-library', ['v' => $this]);
+    $this->insert('_components/media-library');
     $this->end();
 ?>

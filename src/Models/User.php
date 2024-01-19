@@ -149,7 +149,12 @@ class User extends UserModel
         return $this->userType;
     }
 
-    public static function withSocialUser(array $objects, array $filters = [], string $columns = '*'): array
+    public static function withSocialUser(
+        array $objects, 
+        array $filters = [], 
+        string $columns = '*', 
+        ?callable $transformation = null
+    ): array
     {
         return self::withHasOne(
             $objects, 
@@ -158,11 +163,17 @@ class User extends UserModel
             'socialUser', 
             'id', 
             $filters, 
-            $columns
+            $columns,
+            $transformation
         );
     }
 
-    public static function withUserType(array $objects, array $filters = [], string $columns = '*'): array
+    public static function withUserType(
+        array $objects, 
+        array $filters = [], 
+        string $columns = '*', 
+        ?callable $transformation = null
+    ): array
     {
         return self::withBelongsTo(
             $objects, 
@@ -171,7 +182,8 @@ class User extends UserModel
             'userType', 
             'id', 
             $filters, 
-            $columns
+            $columns,
+            $transformation
         );
     }
 

@@ -1,4 +1,4 @@
-<?php $v->insert('_scripts/media-library.js'); ?>
+<?php $this->insert('_scripts/media-library.js'); ?>
 <div class="modal fade" id="media-library-modal" tabindex="-1" role="dialog" aria-hidden="true" 
     data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
