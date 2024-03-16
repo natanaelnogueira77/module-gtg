@@ -2,112 +2,54 @@
 
 namespace GTG\MVC;
 
-use GTG\MVC\Controller;
-use GTG\MVC\DB\Database;
-use GTG\MVC\Middleware;
-use GTG\MVC\Request;
-use GTG\MVC\Response;
+use GTG\MVC\Database\Database;
+use GTG\MVC\Exceptions\AppException;
+use GTG\MVC\DTOs\ErrorDTO;
+use GTG\MVC\ErrorHandler;
 use GTG\MVC\Router;
 use GTG\MVC\Session;
+use GTG\MVC\SMTP;
 use GTG\MVC\View;
 
 class Application 
 {
-    public static string $ROOT_DIR;
-    public static ?array $DB_INFO = null;
-    public static ?array $SMTP_INFO = null;
-    public static Application $app;
+    public static Application $instance;
     public ?array $appData = null;
-    public ?string $errorView = null;
-    public Controller $controller;
-    public ?Database $db = null;
-    public Request $request;
-    public Response $response;
+    public Database $database;
     public ?Router $router = null;
-    public ?Session $session = null;
+    public Session $session;
+    public SMTP $SMTP;
     public ?View $view = null;
+    private string $projectPath;
+    private ErrorHandler $errorHandler;
 
-    public function __construct(string $rootPath) 
+    public function __construct(string $projectPath) 
     {
-        self::$ROOT_DIR = $rootPath;
-        self::$app = $this;
+        $this->projectPath = $projectPath;
+        $this->errorHandler = new ErrorHandler($projectPath);
+        $this->database = new Database($projectPath);
+        $this->SMTP = new SMTP();
+        $this->session = new Session();
+        self::$instance = $this;
     }
 
-    public function setRouter(string $appUrl): self 
+    public static function getInstance(): Application 
     {
-        $this->router = isset($_SERVER['REQUEST_METHOD']) ? new Router($appUrl) : null;
-        return $this;
+        return self::$instance;
     }
 
-    public function setSessionParams(string $authKey, string $flashKey, string $languageKey): self 
+    public function setRouter(string $projectURL): self 
     {
-        $this->session = new Session($authKey, $flashKey, $languageKey);
-        return $this;
-    }
-
-    public function setDatabaseConnection(
-        string $driver,
-        string $dbname,
-        string $host,
-        string $port,
-        string $username,
-        string $password,
-        ?array $options = null
-    ): self 
-    {
-        self::$DB_INFO = [
-            'driver' => $driver,
-            'dbname' => $dbname,
-            'host' => $host,
-            'port' => $port,
-            'username' => $username,
-            'passwd' => $password,
-            'options' => $options
-        ];
-        $this->db = new Database(self::$DB_INFO);
-        return $this;
-    }
-
-    public function setMigrations(string $relativePath, string $namespace): self 
-    {
-        if($this->db) {
-            $this->db->setMigrations($relativePath, $namespace);
+        if(!isset($_SERVER['REQUEST_METHOD'])) {
+            throw new AppException('No Request Method was settled for the Router!');
         }
+        $this->router = new Router($projectURL);
         return $this;
     }
 
-    public function setSeeders(string $relativePath, string $namespace): self 
+    public function setView(string $relativePath): self 
     {
-        if($this->db) {
-            $this->db->setSeeders($relativePath, $namespace);
-        }
-        return $this;
-    }
-
-    public function setSMTP(
-        string $host,
-        string $port,
-        string $username,
-        string $password,
-        string $name,
-        string $email
-    ): self 
-    {
-        self::$SMTP_INFO = [
-            'host' => $host,
-            'port' => $port,
-            'username' => $username,
-            'password' => $password,
-            'name' => $name,
-            'email' => $email
-        ];
-        return $this;
-    }
-
-    public function setViews(string $viewPath, ?string $errorView = null): self 
-    {
-        $this->view = new View($viewPath);
-        $this->errorView = $errorView;
+        $this->view = new View($this->projectPath . '/' . $relativePath);
         return $this;
     }
 
@@ -119,57 +61,90 @@ class Application
 
     public function apply(): void 
     {
-        $this->request = new Request();
-        $this->response = new Response();
-        $this->controller = new Controller();
+        $this->setErrorHandling();
+        $this->setLocaleAndLanguage();
+    }
 
+    private function setErrorHandling(): void 
+    {
+        $this->setErrorConfigurationOptions();
+        $this->setErrorCallback();
+        $this->configureErrorHandler();
+    }
+
+    private function setErrorConfigurationOptions(): void 
+    {
         ini_set('display_errors', 0);
         ini_set('display_startup_errors', 1);
         ini_set('ignore_repeated_source', true);
         ini_set('log_errors', true);
-        error_reporting( E_ALL );
+        error_reporting(E_ALL);
+    }
 
-        set_error_handler(array('GTG\MVC\Exceptions\ErrorHandler', 'control'), E_ALL);
-        register_shutdown_function(array('GTG\MVC\Exceptions\ErrorHandler', 'shutdown'));
+    private function setErrorCallback(): void 
+    {
+        if($this->view) {
+            $app = $this;
+            $this->errorHandler->setErrorCallback(function($error) use ($app) {
+                $app->renderErrorPage($error);
+            });
+        }
+    }
 
-        setlocale(LC_ALL, $this->session->getLanguage()[1]);
-        putenv('LANGUAGE=' . $this->session->getLanguage()[1]);
+    private function renderErrorPage(ErrorDTO $error): void
+    {
+        echo $this->view && $this->view->getErrorPagePath() 
+            ? $this->view->getContext()->render($this->view->getErrorPagePath(), [
+                'appData' => $this->appData,
+                'router' => $this->router,
+                'session' => $this->session,
+                'error' => $error
+            ]) 
+            : '';
+    }
 
-        bindtextdomain('messages', self::$ROOT_DIR . '/lang');
-        bind_textdomain_codeset('messages', 'UTF-8');
-        textdomain('messages');
+    private function configureErrorHandler(): void 
+    {
+        set_error_handler(array($this->errorHandler, 'control'), E_ALL);
+        register_shutdown_function(array($this->errorHandler, 'shutdown'));
+    }
+
+    private function setLocaleAndLanguage(): void 
+    {
+        if($this->session->getLanguage()) {
+            setlocale(LC_ALL, $this->session->getLanguage()[1]);
+            putenv('LANGUAGE=' . $this->session->getLanguage()[1]);
+        }
 
         date_default_timezone_set('America/Recife');
-
-        return;
+        bindtextdomain('messages', $this->projectPath . '/lang');
+        bind_textdomain_codeset('messages', 'UTF-8');
+        textdomain('messages');
     }
 
     public function run(): void 
     {
-        if($this->router) {
-            $this->router->dispatch();
-            if($this->router->error()) {
-                $this->response->setStatusCode($this->router->error());
-                if($this->errorView) {
-                    echo $this->view->render($this->errorView, [
-                        'appData' => $this->appData,
-                        'router' => $this->router,
-                        'session' => $this->session,
-                        'code' => $this->router->error()
-                    ]);
-                }
-            }
+        $this->dispatchRouter();
+        $this->handleRouterError();
+    }
+
+    private function dispatchRouter(): void
+    {
+        if(!$this->router) {
+            throw new AppException('Error at run: No Router was settled!');
         }
-        return;
+
+        $this->router->dispatch();
     }
 
-    public function getController(): Controller 
+    private function handleRouterError(): void 
     {
-        return $this->controller;
-    }
-
-    public function setController(Controller $controller): void 
-    {
-        $this->controller = $controller;
+        if($this->router->error()) {
+            http_response_code($this->router->error());
+            $this->renderErrorPage(new ErrorDTO(
+                $this->router->error(), 
+                'Router error!'
+            ));
+        }
     }
 }

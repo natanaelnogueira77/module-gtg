@@ -4,113 +4,64 @@ namespace GTG\MVC;
 
 use DateTime;
 use GTG\MVC\Application;
+use GTG\MVC\BuildContext;
+use GTG\MVC\Utils\Email;
+use GTG\MVC\Utils\ExcelGenerator;
+use GTG\MVC\Utils\PDFGenerator;
+use GTG\MVC\Database\Database;
 use GTG\MVC\Request;
 use GTG\MVC\Response;
 use GTG\MVC\Router;
 use GTG\MVC\Session;
 use GTG\MVC\View;
 
-class Controller 
+abstract class Controller 
 {
     protected ?array $appData;
-    protected Request $request;
-    protected Response $response;
-    protected ?Router $router;
-    protected ?Session $session;
-    protected ?View $view;
-    protected ?array $errors = null;
-    protected ?array $message = null;
+    protected Router $router;
+    protected Session $session;
+    private View $view;
+    private Database $database;
+    private SMTP $SMTP;
 
     public function __construct() 
     {
-        $this->appData = Application::$app->appData;
-        $this->request = Application::$app->request;
-        $this->response = Application::$app->response;
-        $this->router = Application::$app->router;
-        $this->session = Application::$app->session;
-        $this->view = Application::$app->view;
-    }
-
-    protected function render(string $view, array $params = []): void  
-    {
-        $this->view->addData([
-            'appData' => $this->appData,
-            'router' => $this->router,
-            'session' => $this->session
-        ]);
-        echo $this->view->render($view, $params);
-    }
-
-    protected function getView(string $view, array $params = []): string  
-    {
-        $this->view->addData([
-            'appData' => $this->appData,
-            'router' => $this->router,
-            'session' => $this->session
-        ]);
-        return $this->view->render($view, $params);
-    }
-
-    protected function getRoute(string $route, array $params = []): ?string 
-    {
-        return $this->router?->route($route, $params);
-    }
-
-    protected function addViewData(array $params): void 
-    {
-        $this->view->addData($params);
+        $this->appData = Application::getInstance()->appData;
+        $this->router = Application::getInstance()->router;
+        $this->session = Application::getInstance()->session;
+        $this->view = Application::getInstance()->view;
+        $this->database = Application::getInstance()->database;
+        $this->SMTP = Application::getInstance()->SMTP;
     }
 
     protected function redirect(string $routeKey, array $params = []): void 
     {
-        header("Location: {$this->getRoute($routeKey, $params)}");
+        header("Location: " . $this->router->route($routeKey, $params));
         exit();
     }
 
-    protected function getDateTime(?string $date = null): DateTime 
+    protected function createResponse(array $data, int $statusCode = 200): Response 
     {
-        return new DateTime($date ? $date : '');
+        return new Response($data, $statusCode);
     }
 
-    protected function APIResponse(array $callback, int $statusCode = 200): void 
+    protected function getContext(): BuildContext
     {
-        if($this->errors) {
-            $callback['errors'] = $this->errors;
-        }
-
-        if($this->message) {
-            $callback['message'] = $this->message;
-        }
-
-        $this->response->setStatusCode($statusCode);
-        echo json_encode($callback);
+        return $this->view->getContext();
     }
 
-    protected function getMessage(): ?array 
+    protected function createExcelGenerator(): ExcelGenerator 
     {
-        return $this->message;
+        return new ExcelGenerator();
     }
 
-    protected function getErrors(): ?array 
+    protected function createPDFGenerator(): PDFGenerator 
     {
-        return $this->errors;
+        return new PDFGenerator();
     }
-
-    protected function setMessage(string $type, string $message): static 
+    
+    protected function createEmail(): Email 
     {
-        $this->message = [$type, $message];
-        return $this;
-    }
-
-    protected function setErrors(array $errors): static 
-    {
-        $this->errors = $errors;
-        return $this;
-    }
-
-    protected function addError(string $key, string $message): static 
-    {
-        $this->errors[$key] = $message;
-        return $this;
+        return new Email($this->SMTP);
     }
 }

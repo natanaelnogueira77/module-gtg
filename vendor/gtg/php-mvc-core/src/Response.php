@@ -4,14 +4,33 @@ namespace GTG\MVC;
 
 class Response 
 {
-    public function setStatusCode(int $code): void
+    public function __construct(
+        private array $data,
+        private int $statusCode
+    ) 
     {
-        http_response_code($code);
+        $this->setResponseCode();
     }
 
-    public function redirect(string $url): void 
+    public function setMessage(string $type, string $message): self
     {
-        header("Location: {$url}");
-        exit();
+        $this->data['message'] = [$type, $message];
+        return $this;
+    }
+
+    public function setErrors(array $errors): self
+    {
+        $this->data['errors'] = $errors;
+        return $this;
+    }
+
+    private function setResponseCode(): void
+    {
+        http_response_code($this->statusCode);
+    }
+
+    public function writeToJSON(): void 
+    {
+        echo json_encode($this->data);
     }
 }

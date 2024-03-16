@@ -2,38 +2,44 @@
 
 namespace Src\Models;
 
-use GTG\MVC\Model;
-use Src\Models\User;
-use Src\Models\UserMeta;
+use Src\Exceptions\ValidationException;
+use Src\Models\AR\User;
+use Src\Models\AR\UserMeta;
+use Src\Models\Model;
 
 class ForgotPasswordForm extends Model 
 {
-    public ?string $email = null;
+    public function __construct(
+        public ?string $email = null
+    ) 
+    {}
 
     public function rules(): array 
     {
         return [
             'email' => [
-                [self::RULE_REQUIRED, 'message' => _('O email é obrigatório!')], 
-                [self::RULE_EMAIL, 'message' => _('O email é inválido!')],
-                [self::RULE_MAX, 'max' => 100, 'message' => sprintf(_('O email precisa ter no máximo %s caractéres!'), 100)]
+                $this->createRule()->required('email')->setMessage(_('The email is required!')),
+                $this->createRule()->email('email')->setMessage(_('The email is invalid!')),
+                $this->createRule()->maxLength('email', 100)->setMessage(sprintf(_('The email must have %s characters or less!'), 100))
             ]
         ];
     }
 
-    public function user(): ?User 
+    public function getUser(): ?User 
     {
-        if(!$this->validate()) {
-            return null;
-        }
+        $this->validate();
 
         if(!$user = User::getByEmail($this->email)) {
-            $this->addError('email', _('O email não foi encontrado!'));
-            return null;
-        } elseif($lastRequest = $user->getMeta(UserMeta::KEY_LAST_PASS_REQUEST)) {
+            throw new ValidationException([
+                'email' => _('This email was not found!'),
+                _('This email was not found!')
+            ]);
+        } elseif($lastRequest = $user->getLastResetPasswordRequest()) {
             if(strtotime($lastRequest) >= strtotime('-1 hour')) {
-                $this->addError('email', _('Uma requisição já foi enviada para este email! Espere 1 hora para poder enviar outra.'));
-                return null;
+                throw new ValidationException([
+                    'email' => _('A request was already sent to this email! Wait 1 hour to send another.'),
+                    _('A request was already sent to this email! Wait 1 hour to send another.')
+                ]);
             }
         }
 

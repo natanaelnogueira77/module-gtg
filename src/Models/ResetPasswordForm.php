@@ -2,25 +2,25 @@
 
 namespace Src\Models;
 
-use GTG\MVC\Model;
-use Src\Models\User;
+use Src\Models\AR\User;
+use Src\Models\Model;
 
 class ResetPasswordForm extends Model 
 {
-    public ?string $password = null;
-    public ?string $password_confirm = null;
+    public function __construct(
+        public ?string $password = null,
+        public ?string $passwordConfirm = null
+    ) 
+    {}
 
     public function rules(): array 
     {
         return [
-            'password' => [
-                [self::RULE_REQUIRED, 'message' => _('A senha é obrigatória!')], 
-                [self::RULE_MIN, 'min' => 5, 'message' => sprintf(_('A senha deve conter no mínimo %s caractéres!'), 5)]
-            ],
-            'password_confirm' => [
-                [self::RULE_REQUIRED, 'message' => _('A confirmação de senha é obrigatória!')], 
-                [self::RULE_MATCH, 'match' => 'password', 'message' => _('As senhas não correspondem!')]
-            ]
+            $this->createRule()->required('password')->setMessage(_('The password is required!')),
+            $this->createRule()->minLength('password', 5)->setMessage(sprintf(_('The password must have %s characters or more!'), 5)),
+            $this->createRule()->required('passwordConfirm')->setMessage(_('The password confirmation is required!')),
+            $this->createRule()->match('password', 'passwordConfirm')->setMessage(_('The passwords does not match!')),
+            $this->createRule()->match('passwordConfirm', 'password')->setMessage(_('The passwords does not match!'))
         ];
     }
 }

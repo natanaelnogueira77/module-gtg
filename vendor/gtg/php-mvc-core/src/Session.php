@@ -4,64 +4,90 @@ namespace GTG\MVC;
 
 class Session 
 {
-    protected string $flashKey;
-    protected string $authKey;
-    protected string $langKey;
+    protected ?string $flashKey = null;
+    protected ?string $authKey = null;
+    protected ?string $languageKey = null;
 
-    public function __construct(string $authKey, string $flashKey, string $languageKey) 
+    public function __construct() 
     {
         session_start();
-        
+    }
+
+    public function setAuthKey(string $authKey): self
+    {
         $this->authKey = $authKey;
+        return $this;
+    }
+
+    public function setFlashKey(string $flashKey): self
+    {
         $this->flashKey = $flashKey;
-        $this->langKey = $languageKey;
         $flashMessages = $_SESSION[$this->flashKey] ?? [];
         foreach($flashMessages as $key => &$flashMessage) {
             $flashMessage['remove'] = true;
         }
 
         $_SESSION[$this->flashKey] = $flashMessages;
+        return $this;
     }
 
-    public function setFlash(string $key, string $message): void 
+    public function setLanguageKey(string $languageKey): self
     {
-        $_SESSION[$this->flashKey][$key] = [
-            'remove' => false,
-            'value' => $message
-        ];
+        $this->languageKey = $languageKey;
+        return $this;
+    }
+
+    public function setFlash(string $key, string $message): void
+    {
+        if($this->flashKey) {
+            if(!$_SESSION[$this->flashKey]) {
+                $_SESSION[$this->flashKey] = [];
+            }
+            
+            $_SESSION[$this->flashKey][$key] = [
+                'remove' => false,
+                'value' => $message
+            ];
+        }
     }
 
     public function getFlash(string $key): string|false
     {
-        return $_SESSION[$this->flashKey][$key]['value'] ?? false;
+        return $this->flashKey ? ($_SESSION[$this->flashKey][$key]['value'] ?? false) : false;
     }
 
-    public function setAuth($user): void 
+    public function setAuth(object $auth): void 
     {
-        $_SESSION[$this->authKey] = $user;
+        if($this->authKey) {
+            $_SESSION[$this->authKey] = $auth;
+        }
     }
 
     public function getAuth(): object|false
     {
-        return $_SESSION[$this->authKey] ?? false;
+        return $this->authKey ? ($_SESSION[$this->authKey] ?? false) : false;
     }
 
     public function removeAuth(): void
     {
-        unset($_SESSION[$this->authKey]);
+        if($this->authKey) {
+            unset($_SESSION[$this->authKey]);
+        }
     }
 
     public function setLanguage(array $languageInfo): void 
     {
-        $_SESSION[$this->langKey] = $languageInfo;
+        if($this->languageKey) {
+            $_SESSION[$this->languageKey] = $languageInfo;
+        }
     }
 
     public function getLanguage(): ?array
     {
-        if(!$_SESSION[$this->langKey]) {
+        if($this->languageKey && !$_SESSION[$this->languageKey]) {
             $this->setLanguage(['pt_BR.utf-8', 'pt_BR', 'Portuguese_Brazil']);
         }
-        return $_SESSION[$this->langKey] ?? null;
+        return $this->languageKey ? ($_SESSION[$this->languageKey] ?? null) : null;
     }
 
     public function set(string $key, mixed $value): void 
@@ -81,13 +107,15 @@ class Session
 
     public function __destruct() 
     {
-        $flashMessages = $_SESSION[$this->flashKey] ?? [];
-        foreach($flashMessages as $key => &$flashMessage) {
-            if($flashMessage['remove']) {
-                unset($flashMessages[$key]);
+        if($this->flashKey) {
+            $flashMessages = $_SESSION[$this->flashKey] ?? [];
+            foreach($flashMessages as $key => &$flashMessage) {
+                if($flashMessage['remove']) {
+                    unset($flashMessages[$key]);
+                }
             }
+    
+            $_SESSION[$this->flashKey] = $flashMessages;
         }
-
-        $_SESSION[$this->flashKey] = $flashMessages;
     }
 }

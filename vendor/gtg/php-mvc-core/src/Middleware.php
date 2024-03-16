@@ -2,23 +2,19 @@
 
 namespace GTG\MVC;
 
-use GTG\MVC\Application;
-use GTG\MVC\Controller;
+use GTG\MVC\Request;
 use GTG\MVC\Router;
 use GTG\MVC\Session;
 
-class Middleware 
+abstract class Middleware 
 {
-    protected Controller $controller;
-    protected ?Router $router;
-    protected ?Session $session;
+    abstract public function handle(Request $request): bool;
 
-    public function __construct() 
-    {
-        $this->controller = Application::$app->controller;
-        $this->router = Application::$app->router;
-        $this->session = Application::$app->session;
-    }
+    public function __construct(
+        protected ?Router $router = null,
+        protected ?Session $session = null
+    ) 
+    {}
 
     protected function getRoute(string $route, array $params = []): ?string 
     {
@@ -27,7 +23,7 @@ class Middleware
 
     protected function redirect(string $routeKey, array $params = []): void 
     {
-        header("Location: {$this->getRoute($routeKey, $params)}");
+        header("Location: " . $this->getRoute($routeKey, $params));
         exit();
     }
 }
