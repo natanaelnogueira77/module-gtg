@@ -22,7 +22,7 @@ class ProcedureParamDefinition
 
     public function toMySQL(): string 
     {
-        $sql .= "`{$this->columnName}`";
+        $sql = "`{$this->columnName}`";
         if($this->type == 'integer') {
             $sql .= ' INT(1)';
         } elseif($this->type == 'tinyInteger') {

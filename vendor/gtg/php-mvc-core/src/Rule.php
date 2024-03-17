@@ -18,7 +18,9 @@ class Rule
     private const RULE_MIN = 9;
     private const RULE_EQUAL_TO = 10;
     private const RULE_SMALLER_THAN = 11;
-    private const RULE_LARGER_THAN = 12;
+    private const RULE_EQUAL_OR_SMALLER_THAN = 12;
+    private const RULE_LARGER_THAN = 13;
+    private const RULE_EQUAL_OR_LARGER_THAN = 14;
 
     private int $type = 1;
     private ?string $attribute = null;
@@ -125,9 +127,25 @@ class Rule
         return $this;
     }
 
+    public function equalOrSmallerThan(string $attribute, int|float $value): self 
+    {
+        $this->type = self::RULE_EQUAL_OR_SMALLER_THAN;
+        $this->attribute = $attribute;
+        $this->params = ['value' => $value];
+        return $this;
+    }
+
     public function largerThan(string $attribute, int|float $value): self 
     {
         $this->type = self::RULE_LARGER_THAN;
+        $this->attribute = $attribute;
+        $this->params = ['value' => $value];
+        return $this;
+    }
+
+    public function equalOrLargerThan(string $attribute, int|float $value): self 
+    {
+        $this->type = self::RULE_EQUAL_OR_LARGER_THAN;
         $this->attribute = $attribute;
         $this->params = ['value' => $value];
         return $this;
@@ -147,7 +165,9 @@ class Rule
             || ($this->isMatch() && $value !== $model->{$this->params['match']})
             || ($this->isEqualTo() && $value != $this->params['value'])
             || ($this->isSmallerThan() && $value >= $this->params['value'])
+            || ($this->isEqualOrSmallerThan() && $value > $this->params['value'])
             || ($this->isLargerThan() && $value <= $this->params['value'])
+            || ($this->isEqualOrLargerThan() && $value < $this->params['value'])
             || ($this->isIn() && $value && !in_array($value, $this->params['values']))
         ) {
             return false;
@@ -206,9 +226,19 @@ class Rule
         return $this->type == self::RULE_SMALLER_THAN;
     }
 
+    private function isEqualOrSmallerThan(): bool 
+    {
+        return $this->type == self::RULE_EQUAL_OR_SMALLER_THAN;
+    }
+
     private function isLargerThan(): bool 
     {
         return $this->type == self::RULE_LARGER_THAN;
+    }
+
+    private function isEqualOrLargerThan(): bool 
+    {
+        return $this->type == self::RULE_EQUAL_OR_LARGER_THAN;
     }
 
     private function isIn(): bool 
