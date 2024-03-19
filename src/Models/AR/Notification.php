@@ -3,8 +3,6 @@
 namespace Src\Models\AR;
 
 use DateTime;
-use Src\Models\AR\ActiveRecord;
-use Src\Models\AR\User;
 
 class Notification extends ActiveRecord 
 {
@@ -43,7 +41,9 @@ class Notification extends ActiveRecord
 
     public static function getByUserId(int $userId, string $columns = '*'): ?array 
     {
-        return self::get(['usu_id' => $userId], $columns)->fetch(true);
+        return self::get($columns)->filters(function($where) use ($userId) {
+            $where->equal('usu_id')->assignment($userId);
+        })->fetch(true);
     }
 
     public function getContent(): string 
@@ -80,9 +80,9 @@ class Notification extends ActiveRecord
 
     public static function getUnreadByUser(User $user, string $columns = '*'): ?array 
     {
-        return self::get([
-            'usu_id' => $user->id,
-            'was_read' => 0
-        ], $columns)->fetch(true);
+        return self::get($columns)->filters(function($where) use ($user) {
+            $where->equal('usu_id')->assignment($user->id);
+            $where->equal('was_read')->assignment(0);
+        })->fetch(true);
     }
 }

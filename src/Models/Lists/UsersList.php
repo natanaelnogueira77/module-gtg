@@ -5,11 +5,11 @@ namespace Src\Models\Lists;
 class UsersList extends ActiveRecordList 
 {
     public function __construct(
-        private int $limit = 10,
-        private int $pageToShow = 1,
-        private string $orderBy = 'id',
-        private string $orderType = 'ASC',
-        private ?string $searchTerm = null,
+        protected int $limit = 10,
+        protected int $pageToShow = 1,
+        protected string $orderBy = 'id',
+        protected string $orderType = 'ASC',
+        protected ?string $searchTerm = null,
         private ?int $userType = null
     ) 
     {
@@ -22,16 +22,8 @@ class UsersList extends ActiveRecordList
         );
     }
 
-    public function getFilters(): array 
+    public function getUserType(): ?int 
     {
-        return array_merge(
-            $this->searchTerm ? [
-                'search' => [
-                    'term' => $this->searchTerm,
-                    'columns' => ['name', 'email', 'slug']
-                ]
-            ] : [], 
-            $this->userType ? ['user_type' => $this->userType] : []
-        );
+        return $this->userType;
     }
 }

@@ -2,7 +2,7 @@
 
 namespace GTG\MVC;
 
-class Request 
+final class Request 
 {
     public function __construct(
         private array $data

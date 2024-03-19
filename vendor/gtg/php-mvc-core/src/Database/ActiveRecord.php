@@ -2,14 +2,10 @@
 
 namespace GTG\MVC\Database;
 
-use DateTime;
-use GTG\MVC\Application;
-use GTG\MVC\Database\ActiveRecordStatement;
-use GTG\MVC\Database\Database;
+use DateTime, PDD, PDOException;
+use GTG\MVC\{ Application, Model };
+use GTG\MVC\Database\{ ActiveRecordStatement, Database };
 use GTG\MVC\Exceptions\ActiveRecordException;
-use GTG\MVC\Model;
-use PDO;
-use PDOException;
 
 abstract class ActiveRecord extends Model 
 {
@@ -40,36 +36,16 @@ abstract class ActiveRecord extends Model
         $this->values[$key] = $value;
     }
 
-    public static function get(array $filters = [], string $columns = '*'): ActiveRecordStatement 
+    public static function get(string|array $columns = '*'): ActiveRecordStatement 
     {
-        return new ActiveRecordStatement(
-            static::class, 
-            static::tableName(), 
-            $filters, 
-            $columns,
-            null
-        );
-    }
-
-    public static function getByStatement(string $statement): ActiveRecordStatement 
-    {
-        return new ActiveRecordStatement(
-            static::class, 
-            static::tableName(), 
-            null, 
-            null,
-            $sql
-        );
+        return new ActiveRecordStatement(static::class, static::tableName(), $columns);
     }
 
     public static function findById(int $id, string $columns = '*'): static|null
     {
-        return (new ActiveRecordStatement(
-            static::class, 
-            static::tableName(), 
-            [static::primaryKey() => $id], 
-            $columns
-        ))->fetch();
+        return static::get($columns)->filters(function($where) use ($id) {
+            $where->equal('id')->assignment($id);
+        })->fetch();
     }
 
     protected function exec(string $sql): void  

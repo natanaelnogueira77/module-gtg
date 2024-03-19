@@ -3,13 +3,10 @@
 namespace Src\Controllers;
 
 use GTG\MVC\Request;
-use Src\Controllers\Controller;
-use Src\Models\AR\Config;
-use Src\Models\AR\User;
-use Src\Models\ForgotPasswordForm;
-use Src\Models\ResetPasswordForm;
+use Src\Models\{ ForgotPasswordForm, ResetPasswordForm };
+use Src\Models\AR\{ Config, User };
 use Src\Views\LayoutFactory;
-use Src\Views\Widgets\Sections\ResetPassword as ResetPasswordSection;
+use Src\Views\Pages\ResetPasswordPage;
 
 class ResetPasswordController extends Controller
 {
@@ -17,13 +14,11 @@ class ResetPasswordController extends Controller
     {
         $this->renderPage('reset-password', [
             'layout' => LayoutFactory::createMain(),
-            'resetPasswordSection' => new ResetPasswordSection(
-                formId: 'reset-password-form',
+            'page' => new ResetPasswordPage(
                 formAction: $this->router->route(
                     'resetPassword.index', 
                     $request->get('redirect') ? ['redirect' => $request->get('redirect')] : []
                 ),
-                formMethod: 'post',
                 redirectURL: $request->get('redirect')
             )
         ]);
@@ -57,15 +52,13 @@ class ResetPasswordController extends Controller
 
         $this->renderPage('reset-password', [
             'layout' => LayoutFactory::createMain(),
-            'resetPasswordSection' => new ResetPasswordSection(
-                formId: 'reset-password-form',
+            'page' => new ResetPasswordPage(
                 formAction: $this->router->route(
                     'resetPassword.verify', 
                     array_merge([
                         'token' => $user->token
                     ], $request->get('redirect') ? ['redirect' => $request->get('redirect')] : [])
                 ),
-                formMethod: 'post',
                 redirectURL: $request->get('redirect'),
                 hasToken: true
             )

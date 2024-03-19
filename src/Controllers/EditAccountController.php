@@ -3,10 +3,9 @@
 namespace Src\Controllers;
 
 use GTG\MVC\Request;
-use Src\Controllers\Controller;
 use Src\Models\AR\User;
 use Src\Views\LayoutFactory;
-use Src\Views\Widgets\Sections\EditAccount as EditAccountSection;
+use Src\Views\Pages\EditAccountPage;
 
 class EditAccountController extends Controller
 {
@@ -14,8 +13,7 @@ class EditAccountController extends Controller
     {
         $this->renderPage('edit-account', [
             'layout' => LayoutFactory::createMain(),
-            'editAccountSection' => new EditAccountSection(
-                formId: 'filters',
+            'page' => new EditAccountPage(
                 user: $this->session->getAuth(),
                 userTypes: User::getUserTypes()
             )

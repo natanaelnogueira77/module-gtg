@@ -2,7 +2,7 @@
 
 namespace GTG\MVC;
 
-class Session 
+final class Session 
 {
     protected ?string $flashKey = null;
     protected ?string $authKey = null;

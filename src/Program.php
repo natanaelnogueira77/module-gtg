@@ -2,13 +2,11 @@
 
 namespace Src;
 
-use Exception;
+use Exception, PDO;
 use GTG\MVC\Application;
 use GTG\MVC\Database\Drivers\MySQLDriver;
-use PDO;
 use Src\Config\AppRouter;
-use Src\Exceptions\ApplicationException;
-use Src\Exceptions\ValidationException;
+use Src\Exceptions\{ ApplicationException, ValidationException };
 
 class Program 
 {

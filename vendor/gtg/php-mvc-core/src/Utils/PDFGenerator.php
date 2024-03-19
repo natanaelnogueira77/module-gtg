@@ -2,8 +2,7 @@
 
 namespace GTG\MVC\Utils;
 
-use Dompdf\Dompdf;
-use Dompdf\Options;
+use Dompdf\{ Dompdf, Options };
 use GTG\MVC\Exceptions\PDFGeneratorException;
 use stdClass;
 

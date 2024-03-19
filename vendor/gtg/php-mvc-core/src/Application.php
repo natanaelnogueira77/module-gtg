@@ -5,13 +5,9 @@ namespace GTG\MVC;
 use GTG\MVC\Database\Database;
 use GTG\MVC\Exceptions\AppException;
 use GTG\MVC\DTOs\ErrorDTO;
-use GTG\MVC\ErrorHandler;
-use GTG\MVC\Router;
-use GTG\MVC\Session;
-use GTG\MVC\SMTP;
-use GTG\MVC\View;
+use GTG\MVC\{ ErrorHandler, Router, Session, SMTP, View };
 
-class Application 
+final class Application 
 {
     public static Application $instance;
     public ?array $appData = null;

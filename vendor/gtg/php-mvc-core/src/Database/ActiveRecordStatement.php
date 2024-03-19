@@ -2,117 +2,79 @@
 
 namespace GTG\MVC\Database;
 
-use DateTime;
-use GTG\MVC\Application;
-use GTG\MVC\Database\ActiveRecord;
-use GTG\MVC\Database\ActiveRecordStatement;
-use GTG\MVC\Database\Database;
-use GTG\MVC\Exceptions\ActiveRecordException;
-use GTG\MVC\Model;
-use PDO;
-use PDOException;
+use DateTime, PDO, PDOException;
+use GTG\MVC\{ Application, Model };
+use GTG\MVC\Database\{ ActiveRecord, Database };
+use GTG\MVC\Database\Statement\Clauses\{ From, Limit, OrderBy, Select, Where };
+use GTG\MVC\Exceptions\StatementException;
 
-class ActiveRecordStatement 
+final class ActiveRecordStatement 
 {
     protected ?string $statement = null;
+    protected ?string $filters = null;
     protected ?array $params = null;
-    protected ?string $group = null;
     protected ?string $order = null;
     protected ?string $limit = null;
-    protected ?string $offset = null;
     private Database $database;
     
     public function __construct(
         protected string $className,
-        string $tableName, 
-        ?array $filters = [], 
-        ?string $columns = '*',
-        ?string $statement = null
+        string|array $tableReferences,
+        string|array $columns = '*'
     ) 
     {
         $this->database = Application::getInstance()->database;
-        if(!$statement) {
-            [$terms, $params] = $this->database->getDriver()->getFiltersForStatement($filters);
-            $this->statement = "SELECT {$columns} FROM {$tableName}" . (
-                $filters ? (" WHERE {$terms}") : ''
-            );
-            parse_str($params ?? '', $this->params);
-        } else {
-            $this->statement = $statement;
-        }
+        $this->columns($columns);
+        $this->tableReferences($tableReferences);
     }
 
-    public function statement(string $sql): static 
+    private function columns(string|array $columns = '*'): static 
     {
-        $this->statement = $sql;
+        $this->statement = (new Select($columns))->build();
         return $this;
     }
 
-    public function group(string $column): static
+    private function tableReferences(string|array $tableReferences): static 
     {
-        $this->group = " GROUP BY {$column}";
+        $this->statement .= ' ' . (new From($tableReferences))->build();
         return $this;
     }
 
-    public function order(string $orderRule): static
+    private function getQuery(): string 
     {
-        $this->order = " ORDER BY {$orderRule}";
+        return $this->statement . $this->filters . $this->order . $this->limit;
+    }
+
+    public function filters(callable $callback): static 
+    {
+        $where = new Where();
+        call_user_func($callback, $where);
+        $this->filters = ' ' . $where->build();
         return $this;
     }
 
-    public function limit(int $limit): static
+    public function order(string $expression): static
     {
-        $this->limit = " LIMIT {$limit}";
+        $this->order = ' ' . (new OrderBy($expression))->build();
         return $this;
     }
 
-    public function in(string $column, array $values): static
+    public function limit(int $limitCount, ?int $offset): static
     {
-        $index = 0;
-        $params = array();
-        $statement = "{$column} IN (";
-
-        foreach($values as $value) {
-            $index++;
-            if($value == end($values)) {
-                $statement .= ":in_{$index}";
-            } else {
-                $statement .= ":in_{$index},";
-            }
-
-            $params["in_{$index}"] = $value;
-        }
-
-        $statement .= ')';
-        if(!str_contains($this->statement, 'WHERE')) {
-            $this->statement .= ' WHERE ' . $statement;
-        } else {
-            $this->statement .= ' AND ' . $statement;
-        }
-
-        $this->params = $this->params ? $this->params += $params : $params;
-        return $this;
-    }
-
-    public function offset(int $offset): static 
-    {
-        $this->offset = " OFFSET {$offset}";
+        $this->limit = ' ' . (new Limit($limitCount, $offset))->build();
         return $this;
     }
 
     public function paginate(int $limit = 10, int $page = 1): static
     {
-        $this->limit($limit)->offset(($page - 1) * $limit);
+        $this->limit($limit, ($page - 1) * $limit);
         return $this;
     }
 
-    public function fetch(bool $all = false): array|ActiveRecord|null
+    public function fetch(bool $all = false): array|object|null
     {
         try {
-            $stmt = $this->database->getConnection()->prepare(
-                $this->statement . $this->group . $this->order . $this->limit . $this->offset
-            );
-
+            $stmt = $this->database->getConnection()->prepare($this->getQuery());
             $stmt->execute($this->params);
 
             if(!$stmt->rowCount()) {
@@ -125,18 +87,18 @@ class ActiveRecordStatement
 
             return $stmt->fetchObject($this->className);
         } catch(PDOException $e) {
-            throw new ActiveRecordException($e->getMessage());
+            throw new StatementException($e->getMessage() . $this->getQuery());
         }
     }
 
     public function count(): int
     {
         try {
-            $stmt = $this->database->getConnection()->prepare($this->statement);
+            $stmt = $this->database->getConnection()->prepare($this->statement . $this->filters);
             $stmt->execute($this->params);
             return $stmt->rowCount();
         } catch(PDOException $e) {
-            throw new ActiveRecordException($e->getMessage());
+            throw new StatementException($e->getMessage());
         }
     }
 }

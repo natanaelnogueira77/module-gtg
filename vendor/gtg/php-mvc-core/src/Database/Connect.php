@@ -2,10 +2,9 @@
 
 namespace GTG\MVC\Database;
 
-use PDO;
-use PDOException;
+use PDO, PDOException;
 
-class Connect
+final class Connect
 {
     private static array $instance;
     private static ?PDOException $error = null;

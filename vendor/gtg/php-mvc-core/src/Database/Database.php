@@ -5,14 +5,10 @@ namespace GTG\MVC\Database;
 use GTG\MVC\Application;
 use GTG\MVC\Database\Connect;
 use GTG\MVC\Database\Drivers\Driver;
-use GTG\MVC\Database\Schema\Event;
-use GTG\MVC\Database\Schema\Procedure;
-use GTG\MVC\Database\Schema\Table;
-use GTG\MVC\Database\Schema\Trigger;
-use PDO;
-use PDOStatement;
+use GTG\MVC\Database\Schema\{ Event, Procedure, Table, Trigger };
+use PDO, PDOStatement;
 
-class Database 
+final class Database 
 {
     private string $projectPath = '';
     private ?Driver $driver = null;
@@ -60,6 +56,7 @@ class Database
         if(!empty($newMigrations)) {
             $this->saveMigrations($newMigrations);
         }
+        
         $this->log('All migrations were applied!');
     }
 

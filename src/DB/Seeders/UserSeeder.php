@@ -13,8 +13,8 @@ class UserSeeder extends Seeder
             (new User())->fillAttributes([
                 'user_type' => User::UT_ADMIN,
                 'name' => 'Admin',
-                'password' => 'soft@net12',
-                'email' => 'admin@gtg.software',
+                'password' => 'example',
+                'email' => 'admin@projectexample.com',
                 'slug' => 'adm'
             ])
         ]);

@@ -3,22 +3,23 @@
 namespace Src\Views;
 
 use GTG\MVC\Application;
-use Src\Models\AR\Config;
-use Src\Models\AR\Notification;
+use Src\Models\AR\{ Config, Notification };
 use Src\Views\Components\DropdownMenuItem;
-use Src\Views\Components\MainLayout\Footer;
-use Src\Views\Components\MainLayout\Header;
-use Src\Views\Components\MainLayout\HeaderAvatarDropdown;
-use Src\Views\Components\MainLayout\HeaderLanguages;
-use Src\Views\Components\MainLayout\HeaderMenu;
-use Src\Views\Components\MainLayout\HeaderMenuItem;
-use Src\Views\Components\MainLayout\HeaderNotificationBell;
-use Src\Views\Components\MainLayout\HeaderRight;
-use Src\Views\Components\MainLayout\Language;
-use Src\Views\Components\MainLayout\Left;
-use Src\Views\Components\MainLayout\LeftMenu;
-use Src\Views\Components\MainLayout\LeftMenuItem;
-use Src\Views\Components\MainLayout\Social;
+use Src\Views\Components\MainLayout\{ 
+    Footer,
+    Header,
+    HeaderAvatarDropdown,
+    HeaderLanguages,
+    HeaderMenu,
+    HeaderMenuItem,
+    HeaderNotificationBell,
+    HeaderRight,
+    Language,
+    Left,
+    LeftMenu,
+    LeftMenuItem,
+    Social
+};
 use Src\Views\Layouts\Main as MainLayout;
 
 class LayoutFactory 

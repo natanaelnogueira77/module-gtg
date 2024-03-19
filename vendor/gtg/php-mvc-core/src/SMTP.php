@@ -2,7 +2,7 @@
 
 namespace GTG\MVC;
 
-class SMTP 
+final class SMTP 
 {
     private string $host = '';
     private string $port = '';

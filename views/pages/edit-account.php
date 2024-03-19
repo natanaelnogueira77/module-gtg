@@ -1,6 +1,13 @@
 <?php 
 
 use Src\Views\Components\LayoutTitle;
+use Src\Views\Widgets\Sections\EditAccount as EditAccountSection;
+
+$editAccountSection = new EditAccountSection(
+    formId: 'filters',
+    user: $page->getUser(),
+    userTypes: $page->getUserTypes()
+);
 
 $this->layout('layouts/main', ['layout' => $layout]);
 $this->insert('components/layout-title', [

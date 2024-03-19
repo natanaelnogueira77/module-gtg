@@ -2,8 +2,6 @@
 
 namespace Src\Models;
 
-use Src\Models\Model;
-
 class ConfigForm extends Model 
 {
     public function __construct(

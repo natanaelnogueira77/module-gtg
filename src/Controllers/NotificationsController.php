@@ -3,7 +3,6 @@
 namespace Src\Controllers;
 
 use GTG\MVC\Request;
-use Src\Controllers\Controller;
 use Src\Models\AR\Notification;
 
 class NotificationsController extends Controller

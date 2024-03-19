@@ -1,6 +1,16 @@
 <?php 
 
 use Src\Views\Components\LayoutTitle;
+use Src\Views\Widgets\Sections\UsersList as UsersListSection;
+
+$usersListSection = new UsersListSection(
+    formId: 'save-user-form',
+    buttonId: 'create-user',
+    tableId: 'users',
+    modalId: 'save-user-modal',
+    filtersFormId: 'users-filters-form',
+    userTypes: $page->getUserTypes()
+);
 
 $this->layout('layouts/main', ['layout' => $layout]);
 $this->insert('components/layout-title', [

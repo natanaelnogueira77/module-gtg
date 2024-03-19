@@ -88,8 +88,8 @@ final class ErrorHandler
 
     private function executeErrorCallback(ErrorDTO $errorDTO): void
     {
-        if($this->callbacks['error']) {
-            $this->callbacks['error']($errorDTO);
+        if(is_callable($this->callbacks['error'])) {
+            call_user_func($this->callbacks['error'], $errorDTO);
         }
         return;
     }

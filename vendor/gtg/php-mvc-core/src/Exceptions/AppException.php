@@ -2,8 +2,7 @@
 
 namespace GTG\MVC\Exceptions;
 
-use Exception;
-use Throwable;
+use Exception, Throwable;
 
 class AppException extends Exception 
 {

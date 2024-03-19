@@ -5,7 +5,7 @@ namespace GTG\MVC;
 use DateTime;
 use GTG\MVC\Model;
 
-class Rule 
+final class Rule 
 {
     private const RULE_REQUIRED = 1;
     private const RULE_RAW = 2;

@@ -3,12 +3,11 @@
 namespace Src\Controllers;
 
 use GTG\MVC\Request;
-use Src\Controllers\Controller;
+use Src\Exceptions\ApplicationException;
+use Src\Models\AR\{ Config, User };
 use Src\Models\Lists\UsersList;
-use Src\Models\AR\Config;
-use Src\Models\AR\User;
 use Src\Views\LayoutFactory;
-use Src\Views\Widgets\Sections\UsersList as UsersListSection;
+use Src\Views\Pages\UsersPage;
 
 class UsersController extends Controller
 {
@@ -16,12 +15,7 @@ class UsersController extends Controller
     {
         $this->renderPage('users', [
             'layout' => LayoutFactory::createMain(),
-            'usersListSection' => new UsersListSection(
-                formId: 'save-user-form',
-                buttonId: 'create-user',
-                tableId: 'users',
-                modalId: 'save-user-modal',
-                filtersFormId: 'users-filters-form',
+            'page' => new UsersPage(
                 userTypes: User::getUserTypes()
             )
         ]);
@@ -29,7 +23,7 @@ class UsersController extends Controller
 
     public function show(Request $request): void 
     {
-        $user = User::findById(intval($request->get('user_id')));
+        $user = $this->getUser($request);
         $this->writeSuccessResponse([
             'data' => array_replace($user->columnsValuesToArray(), ['password' => null]),
             'update' => [
@@ -37,6 +31,15 @@ class UsersController extends Controller
                 'method' => 'put'
             ]
         ]);
+    }
+
+    private function getUser(Request $request): User 
+    {
+        if(!$user = User::findById(intval($request->get('user_id')))) {
+            throw new ApplicationException(_('No user was found!'), 404);
+        }
+
+        return $user;
     }
 
     public function store(Request $request): void 
@@ -65,7 +68,7 @@ class UsersController extends Controller
 
     public function update(Request $request): void 
     {
-        $user = User::findById(intval($request->get('user_id')));
+        $user = $this->getUser($request);
         $user->fillAttributes([
             'user_type' => $request->get('user_type'), 
             'name' => $request->get('name'), 
@@ -84,7 +87,7 @@ class UsersController extends Controller
 
     public function delete(Request $request): void 
     {
-        $user = User::findById(intval($request->get('user_id')));
+        $user = $this->getUser($request);
         $user->destroy();
         $this->writeSuccessResponse([
             'message' => ['success', sprintf(_('The user "%s" was successfully deleted.'), $user->name)]

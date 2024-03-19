@@ -3,7 +3,6 @@
 namespace Src\Middlewares;
 
 use GTG\MVC\Request;
-use Src\Middlewares\Middleware;
 
 class APIAdminMiddleware extends Middleware 
 {

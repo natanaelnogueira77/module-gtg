@@ -3,7 +3,6 @@
 namespace Src\Config;
 
 use Exception;
-use Src\Config\LocalStorage;
 use Src\Exceptions\ApplicationException;
 
 class FileSystem 

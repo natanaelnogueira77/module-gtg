@@ -3,7 +3,6 @@
 namespace Src\Controllers;
 
 use GTG\MVC\Request;
-use Src\Controllers\Controller;
 
 class LanguageController extends Controller 
 {

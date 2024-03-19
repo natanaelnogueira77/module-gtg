@@ -2,16 +2,18 @@
 
 namespace Src\Models\Lists;
 
+use Closure;
+
 abstract class ActiveRecordList 
 {
-    private int $resultsCount = 0;
+    protected int $resultsCount = 0;
 
     public function __construct(
-        private int $limit = 10,
-        private int $pageToShow = 1,
-        private string $orderBy = 'id',
-        private string $orderType = 'ASC',
-        private ?string $searchTerm = null
+        protected int $limit = 10,
+        protected int $pageToShow = 1,
+        protected string $orderBy = 'id',
+        protected string $orderType = 'ASC',
+        protected ?string $searchTerm = null
     ) 
     {}
 
@@ -35,14 +37,9 @@ abstract class ActiveRecordList
         return $this->orderType;
     }
 
-    public function getFilters(): array 
+    public function getSearchTerm(): ?string 
     {
-        return [];
-    }
-
-    public function getColumns(): string 
-    {
-        return '*';
+        return $this->searchTerm;
     }
 
     public function getResultsCount(): int 

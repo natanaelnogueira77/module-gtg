@@ -4,29 +4,28 @@ namespace GTG\MVC\Database\Schema;
 
 use GTG\MVC\Database\Schema\ProcedureParamDefinition;
 
-class Procedure 
+final class Procedure 
 {
-    protected string $procedure;
     protected string $action;
     protected string $columnAction;
     protected array $columnParams = [];
     protected array $columns = [];
     protected string $statement;
 
-    public function __construct(string $procedure) 
+    public function __construct(
+        protected string $procedure
+    ) 
+    {}
+
+    public function create(): static 
     {
-        $this->procedure = $procedure;
+        $this->setAction('create');
+        return $this;
     }
 
     protected function setAction(string $action): static 
     {
         $this->action = $action;
-        return $this;
-    }
-
-    public function create(): static 
-    {
-        $this->setAction('create');
         return $this;
     }
 
@@ -45,6 +44,13 @@ class Procedure
     public function integer(string $columnName, bool $autoIncrement = false): ProcedureParamDefinition
     {
         return $this->addColumn($columnName, 'integer', compact('autoIncrement'));
+    }
+
+    private function addColumn(string $columnName, string $type = '', array $params = []): ProcedureParamDefinition 
+    {
+        $definition = new ProcedureParamDefinition($columnName, $type, $params);
+        $this->columns[] = $definition;
+        return $definition;
     }
 
     public function tinyInteger(string $columnName, bool $autoIncrement = false): ProcedureParamDefinition
@@ -118,18 +124,10 @@ class Procedure
         return $this;
     }
 
-    private function addColumn(string $columnName, string $type = '', array $params = []): ProcedureParamDefinition 
+    public function build(): string 
     {
-        $definition = new ProcedureParamDefinition($columnName, $type, $params);
-        $this->columns[] = $definition;
-        return $definition;
-    }
-
-    private function toMySQL(): string 
-    {
-        $sql = '';
         if($this->action == 'create') {
-            $sql .= "CREATE PROCEDURE `{$this->procedure}`(";
+            $sql = "CREATE PROCEDURE `{$this->procedure}`(";
             if($this->columns) {
                 foreach($this->columns as $column) {
                     $sql .= $column->build() . ',';
@@ -140,17 +138,13 @@ class Procedure
             }
 
             $sql .= ' BEGIN ' . $this->statement . ' END;';
+            return $sql;
         } elseif($this->action == 'drop') {
-            $sql .= "DROP PROCEDURE `{$this->procedure}`";
+            return "DROP PROCEDURE `{$this->procedure}`";
         } elseif($this->action == 'drop_if_exists') {
-            $sql .= "DROP PROCEDURE IF EXISTS `{$this->procedure}`";
+            return "DROP PROCEDURE IF EXISTS `{$this->procedure}`";
         }
 
-        return $sql;
-    }
-
-    public function build(): string 
-    {
-        return $this->toMySQL();
+        return '';
     }
 }

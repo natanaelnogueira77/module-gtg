@@ -3,7 +3,6 @@
 namespace Src\Models\AR;
 
 use DateTime;
-use Src\Models\AR\ActiveRecord;
 
 class UserMeta extends ActiveRecord 
 {

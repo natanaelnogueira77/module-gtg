@@ -1,16 +1,7 @@
 <?php 
 
-use Src\Views\Components\CircularImageWithTitleAndSubtitle;
-use Src\Views\Components\DataTable\DataTable;
-use Src\Views\Components\DataTable\Body;
-use Src\Views\Components\DataTable\Cell;
-use Src\Views\Components\DataTable\Filters;
-use Src\Views\Components\DataTable\Head;
-use Src\Views\Components\DataTable\Header;
-use Src\Views\Components\DataTable\Row;
-use Src\Views\Components\Dropdown;
-use Src\Views\Components\DropdownMenu;
-use Src\Views\Components\DropdownMenuItem;
+use Src\Views\Components\{ CircularImageWithTitleAndSubtitle, Dropdown, DropdownMenu, DropdownMenuItem };
+use Src\Views\Components\DataTable\{ DataTable, Body, Cell, Filters, Head, Header, Row };
 
 $this->insert('components/data-table/table', [
     'component' => new DataTable(

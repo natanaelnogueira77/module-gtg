@@ -3,9 +3,7 @@
 namespace Src\Controllers;
 
 use GTG\MVC\Request;
-use Src\Config\Constants;
-use Src\Config\FileSystem;
-use Src\Controllers\Controller;
+use Src\Config\{ Constants, FileSystem };
 
 class MediaLibraryController extends Controller
 {

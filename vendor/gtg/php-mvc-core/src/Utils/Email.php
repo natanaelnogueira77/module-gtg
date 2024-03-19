@@ -2,11 +2,10 @@
 
 namespace GTG\MVC\Utils;
 
-use Exception;
+use Exception, stdClass;
 use PHPMailer\PHPMailer\PHPMailer;
 use GTG\MVC\Exceptions\EmailException;
 use GTG\MVC\SMTP;
-use stdClass;
 
 class Email 
 {
@@ -71,8 +70,8 @@ class Email
     {
         try {
             $this->loadMailForSend(
-                $fromEmail ?? $this->SMTP->getFromEmail(), 
-                $fromName ?? $this->SMTP->getFromName()
+                $fromName ?? $this->SMTP->getFromName(),
+                $fromEmail ?? $this->SMTP->getFromEmail()
             );
             $this->mail->send();
         } catch(Exception $e) {

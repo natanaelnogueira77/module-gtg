@@ -2,9 +2,7 @@
 
 namespace Src\Views\Layouts;
 
-use Src\Views\Components\MainLayout\Footer;
-use Src\Views\Components\MainLayout\Header;
-use Src\Views\Components\MainLayout\Left;
+use Src\Views\Components\MainLayout\{ Footer, Header, Left };
 
 class Main 
 {

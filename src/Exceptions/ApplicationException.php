@@ -2,8 +2,7 @@
 
 namespace Src\Exceptions;
 
-use Exception;
-use Throwable;
+use Exception, Throwable;
 
 class ApplicationException extends Exception 
 {

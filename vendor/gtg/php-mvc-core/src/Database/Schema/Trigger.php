@@ -4,26 +4,25 @@ namespace GTG\MVC\Database\Schema;
 
 use GTG\MVC\Database\Schema\ColumnDefinition;
 
-class Trigger 
+final class Trigger 
 {
     protected string $event;
     protected string $statement;
-    protected string $trigger;
 
-    public function __construct(string $trigger) 
+    public function __construct(
+        protected string $trigger
+    ) 
+    {}
+
+    public function create(): static 
     {
-        $this->trigger = $trigger;
+        $this->setAction('create');
+        return $this;
     }
 
     protected function setAction(string $action): static 
     {
         $this->action = $action;
-        return $this;
-    }
-
-    public function create(): static 
-    {
-        $this->setAction('create');
         return $this;
     }
 
@@ -51,22 +50,16 @@ class Trigger
         return $this;
     }
 
-    private function toMySQL(): string 
-    {
-        $sql = '';
-        if($this->action == 'create') {
-            $sql .= "CREATE TRIGGER `{$this->trigger}` " . $this->event . ' BEGIN ' . $this->statement . ' END;';
-        } elseif($this->action == 'drop') {
-            $sql .= "DROP TRIGGER `{$this->trigger}`";
-        } elseif($this->action == 'drop_if_exists') {
-            $sql .= "DROP TRIGGER IF EXISTS `{$this->trigger}`";
-        }
-
-        return $sql;
-    }
-
     public function build(): string 
     {
-        return $this->toMySQL();
+        if($this->action == 'create') {
+            return "CREATE TRIGGER `{$this->trigger}` " . $this->event . ' BEGIN ' . $this->statement . ' END;';
+        } elseif($this->action == 'drop') {
+            return "DROP TRIGGER `{$this->trigger}`";
+        } elseif($this->action == 'drop_if_exists') {
+            return "DROP TRIGGER IF EXISTS `{$this->trigger}`";
+        }
+
+        return '';
     }
 }

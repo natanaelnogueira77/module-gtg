@@ -4,8 +4,7 @@ namespace Src\Models\AR;
 
 use GTG\MVC\Database\ActiveRecord as GTGActiveRecord;
 use Src\Models\Lists\ActiveRecordList;
-use Src\Exceptions\ApplicationException;
-use Src\Exceptions\ValidationException;
+use Src\Exceptions\{ ApplicationException, ValidationException };
 
 abstract class ActiveRecord extends GTGActiveRecord
 {
@@ -34,21 +33,8 @@ abstract class ActiveRecord extends GTGActiveRecord
         }
     }
 
-    public static function getById(int $id, string $columns = '*'): ?static
+    public static function getById(int $id, string|array $columns = '*'): ?static
     {
-        return (new static())->findById($id, $columns);
-    }
-
-    public static function getList(ActiveRecordList $list): ?array
-    {
-        return static::get($list->getFilters(), $list->getColumns())->paginate(
-            $list->getLimit(), 
-            $list->getPageToShow()
-        )->order("{$list->getOrderBy()} {$list->getOrderType()}")->fetch(true);
-    }
-
-    public static function getListResultsCount(ActiveRecordList $list): int
-    {
-        return static::get($list->getFilters())->count();
+        return static::findById($id, $columns);
     }
 }

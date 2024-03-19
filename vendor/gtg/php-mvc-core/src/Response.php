@@ -2,7 +2,7 @@
 
 namespace GTG\MVC;
 
-class Response 
+final class Response 
 {
     public function __construct(
         private array $data,

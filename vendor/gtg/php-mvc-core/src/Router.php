@@ -2,10 +2,9 @@
 
 namespace GTG\MVC;
 
-use GTG\MVC\Application;
-use GTG\MVC\Request;
+use GTG\MVC\{ Application, Request };
 
-class Router
+final class Router
 {
     protected string $projectURL;
     protected string $httpMethod;

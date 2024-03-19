@@ -3,11 +3,13 @@
 namespace Src\Config;
 
 use GTG\MVC\Application;
-use Src\Middlewares\AdminMiddleware;
-use Src\Middlewares\APIAdminMiddleware;
-use Src\Middlewares\APIUserMiddleware;
-use Src\Middlewares\GuestMiddleware;
-use Src\Middlewares\UserMiddleware;
+use Src\Middlewares\{ 
+    AdminMiddleware, 
+    APIAdminMiddleware, 
+    APIUserMiddleware, 
+    GuestMiddleware, 
+    UserMiddleware
+};
 
 final class AppRouter 
 {

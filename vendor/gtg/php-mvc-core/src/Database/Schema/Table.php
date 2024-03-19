@@ -2,30 +2,27 @@
 
 namespace GTG\MVC\Database\Schema;
 
-use GTG\MVC\Database\Schema\ColumnDefinition;
-
-class Table 
+final class Table 
 {
-    protected string $table;
     protected string $action;
     protected string $columnAction;
     protected array $columnParams = [];
     protected array $columns = [];
 
-    public function __construct(string $table) 
+    public function __construct(
+        protected string $table
+    ) 
+    {}
+
+    public function create(): static 
     {
-        $this->table = $table;
+        $this->setAction('create');
+        return $this;
     }
 
     protected function setAction(string $action): static 
     {
         $this->action = $action;
-        return $this;
-    }
-
-    public function create(): static 
-    {
-        $this->setAction('create');
         return $this;
     }
 
@@ -55,6 +52,28 @@ class Table
     public function integer(string $columnName, bool $autoIncrement = false): ColumnDefinition
     {
         return $this->addColumn($columnName, 'integer', compact('autoIncrement'));
+    }
+
+    private function addColumn(string $columnName, string $type = '', array $params = []): ColumnDefinition 
+    {
+        if($this->action == 'alter') {
+            if(isset($this->columnAction) && $this->columnAction != '') {
+                $params['command'] = $this->columnAction;
+            } else {
+                $params['command'] = 'add_column';
+            }
+
+            if($this->columnParams) {
+                $params = array_merge($params, $this->columnParams);
+            }
+
+            $this->columnAction = '';
+            $this->columnParams = [];
+        }
+
+        $definition = new ColumnDefinition($columnName, $type, $params);
+        $this->columns[] = $definition;
+        return $definition;
     }
 
     public function tinyInteger(string $columnName, bool $autoIncrement = false): ColumnDefinition
@@ -129,31 +148,15 @@ class Table
         return $this;
     }
 
-    private function addColumn(string $columnName, string $type = '', array $params = []): ColumnDefinition 
-    {
-        if($this->action == 'alter') {
-            if(isset($this->columnAction) && $this->columnAction != '') {
-                $params['command'] = $this->columnAction;
-            } else {
-                $params['command'] = 'add_column';
-            }
-
-            if($this->columnParams) {
-                $params = array_merge($params, $this->columnParams);
-            }
-
-            $this->columnAction = '';
-            $this->columnParams = [];
-        }
-
-        $definition = new ColumnDefinition($columnName, $type, $params);
-        $this->columns[] = $definition;
-        return $definition;
-    }
-
     public function modifyColumn(): static 
     {
         $this->setColumnAction('modify_column');
+        return $this;
+    }
+
+    private function setColumnAction(string $action): static 
+    {
+        $this->columnAction = $action;
         return $this;
     }
 
@@ -161,6 +164,12 @@ class Table
     {
         $this->setColumnAction('change_column');
         $this->setColumnParams(['from' => $from]);
+        return $this;
+    }
+
+    private function setColumnParams(array $params = []): static 
+    {
+        $this->columnParams = $params;
         return $this;
     }
 
@@ -176,46 +185,24 @@ class Table
         return $this->addColumn($tableName);
     }
 
-    private function setColumnAction(string $action): static 
-    {
-        $this->columnAction = $action;
-        return $this;
-    }
-
-    private function setColumnParams(array $params = []): static 
-    {
-        $this->columnParams = $params;
-        return $this;
-    }
-
-    private function toMySQL(): string 
-    {
-        $sql = '';
-        if($this->action == 'create') {
-            $sql .= "CREATE TABLE `{$this->table}` (";
-            foreach($this->columns as $column) {
-                $sql .= $column->build() . ',';
-            }
-
-            $sql[strlen($sql) - 1] = ')';
-            $sql .= ';';
-        } elseif($this->action == 'alter') {
-            $sql .= "ALTER TABLE `{$this->table}`";
-            foreach($this->columns as $column) {
-                $sql .= $column->build() . ',';
-            }
-            $sql[strlen($sql) - 1] = ';';
-        } elseif($this->action == 'drop') {
-            $sql .= "DROP TABLE `{$this->table}`";
-        } elseif($this->action == 'drop_if_exists') {
-            $sql .= "DROP TABLE IF EXISTS `{$this->table}`";
-        }
-
-        return $sql;
-    }
-
     public function build(): string 
     {
-        return $this->toMySQL();
+        if($this->action == 'create') {
+            return "CREATE TABLE `{$this->table}` (" . implode(',', array_map(
+                fn($column) => $column->build(), 
+                $this->columns
+            )) . ');';
+        } elseif($this->action == 'alter') {
+            $sql = "ALTER TABLE `{$this->table}` " . implode(',', array_map(
+                fn($column) => $column->build(), 
+                $this->columns
+            )) . ';';
+        } elseif($this->action == 'drop') {
+            return "DROP TABLE `{$this->table}`";
+        } elseif($this->action == 'drop_if_exists') {
+            return "DROP TABLE IF EXISTS `{$this->table}`";
+        }
+
+        return '';
     }
 }

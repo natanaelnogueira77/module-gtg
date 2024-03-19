@@ -3,7 +3,6 @@
 namespace Src\Models;
 
 use Src\Models\AR\User;
-use Src\Models\Model;
 
 class ResetPasswordForm extends Model 
 {

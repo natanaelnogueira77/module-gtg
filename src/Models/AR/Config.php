@@ -3,7 +3,6 @@
 namespace Src\Models\AR;
 
 use Src\Config\FileSystem;
-use Src\Models\AR\ActiveRecord;
 
 class Config extends ActiveRecord 
 {
@@ -45,9 +44,10 @@ class Config extends ActiveRecord
 
     public static function getValuesByMetaKeys(array $metaKeys): ?array 
     {
-        return self::transformMetaValues(self::get([
-            'in' => ['meta' => $metaKeys]
-        ])->fetch(true) ?? []);
+        return self::transformMetaValues(self::get()->filters(function($where) use ($metaKeys) {
+            $inCondition = $where->in('meta');
+            array_walk($metaKeys, fn($key) => $inCondition->add($key));
+        })->fetch(true) ?? []);
     }
 
     private static function transformMetaValues(array $models): array 
@@ -67,12 +67,19 @@ class Config extends ActiveRecord
 
     public static function saveSystemOptions(array $configValues): ?array
     {
-        $configs = self::get(['in' => ['meta' => array_keys($configValues)]])->fetch(true);
-        foreach($configs as $config) {
-            $config->value = $configValues[$config->meta];
+        $configs = self::get()->filters(function($where) use ($configValues) {
+            $inCondition = $where->in('meta');
+            array_walk(array_keys($configValues), fn($key) => $inCondition->add($key));
+        })->fetch(true);
+
+        if($configs) {
+            foreach($configs as $config) {
+                $config->value = $configValues[$config->meta];
+            }
+            
+            self::saveMany($configs);
         }
         
-        self::saveMany($configs);
         return $configs;
     }
 

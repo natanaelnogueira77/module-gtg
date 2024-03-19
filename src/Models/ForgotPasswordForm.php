@@ -3,9 +3,7 @@
 namespace Src\Models;
 
 use Src\Exceptions\ValidationException;
-use Src\Models\AR\User;
-use Src\Models\AR\UserMeta;
-use Src\Models\Model;
+use Src\Models\AR\{ User, UserMeta };
 
 class ForgotPasswordForm extends Model 
 {
@@ -17,11 +15,9 @@ class ForgotPasswordForm extends Model
     public function rules(): array 
     {
         return [
-            'email' => [
-                $this->createRule()->required('email')->setMessage(_('The email is required!')),
-                $this->createRule()->email('email')->setMessage(_('The email is invalid!')),
-                $this->createRule()->maxLength('email', 100)->setMessage(sprintf(_('The email must have %s characters or less!'), 100))
-            ]
+            $this->createRule()->required('email')->setMessage(_('The email is required!')),
+            $this->createRule()->email('email')->setMessage(_('The email is invalid!')),
+            $this->createRule()->maxLength('email', 100)->setMessage(sprintf(_('The email must have %s characters or less!'), 100))
         ];
     }
 

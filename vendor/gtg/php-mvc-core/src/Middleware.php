@@ -2,9 +2,7 @@
 
 namespace GTG\MVC;
 
-use GTG\MVC\Request;
-use GTG\MVC\Router;
-use GTG\MVC\Session;
+use GTG\MVC\{ Request, Router, Session };
 
 abstract class Middleware 
 {

@@ -4,7 +4,6 @@ namespace Src\Models;
 
 use Src\Exceptions\ApplicationException;
 use Src\Models\AR\User;
-use Src\Models\Model;
 
 class LoginForm extends Model 
 {

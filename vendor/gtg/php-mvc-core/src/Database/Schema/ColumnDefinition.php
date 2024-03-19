@@ -2,18 +2,14 @@
 
 namespace GTG\MVC\Database\Schema;
 
-class ColumnDefinition 
+final class ColumnDefinition 
 {
-    private string $columnName;
-    private string $type;
-    private array $params;
-
-    public function __construct(string $columnName, string $type, array $params = []) 
-    {
-        $this->columnName = $columnName;
-        $this->type = $type;
-        $this->params = $params;
-    }
+    public function __construct(
+        private string $columnName,
+        private string $type,
+        private array $params = []
+    ) 
+    {}
 
     public function primaryKey(): static 
     {
@@ -33,9 +29,9 @@ class ColumnDefinition
         return $this;
     }
 
-    private function getParam(string $key): mixed 
+    public function build(): string 
     {
-        return isset($this->params[$key]) ? $this->params[$key] : null;
+        return $this->toMySQL();
     }
 
     public function toMySQL(): string 
@@ -93,8 +89,8 @@ class ColumnDefinition
         return $sql;
     }
 
-    public function build(): string 
+    private function getParam(string $key): mixed 
     {
-        return $this->toMySQL();
+        return isset($this->params[$key]) ? $this->params[$key] : null;
     }
 }

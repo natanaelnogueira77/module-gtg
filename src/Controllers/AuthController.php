@@ -3,11 +3,10 @@
 namespace Src\Controllers;
 
 use GTG\MVC\Request;
-use Src\Controllers\Controller;
-use Src\Models\AR\Config;
+use Src\Models\AR\{Config, User};
 use Src\Models\LoginForm;
 use Src\Views\LayoutFactory;
-use Src\Views\Widgets\Sections\LoginForm as LoginFormSection;
+use Src\Views\Pages\AuthPage;
 
 class AuthController extends Controller
 {
@@ -15,16 +14,9 @@ class AuthController extends Controller
     {
         $this->renderPage('auth', [
             'layout' => LayoutFactory::createMain(),
-            'loginFormSection' => new LoginFormSection(
-                formId: 'main-login-form',
-                formAction: $this->router->route('auth.index'),
-                formMethod: 'post',
-                redirectURL: $request->get('redirect'),
-                backgroundImageURL: Config::getLoginImageURL(),
-                resetPasswordURL: $this->router->route(
-                    'resetPassword.index', 
-                    $request->get('redirect') ? ['redirect' => $request->get('redirect')] : []
-                )
+            'page' => new AuthPage(
+                loginImageURL: Config::getLoginImageURL(),
+                redirectURL: $request->get('redirect')
             )
         ]);
     }

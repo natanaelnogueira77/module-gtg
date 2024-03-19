@@ -4,26 +4,37 @@ namespace GTG\MVC\Database\Schema;
 
 use GTG\MVC\Database\Schema\ColumnDefinition;
 
-class Event 
+final class Event 
 {
-    protected string $event;
     protected string $schedule;
     protected string $statement;
 
-    public function __construct(string $event) 
+    public function __construct(
+        protected string $event
+    ) 
+    {}
+
+    public function schedule(string $schedule): static 
     {
-        $this->event = $event;
+        $this->schedule = $schedule;
+        return $this;
     }
 
-    protected function setAction(string $action): static 
+    public function statement(string $statement): static 
     {
-        $this->action = $action;
+        $this->statement = $statement;
         return $this;
     }
 
     public function create(): static 
     {
         $this->setAction('create');
+        return $this;
+    }
+
+    protected function setAction(string $action): static 
+    {
+        $this->action = $action;
         return $this;
     }
 
@@ -39,34 +50,16 @@ class Event
         return $this;
     }
 
-    public function schedule(string $schedule): static 
-    {
-        $this->schedule = $schedule;
-        return $this;
-    }
-
-    public function statement(string $statement): static 
-    {
-        $this->statement = $statement;
-        return $this;
-    }
-
-    private function toMySQL(): string 
-    {
-        $sql = '';
-        if($this->action == 'create') {
-            $sql .= "CREATE EVENT `{$this->event}` ON SCHEDULE " . $this->schedule . ' DO ' . $this->statement . ';';
-        } elseif($this->action == 'drop') {
-            $sql .= "DROP EVENT `{$this->event}`";
-        } elseif($this->action == 'drop_if_exists') {
-            $sql .= "DROP EVENT IF EXISTS `{$this->event}`";
-        }
-
-        return $sql;
-    }
-
     public function build(): string 
     {
-        return $this->toMySQL();
+        if($this->action == 'create') {
+            return "CREATE EVENT `{$this->event}` ON SCHEDULE " . $this->schedule . ' DO ' . $this->statement . ';';
+        } elseif($this->action == 'drop') {
+            return "DROP EVENT `{$this->event}`";
+        } elseif($this->action == 'drop_if_exists') {
+            return "DROP EVENT IF EXISTS `{$this->event}`";
+        }
+
+        return '';
     }
 }

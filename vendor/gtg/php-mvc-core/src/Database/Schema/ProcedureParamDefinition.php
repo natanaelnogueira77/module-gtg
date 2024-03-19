@@ -2,22 +2,23 @@
 
 namespace GTG\MVC\Database\Schema;
 
-class ProcedureParamDefinition 
+final class ProcedureParamDefinition 
 {
-    private string $columnName;
-    private string $type;
-    private array $params;
-
-    public function __construct(string $columnName, string $type, array $params = []) 
-    {
-        $this->columnName = $columnName;
-        $this->type = $type;
-        $this->params = $params;
-    }
+    public function __construct(
+        private string $columnName,
+        private string $type,
+        private array $params = []
+    ) 
+    {}
 
     private function getParam(string $key): mixed 
     {
         return isset($this->params[$key]) ? $this->params[$key] : null;
+    }
+
+    public function build(): string 
+    {
+        return $this->toMySQL();
     }
 
     public function toMySQL(): string 
@@ -54,10 +55,5 @@ class ProcedureParamDefinition
         }
 
         return $sql;
-    }
-
-    public function build(): string 
-    {
-        return $this->toMySQL();
     }
 }

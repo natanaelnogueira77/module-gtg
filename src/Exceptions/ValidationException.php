@@ -2,7 +2,6 @@
 
 namespace Src\Exceptions;
 
-use Src\Exceptions\ApplicationException;
 use Throwable;
 
 class ValidationException extends ApplicationException 
