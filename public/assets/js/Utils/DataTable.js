@@ -110,7 +110,7 @@ class DataTable
     {
         const object = this;
         object.container.find("[dt-page]").click(function () {
-            object.#filters.page = $(this).data('page');
+            object.#filters.page = $(this).attr('dt-page');
             object.load();
         });
 

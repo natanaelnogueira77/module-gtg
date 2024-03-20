@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-03-19 10:45-0300\n"
-"PO-Revision-Date: 2024-03-19 19:06-0300\n"
+"POT-Creation-Date: 2024-03-19 22:04-0300\n"
+"PO-Revision-Date: 2024-03-19 22:04-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -74,7 +74,7 @@ msgid "Your password was reseted successfully!"
 msgstr "¡Su contraseña fue restablecida exitosamente!"
 
 #: src/Controllers/UsersController.php:39
-#: views/widgets/data-tables/users.php:40
+#: views/widgets/data-tables/users.php:39
 msgid "No user was found!"
 msgstr "¡No se encontró ningún usuario!"
 
@@ -508,21 +508,21 @@ msgstr "Abajo está la lista de los usuarios del sistema"
 msgid "Are you sure you want to delete this user?"
 msgstr "¿Estás seguro de que deseas eliminar este usuario?"
 
-#: views/widgets/data-tables/users.php:14
-#: views/widgets/data-tables/users.php:50
-#: views/widgets/data-tables/users.php:55
+#: views/widgets/data-tables/users.php:13
+#: views/widgets/data-tables/users.php:49
+#: views/widgets/data-tables/users.php:54
 msgid "Actions"
 msgstr "Acciones"
 
-#: views/widgets/data-tables/users.php:19
+#: views/widgets/data-tables/users.php:18
 msgid "ID"
 msgstr "ID"
 
-#: views/widgets/data-tables/users.php:24 views/widgets/forms/save-user.php:5
+#: views/widgets/data-tables/users.php:23 views/widgets/forms/save-user.php:5
 msgid "Name"
 msgstr "Nombre"
 
-#: views/widgets/data-tables/users.php:29
+#: views/widgets/data-tables/users.php:28
 #: views/widgets/forms/expired-session-login.php:3
 #: views/widgets/forms/save-user.php:18
 #: views/widgets/sections/login-form.php:14
@@ -530,15 +530,15 @@ msgstr "Nombre"
 msgid "Email"
 msgstr "Email"
 
-#: views/widgets/data-tables/users.php:34
+#: views/widgets/data-tables/users.php:33
 msgid "Created At"
 msgstr "Creado En"
 
-#: views/widgets/data-tables/users.php:59
+#: views/widgets/data-tables/users.php:58
 msgid "Edit User"
 msgstr "Editar Usuario"
 
-#: views/widgets/data-tables/users.php:68
+#: views/widgets/data-tables/users.php:67
 msgid "Delete User"
 msgstr "Borrar Usuario"
 

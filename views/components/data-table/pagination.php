@@ -12,12 +12,12 @@
         </div>
     </div>
     
-    <?php if($component->getSelectedPage() > 1): ?>
+    <?php if($component->getTotalPages() > 1): ?>
     <div class="col-sm-12 col-md-8 mb-3">
         <nav>
             <ul class="pagination justify-content-end flex-wrap">
                 <li class="page-item <?= $component->getSelectedPage() > 1 ? '' : 'disabled' ?>">
-                    <a class="page-link" data-page="<?= ($component->getSelectedPage() - 1) ?>"><?= _('Previous') ?></a>
+                    <a class="page-link" dt-page="<?= ($component->getSelectedPage() - 1) ?>"><?= _('Previous') ?></a>
                 </li>
 
                 <?php 
@@ -28,12 +28,12 @@
                 ):
                 ?>
                 <li class="page-item <?= $i == $component->getSelectedPage() ? 'active' : '' ?>">
-                    <a class="page-link" data-page="<?= $i ?>"><?= $i ?></a>
+                    <a class="page-link" dt-page="<?= $i ?>"><?= $i ?></a>
                 </li>
                 <?php endfor; ?>
 
                 <li class="page-item <?= $component->getSelectedPage() < $component->getTotalPages() ? '' : 'disabled' ?>">
-                    <a class="page-link" data-page="<?= ($component->getSelectedPage() + 1) ?>"><?= _('Next') ?></a>
+                    <a class="page-link" dt-page="<?= ($component->getSelectedPage() + 1) ?>"><?= _('Next') ?></a>
                 </li>
             </ul>
         </nav>
