@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-03-21 00:53-0300\n"
-"PO-Revision-Date: 2024-03-21 00:53-0300\n"
+"POT-Creation-Date: 2024-03-21 15:30-0300\n"
+"PO-Revision-Date: 2024-03-21 15:30-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -446,17 +446,17 @@ msgstr ""
 msgid "Click here to reset your password"
 msgstr "Haga clic aquí para restablecer la contraseña"
 
-#: views/layouts/main.php:73
+#: views/layouts/main.php:78
 msgid "The file extension is not allowed here! Allowed extensions: "
 msgstr ""
 "¡La extensión de archivo no está permitida aquí! Extensiones permitidas: "
 
-#: views/layouts/main.php:74
+#: views/layouts/main.php:79
 #, php-format
 msgid "The file you tried to send is bigger than %sMB!"
 msgstr "¡El archivo que intentaste enviar tiene un tamaño superior a %sMB!"
 
-#: views/layouts/main.php:75
+#: views/layouts/main.php:80
 msgid "We're sorry, but there was an error when reading the file!"
 msgstr "Lo sentimos, ¡pero hubo un error al leer el archivo!"
 
@@ -534,7 +534,7 @@ msgstr "Creado En"
 msgid "Edit User"
 msgstr "Editar Usuario"
 
-#: views/widgets/data-tables/users.php:62
+#: views/widgets/data-tables/users.php:63
 #, php-format
 msgid "Edit User - %s"
 msgstr "Editar Usuário - %s"
@@ -543,7 +543,7 @@ msgstr "Editar Usuário - %s"
 msgid "Delete User"
 msgstr "Borrar Usuario"
 
-#: views/widgets/data-tables/users.php:72
+#: views/widgets/data-tables/users.php:74
 #, php-format
 msgid "Are you sure you want to delete the user %s?"
 msgstr "¿Estás seguro de que deseas eliminar el usuário %s?"

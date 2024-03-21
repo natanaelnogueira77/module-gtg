@@ -11,12 +11,23 @@ class Left
     ) 
     {}
 
-    public function getBackgroundColor(): string 
+    public function getStyles(): string 
+    {
+        return 'col-1 col-md-3 col-xl-2 px-md-2 px-0 shadow ' . $this->getBackgroundColor();
+    }
+
+    private function getBackgroundColor(): string 
     {
         return 'bg-' . $this->backgroundColor;
     }
 
-    public function getTextColor(): string 
+    public function getAsideStyles(): string 
+    {
+        return 'align-items-center align-items-md-start px-md-0 pt-2 min-vh-100 sticky-top ' 
+            . $this->getBackgroundColor() . ' ' . $this->getTextColor();
+    }
+
+    private function getTextColor(): string 
     {
         return 'text-' . $this->textColor;
     }

@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-between">
+<div class="d-sm-flex justify-content-between">
     <?php if($component->hasLimitFilter()): ?>
     <div class="form-group mb-3">
         <div class="input-group">

@@ -57,22 +57,25 @@ $this->insert('components/data-table/table', [
                                                 type: DropdownMenuItem::BUTTON_TYPE,
                                                 text: _('Edit User'),
                                                 attributes: [
+                                                    'dt-event' => 'edit',
                                                     'data-action' => $router->route('users.show', ['user_id' => $model->id]),
                                                     'data-method' => 'get',
-                                                    'data-modal-title' => sprintf(_('Edit User - %s'), $model->name),
-                                                    'dt-event' => 'edit'
+                                                    'data-modal-title' => sprintf(_('Edit User - %s'), $model->name)
                                                 ]
                                             ),
                                             new DropdownMenuItem(
                                                 type: DropdownMenuItem::BUTTON_TYPE,
                                                 text: _('Delete User'),
                                                 attributes: [
+                                                    'dt-event' => 'delete',
                                                     'data-action' => $router->route('users.delete', ['user_id' => $model->id]),
                                                     'data-method' => 'delete',
-                                                    'data-confirm-message' => sprintf(_('Are you sure you want to delete the user %s?'), $model->name),
-                                                    'dt-event' => 'delete'
+                                                    'data-confirm-message' => sprintf(
+                                                        _('Are you sure you want to delete the user %s?'), 
+                                                        $model->name
+                                                    )
                                                 ]
-                                            ),
+                                            )
                                         ]
                                     )
                                 )

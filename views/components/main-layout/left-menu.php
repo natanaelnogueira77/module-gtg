@@ -1,5 +1,4 @@
-<ul id="left-menu" class="nav nav-pills flex-column mb-md-auto mb-0 align-items-center 
-    align-items-md-start overflow-auto vh-100 position-fixed">
+<ul id="left-menu" class="<?= $component->getStyles() ?>">
     <?php 
         if($component->hasItems()) {
             foreach($component->getItems() as $item) {

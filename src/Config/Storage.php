@@ -4,7 +4,7 @@ namespace Src\Config;
 
 use Src\Models\AR\User;
 
-class Constants 
+final class Storage 
 {
     const STORAGE_PATH = 'public/storage';
     const USERS_STORAGE_FOLDER = 'users';

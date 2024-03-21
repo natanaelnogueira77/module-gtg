@@ -1,5 +1,7 @@
-<script src="<?= url('public/assets/js/DataTables/UsersDataTable.js') ?>"></script>
-<script src="<?= url('public/assets/js/Forms/SaveUserForm.js') ?>"></script>
+<?php 
+    loadScript('DataTables/UsersDataTable');
+    loadScript('Forms/SaveUserForm');
+?>
 <script>
     $(function () {
         const createButton = $("#<?= $widget->getButtonId() ?>");

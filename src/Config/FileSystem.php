@@ -5,7 +5,7 @@ namespace Src\Config;
 use Exception;
 use Src\Exceptions\ApplicationException;
 
-class FileSystem 
+final class FileSystem 
 {
     public const LOCAL_STORAGE = 'local';
 

@@ -3,7 +3,7 @@
 namespace Src\Controllers;
 
 use GTG\MVC\Request;
-use Src\Config\{ Constants, FileSystem };
+use Src\Config\{ FileSystem, Storage };
 
 class MediaLibraryController extends Controller
 {
@@ -40,7 +40,7 @@ class MediaLibraryController extends Controller
 
     private function getFiles(): array 
     {
-        return FileSystem::listFiles(Constants::getStorageFolder($this->session->getAuth()));
+        return FileSystem::listFiles(Storage::getStorageFolder($this->session->getAuth()));
     }
 
     public function addFile(Request $request): void
@@ -68,7 +68,7 @@ class MediaLibraryController extends Controller
         }
 
         $file = FileSystem::uploadFile(
-            Constants::getStorageFolder($this->session->getAuth()) . '/' . $filename, 
+            Storage::getStorageFolder($this->session->getAuth()) . '/' . $filename, 
             $file['tmp_name']
         );
 
@@ -93,7 +93,7 @@ class MediaLibraryController extends Controller
         }
         
         FileSystem::deleteFile(
-            Constants::getStorageFolder($this->session->getAuth()) . '/' . $request->get('name')
+            Storage::getStorageFolder($this->session->getAuth()) . '/' . $request->get('name')
         );
 
         $this->writeSuccessResponse([

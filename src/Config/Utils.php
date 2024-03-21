@@ -1,5 +1,6 @@
 <?php 
 
+use Src\Config\HTMLDocument;
 use Src\Program;
 
 function url(?string $uri = null): string 
@@ -31,4 +32,19 @@ function slugify(string $str, string $delimiter = '-'): string
             $delimiter
         )
     );
+}
+
+function asset(string $assetPath): string 
+{
+    return url('public/assets/' . $assetPath);
+}
+
+function loadStyle(string $styleFilePath): void
+{
+    echo HTMLDocument::addLoadedStyle(asset('css/' . $styleFilePath . '.css'));
+}
+
+function loadScript(string $javascriptFilePath): void
+{
+    echo HTMLDocument::addLoadedScript(asset('js/' . $javascriptFilePath . '.js'));
 }

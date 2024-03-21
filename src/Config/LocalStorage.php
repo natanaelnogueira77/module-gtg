@@ -4,7 +4,7 @@ namespace Src\Config;
 
 use Exception;
 
-class LocalStorage 
+final class LocalStorage 
 {
     private const STORAGE_ROOT = 'public/storage';
 

@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?= url('public/assets/css/bootstrap.css') ?>">
-    <link rel="stylesheet" href="<?= url('public/assets/css/custom.css') ?>">
-    <link rel="stylesheet" href="<?= url('public/assets/css/icofont.css') ?>">
-    <link rel="stylesheet" href="<?= url('public/assets/css/toastr.css') ?>">
+    <?php 
+        loadStyle('bootstrap');
+        loadStyle('custom');
+        loadStyle('icofont');
+        loadStyle('toastr');
+    ?>
     <?= $this->section('styles'); ?>
     <link rel="shortcut icon" href="<?= $layout->getLogoIconURL() ?>" type="image/png">
     <title><?= $layout->getTitle() ?></title>
@@ -19,14 +21,15 @@
         }
     ?>
 
-    <main class="container-fluid p-0">
+    <main class="container-fluid p-0 w-100">
         <div class="d-flex flex-nowrap">
             <?php 
                 if($layout->getLeft()) {
                     $this->insert('components/main-layout/left', ['component' => $layout->getLeft()]);
                 }
             ?>
-            <div class="w-100 min-vh-100 d-flex flex-column">
+            <div id="main-content" class="<?= $layout->getLeft() ? 'col-11 col-md-9 col-xl-10' : 'col-12' ?> 
+                min-vh-100 d-flex flex-column">
                 <?= $this->section('content') ?>
                 <?php 
                     if($layout->getFooter()) {
@@ -47,22 +50,24 @@
             ]); 
         }
     ?>
-    
-    <script src="<?= url('public/assets/js/jquery.js') ?>"></script>
-    <script src="<?= url('public/assets/js/popper.js') ?>"></script>
-    <script src="<?= url('public/assets/js/bootstrap.js') ?>"></script>
-    <script src="<?= url('public/assets/js/toastr.js') ?>"></script>
-    <script src="<?= url('public/assets/js/jquery.maskedinput.js') ?>"></script>
-    <script src="<?= url('public/assets/js/tinymce.js') ?>"></script>
 
-    <script src="<?= url('public/themes/main/js/left-sidebar-toggle.js') ?>"></script>
+    <?php 
+        loadScript('jquery');
+        loadScript('popper');
+        loadScript('bootstrap');
+        loadScript('toastr');
+        loadScript('jquery.maskedinput');
+        loadScript('tinymce');
 
-    <script src="<?= url('public/assets/js/Utils/DynamicForm.js') ?>"></script>
-    <script src="<?= url('public/assets/js/Utils/DataTable.js') ?>"></script>
-    <script src="<?= url('public/assets/js/Utils/FileSelector.js') ?>"></script>
-    <script src="<?= url('public/assets/js/Utils/MediaLibrary.js') ?>"></script>
-    <script src="<?= url('public/assets/js/Utils/App.js') ?>"></script>
-    <script src="<?= url('public/assets/js/Utils/Config.js') ?>"></script>
+        loadScript('Themes/Main/left-sidebar-toggle');
+
+        loadScript('Utils/DynamicForm');
+        loadScript('Utils/DataTable');
+        loadScript('Utils/FileSelector');
+        loadScript('Utils/MediaLibrary');
+        loadScript('Utils/App');
+        loadScript('Utils/Config');
+    ?>
     
     <?php if($session->getAuth()): ?>
     <script>

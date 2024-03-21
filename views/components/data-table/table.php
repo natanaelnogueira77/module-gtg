@@ -1,4 +1,4 @@
-<div>
+<div class="table-responsive table-responsive-sm">
     <?php $this->insert('components/data-table/pagination', ['component' => $component->getPagination()]); ?>
     <table class="<?= $component->getStyles() ?>">
         <?php 

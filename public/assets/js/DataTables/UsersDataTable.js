@@ -12,6 +12,11 @@ class UsersDataTable
         this.#saveUserForm = saveUserForm;
         this.#setDataTable(table);
     }
+    
+    get dataTable() 
+    {
+        return this.#dataTable;
+    }
 
     #setDataTable(table) 
     {
