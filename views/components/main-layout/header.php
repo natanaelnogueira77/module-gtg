@@ -1,4 +1,4 @@
-<header class="p-3 sticky-top shadow <?= $component->getBackgroundColor() ?>" style="z-index: 10000;">
+<header class="p-3 sticky-top shadow <?= $component->getBackgroundColor() ?>" style="z-index: 1000;">
     <div class="container-fluid">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-start">
             <?php if($component->hasLeft()): ?>
