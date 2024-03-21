@@ -3,7 +3,6 @@
 namespace Src\Models\AR;
 
 use DateTime, stdClass;
-use Src\Components\DataTable;
 use Src\DB\Statement;
 use Src\Exceptions\ApplicationException;
 use Src\Models\Lists\UsersList;
@@ -220,7 +219,7 @@ class User extends UserModel
         };
     }
 
-    public static function getListResultsCount($list): int
+    public static function getListResultsCount(UsersList $list): int
     {
         return self::get()->filters(self::getListFilters($list))->count();
     }

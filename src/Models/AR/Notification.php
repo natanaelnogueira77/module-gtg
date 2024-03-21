@@ -41,9 +41,7 @@ class Notification extends ActiveRecord
 
     public static function getByUserId(int $userId, string $columns = '*'): ?array 
     {
-        return self::get($columns)->filters(function($where) use ($userId) {
-            $where->equal('usu_id')->assignment($userId);
-        })->fetch(true);
+        return self::get($columns)->filters(fn($where) => $where->equal('usu_id')->assignment($userId))->fetch(true);
     }
 
     public function getContent(): string 

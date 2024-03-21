@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-03-19 22:03-0300\n"
-"PO-Revision-Date: 2024-03-19 22:03-0300\n"
+"POT-Creation-Date: 2024-03-21 00:53-0300\n"
+"PO-Revision-Date: 2024-03-21 00:53-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -137,62 +137,62 @@ msgstr "The content is required!"
 msgid "The content must have %s characters or less!"
 msgstr "The content must have %s characters or less!"
 
-#: src/Models/AR/User.php:46
+#: src/Models/AR/User.php:45
 msgid "The user permission is required!"
 msgstr "The user permission is required!"
 
-#: src/Models/AR/User.php:47
+#: src/Models/AR/User.php:46
 msgid "The user permission is invalid!"
 msgstr "The user permission is invalid!"
 
-#: src/Models/AR/User.php:48
+#: src/Models/AR/User.php:47
 msgid "The name is required!"
 msgstr "The name is required!"
 
-#: src/Models/AR/User.php:49
+#: src/Models/AR/User.php:48
 #, php-format
 msgid "The name must have %s characters or less!"
 msgstr "The name must have %s characters or less!"
 
-#: src/Models/AR/User.php:50 src/Models/ForgotPasswordForm.php:18
+#: src/Models/AR/User.php:49 src/Models/ForgotPasswordForm.php:18
 #: src/Models/LoginForm.php:19
 msgid "The email is required!"
 msgstr "The email is required!"
 
-#: src/Models/AR/User.php:51 src/Models/ForgotPasswordForm.php:19
+#: src/Models/AR/User.php:50 src/Models/ForgotPasswordForm.php:19
 #: src/Models/LoginForm.php:20
 msgid "The email is invalid!"
 msgstr "The email is invalid!"
 
-#: src/Models/AR/User.php:52 src/Models/ForgotPasswordForm.php:20
+#: src/Models/AR/User.php:51 src/Models/ForgotPasswordForm.php:20
 #: src/Models/LoginForm.php:21
 #, php-format
 msgid "The email must have %s characters or less!"
 msgstr "The email must have %s characters or less!"
 
-#: src/Models/AR/User.php:53 src/Models/LoginForm.php:22
-#: src/Models/ResetPasswordForm.php:18
+#: src/Models/AR/User.php:52 src/Models/LoginForm.php:22
+#: src/Models/ResetPasswordForm.php:16
 msgid "The password is required!"
 msgstr "The password is required!"
 
-#: src/Models/AR/User.php:54
+#: src/Models/AR/User.php:53
 #, php-format
 msgid "The password must have %s characters or less!"
 msgstr "The password must have %s characters or less!"
 
-#: src/Models/AR/User.php:61
+#: src/Models/AR/User.php:60
 msgid "Admin"
 msgstr "Admin"
 
-#: src/Models/AR/User.php:62
+#: src/Models/AR/User.php:61
 msgid "User"
 msgstr "User"
 
-#: src/Models/AR/User.php:103
+#: src/Models/AR/User.php:102
 msgid "You cannot delete the Admin!"
 msgstr "You cannot delete the Admin!"
 
-#: src/Models/AR/User.php:108
+#: src/Models/AR/User.php:107
 msgid "You cannot delete an user with stored data!"
 msgstr "You cannot delete an user with stored data!"
 
@@ -247,16 +247,16 @@ msgstr "A request was already sent to this email! Wait 1 hour to send another."
 msgid "The email/password are incorrect!"
 msgstr "The email/password are incorrect!"
 
-#: src/Models/ResetPasswordForm.php:19
+#: src/Models/ResetPasswordForm.php:17
 #, php-format
 msgid "The password must have %s characters or more!"
 msgstr "The password must have %s characters or more!"
 
-#: src/Models/ResetPasswordForm.php:20
+#: src/Models/ResetPasswordForm.php:18
 msgid "The password confirmation is required!"
 msgstr "The password confirmation is required!"
 
-#: src/Models/ResetPasswordForm.php:21 src/Models/ResetPasswordForm.php:22
+#: src/Models/ResetPasswordForm.php:19 src/Models/ResetPasswordForm.php:20
 msgid "The passwords does not match!"
 msgstr "The passwords does not match!"
 
@@ -497,10 +497,6 @@ msgstr "Welcome!"
 msgid "Down below is the list of the users of the system"
 msgstr "Down below is the list of the users of the system"
 
-#: views/scripts/sections/users-list.js.php:30
-msgid "Are you sure you want to delete this user?"
-msgstr "Are you sure you want to delete this user?"
-
 #: views/widgets/data-tables/users.php:13
 #: views/widgets/data-tables/users.php:49
 #: views/widgets/data-tables/users.php:54
@@ -531,9 +527,19 @@ msgstr "Created At"
 msgid "Edit User"
 msgstr "Edit User"
 
-#: views/widgets/data-tables/users.php:67
+#: views/widgets/data-tables/users.php:62
+#, php-format
+msgid "Edit User - %s"
+msgstr "Edit User - %s"
+
+#: views/widgets/data-tables/users.php:68
 msgid "Delete User"
 msgstr "Delete User"
+
+#: views/widgets/data-tables/users.php:72
+#, php-format
+msgid "Are you sure you want to delete the user %s?"
+msgstr "Are you sure you want to delete the user %s?"
 
 #: views/widgets/forms/expired-session-login.php:4
 #: views/widgets/sections/reset-password.php:16

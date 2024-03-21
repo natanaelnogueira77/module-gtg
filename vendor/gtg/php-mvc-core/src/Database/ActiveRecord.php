@@ -2,7 +2,7 @@
 
 namespace GTG\MVC\Database;
 
-use DateTime, PDD, PDOException;
+use DateTime, PDO, PDOException;
 use GTG\MVC\{ Application, Model };
 use GTG\MVC\Database\{ ActiveRecordStatement, Database };
 use GTG\MVC\Exceptions\ActiveRecordException;
@@ -43,9 +43,7 @@ abstract class ActiveRecord extends Model
 
     public static function findById(int $id, string $columns = '*'): static|null
     {
-        return static::get($columns)->filters(function($where) use ($id) {
-            $where->equal('id')->assignment($id);
-        })->fetch();
+        return static::get($columns)->filters(fn($where) => $where->equal('id')->assignment($id))->fetch();
     }
 
     protected function exec(string $sql): void  
@@ -65,7 +63,7 @@ abstract class ActiveRecord extends Model
 
     public function columnsValuesToArray(): array 
     {
-        return [static::primaryKey() => $this->{static::primaryKey()}] + $this->attributesToArray();
+        return array_merge([static::primaryKey() => $this->{static::primaryKey()}], $this->attributesToArray());
     }
 
     public function fillAttributes(array $attributes): static 
@@ -87,7 +85,7 @@ abstract class ActiveRecord extends Model
             if($id = $this->{$primary}) {
                 $this->update("{$primary} = :id", "id={$id}");
             } else {
-                $this->create();
+                $this->{static::primaryKey()} = $this->create();
             }
         } catch(PDOException $e) {
             throw new ActiveRecordException($e->getMessage());
@@ -263,9 +261,7 @@ abstract class ActiveRecord extends Model
         }
 
         $attributes = static::getColumns();
-        $dataSet = implode(', ', array_map(function($attr) {
-            return "{$attr} = VALUES ({$attr})";
-        }, $attributes));
+        $dataSet = implode(', ', array_map(fn($attr) => "{$attr} = VALUES ({$attr})", $attributes));
 
         $columns = implode(', ', $attributes);
         foreach($modelsData as $index => $modelData) {

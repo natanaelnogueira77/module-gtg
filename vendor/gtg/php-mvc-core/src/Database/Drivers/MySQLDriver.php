@@ -2,8 +2,6 @@
 
 namespace GTG\MVC\Database\Drivers;
 
-use GTG\MVC\Database\Drivers\Driver;
-
 final class MySQLDriver implements Driver 
 {
     public function __construct(

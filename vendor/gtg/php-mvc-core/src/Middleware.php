@@ -2,8 +2,6 @@
 
 namespace GTG\MVC;
 
-use GTG\MVC\{ Request, Router, Session };
-
 abstract class Middleware 
 {
     abstract public function handle(Request $request): bool;

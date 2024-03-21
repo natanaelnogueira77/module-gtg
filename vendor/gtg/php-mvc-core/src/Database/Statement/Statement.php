@@ -14,8 +14,7 @@ use GTG\MVC\Database\Statement\Clauses\{
     Join, 
     Limit, 
     OrderBy, 
-    RightJoin, 
-    Select, 
+    RightJoin,  
     Where
 };
 use GTG\MVC\Exceptions\StatementException;

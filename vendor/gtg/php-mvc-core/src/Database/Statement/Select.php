@@ -1,8 +1,8 @@
 <?php 
 
-namespace GTG\MVC\Database\Statement\Clauses;
+namespace GTG\MVC\Database\Statement;
 
-final class Select extends Clause 
+final class Select
 {
     public function __construct(
         private string|array $columns

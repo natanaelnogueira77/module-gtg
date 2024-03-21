@@ -3,14 +3,13 @@
 namespace GTG\MVC\Database;
 
 use GTG\MVC\Application;
-use GTG\MVC\Database\Database;
 
 abstract class Migration 
 {
+    protected Database $database;
+    
     abstract public function up(): void;
     abstract public function down(): void;
-
-    protected Database $database;
 
     public function __construct() 
     {

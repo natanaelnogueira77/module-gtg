@@ -3,7 +3,6 @@
 namespace GTG\MVC\Database;
 
 use GTG\MVC\Application;
-use GTG\MVC\Database\Connect;
 use GTG\MVC\Database\Drivers\Driver;
 use GTG\MVC\Database\Schema\{ Event, Procedure, Table, Trigger };
 use PDO, PDOStatement;

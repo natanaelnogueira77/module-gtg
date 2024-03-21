@@ -59,6 +59,7 @@ $this->insert('components/data-table/table', [
                                                 attributes: [
                                                     'data-action' => $router->route('users.show', ['user_id' => $model->id]),
                                                     'data-method' => 'get',
+                                                    'data-modal-title' => sprintf(_('Edit User - %s'), $model->name),
                                                     'dt-event' => 'edit'
                                                 ]
                                             ),
@@ -68,6 +69,7 @@ $this->insert('components/data-table/table', [
                                                 attributes: [
                                                     'data-action' => $router->route('users.delete', ['user_id' => $model->id]),
                                                     'data-method' => 'delete',
+                                                    'data-confirm-message' => sprintf(_('Are you sure you want to delete the user %s?'), $model->name),
                                                     'dt-event' => 'delete'
                                                 ]
                                             ),

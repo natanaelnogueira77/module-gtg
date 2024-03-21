@@ -2,8 +2,6 @@
 
 namespace GTG\MVC;
 
-use GTG\MVC\Rule;
-
 abstract class Model 
 {
     protected array $errors = [];

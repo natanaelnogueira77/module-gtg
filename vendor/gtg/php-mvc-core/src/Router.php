@@ -2,8 +2,6 @@
 
 namespace GTG\MVC;
 
-use GTG\MVC\{ Application, Request };
-
 final class Router
 {
     protected string $projectURL;
@@ -25,9 +23,9 @@ final class Router
 
     public function __construct(string $projectURL) 
     {
-        $this->projectURL = substr($projectURL, "-1") == "/" ? substr($projectURL, 0, -1) : $projectURL;
-        $this->path = rtrim(filter_input(INPUT_GET, "route", FILTER_DEFAULT) ?? "/", "/");
-        $this->separator = $separator ?? ":";
+        $this->projectURL = substr($projectURL, '-1') == '/' ? substr($projectURL, 0, -1) : $projectURL;
+        $this->path = rtrim(filter_input(INPUT_GET, 'route', FILTER_DEFAULT) ?? '/', '/');
+        $this->separator = $separator ?? ':';
         $this->httpMethod = $_SERVER['REQUEST_METHOD'];
     }
 
@@ -44,7 +42,7 @@ final class Router
 
     public function group(?string $group, array|string $middleware = null): self
     {
-        $this->group = $group ? trim($group, "/") : null;
+        $this->group = $group ? trim($group, '/') : null;
         $this->middleware = $middleware ? [$this->group => $middleware] : null;
         return $this;
     }
@@ -131,7 +129,7 @@ final class Router
 
     private function setRouteData(string $route): self 
     {
-        $removeGroupFromPath = $this->group ? str_replace($this->group, "", $this->path) : $this->path;
+        $removeGroupFromPath = $this->group ? str_replace($this->group, '', $this->path) : $this->path;
         $pathAssoc = trim($removeGroupFromPath, "/");
         $routeAssoc = trim($route, "/");
 
@@ -150,25 +148,25 @@ final class Router
     {
         $post = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-        if(!empty($post['_method']) && in_array($post['_method'], ["PUT", "PATCH", "DELETE"])) {
+        if(!empty($post['_method']) && in_array($post['_method'], ['PUT', 'PATCH', 'DELETE'])) {
             $this->httpMethod = $post['_method'];
             $this->data = $post;
             
-            unset($this->data["_method"]);
+            unset($this->data['_method']);
             return;
-        } elseif($this->httpMethod == "POST") {
+        } elseif($this->httpMethod == 'POST') {
             $this->data = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-            unset($this->data["_method"]);
+            unset($this->data['_method']);
             return;
-        } elseif(in_array($this->httpMethod, ["PUT", "PATCH", "DELETE"]) && !empty($_SERVER['CONTENT_LENGTH'])) {
+        } elseif(in_array($this->httpMethod, ['PUT', 'PATCH', 'DELETE']) && !empty($_SERVER['CONTENT_LENGTH'])) {
             parse_str(
                 file_get_contents('php://input', false, null, 0, $_SERVER['CONTENT_LENGTH']), 
                 $putPatch
             );
             $this->data = $putPatch;
 
-            unset($this->data["_method"]);
+            unset($this->data['_method']);
             return;
         }
 
@@ -197,7 +195,7 @@ final class Router
             exit;
         }
 
-        $route = (substr($route, 0, 1) == "/" ? $route : "/{$route}");
+        $route = (substr($route, 0, 1) == '/' ? $route : "/{$route}");
         header("Location: {$this->getRouteURL($route)}");
         exit;
     }

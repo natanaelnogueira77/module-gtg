@@ -5,7 +5,6 @@ namespace GTG\MVC;
 use GTG\MVC\Database\Database;
 use GTG\MVC\Exceptions\AppException;
 use GTG\MVC\DTOs\ErrorDTO;
-use GTG\MVC\{ ErrorHandler, Router, Session, SMTP, View };
 
 final class Application 
 {

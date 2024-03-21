@@ -2,8 +2,6 @@
 
 namespace Src\Models;
 
-use Src\Models\AR\User;
-
 class ResetPasswordForm extends Model 
 {
     public function __construct(

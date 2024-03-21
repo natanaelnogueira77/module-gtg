@@ -2,8 +2,6 @@
 
 namespace GTG\MVC\Database\Schema;
 
-use GTG\MVC\Database\Schema\ProcedureParamDefinition;
-
 final class Procedure 
 {
     protected string $action;

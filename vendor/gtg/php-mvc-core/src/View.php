@@ -2,8 +2,6 @@
 
 namespace GTG\MVC;
 
-use GTG\MVC\BuildContext;
-
 final class View 
 {
     private BuildContext $buildContext;

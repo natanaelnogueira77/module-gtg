@@ -3,13 +3,12 @@
 namespace GTG\MVC\Database;
 
 use GTG\MVC\Application;
-use GTG\MVC\Database\Database;
 
 abstract class Seeder 
 {
-    abstract public function run(): void;
-
     protected Database $database;
+    
+    abstract public function run(): void;
 
     public function __construct() 
     {

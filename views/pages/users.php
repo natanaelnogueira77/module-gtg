@@ -34,7 +34,7 @@ $this->insert('modals/save-user', [
 ]);
 $this->end(); 
 
-$this->start('scripts'); 
+$this->start('scripts');
 $this->insert('scripts/sections/users-list.js', [
     'widget' => $usersListSection
 ]);
