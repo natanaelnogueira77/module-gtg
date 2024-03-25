@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-03-21 15:29-0300\n"
-"PO-Revision-Date: 2024-03-21 15:29-0300\n"
+"POT-Creation-Date: 2024-03-25 15:37-0300\n"
+"PO-Revision-Date: 2024-03-25 15:38-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -22,16 +22,31 @@ msgstr "Desculpe, não foi possível criar o caminho para o arquivo!"
 msgid "We are sorry, but it appears there was an error uploading the file!"
 msgstr "Lamentamos, mas parece que ocorreu um erro ao enviar o arquivo!"
 
-#: src/Controllers/AdminController.php:47
+#: src/Controllers/AdminController.php:17
+#, php-format
+msgid "Admin Dashboard | %s"
+msgstr "Painel de Admin | %s"
+
+#: src/Controllers/AdminController.php:49
 msgid "The configurations were successfully updated!"
 msgstr "As configurações foram atualizadas com sucesso!"
 
-#: src/Controllers/AuthController.php:33
+#: src/Controllers/AuthController.php:17
+#, php-format
+msgid "Login | %s"
+msgstr "Entrar | %s"
+
+#: src/Controllers/AuthController.php:35
 #, php-format
 msgid "Welcome, %s!"
 msgstr "Bem-vindo, %s!"
 
-#: src/Controllers/EditAccountController.php:38
+#: src/Controllers/EditAccountController.php:16
+#, php-format
+msgid "Edit Account | %s"
+msgstr "Editar Conta | %s"
+
+#: src/Controllers/EditAccountController.php:40
 #, php-format
 msgid "Your data was updated successfully, %s!"
 msgstr "Seus dados foram atualizados com sucesso, %s!"
@@ -52,45 +67,61 @@ msgstr "Nenhum nome de arquivo foi declarado!"
 msgid "The file was successfully removed."
 msgstr "O arquivo foi removido com sucesso."
 
-#: src/Controllers/ResetPasswordController.php:34
+#: src/Controllers/ResetPasswordController.php:17
+#: src/Controllers/ResetPasswordController.php:57
+#, php-format
+msgid "Reset Password | %s"
+msgstr "Redefinir Senha | %s"
+
+#: src/Controllers/ResetPasswordController.php:36
 #: views/widgets/sections/reset-password.php:5
 msgid "Reset Your Password"
 msgstr "Redefinir Sua Senha"
 
-#: src/Controllers/ResetPasswordController.php:42
+#: src/Controllers/ResetPasswordController.php:44
 #, php-format
 msgid "An email was sent to %s. Check it in order to reset your password."
 msgstr "Um e-mail foi enviado para %s. Verifique-o para redefinir sua senha."
 
-#: src/Controllers/ResetPasswordController.php:49
-#: src/Controllers/ResetPasswordController.php:72
+#: src/Controllers/ResetPasswordController.php:51
+#: src/Controllers/ResetPasswordController.php:76
 msgid "The token is invalid!"
 msgstr "O token é inválido!"
 
-#: src/Controllers/ResetPasswordController.php:86
+#: src/Controllers/ResetPasswordController.php:90
 msgid "Your password was reseted successfully!"
 msgstr "Sua senha foi redefinida com sucesso!"
 
-#: src/Controllers/UsersController.php:39
+#: src/Controllers/UserController.php:14
+#, php-format
+msgid "User Page | %s"
+msgstr "Página do Usuário | %s"
+
+#: src/Controllers/UsersController.php:18
+#, php-format
+msgid "Users List | %s"
+msgstr "Lista de Usuários | %s"
+
+#: src/Controllers/UsersController.php:41
 #: views/widgets/data-tables/users.php:39
 msgid "No user was found!"
 msgstr "Nenhum usuário foi encontrado!"
 
-#: src/Controllers/UsersController.php:57
+#: src/Controllers/UsersController.php:59
 msgid "You Were Successfully Registered!"
 msgstr "Você Foi Registrado Com Sucesso!"
 
-#: src/Controllers/UsersController.php:65
+#: src/Controllers/UsersController.php:67
 #, php-format
 msgid "The user \"%s\" was successfully created!"
 msgstr "O usuário \"%s\" foi criado com sucesso!"
 
-#: src/Controllers/UsersController.php:84
+#: src/Controllers/UsersController.php:86
 #, php-format
 msgid "The user \"%s\" was successfully updated!"
 msgstr "O usuário \"%s\" foi atualizado com sucesso!"
 
-#: src/Controllers/UsersController.php:93
+#: src/Controllers/UsersController.php:95
 #, php-format
 msgid "The user \"%s\" was successfully deleted."
 msgstr "O usuário \"%s\" foi excluído com sucesso."
@@ -265,11 +296,6 @@ msgstr "As senhas não coincidem!"
 #: src/Views/Components/DataTable/Body.php:31
 msgid "No corresponding data was found!"
 msgstr "Nenhum dado correspondente foi encontrado!"
-
-#: src/Views/LayoutFactory.php:47
-#, php-format
-msgid "Login | %s"
-msgstr "Entrar | %s"
 
 #: src/Views/LayoutFactory.php:56
 msgid "Home"

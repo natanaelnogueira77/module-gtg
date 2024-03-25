@@ -13,7 +13,9 @@ class ResetPasswordController extends Controller
     public function index(Request $request): void
     {
         $this->renderPage('reset-password', [
-            'layout' => LayoutFactory::createMain(),
+            'layout' => LayoutFactory::createMain(
+                sprintf(_('Reset Password | %s'), $this->appData['app_name'])
+            ),
             'page' => new ResetPasswordPage(
                 formAction: $this->router->route(
                     'resetPassword.index', 
@@ -51,7 +53,9 @@ class ResetPasswordController extends Controller
         }
 
         $this->renderPage('reset-password', [
-            'layout' => LayoutFactory::createMain(),
+            'layout' => LayoutFactory::createMain(
+                sprintf(_('Reset Password | %s'), $this->appData['app_name'])
+            ),
             'page' => new ResetPasswordPage(
                 formAction: $this->router->route(
                     'resetPassword.verify', 

@@ -24,7 +24,7 @@ use Src\Views\Layouts\Main as MainLayout;
 
 class LayoutFactory 
 {
-    public static function createMain(): MainLayout 
+    public static function createMain(string $title): MainLayout 
     {
         $configValues = Config::getValuesByMetaKeys([
             Config::KEY_LOGIN_IMAGE, 
@@ -44,7 +44,7 @@ class LayoutFactory
             applicationVersion: Application::getInstance()->appData['app_version'],
             logoURL: $configValues[Config::KEY_LOGO]['url'],
             logoIconURL: $configValues[Config::KEY_LOGO_ICON]['url'],
-            title: sprintf(_('Login | %s'), Application::getInstance()->appData['app_name']),
+            title: $title,
             header: new Header(
                 backgroundColor: self::getBackgroundColorByTheme($configValues[Config::KEY_STYLE]),
                 textColor: static::getTextColorByTheme($configValues[Config::KEY_STYLE]),

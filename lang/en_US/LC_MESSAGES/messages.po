@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-03-21 15:29-0300\n"
-"PO-Revision-Date: 2024-03-21 15:29-0300\n"
+"POT-Creation-Date: 2024-03-25 15:34-0300\n"
+"PO-Revision-Date: 2024-03-25 15:35-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -22,16 +22,31 @@ msgstr "Sorry, we were unable to create the path to the file!"
 msgid "We are sorry, but it appears there was an error uploading the file!"
 msgstr "We are sorry, but it appears there was an error uploading the file!"
 
-#: src/Controllers/AdminController.php:47
+#: src/Controllers/AdminController.php:17
+#, php-format
+msgid "Admin Dashboard | %s"
+msgstr "Admin Dashboard | %s"
+
+#: src/Controllers/AdminController.php:49
 msgid "The configurations were successfully updated!"
 msgstr "The configurations were successfully updated!"
 
-#: src/Controllers/AuthController.php:33
+#: src/Controllers/AuthController.php:17
+#, php-format
+msgid "Login | %s"
+msgstr "Login | %s"
+
+#: src/Controllers/AuthController.php:35
 #, php-format
 msgid "Welcome, %s!"
 msgstr "Welcome, %s!"
 
-#: src/Controllers/EditAccountController.php:38
+#: src/Controllers/EditAccountController.php:16
+#, php-format
+msgid "Edit Account | %s"
+msgstr "Edit Account | %s"
+
+#: src/Controllers/EditAccountController.php:40
 #, php-format
 msgid "Your data was updated successfully, %s!"
 msgstr "Your data was updated successfully, %s!"
@@ -52,45 +67,61 @@ msgstr "No filename was declared!"
 msgid "The file was successfully removed."
 msgstr "The file was successfully removed."
 
-#: src/Controllers/ResetPasswordController.php:34
+#: src/Controllers/ResetPasswordController.php:17
+#: src/Controllers/ResetPasswordController.php:57
+#, php-format
+msgid "Reset Password | %s"
+msgstr "Reset Password | %s"
+
+#: src/Controllers/ResetPasswordController.php:36
 #: views/widgets/sections/reset-password.php:5
 msgid "Reset Your Password"
 msgstr "Reset Your Password"
 
-#: src/Controllers/ResetPasswordController.php:42
+#: src/Controllers/ResetPasswordController.php:44
 #, php-format
 msgid "An email was sent to %s. Check it in order to reset your password."
 msgstr "An email was sent to %s. Check it in order to reset your password."
 
-#: src/Controllers/ResetPasswordController.php:49
-#: src/Controllers/ResetPasswordController.php:72
+#: src/Controllers/ResetPasswordController.php:51
+#: src/Controllers/ResetPasswordController.php:76
 msgid "The token is invalid!"
 msgstr "The token is invalid!"
 
-#: src/Controllers/ResetPasswordController.php:86
+#: src/Controllers/ResetPasswordController.php:90
 msgid "Your password was reseted successfully!"
 msgstr "Your password was reseted successfully!"
 
-#: src/Controllers/UsersController.php:39
+#: src/Controllers/UserController.php:14
+#, php-format
+msgid "User Page | %s"
+msgstr "User Page | %s"
+
+#: src/Controllers/UsersController.php:18
+#, php-format
+msgid "Users List | %s"
+msgstr "Users List | %s"
+
+#: src/Controllers/UsersController.php:41
 #: views/widgets/data-tables/users.php:39
 msgid "No user was found!"
 msgstr "No user was found!"
 
-#: src/Controllers/UsersController.php:57
+#: src/Controllers/UsersController.php:59
 msgid "You Were Successfully Registered!"
 msgstr "You Were Successfully Registered!"
 
-#: src/Controllers/UsersController.php:65
+#: src/Controllers/UsersController.php:67
 #, php-format
 msgid "The user \"%s\" was successfully created!"
 msgstr "The user \"%s\" was successfully created!"
 
-#: src/Controllers/UsersController.php:84
+#: src/Controllers/UsersController.php:86
 #, php-format
 msgid "The user \"%s\" was successfully updated!"
 msgstr "The user \"%s\" was successfully updated!"
 
-#: src/Controllers/UsersController.php:93
+#: src/Controllers/UsersController.php:95
 #, php-format
 msgid "The user \"%s\" was successfully deleted."
 msgstr "The user \"%s\" was successfully deleted."
@@ -263,11 +294,6 @@ msgstr "The passwords does not match!"
 #: src/Views/Components/DataTable/Body.php:31
 msgid "No corresponding data was found!"
 msgstr "No corresponding data was found!"
-
-#: src/Views/LayoutFactory.php:47
-#, php-format
-msgid "Login | %s"
-msgstr "Login | %s"
 
 #: src/Views/LayoutFactory.php:56
 msgid "Home"

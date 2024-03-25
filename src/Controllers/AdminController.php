@@ -13,7 +13,9 @@ class AdminController extends Controller
     public function index(Request $request): void
     {
         $this->renderPage('admin', [
-            'layout' => LayoutFactory::createMain(),
+            'layout' => LayoutFactory::createMain(
+                sprintf(_('Admin Dashboard | %s'), $this->appData['app_name'])
+            ),
             'page' => new AdminPage(
                 userTypes: User::getUserTypes(),
                 usersCount: User::getUsersCountGroupedByUserType(),

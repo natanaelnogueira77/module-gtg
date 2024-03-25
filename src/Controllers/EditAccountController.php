@@ -12,7 +12,9 @@ class EditAccountController extends Controller
     public function index(Request $request): void
     {
         $this->renderPage('edit-account', [
-            'layout' => LayoutFactory::createMain(),
+            'layout' => LayoutFactory::createMain(
+                sprintf(_('Edit Account | %s'), $this->appData['app_name'])
+            ),
             'page' => new EditAccountPage(
                 user: $this->session->getAuth(),
                 userTypes: User::getUserTypes()

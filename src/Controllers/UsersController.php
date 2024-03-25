@@ -14,7 +14,9 @@ class UsersController extends Controller
     public function index(Request $request): void
     {
         $this->renderPage('users', [
-            'layout' => LayoutFactory::createMain(),
+            'layout' => LayoutFactory::createMain(
+                sprintf(_('Users List | %s'), $this->appData['app_name'])
+            ),
             'page' => new UsersPage(
                 userTypes: User::getUserTypes()
             )

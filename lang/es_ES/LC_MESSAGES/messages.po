@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-03-21 15:30-0300\n"
-"PO-Revision-Date: 2024-03-21 15:30-0300\n"
+"POT-Creation-Date: 2024-03-25 15:35-0300\n"
+"PO-Revision-Date: 2024-03-25 15:37-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -22,16 +22,31 @@ msgstr "Lo sentimos, no pudimos crear la ruta al archivo!"
 msgid "We are sorry, but it appears there was an error uploading the file!"
 msgstr "Lo sentimos, pero parece que hubo un error al cargar el archivo!"
 
-#: src/Controllers/AdminController.php:47
+#: src/Controllers/AdminController.php:17
+#, php-format
+msgid "Admin Dashboard | %s"
+msgstr "Panel de Administración | %s"
+
+#: src/Controllers/AdminController.php:49
 msgid "The configurations were successfully updated!"
 msgstr "¡Las configuraciones se actualizaron exitosamente!"
 
-#: src/Controllers/AuthController.php:33
+#: src/Controllers/AuthController.php:17
+#, php-format
+msgid "Login | %s"
+msgstr "Iniciar sesión | %s"
+
+#: src/Controllers/AuthController.php:35
 #, php-format
 msgid "Welcome, %s!"
 msgstr "¡Bienvenido, %s!"
 
-#: src/Controllers/EditAccountController.php:38
+#: src/Controllers/EditAccountController.php:16
+#, php-format
+msgid "Edit Account | %s"
+msgstr "Editar Cuenta | %s"
+
+#: src/Controllers/EditAccountController.php:40
 #, php-format
 msgid "Your data was updated successfully, %s!"
 msgstr "¡Tus datos se actualizaron exitosamente, %s!"
@@ -52,47 +67,63 @@ msgstr "¡No se declaró ningún nombre de archivo!"
 msgid "The file was successfully removed."
 msgstr "El archivo se eliminó exitosamente."
 
-#: src/Controllers/ResetPasswordController.php:34
+#: src/Controllers/ResetPasswordController.php:17
+#: src/Controllers/ResetPasswordController.php:57
+#, php-format
+msgid "Reset Password | %s"
+msgstr "Restablecer la Contraseña | %s"
+
+#: src/Controllers/ResetPasswordController.php:36
 #: views/widgets/sections/reset-password.php:5
 msgid "Reset Your Password"
 msgstr "Restablecer Su Contraseña"
 
-#: src/Controllers/ResetPasswordController.php:42
+#: src/Controllers/ResetPasswordController.php:44
 #, php-format
 msgid "An email was sent to %s. Check it in order to reset your password."
 msgstr ""
 "Se envió un correo electrónico a %s. Verifíquelo para restablecer su "
 "contraseña."
 
-#: src/Controllers/ResetPasswordController.php:49
-#: src/Controllers/ResetPasswordController.php:72
+#: src/Controllers/ResetPasswordController.php:51
+#: src/Controllers/ResetPasswordController.php:76
 msgid "The token is invalid!"
 msgstr "¡La ficha no es válida!"
 
-#: src/Controllers/ResetPasswordController.php:86
+#: src/Controllers/ResetPasswordController.php:90
 msgid "Your password was reseted successfully!"
 msgstr "¡Su contraseña fue restablecida exitosamente!"
 
-#: src/Controllers/UsersController.php:39
+#: src/Controllers/UserController.php:14
+#, php-format
+msgid "User Page | %s"
+msgstr "Pagina del Usuário | %s"
+
+#: src/Controllers/UsersController.php:18
+#, php-format
+msgid "Users List | %s"
+msgstr "Lista de Usuarios | %s"
+
+#: src/Controllers/UsersController.php:41
 #: views/widgets/data-tables/users.php:39
 msgid "No user was found!"
 msgstr "¡No se encontró ningún usuario!"
 
-#: src/Controllers/UsersController.php:57
+#: src/Controllers/UsersController.php:59
 msgid "You Were Successfully Registered!"
 msgstr "¡Te Registraste Exitosamente!"
 
-#: src/Controllers/UsersController.php:65
+#: src/Controllers/UsersController.php:67
 #, php-format
 msgid "The user \"%s\" was successfully created!"
 msgstr "¡El usuario \"%s\" fue creado exitosamente!"
 
-#: src/Controllers/UsersController.php:84
+#: src/Controllers/UsersController.php:86
 #, php-format
 msgid "The user \"%s\" was successfully updated!"
 msgstr "El usuario \"%s\" se actualizó con éxito!"
 
-#: src/Controllers/UsersController.php:93
+#: src/Controllers/UsersController.php:95
 #, php-format
 msgid "The user \"%s\" was successfully deleted."
 msgstr "El usuario \"%s\" se eliminó correctamente."
@@ -268,11 +299,6 @@ msgstr "¡Las contraseñas no coinciden!"
 #: src/Views/Components/DataTable/Body.php:31
 msgid "No corresponding data was found!"
 msgstr "¡No se encontraron datos correspondientes!"
-
-#: src/Views/LayoutFactory.php:47
-#, php-format
-msgid "Login | %s"
-msgstr "Iniciar sesión | %s"
 
 #: src/Views/LayoutFactory.php:56
 msgid "Home"

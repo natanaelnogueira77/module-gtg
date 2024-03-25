@@ -13,7 +13,9 @@ class AuthController extends Controller
     public function index(Request $request): void
     {
         $this->renderPage('auth', [
-            'layout' => LayoutFactory::createMain(),
+            'layout' => LayoutFactory::createMain(
+                sprintf(_('Login | %s'), $this->appData['app_name'])
+            ),
             'page' => new AuthPage(
                 loginImageURL: Config::getLoginImageURL(),
                 redirectURL: $request->get('redirect')

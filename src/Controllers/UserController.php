@@ -10,7 +10,9 @@ class UserController extends Controller
     public function index(Request $request): void
     {
         $this->renderPage('user', [
-            'layout' => LayoutFactory::createMain()
+            'layout' => LayoutFactory::createMain(
+                sprintf(_('User Page | %s'), $this->appData['app_name'])
+            )
         ]);
     }
 }
