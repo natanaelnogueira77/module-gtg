@@ -1,4 +1,4 @@
-<ul id="left-menu" class="<?= $component->getStyles() ?>">
+<ul id="left-menu" class="<?= $component->getStyles() ?>" style="overflow-y: scroll;">
     <?php 
         if($component->hasItems()) {
             foreach($component->getItems() as $item) {

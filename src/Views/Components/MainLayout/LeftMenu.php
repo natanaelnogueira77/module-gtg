@@ -20,7 +20,7 @@ class LeftMenu
 
     public function getStyles(): string 
     {
-        return 'nav nav-pills mb-md-auto mb-0 align-items-center align-items-md-start overflow-auto vh-100 flex-column';
+        return 'nav nav-pills mb-md-auto mb-0 align-items-center align-items-md-start overflow-auto w-100';
     }
 
     public function hasItems(): bool 
