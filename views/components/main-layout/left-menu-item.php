@@ -9,7 +9,11 @@
     <?php if($component->hasItems()): ?>
     <ul id="<?= $component->getItemsListId() ?>" data-bs-parent="#left-menu" 
         class="collapse btn-toggle-nav list-unstyled fw-normal pb-1 small">
-        <?= $component->getItems() ?>
+        <?php 
+            foreach($component->getItems() as $item) {
+                $this->insert('components/main-layout/left-menu-item', ['component' => $item]);
+            }
+        ?>
     </ul>
     <?php endif; ?>
 </li>
