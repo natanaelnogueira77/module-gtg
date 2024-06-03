@@ -1,11 +1,11 @@
 <?php $this->layout('layouts/main', ['theme' => $theme]); ?>
 
 <main class="login-body">
-    <div class="full-background" style="background-image: url('<?= provide('theme')['backgroundImageURL'] ?>')"></div>
+    <div class="full-background" style="background-image: url('<?= $theme->getBackgroundImageURL() ?>')"></div>
     <div class="login-form mt-5">
         <div class="logo-login">
             <a href="#">
-                <img src="<?= provide('theme')['logoIconURL'] ?>" alt="">
+                <img src="<?= $theme->getLogoIconURL() ?>" alt="">
             </a>
         </div>
 
