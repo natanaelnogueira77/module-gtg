@@ -80,15 +80,15 @@ class DataTable
             url: object.#ajaxURL,
             type: 'get',
             data: object.#filters,
-            dataType: 'json',
-            beforeSend: function () {
+            dataType: 'html',
+            beforeSend: function() {
                 object.#isRequestRunning = true;
                 object.container.css('opacity', '0.1');
             },
             success: function(response) {
-                if(response.html) {
+                if(response) {
                     object.container.children().remove();
-                    object.container.append(response.html);
+                    object.container.append(response);
                     object.#setPagination();
                     object.#setOrdenation();
                     
@@ -97,7 +97,7 @@ class DataTable
                     }
                 }
             },
-            complete: function () {
+            complete: function() {
                 object.#isRequestRunning = false;
                 object.container.animate({opacity: '1'}, 'fast');
             }

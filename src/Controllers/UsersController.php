@@ -115,11 +115,9 @@ class UsersController extends Controller
         $models = User::getList($list);
         $list->setResultsCount(User::getListResultsCount($list));
         
-        $this->writeSuccessResponse([
-            'html' => $this->getDataTableHTML('users', [
-                'models' => $models,
-                'list' => $list
-            ])
+        echo $this->getDataTableHTML('users', [
+            'models' => $models,
+            'list' => $list
         ]);
     }
 }
