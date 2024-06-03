@@ -3,16 +3,18 @@
 namespace Src\Controllers;
 
 use GTG\MVC\Request;
-use Src\Views\LayoutFactory;
 
 class UserController extends Controller
 {
     public function index(Request $request): void
     {
         $this->renderPage('user', [
-            'layout' => LayoutFactory::createMain(
-                sprintf(_('User Page | %s'), $this->appData['app_name'])
-            )
+            'theme' => ThemeUtils::createDefault(
+                $this->router, 
+                $this->session, 
+                sprintf(_('Painel Principal | %s'), $this->appData['app_name'])
+            ),
+            'cards' => []
         ]);
     }
 }

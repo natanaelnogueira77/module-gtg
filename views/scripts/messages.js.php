@@ -1,12 +1,12 @@
 <script>
-    $(function () {
+    $(function() {
         <?php 
         foreach(['success', 'error', 'info'] as $type):
             if($session->getFlash($type)): 
             ?>
             App.showMessage(
-                <?php echo json_encode($session->getFlash($type)) ?>, 
-                <?php echo json_encode($type) ?>,
+                <?= json_encode($session->getFlash($type)) ?>, 
+                <?= json_encode($type) ?>,
                 5000, 
                 5000, 
                 5000, 

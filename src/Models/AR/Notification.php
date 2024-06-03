@@ -33,9 +33,9 @@ class Notification extends ActiveRecord
     public function rules(): array 
     {
         return [
-            $this->createRule()->required('usu_id')->setMessage(_('The user is required!')),
-            $this->createRule()->required('content')->setMessage(_('The content is required!')),
-            $this->createRule()->maxLength('content', 1000)->setMessage(sprintf(_('The content must have %s characters or less!'), 1000))
+            $this->createRule()->required('usu_id')->setMessage(_('O usuário é obrigatório!')),
+            $this->createRule()->required('content')->setMessage(_('O conteúdo é obrigatório!')),
+            $this->createRule()->maxLength('content', 1000)->setMessage(sprintf(_('O conteúdo deve ter %s caractéres ou menos!'), 1000))
         ];
     }
 
@@ -81,6 +81,6 @@ class Notification extends ActiveRecord
         return self::get($columns)->filters(function($where) use ($user) {
             $where->equal('usu_id')->assignment($user->id);
             $where->equal('was_read')->assignment(0);
-        })->fetch(true);
+        })->order('created_at DESC')->fetch(true);
     }
 }

@@ -36,27 +36,27 @@ class UserMeta extends ActiveRecord
     public function rules(): array 
     {
         return [
-            $this->createRule()->required('meta')->setMessage(_('The metadata is required!')),
-            $this->createRule()->maxLength('meta', 50)->setMessage(sprintf(_('The metadata must have %s characters or less!'), 50)),
+            $this->createRule()->required('meta')->setMessage(_('O metadado é obrigatório!')),
+            $this->createRule()->maxLength('meta', 50)->setMessage(sprintf(_('O metadado deve ter %s caractéres ou menos!'), 50)),
             $this->createRule()->raw(function($model) {
                 if(!$model->hasError('meta')) {
                     if($model->meta == self::KEY_LANG) {
                         if(!$model->value) {
                             $model->addError(
                                 self::KEY_LANG, 
-                                _('The language is required!')
+                                _('A linguagem é obrigatória!')
                             );
                         }
                     } elseif($model->meta == self::KEY_LAST_PASS_REQUEST) {
                         if(!$model->value) {
                             $model->addError(
                                 self::KEY_LAST_PASS_REQUEST, 
-                                _('The last password reset date is required!')
+                                _('A data da última solicitação de redefinição de senha é obrigatória!')
                             );
                         } elseif(!DateTime::createFromFormat('Y-m-d H:i:s', $model->value)) {
                             $model->addError(
                                 self::KEY_LAST_PASS_REQUEST, 
-                                _('The last password reset date must follow the dd/mm/aaaa hh:mm:ss pattern!')
+                                _('A data da última solicitação de redefinição de senha deve seguir o padrão dd/mm/aaaa hh:mm:ss!')
                             );
                         }
                     }

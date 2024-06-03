@@ -1,6 +1,6 @@
 <?php 
 
-use Src\Config\HTMLDocument;
+use Src\Config\{ HTMLDocument, Provider };
 use Src\Program;
 
 function url(?string $uri = null): string 
@@ -47,4 +47,9 @@ function loadStyle(string $styleFilePath): void
 function loadScript(string $javascriptFilePath): void
 {
     echo HTMLDocument::addLoadedScript(asset('js/' . $javascriptFilePath . '.js'));
+}
+
+function provide(string $name): mixed 
+{
+    return Provider::get($name);
 }

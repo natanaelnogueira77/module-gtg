@@ -10,10 +10,7 @@ abstract class Model extends GTGModel
     public function validate(): bool 
     {
         if(!parent::validate()) {
-            throw new ValidationException(
-                $this->getFirstErrors(), 
-                _('Validation errors! Check the fields.')
-            );
+            throw new ValidationException($this->getFirstErrors(), _('Erros de validação! Verifique os campos.'), 422);
         }
 
         return true;

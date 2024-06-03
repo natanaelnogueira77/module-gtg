@@ -18,6 +18,4 @@ return array(
     'GTG\\MVC\\' => array($vendorDir . '/gtg/php-mvc-core/src'),
     'FontLib\\' => array($vendorDir . '/phenx/php-font-lib/src/FontLib'),
     'Dompdf\\' => array($vendorDir . '/dompdf/dompdf/src'),
-    'CoffeeCode\\Router\\' => array($vendorDir . '/coffeecode/router/src'),
-    'CoffeeCode\\DataLayer\\' => array($vendorDir . '/coffeecode/datalayer/src'),
 );

@@ -1,23 +1,49 @@
-<?php 
+<?php $this->layout('layouts/main', ['theme' => $theme]); ?>
 
-use Src\Views\Widgets\Sections\LoginForm as LoginFormSection;
+<main class="login-body">
+    <div class="full-background" style="background-image: url('<?= $theme->getBackgroundImageURL() ?>')"></div>
+    <form id="main-login-form" class="form-default" action="<?= $router->route('auth.index') ?>" method="post">
+        <?php if($redirect): ?>
+        <input type="hidden" name="redirect" value="<?= $redirect ?>">
+        <?php endif; ?>
+        <div class="login-form mt-5">
+            <div class="logo-login">
+                <a href="#">
+                    <img src="<?= $theme->getLogoIconURL() ?>" alt="">
+                </a>
+            </div>
 
-$loginFormSection = new LoginFormSection(
-    formId: 'main-login-form',
-    formAction: $router->route('auth.index'),
-    formMethod: 'post',
-    redirectURL: $page->getRedirectURL(),
-    backgroundImageURL: $page->getLoginImageURL(),
-    resetPasswordURL: $router->route(
-        'resetPassword.index', 
-        $page->getRedirectURL() ? ['redirect' => $page->getRedirectURL()] : []
-    )
-);
+            <h2><?= _('Entrar') ?></h2>
 
-$this->layout("layouts/main", ['layout' => $layout]); 
+            <div class="form-input">
+                <input type="email" name="email" placeholder="<?= _('Digite seu email') ?>" required>
+                <div class="invalid-feedback"></div>
+            </div>
 
-$this->insert('widgets/sections/login-form', ['widget' => $loginFormSection]);
+            <div class="form-input">
+                <input type="password" name="password" placeholder="<?= _('Digite sua senha') ?>" required>
+                <div class="invalid-feedback"></div>
+            </div>
 
-$this->start('scripts'); 
-$this->insert('scripts/sections/login-form.js', ['widget' => $loginFormSection]);
-$this->end();
+            <div class="form-input pt-10">
+                <input type="submit" value="<?= _('Entrar') ?>">
+            </div>
+
+            <a href="<?= $router->route('resetPassword.index') ?>" class="forget">
+                <?= _('Esqueceu a senha?') ?>
+            </a>
+        </div>
+    </form>
+</main>
+
+<?php $this->start('scripts'); ?>
+<script>
+    $(function () {
+        const dynamicForm = App.getDynamicForm(
+            $(`#main-login-form`)
+        ).onSuccess(function(instance, response) {
+            if(response.redirectURL) window.location.href = response.redirectURL;
+        }).apply();
+    });
+</script>
+<?php $this->end(); ?>

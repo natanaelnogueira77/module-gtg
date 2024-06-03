@@ -175,7 +175,7 @@ class DynamicForm
                         }
 
                         if(object.#error) {
-                            object.#error(object, response);
+                            object.#error(object, errorData);
                         }
                     } else {
                         console.error(new Error(`The requisition of the Form returned an error!`));

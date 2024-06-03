@@ -30,6 +30,7 @@ class m0001_initial extends Migration
             $table->string('password', 100);
             $table->string('token', 100);
             $table->string('slug', 100);
+            $table->string('avatar_image', 255)->nullable();
             $table->timestamps();
         });
 

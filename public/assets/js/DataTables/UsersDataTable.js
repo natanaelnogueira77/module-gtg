@@ -3,13 +3,13 @@ class UsersDataTable
     #dataTable;
     #filtersForm;
     #modal;
-    #saveUserForm;
+    #saveForm;
 
-    constructor(table, filtersForm, modal, saveUserForm) 
+    constructor(table, filtersForm, modal, saveForm) 
     {
         this.#filtersForm = filtersForm;
         this.#modal = modal;
-        this.#saveUserForm = saveUserForm;
+        this.#saveForm = saveForm;
         this.#setDataTable(table);
     }
     
@@ -31,10 +31,10 @@ class UsersDataTable
                     url: data.action,
                     type: data.method,
                     success: function(response) {
-                        object.#saveUserForm.dynamicForm.setAction(response.update.action);
-                        object.#saveUserForm.dynamicForm.setMethod(response.update.method);
-                        object.#saveUserForm.resetWithUpdatePasswordArea();
-                        object.#saveUserForm.fillFields(response.data);
+                        object.#saveForm.dynamicForm.setAction(response.update.action);
+                        object.#saveForm.dynamicForm.setMethod(response.update.method);
+                        object.#saveForm.resetWithUpdatePasswordArea();
+                        object.#saveForm.fillFields(response.data);
 
                         object.#modal.find('.modal-title').text(data.modalTitle);
                         object.#modal.modal('show');

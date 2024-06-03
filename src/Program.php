@@ -6,7 +6,8 @@ use Exception, PDO;
 use GTG\MVC\Application;
 use GTG\MVC\Database\Drivers\MySQLDriver;
 use Src\Config\AppRouter;
-use Src\Exceptions\{ ApplicationException, ValidationException };
+use Src\Controllers\Controller;
+use Src\Exceptions\{ ApplicationException, RedirectException, ValidationException };
 
 class Program 
 {
@@ -36,19 +37,28 @@ class Program
             self::setRoutes();
             self::$app->run();
         } catch(Exception $e) {
-            if($e instanceof ValidationException) {
-                echo json_encode([
-                    'message' => ['error', $e->getMessage()],
-                    'errors' => $e->getErrors()
-                ]);
-            } elseif($e instanceof ApplicationException) {
-                echo json_encode(['message' => ['error', $e->getMessage()]]);
-            } else {
-                echo json_encode(['message' => ['error', $e->getMessage()]]);
-            }
-            
-            http_response_code($e->getCode());
+            self::handleException($e);
         }
+    }
+
+    private static function handleException(Exception $e): void 
+    {
+        if($e instanceof ValidationException) {
+            echo json_encode([
+                'message' => ['error', $e->getMessage()],
+                'errors' => $e->getErrors()
+            ]);
+        } elseif($e instanceof RedirectException) {
+            self::$app->session->setFlash('error', $e->getMessage());
+            header('Location: ' . $e->getRedirectURL());
+            exit();
+        } elseif($e instanceof ApplicationException) {
+            echo json_encode(['message' => ['error', $e->getMessage()]]);
+        } else {
+            echo json_encode(['message' => ['error', $e->getMessage()]]);
+        }
+        
+        http_response_code(intval($e->getCode()));
     }
 
     private static function setEnvironmentVariables(): void 
@@ -85,7 +95,7 @@ class Program
     private static function setView(): void 
     {
         self::$app->setView('views');
-        self::$app->view->setErrorPagePath('error/index');
+        self::$app->view->setErrorPagePath('pages/error');
     }
 
     private static function setDatabase(): void 
@@ -152,5 +162,32 @@ class Program
         self::setApp();
         self::setDatabase();
         self::$app->database->applySeeders('src/DB/Seeders');
+    }
+
+    public static function executeController(Controller $controller, string $method): void 
+    {
+        self::setEnvironmentVariables();
+        require_once(realpath(dirname(__FILE__) . '/Config/Utils.php'));
+
+        try {
+            self::setApp();
+            self::setRouter();
+            self::setAppData();
+            self::setView();
+            self::setDatabase();
+            self::setSMTP();
+            self::$app->apply();
+        } catch(Exception $e) {
+            echo $e->getMessage();
+            die();
+        }
+
+        try {
+            self::setRoutes();
+            $newController =  new $controller();
+            $newController->$method();
+        } catch(Exception $e) {
+            self::handleException($e);
+        }
     }
 }

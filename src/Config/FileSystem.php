@@ -18,7 +18,6 @@ final class FileSystem
 
     public static function listFiles(string $filepath): array
     {
-        $files = [];
         try {
             $storage = self::getLocalStorage();
             $files = $storage->listFiles($filepath);

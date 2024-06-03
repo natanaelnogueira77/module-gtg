@@ -16,9 +16,6 @@ final class LeftJoin extends Clause
 
     public function build(): string 
     {
-        return $this->operators ? ('LEFT JOIN ' . $this->getTableReferences() . ' ON ' . implode(' AND ', array_map(
-            fn($operator) => $operator->build(), 
-            $this->operators
-        ))) : '';
+        return $this->operators ? ('LEFT JOIN ' . $this->getTableReferences() . ' ON ' . $this->getConditions()) : '';
     }
 }

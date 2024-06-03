@@ -9,7 +9,7 @@ class UserMiddleware extends Middleware
     public function handle(Request $request): bool
     {
         if(!$this->session->getAuth()) {
-            $this->setErrorFlash(_('You must be authenticated in order to access this area!'));
+            $this->setErrorFlash(_('Você precisa estar autenticado para acessar essa área!'));
             $this->redirect('auth.index');
             return false;
         }

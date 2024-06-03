@@ -62,9 +62,24 @@ abstract class Controller extends GTGController
         return $this->getViewHTML("widgets/{$filename}", $data);
     }
 
+    protected function getDataTableHTML(string $filename, ?array $data = []): string
+    {
+        return $this->getWidgetHTML("data-tables/{$filename}", $data);
+    }
+
     protected function getEmailHTML(string $filename, ?array $data = []): string
     {
-        return $this->getViewHTML("emails/{$filename}", $data);
+        return $this->getWidgetHTML("emails/{$filename}", $data);
+    }
+
+    protected function getFormHTML(string $filename, ?array $data = []): string
+    {
+        return $this->getWidgetHTML("forms/{$filename}", $data);
+    }
+
+    protected function getPDFHTML(string $filename, ?array $data = []): string
+    {
+        return $this->getWidgetHTML("pdfs/{$filename}", $data);
     }
 
     protected function renderPage(string $filename, ?array $data = []): void 

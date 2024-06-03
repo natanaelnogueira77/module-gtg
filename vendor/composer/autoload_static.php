@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit7ddf24c22616fa52e0654a4ac941adde
+class ComposerStaticInitf2e7b00e698cb882453bc6dfac32a14c
 {
     public static $prefixLengthsPsr4 = array (
         'S' => 
@@ -42,11 +42,6 @@ class ComposerStaticInit7ddf24c22616fa52e0654a4ac941adde
         'D' => 
         array (
             'Dompdf\\' => 7,
-        ),
-        'C' => 
-        array (
-            'CoffeeCode\\Router\\' => 18,
-            'CoffeeCode\\DataLayer\\' => 21,
         ),
     );
 
@@ -99,14 +94,6 @@ class ComposerStaticInit7ddf24c22616fa52e0654a4ac941adde
         array (
             0 => __DIR__ . '/..' . '/dompdf/dompdf/src',
         ),
-        'CoffeeCode\\Router\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/coffeecode/router/src',
-        ),
-        'CoffeeCode\\DataLayer\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/coffeecode/datalayer/src',
-        ),
     );
 
     public static $classMap = array (
@@ -117,9 +104,9 @@ class ComposerStaticInit7ddf24c22616fa52e0654a4ac941adde
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit7ddf24c22616fa52e0654a4ac941adde::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit7ddf24c22616fa52e0654a4ac941adde::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit7ddf24c22616fa52e0654a4ac941adde::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitf2e7b00e698cb882453bc6dfac32a14c::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitf2e7b00e698cb882453bc6dfac32a14c::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitf2e7b00e698cb882453bc6dfac32a14c::$classMap;
 
         }, null, ClassLoader::class);
     }

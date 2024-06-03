@@ -45,6 +45,7 @@ final class AppRouter
         $this->setNotificationsRoutes();
         $this->setEditAccountRoutes();
         $this->setUsersRoutes();
+
         return $this->app;
     }
 
@@ -105,6 +106,8 @@ final class AppRouter
 
         $this->app->router->group('admin');
         $this->app->router->get('/', 'AdminController:index', 'admin.index', AdminMiddleware::class);
+        $this->app->router->put('/update', 'AdminController:update', 'admin.update', APIAdminMiddleware::class);
+        $this->app->router->delete('/reset', 'AdminController:reset', 'admin.reset', APIAdminMiddleware::class);
         $this->app->router->put('/update-config', 'AdminController:updateConfig', 'admin.updateConfig', APIAdminMiddleware::class);
     }
 
@@ -121,12 +124,8 @@ final class AppRouter
         $this->app->router->namespace('Src\Controllers');
 
         $this->app->router->group('notifications');
-        $this->app->router->patch(
-            '/mark-all-as-read', 
-            'NotificationsController:markAllAsRead', 
-            'notifications.markAllAsRead', 
-            APIUserMiddleware::class
-        );
+        $this->app->router->patch('/mark-all-as-read', 'NotificationsController:markAllAsRead', 'notifications.markAllAsRead', APIUserMiddleware::class);
+        $this->app->router->get('/get-all-unread', 'NotificationsController:getAllUnread', 'notifications.getAllUnread', APIUserMiddleware::class);
     }
 
     private function setEditAccountRoutes(): void 

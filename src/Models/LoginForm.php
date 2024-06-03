@@ -16,10 +16,10 @@ class LoginForm extends Model
     public function rules(): array 
     {
         return [
-            $this->createRule()->required('email')->setMessage(_('The email is required!')),
-            $this->createRule()->email('email')->setMessage(_('The email is invalid!')),
-            $this->createRule()->maxLength('email', 100)->setMessage(sprintf(_('The email must have %s characters or less!'), 100)),
-            $this->createRule()->required('password')->setMessage(_('The password is required!'))
+            $this->createRule()->required('email')->setMessage(_('O email é obrigatório!')),
+            $this->createRule()->email('email')->setMessage(_('O email é invalido!')),
+            $this->createRule()->maxLength('email', 100)->setMessage(sprintf(_('O email deve ter %s caractéres ou menos!'), 100)),
+            $this->createRule()->required('password')->setMessage(_('A senha é obrigatória!'))
         ];
     }
 
@@ -28,7 +28,7 @@ class LoginForm extends Model
         $this->validate();
 
         if(!($user = User::getByEmail($this->email)) || !$user->verifyPassword($this->password)) {
-            throw new ApplicationException(_('The email/password are incorrect!'));
+            throw new ApplicationException(_('O email/senha estão incorretos!'), 422);
         }
 
         return $user;

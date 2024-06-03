@@ -1,19 +1,53 @@
-<?php 
+<?php $this->layout('layouts/main', ['theme' => $theme]); ?>
 
-use Src\Views\Widgets\Sections\ResetPassword as ResetPasswordSection;
+<main class="login-body">
+    <div class="full-background" style="background-image: url('<?= provide('theme')['backgroundImageURL'] ?>')"></div>
+    <div class="login-form mt-5">
+        <div class="logo-login">
+            <a href="#">
+                <img src="<?= provide('theme')['logoIconURL'] ?>" alt="">
+            </a>
+        </div>
 
-$resetPasswordSection = new ResetPasswordSection(
-    formId: 'reset-password-form',
-    formAction: $page->getFormAction(),
-    formMethod: 'post',
-    redirectURL: $page->getRedirectURL(),
-    hasToken: $page->hasToken()
-);
+        <h2><?= _('Redefinir Senha') ?></h2>
 
-$this->layout("layouts/main", ['layout' => $layout]); 
+        <form id="redefine-password-form" class="form-default" action="<?= $formAction ?>" method="post">
+            <input type="hidden" name="redirect" value="<?= $redirectURL ?>">
+            <?php if(!$hasToken): ?>
+            <div class="form-input">
+                <label for="email"><?= _('Email') ?></label>
+                <input type="email" name="email" placeholder="<?= _('Digite seu email') ?>" required>
+                <div class="invalid-feedback"></div>
+            </div>
 
-$this->insert('widgets/sections/reset-password', ['widget' => $resetPasswordSection]);
+            <div class="form-input pt-30">
+                <input type="submit" value="<?= _('Enviar') ?>">
+            </div>
+            <?php else: ?>
+            <div class="form-input">
+                <label for="password"><?= _('Nova Senha') ?></label>
+                <input type="password" name="password" placeholder="<?= _('Digite sua nova senha') ?>" required>
+                <div class="invalid-feedback"></div>
+            </div>
 
-$this->start('scripts'); 
-$this->insert('scripts/sections/reset-password.js', ['widget' => $resetPasswordSection]);
-$this->end();
+            <div class="form-input">
+                <label for="passwordConfirm"><?= _('Confirmar Nova Senha') ?></label>
+                <input type="password" name="passwordConfirm" placeholder="<?= _('Digite novamente a nova senha') ?>" required>
+                <div class="invalid-feedback"></div>
+            </div>
+
+            <div class="form-input pt-30">
+                <input type="submit" value="<?= _('Redefinir') ?>">
+            </div>
+            <?php endif; ?>
+        </form>
+    </div>
+</main>
+
+<?php $this->start('scripts'); ?>
+<script>
+    $(function () {
+        const dynamicForm = App.getDynamicForm($(`#redefine-password-form`)).apply();
+    });
+</script>
+<?php $this->end(); ?>

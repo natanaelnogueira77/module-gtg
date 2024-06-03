@@ -16,9 +16,7 @@ final class LocalStorage
     public function listFiles(string $filepath): array
     {
         if($files = scandir($this->getLocalStoragePath($filepath))) {
-            $files = array_filter($files, function ($e) {
-                return !in_array($e, ['.', '..']);
-            });
+            $files = array_filter($files, fn($e) => !in_array($e, ['.', '..']));
 
             foreach($files as $index => $file) {
                 $files[$index] = [
@@ -29,7 +27,17 @@ final class LocalStorage
             }
         }
 
-        return $files ? $files : [];
+        return $files ?: [];
+    }
+
+    private function getLocalStoragePath(string $relativePath): string 
+    {
+        return dirname(__FILE__, 3) . '/' . self::STORAGE_ROOT . '/' . $relativePath;
+    }
+
+    private function getLocalStorageURL(string $relativePath): string 
+    {
+        return url(self::STORAGE_ROOT . '/' . $relativePath);
     }
 
     public function upload(string $filepath, string $content): ?array 
@@ -43,13 +51,13 @@ final class LocalStorage
         foreach($pathParts as $index => $part) {
             $path .= $part;
             if($path && !$this->createFolder($path)) {
-                throw new Exception(_('Sorry, we were unable to create the path to the file!'));
+                throw new Exception(_('Desculpe, não foi possível criar o caminho para o arquivo!'));
             }
             $path .= '/';
         }
 
         if(!move_uploaded_file($content, $completePath)) {
-            throw new Exception(_('We are sorry, but it appears there was an error uploading the file!'));
+            throw new Exception(_('Lamentamos, mas parece que ocorreu um erro ao enviar o arquivo!'));
         }
 
         return [
@@ -64,9 +72,7 @@ final class LocalStorage
         $files = glob($this->getLocalStoragePath($filepath));
         if(count($files) > 0) {
             foreach($files as $file) {
-                if(is_file($file)) {
-                    unlink($file);
-                }
+                if(is_file($file)) unlink($file);
             }
         }
 
@@ -76,15 +82,5 @@ final class LocalStorage
     public function getLink(string $relativePath): string
     {
         return $this->getLocalStorageURL($relativePath);
-    }
-
-    private function getLocalStorageURL(string $relativePath): string 
-    {
-        return url(self::STORAGE_ROOT . '/' . $relativePath);
-    }
-
-    private function getLocalStoragePath(string $relativePath): string 
-    {
-        return dirname(__FILE__, 3) . '/' . self::STORAGE_ROOT . '/' . $relativePath;
     }
 }

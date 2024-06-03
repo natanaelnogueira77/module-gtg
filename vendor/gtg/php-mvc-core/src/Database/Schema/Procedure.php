@@ -125,18 +125,9 @@ final class Procedure
     public function build(): string 
     {
         if($this->action == 'create') {
-            $sql = "CREATE PROCEDURE `{$this->procedure}`(";
-            if($this->columns) {
-                foreach($this->columns as $column) {
-                    $sql .= $column->build() . ',';
-                }
-                $sql[strlen($sql) - 1] = ')'; 
-            } else {
-                $sql .= ')'; 
-            }
-
-            $sql .= ' BEGIN ' . $this->statement . ' END;';
-            return $sql;
+            return "CREATE PROCEDURE `{$this->procedure}`(" 
+                . ($this->columns ? implode(', ', array_map(fn($column) => $column->build(), $this->columns)) : '') 
+                . ') BEGIN ' . $this->statement . ' END;';
         } elseif($this->action == 'drop') {
             return "DROP PROCEDURE `{$this->procedure}`";
         } elseif($this->action == 'drop_if_exists') {

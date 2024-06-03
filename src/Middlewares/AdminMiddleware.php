@@ -8,11 +8,8 @@ class AdminMiddleware extends Middleware
 {
     public function handle(Request $request): bool
     {
-        $user = $this->session->getAuth();
-        if(!$user || !$user->isAdmin()) {
-            $this->setErrorFlash(
-                _('You must be authenticated as administrator in order to access this area!')
-            );
+        if(!($user = $this->session->getAuth()) || !$user->isAdmin()) {
+            $this->setErrorFlash(_('Você precisa estar autenticado como administrador para acessar essa área!'));
             $this->redirect('auth.index');
             return false;
         }

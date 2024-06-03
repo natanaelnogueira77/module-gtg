@@ -17,11 +17,7 @@ final class Select
         } elseif(is_array($this->columns)) {
             $columnsArray = [];
             foreach($this->columns as $columnName => $alias) {
-                if(is_string($columnName)) {
-                    $columnsArray[] = $columnName . ' AS ' . $alias;
-                } else {
-                    $columnsArray[] = $alias;
-                }
+                $columnsArray[] = is_string($columnName) ? ($columnName . ' AS ' . $alias) : $alias;
             }
 
             $sql .= implode(', ', $columnsArray);

@@ -8,10 +8,9 @@ class APIAdminMiddleware extends Middleware
 {
     public function handle(Request $request): bool
     {
-        $user = $this->session->getAuth();
-        if(!$user || !$user->isAdmin()) {
+        if(!($user = $this->session->getAuth()) || !$user->isAdmin()) {
             $this->writeForbiddenResponse([
-                'message' => ['error', _('You must be authenticated as administrator in order to access this area!')]
+                'message' => ['error', _('Você precisa estar autenticado como administrador para acessar essa área!')]
             ]);
             return false;
         }

@@ -57,15 +57,8 @@ final class Table
     private function addColumn(string $columnName, string $type = '', array $params = []): ColumnDefinition 
     {
         if($this->action == 'alter') {
-            if(isset($this->columnAction) && $this->columnAction != '') {
-                $params['command'] = $this->columnAction;
-            } else {
-                $params['command'] = 'add_column';
-            }
-
-            if($this->columnParams) {
-                $params = array_merge($params, $this->columnParams);
-            }
+            $params['command'] = isset($this->columnAction) && $this->columnAction != '' ? $this->columnAction : 'add_column';
+            if($this->columnParams) $params = array_merge($params, $this->columnParams);
 
             $this->columnAction = '';
             $this->columnParams = [];
@@ -188,15 +181,9 @@ final class Table
     public function build(): string 
     {
         if($this->action == 'create') {
-            return "CREATE TABLE `{$this->table}` (" . implode(',', array_map(
-                fn($column) => $column->build(), 
-                $this->columns
-            )) . ');';
+            return "CREATE TABLE `{$this->table}` (" . implode(',', array_map(fn($column) => $column->build(), $this->columns)) . ');';
         } elseif($this->action == 'alter') {
-            $sql = "ALTER TABLE `{$this->table}` " . implode(',', array_map(
-                fn($column) => $column->build(), 
-                $this->columns
-            )) . ';';
+            return "ALTER TABLE `{$this->table}` " . implode(',', array_map(fn($column) => $column->build(), $this->columns)) . ';';
         } elseif($this->action == 'drop') {
             return "DROP TABLE `{$this->table}`";
         } elseif($this->action == 'drop_if_exists') {

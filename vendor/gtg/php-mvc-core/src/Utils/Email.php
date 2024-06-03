@@ -28,7 +28,8 @@ class Email
         $this->mail->isSMTP();
         $this->mail->isHTML();
         $this->mail->setLanguage('br');
-
+        
+        $this->mail->SMTPDebug = false;
         $this->mail->SMTPAuth = true;
         $this->mail->SMTPSecure = 'ssl';
         $this->mail->CharSet = 'utf-8';

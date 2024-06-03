@@ -63,15 +63,20 @@ abstract class ActiveRecord extends Model
 
     public function columnsValuesToArray(): array 
     {
-        return array_merge([static::primaryKey() => $this->{static::primaryKey()}], $this->attributesToArray());
+        return array_merge(
+            [static::primaryKey() => $this->{static::primaryKey()}], 
+            $this->attributesToArray(), 
+            static::hasTimestamps() ? [
+                static::CREATED_AT_COLUMN_NAME => $this->{static::CREATED_AT_COLUMN_NAME}, 
+                static::UPDATED_AT_COLUMN_NAME => $this->{static::UPDATED_AT_COLUMN_NAME}
+            ] : []
+        );
     }
 
     public function fillAttributes(array $attributes): static 
     {
         foreach($attributes as $attr => $value) {
-            if(in_array($attr, static::attributes())) {
-                $this->{$attr} = $value;
-            }
+            if(in_array($attr, static::attributes())) $this->{$attr} = $value;
         }
 
         return $this;
@@ -98,6 +103,7 @@ abstract class ActiveRecord extends Model
 
         if(static::hasTimestamps()) {
             $attributes[static::CREATED_AT_COLUMN_NAME] = (new DateTime('now'))->format('Y-m-d H:i:s');
+            $attributes[static::UPDATED_AT_COLUMN_NAME] = (new DateTime('now'))->format('Y-m-d H:i:s');
         }
 
         $columns = implode(', ', array_keys($attributes));
@@ -143,9 +149,7 @@ abstract class ActiveRecord extends Model
         $primary = static::primaryKey();
         $id = $this->{$primary};
 
-        if(empty($id)) {
-            return;
-        }
+        if(empty($id)) return;
 
         $this->delete("{$primary} = :id", "id={$id}");
     }
@@ -208,6 +212,7 @@ abstract class ActiveRecord extends Model
             $modelsData[$index] = $model->attributesToArray();
             if($hasTimestamps) {
                 $modelsData[$index][static::CREATED_AT_COLUMN_NAME] = $now;
+                $modelsData[$index][static::UPDATED_AT_COLUMN_NAME] = $now;
             }
         }
 

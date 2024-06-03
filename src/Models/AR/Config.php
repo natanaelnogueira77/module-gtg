@@ -11,6 +11,11 @@ class Config extends ActiveRecord
     public const KEY_LOGO_ICON = 'logo_icon';
     public const KEY_STYLE = 'style';
 
+    private static ?array $logo = null;
+    private static ?array $logoIcon = null;
+    private static ?array $backgroundImage = null;
+    private static ?string $style = null;
+
     public static function tableName(): string 
     {
         return 'config';
@@ -37,8 +42,8 @@ class Config extends ActiveRecord
     public function rules(): array 
     {
         return [
-            $this->createRule()->required('meta')->setMessage(_('The metadata is required!')),
-            $this->createRule()->maxLength('meta', 50)->setMessage(sprintf(_('The metadata must have %s characters or less!'), 50))
+            $this->createRule()->required('meta')->setMessage(_('O mtetadado é obrigatório!')),
+            $this->createRule()->maxLength('meta', 50)->setMessage(sprintf(_('O metadado deve ter %s caractéres ou menos!'), 50))
         ];
     }
 
@@ -56,7 +61,7 @@ class Config extends ActiveRecord
         foreach($models as $model) {
             if(in_array($model->meta, [self::KEY_LOGIN_IMAGE, self::KEY_LOGO, self::KEY_LOGO_ICON])) {
                 $values[$model->meta]['uri'] = $model->value;
-                $values[$model->meta]['url'] = url('public/storage/' . $model->value);
+                $values[$model->meta]['url'] = FileSystem::getLink($model->value);
             } else {
                 $values[$model->meta] = $model->value;
             }
@@ -73,10 +78,7 @@ class Config extends ActiveRecord
         })->fetch(true);
 
         if($configs) {
-            foreach($configs as $config) {
-                $config->value = $configValues[$config->meta];
-            }
-            
+            array_walk($configs, fn($config) => $config->value = $configValues[$config->meta]);
             self::saveMany($configs);
         }
         
@@ -85,11 +87,25 @@ class Config extends ActiveRecord
 
     public static function getLogoURL(): string 
     {
-        return self::getValuesByMetaKeys([self::KEY_LOGO])[self::KEY_LOGO]['url'];
+        self::$logo = self::$logo ?? self::getValuesByMetaKeys([self::KEY_LOGO])[self::KEY_LOGO];
+        return self::$logo['url'];
+    }
+
+    public static function getLogoIconURL(): string 
+    {
+        self::$logoIcon = self::$logoIcon ?? self::getValuesByMetaKeys([self::KEY_LOGO_ICON])[self::KEY_LOGO_ICON];
+        return self::$logoIcon['url'];
     }
 
     public static function getLoginImageURL(): string 
     {
-        return self::getValuesByMetaKeys([self::KEY_LOGIN_IMAGE])[self::KEY_LOGIN_IMAGE]['url'];
+        self::$backgroundImage = self::$backgroundImage ?? self::getValuesByMetaKeys([self::KEY_LOGIN_IMAGE])[self::KEY_LOGIN_IMAGE];
+        return self::$backgroundImage['url'];
+    }
+
+    public static function getStyle(): string 
+    {
+        self::$style = self::$style ?? self::getValuesByMetaKeys([self::KEY_STYLE])[self::KEY_STYLE];
+        return self::$style;
     }
 }

@@ -5,24 +5,23 @@ namespace Src\Controllers;
 use GTG\MVC\Request;
 use Src\Models\{ ForgotPasswordForm, ResetPasswordForm };
 use Src\Models\AR\{ Config, User };
-use Src\Views\LayoutFactory;
-use Src\Views\Pages\ResetPasswordPage;
+use Src\Utils\ThemeUtils;
 
 class ResetPasswordController extends Controller
 {
     public function index(Request $request): void
     {
         $this->renderPage('reset-password', [
-            'layout' => LayoutFactory::createMain(
-                sprintf(_('Reset Password | %s'), $this->appData['app_name'])
+            'theme' => ThemeUtils::createDefault(
+                $this->router, 
+                $this->session, 
+                sprintf(_('Redefinir Senha | %s'), $this->appData['app_name'])
             ),
-            'page' => new ResetPasswordPage(
-                formAction: $this->router->route(
-                    'resetPassword.index', 
-                    $request->get('redirect') ? ['redirect' => $request->get('redirect')] : []
-                ),
-                redirectURL: $request->get('redirect')
-            )
+            'formAction' => $this->router->route(
+                'resetPassword.index', 
+                $request->get('redirect') ? ['redirect' => $request->get('redirect')] : []
+            ),
+            'redirectURL' => $request->get('redirect')
         ]);
     }
 
@@ -33,39 +32,38 @@ class ResetPasswordController extends Controller
         $user = $forgotPasswordForm->getUser();
 
         $email = $this->createEmail();
-        $email->add(_('Reset Your Password'), $this->getEmailHTML('reset-password', [
+        $email->add(_('Redefina Sua Senha'), $this->getEmailHTML('reset-password', [
             'user' => $user,
-            'logo' => Config::getLogoURL(),
             'redirect' => $request->get('redirect')
         ]), $user->name, $user->email);
         $email->send();
 
         $this->writeSuccessResponse([
-            'message' => ['success', sprintf(_("An email was sent to %s. Check it in order to reset your password."), $user->email)]
+            'message' => ['success', sprintf(_("Um email foi enviado para %s. Verifique para redefinir sua senha."), $user->email)]
         ]);
     }
 
     public function reset(Request $request): void
     {
         if(!$user = User::getByToken($request->get('token'))) {
-            $this->setErrorFlash(_('The token is invalid!'));
+            $this->setErrorFlash(_('A chave de verificação é inválida!'));
             $this->redirect('home.index');
         }
 
         $this->renderPage('reset-password', [
-            'layout' => LayoutFactory::createMain(
-                sprintf(_('Reset Password | %s'), $this->appData['app_name'])
+            'theme' => ThemeUtils::createDefault(
+                $this->router, 
+                $this->session, 
+                sprintf(_('Redefinir Senha | %s'), $this->appData['app_name'])
             ),
-            'page' => new ResetPasswordPage(
-                formAction: $this->router->route(
-                    'resetPassword.verify', 
-                    array_merge([
-                        'token' => $user->token
-                    ], $request->get('redirect') ? ['redirect' => $request->get('redirect')] : [])
-                ),
-                redirectURL: $request->get('redirect'),
-                hasToken: true
-            )
+            'formAction' => $this->router->route(
+                'resetPassword.verify', 
+                array_merge([
+                    'token' => $user->token
+                ], $request->get('redirect') ? ['redirect' => $request->get('redirect')] : [])
+            ),
+            'redirectURL' => $request->get('redirect'),
+            'hasToken' => true
         ]);
     }
 
@@ -73,7 +71,7 @@ class ResetPasswordController extends Controller
     {
         if(!$user = User::getByToken($request->get('token'))) {
             $this->writeForbiddenResponse([
-                'message' => ['error', _('The token is invalid!')]
+                'message' => ['error', _('A chave de verificação é inválida!')]
             ]);
             return;
         }
@@ -87,7 +85,7 @@ class ResetPasswordController extends Controller
         $user->save();
 
         $this->session->setAuth($user);
-        $this->setSuccessFlash(_('Your password was reseted successfully!'));
+        $this->setSuccessFlash(_('Sua senha foi redefinida com sucesso!'));
 
         $this->writeSuccessResponse([
             'redirectURL' => $request->get('redirect') ? url($request->get('redirect')) : $this->router->route('home.index')

@@ -136,13 +136,8 @@ class Statement
             $stmt = $this->database->getConnection()->prepare($this->getQuery());
             $stmt->execute($this->params);
 
-            if(!$stmt->rowCount()) {
-                return null;
-            }
-
-            if($all) {
-                return $stmt->fetchAll(PDO::FETCH_CLASS, $this->className);
-            }
+            if(!$stmt->rowCount()) return null;
+            if($all) return $stmt->fetchAll(PDO::FETCH_CLASS, $this->className);
 
             return $stmt->fetchObject($this->className);
         } catch(PDOException $e) {

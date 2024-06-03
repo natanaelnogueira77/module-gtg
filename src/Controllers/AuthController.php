@@ -3,23 +3,20 @@
 namespace Src\Controllers;
 
 use GTG\MVC\Request;
-use Src\Models\AR\{Config, User};
 use Src\Models\LoginForm;
-use Src\Views\LayoutFactory;
-use Src\Views\Pages\AuthPage;
+use Src\Utils\ThemeUtils;
 
 class AuthController extends Controller
 {
     public function index(Request $request): void
     {
         $this->renderPage('auth', [
-            'layout' => LayoutFactory::createMain(
-                sprintf(_('Login | %s'), $this->appData['app_name'])
+            'theme' => ThemeUtils::createDefault(
+                $this->router, 
+                $this->session, 
+                sprintf(_('Entrar | %s'), $this->appData['app_name'])
             ),
-            'page' => new AuthPage(
-                loginImageURL: Config::getLoginImageURL(),
-                redirectURL: $request->get('redirect')
-            )
+            'redirectURL' => $request->get('redirect')
         ]);
     }
 
@@ -32,7 +29,7 @@ class AuthController extends Controller
         $user = $loginForm->login();
         $this->session->setAuth($user);
 
-        $this->setSuccessFlash(sprintf(_("Welcome, %s!"), $user->name));
+        $this->setSuccessFlash(sprintf(_("Seja bem-vindo(a), %s!"), $user->name));
         $this->writeSuccessResponse([
             'redirectURL' => isset($params['redirect']) 
                 ? url($params['redirect']) 

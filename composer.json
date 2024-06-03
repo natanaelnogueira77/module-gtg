@@ -1,12 +1,10 @@
 {
-    "name": "gtg/mvc-example",
-    "description": "GTG Project Structure Example",
+    "name": "gtg/example",
+    "description": "Project Example",
     "type": "project",
     "require": {
-        "ext-gd": "*",
-        "ext-exif": "*",
-        "google/recaptcha": "^1.3",
-        "gtg/php-mvc-core": "dev-main"
+        "gtg/php-mvc-core": "^2.0",
+        "google/recaptcha": "^1.3"
     },
     "license": "MIT",
     "autoload": {

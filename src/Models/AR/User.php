@@ -3,6 +3,7 @@
 namespace Src\Models\AR;
 
 use DateTime, stdClass;
+use Src\Config\FileSystem;
 use Src\DB\Statement;
 use Src\Exceptions\ApplicationException;
 use Src\Models\Lists\UsersList;
@@ -30,7 +31,8 @@ class User extends UserModel
             'email', 
             'password', 
             'token', 
-            'slug'
+            'slug',
+            'avatar_image'
         ];
     }
         
@@ -42,40 +44,37 @@ class User extends UserModel
     public function rules(): array 
     {
         return [
-            $this->createRule()->required('user_type')->setMessage(_('The user permission is required!')),
-            $this->createRule()->in('user_type', array_keys(self::getUserTypes()))->setMessage(_('The user permission is invalid!')),
-            $this->createRule()->required('name')->setMessage(_('The name is required!')),
-            $this->createRule()->maxLength('name', 100)->setMessage(sprintf(_('The name must have %s characters or less!'), 100)),
-            $this->createRule()->required('email')->setMessage(_('The email is required!')),
-            $this->createRule()->email('email')->setMessage(_('The email is invalid!')),
-            $this->createRule()->maxLength('email', 100)->setMessage(sprintf(_('The email must have %s characters or less!'), 100)),
-            $this->createRule()->required('password')->setMessage(_('The password is required!')),
-            $this->createRule()->minLength('password', 5)->setMessage(sprintf(_('The password must have %s characters or less!'), 5))
+            $this->createRule()->required('user_type')->setMessage(_('O nível de permissão é obrigatório!')),
+            $this->createRule()->in('user_type', array_keys(self::getUserTypes()))->setMessage(_('O nível de permissão é inválido!')),
+            $this->createRule()->required('name')->setMessage(_('O nome é obrigatório!')),
+            $this->createRule()->maxLength('name', 100)->setMessage(sprintf(_('O nome deve ter %s caractéres ou menos!'), 100)),
+            $this->createRule()->required('email')->setMessage(_('O email é obrigatório!')),
+            $this->createRule()->email('email')->setMessage(_('O email é inválido!')),
+            $this->createRule()->maxLength('email', 100)->setMessage(sprintf(_('O email deve ter %s caractéres ou menos!'), 100)),
+            $this->createRule()->required('password')->setMessage(_('A senha é obrigatória!')),
+            $this->createRule()->minLength('password', 5)->setMessage(sprintf(_('A senha deve ter %s caractéres ou menos!'), 5)), 
+            $this->createRule()->raw(function($model) {
+                if($model->avatar_image && !in_array(pathinfo($model->avatar_image, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png', 'gif'])) {
+                    $model->addError('avatar_image', _('Essa imagem é inválida!'));
+                }
+            })
         ];
     }
 
     public static function getUserTypes(): array 
     {
         return [
-            self::UT_ADMIN => _('Admin'),
-            self::UT_STANDARD => _('User')
+            self::UT_ADMIN => _('Administrador'),
+            self::UT_STANDARD => _('Usuário')
         ];
     }
 
     public function getUserType(): ?string 
     {
-        return isset(self::getUserTypes()[$this->user_type]) 
-            ? self::getUserTypes()[$this->user_type] 
-            : null;
+        return self::getUserTypes()[$this->user_type] ?: null;
     }
 
-    public function save(): void 
-    {
-        $this->transformBeforeSaving();
-        parent::save();
-    }
-
-    private function transformBeforeSaving(): self 
+    protected function transformBeforeSaving(): static 
     {
         $this->slug = slugify($this->name);
         $this->email = strtolower($this->email);
@@ -84,29 +83,17 @@ class User extends UserModel
         if(!password_get_info($this->password)['algo']) {
             $this->password = password_hash($this->password, PASSWORD_DEFAULT);
         }
-        return $this;
-    }
+        $this->avatar_image = $this->avatar_image ?: null;
 
-    public static function saveMany(array $models): array 
-    {
-        foreach($models as $model) {
-            $model->transformBeforeSaving();
-        }
-        return parent::saveMany($models);
+        return parent::transformBeforeSaving();
     }
 
     public function destroy(): void 
     {
         if($this->isAdmin()) {
-            throw new ApplicationException(
-                _('You cannot delete the Admin!'), 
-                403
-            );
+            throw new ApplicationException(_('Você não pode excluir o administrador!'), 403);
         } elseif(UserMeta::get()->filters(fn($where) => $where->equal('usu_id')->assignment($this->id))->count()) {
-            throw new ApplicationException(
-                _('You cannot delete an user with stored data!'), 
-                403
-            );
+            throw new ApplicationException(_('Você não pode excluir um usuário com dados armazenados!'), 403);
         }
 
         parent::destroy();
@@ -115,6 +102,11 @@ class User extends UserModel
     public function isAdmin(): bool
     {
         return $this->user_type == self::UT_ADMIN;
+    }
+
+    public function isStandard(): bool
+    {
+        return $this->user_type == self::UT_STANDARD;
     }
 
     public static function getByEmail(string $email, string $columns = '*'): ?self 
@@ -163,9 +155,19 @@ class User extends UserModel
         return new DateTime($this->updated_at);
     }
 
+    public function getAvatarImageURI(): ?string 
+    {
+        return $this->avatar_image;
+    }
+
+    public function getAvatarImageURL(): ?string 
+    {
+        return $this->avatar_image ? FileSystem::getLink($this->avatar_image) : null;
+    }
+
     public function getAvatarURL(): string 
     {
-        return 'https://www.gravatar.com/avatar/' . md5(strtolower(trim($this->email)));
+        return $this->getAvatarImageURL() ?? ('https://www.gravatar.com/avatar/' . md5(strtolower(trim($this->email))));
     }
 
     public function getLastResetPasswordRequest(): ?string 
@@ -184,14 +186,14 @@ class User extends UserModel
         })->fetch(false);
 
         if(!$userMeta) {
-            $userMeta = (new UserMeta())->loadData([
+            $userMeta = (new UserMeta())->fillAttributes([
                 'usu_id' => $userId,
                 'meta' => UserMeta::KEY_LAST_PASS_REQUEST
             ]);
         }
 
         $userMeta->value = $time;
-        return $userMeta->save();
+        $userMeta->save();
     }
 
     public static function getList(UsersList $list): ?array

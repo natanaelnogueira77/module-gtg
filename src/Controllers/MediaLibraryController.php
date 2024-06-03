@@ -3,7 +3,8 @@
 namespace Src\Controllers;
 
 use GTG\MVC\Request;
-use Src\Config\{ FileSystem, Storage };
+use Src\Config\FileSystem;
+use Src\Utils\StorageUtils;
 
 class MediaLibraryController extends Controller
 {
@@ -40,15 +41,13 @@ class MediaLibraryController extends Controller
 
     private function getFiles(): array 
     {
-        return FileSystem::listFiles(Storage::getStorageFolder($this->session->getAuth()));
+        return FileSystem::listFiles(StorageUtils::getStorageFolder($this->session));
     }
 
     public function addFile(Request $request): void
     {
         if(!isset($_FILES)) {
-            $this->writeUnprocessableEntityResponse([
-                'message' => ['error', _('No file was found!')]
-            ]);
+            $this->writeUnprocessableEntityResponse(['message' => ['error', _('Nenhum arquivo foi encontrado!')]]);
             return;
         }
 
@@ -68,12 +67,12 @@ class MediaLibraryController extends Controller
         }
 
         $file = FileSystem::uploadFile(
-            Storage::getStorageFolder($this->session->getAuth()) . '/' . $filename, 
+            StorageUtils::getStorageFolder($this->session) . '/' . $filename, 
             $file['tmp_name']
         );
 
         $this->writeSuccessResponse([
-            'message' => ['success', _('The file was successfully loaded!')],
+            'message' => ['success', _('O arquivo foi carregado com sucesso!')],
             'file' => $file
         ]);
     }
@@ -86,18 +85,11 @@ class MediaLibraryController extends Controller
     public function deleteFile(Request $request): void 
     {
         if(!$request->get('name')) {
-            $this->writeUnprocessableEntity([
-                'message' => ['error', _('No filename was declared!')]
-            ]);
+            $this->writeUnprocessableEntity(['message' => ['error', _('Nenhum nome de arquivo foi declarado!')]]);
             return;
         }
-        
-        FileSystem::deleteFile(
-            Storage::getStorageFolder($this->session->getAuth()) . '/' . $request->get('name')
-        );
 
-        $this->writeSuccessResponse([
-            'message' => ['success', _('The file was successfully removed.')]
-        ]);
+        FileSystem::deleteFile(StorageUtils::getStorageFolder($this->session) . '/' . $request->get('name'));
+        $this->writeSuccessResponse(['message' => ['success', _('O arquivo foi excluído com sucesso.')]]);
     }
 }

@@ -1,13 +1,9 @@
 <?php 
-
-use Src\Views\Components\LayoutTitle;
-
-$this->layout('layouts/main', ['layout' => $layout]);
-$this->insert('components/layout-title', [
-    'component' => new LayoutTitle(
-        title: _('User Dashboard'),
-        subtitle: _('Welcome!'),
-        icon: 'icofont-user',
-        iconColor: 'text-primary'
-    )
-]);
+    $this->layout('layouts/dashboard', ['theme' => $theme]);
+    $this->insert('widgets/layouts/dashboard/title', [
+        'title' => _('Painel Principal'),
+        'subtitle' => sprintf(_('Seja bem-vindo(a), %s!'), $session->getAuth()->name),
+        'icon' => 'pe-7s-home',
+        'iconColor' => 'bg-malibu-beach'
+    ]);
+?>

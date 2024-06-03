@@ -15,9 +15,9 @@ class ForgotPasswordForm extends Model
     public function rules(): array 
     {
         return [
-            $this->createRule()->required('email')->setMessage(_('The email is required!')),
-            $this->createRule()->email('email')->setMessage(_('The email is invalid!')),
-            $this->createRule()->maxLength('email', 100)->setMessage(sprintf(_('The email must have %s characters or less!'), 100))
+            $this->createRule()->required('email')->setMessage(_('O email é obrigatório!')),
+            $this->createRule()->email('email')->setMessage(_('O email é invalido!')),
+            $this->createRule()->maxLength('email', 100)->setMessage(sprintf(_('O email deve ter %s caractéres ou menos!'), 100))
         ];
     }
 
@@ -27,14 +27,14 @@ class ForgotPasswordForm extends Model
 
         if(!$user = User::getByEmail($this->email)) {
             throw new ValidationException([
-                'email' => _('This email was not found!'),
-                _('This email was not found!')
+                'email' => _('Este email não foi encontrado!'),
+                _('Este email não foi encontrado!')
             ]);
         } elseif($lastRequest = $user->getLastResetPasswordRequest()) {
             if(strtotime($lastRequest) >= strtotime('-1 hour')) {
                 throw new ValidationException([
-                    'email' => _('A request was already sent to this email! Wait 1 hour to send another.'),
-                    _('A request was already sent to this email! Wait 1 hour to send another.')
+                    'email' => _('Uma solicitação já foi enviada para este email! Espere 1 hora para enviar outra.'),
+                    _('Uma solicitação já foi enviada para este email! Espere 1 hora para enviar outra.')
                 ]);
             }
         }

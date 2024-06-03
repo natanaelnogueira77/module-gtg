@@ -1,6 +1,6 @@
 # Read me
 
-An project structure example using the GTG MVC core. Can be used to start off a new project.
+Project example using GTG PHP MVC Framework Core.
 
 ## Configuration
 

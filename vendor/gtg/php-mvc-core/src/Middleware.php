@@ -17,6 +17,11 @@ abstract class Middleware
         return $this->router?->route($route, $params);
     }
 
+    protected function createResponse(array $data, int $statusCode = 200): Response 
+    {
+        return new Response($data, $statusCode);
+    }
+
     protected function redirect(string $routeKey, array $params = []): void 
     {
         header("Location: " . $this->getRoute($routeKey, $params));
