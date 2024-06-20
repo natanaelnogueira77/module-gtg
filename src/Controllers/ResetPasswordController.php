@@ -1,28 +1,16 @@
 <?php 
 
-namespace Src\Controllers;
+namespace Controllers;
 
-use GTG\MVC\Request;
-use Src\Models\{ ForgotPasswordForm, ResetPasswordForm };
-use Src\Models\AR\{ Config, User };
-use Src\Utils\ThemeUtils;
+use GTG\MVC\{ Request, Utils\Email };
+use Models\{ AR\Config, AR\User, ForgotPasswordForm, ResetPasswordForm };
+use Views\{ Components\Emails\ResetPasswordEmail, Pages\ResetPasswordPage };
 
 class ResetPasswordController extends Controller
 {
     public function index(Request $request): void
     {
-        $this->renderPage('reset-password', [
-            'theme' => ThemeUtils::createDefault(
-                $this->router, 
-                $this->session, 
-                sprintf(_('Redefinir Senha | %s'), $this->appData['app_name'])
-            ),
-            'formAction' => $this->router->route(
-                'resetPassword.index', 
-                $request->get('redirect') ? ['redirect' => $request->get('redirect')] : []
-            ),
-            'redirectURL' => $request->get('redirect')
-        ]);
+        echo new ResetPasswordPage(request: $request);
     }
 
     public function email(Request $request): void 
@@ -31,15 +19,16 @@ class ResetPasswordController extends Controller
         $forgotPasswordForm->email = $request->get('email');
         $user = $forgotPasswordForm->getUser();
 
-        $email = $this->createEmail();
-        $email->add(_('Redefina Sua Senha'), $this->getEmailHTML('reset-password', [
-            'user' => $user,
-            'redirect' => $request->get('redirect')
-        ]), $user->name, $user->email);
+        $email = new Email();
+        $email->add(_('Redefina Sua Senha'), new ResetPasswordEmail(
+            user: $user, 
+            siteUrl: url(),
+            redirectUrl: $request->get('redirect')
+        ), $user->name, $user->email);
         $email->send();
 
         $this->writeSuccessResponse([
-            'message' => ['success', sprintf(_("Um email foi enviado para %s. Verifique para redefinir sua senha."), $user->email)]
+            'message' => ['success', sprintf(_('Um email foi enviado para %s. Verifique para redefinir sua senha.'), $user->email)]
         ]);
     }
 
@@ -50,21 +39,12 @@ class ResetPasswordController extends Controller
             $this->redirect('home.index');
         }
 
-        $this->renderPage('reset-password', [
-            'theme' => ThemeUtils::createDefault(
-                $this->router, 
-                $this->session, 
-                sprintf(_('Redefinir Senha | %s'), $this->appData['app_name'])
-            ),
-            'formAction' => $this->router->route(
-                'resetPassword.verify', 
-                array_merge([
-                    'token' => $user->token
-                ], $request->get('redirect') ? ['redirect' => $request->get('redirect')] : [])
-            ),
-            'redirectURL' => $request->get('redirect'),
-            'hasToken' => true
-        ]);
+        echo new ResetPasswordPage(
+            appData: $this->appData,
+            router: $this->router, 
+            request: $request, 
+            token: $user->token
+        );
     }
 
     public function verify(Request $request): void 

@@ -1,4 +1,6 @@
-class UsersDataTable
+import App from '../Utils/App.js';
+
+export default class UsersDataTable
 {
     #dataTable;
     #filtersForm;
@@ -25,7 +27,7 @@ class UsersDataTable
         this.#dataTable = App.getDataTable(table).setFiltersForm(object.#filtersForm).setAjaxURL(
             table.data('action')
         ).afterAjax(function() {
-            this.container.find(`[dt-event='edit']`).click(function () {
+            this.container.find(`[dt-event='edit']`).click(function() {
                 const data = $(this).data();
                 App.ajax({
                     url: data.action,
@@ -42,7 +44,7 @@ class UsersDataTable
                 });
             });
             
-            this.container.find(`[dt-event='delete']`).click(function () {
+            this.container.find(`[dt-event='delete']`).click(function() {
                 if(confirm($(this).data('confirmMessage'))) {
                     App.ajax({
                         url: $(this).data('action'),

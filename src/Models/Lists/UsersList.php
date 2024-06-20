@@ -1,6 +1,6 @@
 <?php 
 
-namespace Src\Models\Lists;
+namespace Models\Lists;
 
 class UsersList extends ActiveRecordList 
 {

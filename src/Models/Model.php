@@ -1,9 +1,9 @@
 <?php
 
-namespace Src\Models;
+namespace Models;
 
 use GTG\MVC\Model as GTGModel;
-use Src\Exceptions\ValidationException;
+use Exceptions\ValidationException;
 
 abstract class Model extends GTGModel 
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Src\Models\AR;
+namespace Models\AR;
 
 use GTG\MVC\Database\ActiveRecord as GTGActiveRecord;
-use Src\Models\Lists\ActiveRecordList;
-use Src\Exceptions\{ ApplicationException, ValidationException };
+use Models\Lists\ActiveRecordList;
+use Exceptions\{ ApplicationException, ValidationException };
 
 abstract class ActiveRecord extends GTGActiveRecord
 {

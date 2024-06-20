@@ -1,4 +1,6 @@
-class MediaLibrary 
+import App from './App.js';
+
+export default class MediaLibrary 
 {
     static #addFileRoute;
     static #removeFileRoute;

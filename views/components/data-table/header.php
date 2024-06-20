@@ -1,0 +1,1 @@
+<thead><?= $view->getHeads() ?></thead>

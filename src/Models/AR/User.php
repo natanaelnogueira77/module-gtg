@@ -1,12 +1,12 @@
 <?php 
 
-namespace Src\Models\AR;
+namespace Models\AR;
 
 use DateTime, stdClass;
-use Src\Config\FileSystem;
-use Src\DB\Statement;
-use Src\Exceptions\ApplicationException;
-use Src\Models\Lists\UsersList;
+use Config\FileSystem;
+use Database\Statement;
+use Exceptions\ApplicationException;
+use Models\Lists\UsersList;
 
 class User extends UserModel 
 {

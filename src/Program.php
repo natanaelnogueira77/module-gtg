@@ -1,13 +1,10 @@
 <?php 
 
-namespace Src;
-
-use Exception, PDO;
 use GTG\MVC\Application;
 use GTG\MVC\Database\Drivers\MySQLDriver;
-use Src\Config\AppRouter;
-use Src\Controllers\Controller;
-use Src\Exceptions\{ ApplicationException, RedirectException, ValidationException };
+use Config\AppRouter;
+use Controllers\Controller;
+use Exceptions\{ ApplicationException, RedirectException, ValidationException };
 
 class Program 
 {
@@ -34,7 +31,6 @@ class Program
         }
 
         try {
-            self::setRoutes();
             self::$app->run();
         } catch(Exception $e) {
             self::handleException($e);
@@ -68,12 +64,17 @@ class Program
 
     private static function setApp(): void 
     {
-        self::$app = new Application(dirname(__DIR__));
+        self::$app = new Application(dirname(__DIR__), self::getProjectUrl());
+    }
+
+    public static function getProjectUrl(): string 
+    {
+        return "{$_SERVER['REQUEST_SCHEME']}://{$_SERVER['SERVER_NAME']}" . str_replace('/public/index.php', '', $_SERVER['SCRIPT_NAME']);
     }
 
     private static function setRouter(): void 
     {
-        self::$app->setRouter(self::$environment['app_url']);
+        self::$app->setRouter(fn($router) => AppRouter::getInstance($router)->addRoutes());
     }
 
     private static function setAppData(): void 
@@ -94,8 +95,7 @@ class Program
 
     private static function setView(): void 
     {
-        self::$app->setView('views');
-        self::$app->view->setErrorPagePath('pages/error');
+        self::$app->setView('views', 'error');
     }
 
     private static function setDatabase(): void 
@@ -127,11 +127,6 @@ class Program
         );
     }
 
-    private static function setRoutes(): void 
-    {
-        self::$app = AppRouter::getInstance(self::$app)->setRoutes();
-    }
-
     public static function getEnvironmentVariables(): ?array 
     {
         return self::$environment;
@@ -143,7 +138,7 @@ class Program
         require_once(realpath(dirname(__FILE__) . '/Config/Utils.php'));
         self::setApp();
         self::setDatabase();
-        self::$app->database->applyMigrations('src/DB/Migrations', $numberOfMigrations);
+        self::$app->database->applyMigrations('src/Database/Migrations', 'Database\Migrations', $numberOfMigrations);
     }
 
     public static function reverseMigrations(?int $numberOfMigrations = null): void 
@@ -152,7 +147,7 @@ class Program
         require_once(realpath(dirname(__FILE__) . '/Config/Utils.php'));
         self::setApp();
         self::setDatabase();
-        self::$app->database->reverseMigrations('src/DB/Migrations', $numberOfMigrations);
+        self::$app->database->reverseMigrations('src/Database/Migrations', 'Database\Migrations', $numberOfMigrations);
     }
 
     public static function applySeeders(): void 
@@ -161,7 +156,7 @@ class Program
         require_once(realpath(dirname(__FILE__) . '/Config/Utils.php'));
         self::setApp();
         self::setDatabase();
-        self::$app->database->applySeeders('src/DB/Seeders');
+        self::$app->database->applySeeders('src/Database/Seeders', 'Database\Seeders');
     }
 
     public static function executeController(Controller $controller, string $method): void 
@@ -183,8 +178,8 @@ class Program
         }
 
         try {
-            self::setRoutes();
-            $newController =  new $controller();
+            self::setRouter();
+            $newController = new $controller();
             $newController->$method();
         } catch(Exception $e) {
             self::handleException($e);

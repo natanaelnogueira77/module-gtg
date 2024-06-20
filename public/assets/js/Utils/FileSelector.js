@@ -1,4 +1,4 @@
-class FileSelector 
+export default class FileSelector 
 {
     #currentId = 0;
     #filepaths = null;
@@ -82,31 +82,31 @@ class FileSelector
         return this;
     }
 
-    onAdd(func = function () {}) 
+    onAdd(func = function() {}) 
     {
         this.#onAdd = func;
         return this;
     }
 
-    onAddSuccess(func = function () {}) 
+    onAddSuccess(func = function() {}) 
     {
         this.#onAddSuccess = func;
         return this;
     }
 
-    onEdit(func = function () {}) 
+    onEdit(func = function() {}) 
     {
         this.#onEdit = func;
         return this;
     }
 
-    onEditSuccess(func = function () {}) 
+    onEditSuccess(func = function() {}) 
     {
         this.#onEditSuccess = func;
         return this;
     }
 
-    onRemove(func = function () {}) 
+    onRemove(func = function() {}) 
     {
         this.#onRemove = func;
         return this;
@@ -207,11 +207,11 @@ class FileSelector
             </div>
         `);
 
-        elem.click(function () {
+        elem.click(function() {
             if(object.#onAdd) {
                 object.#onAdd(object, elem, object.#getNextId());
             } else {
-                object.#mediaLibrary.onSuccess(function (uri, url) {
+                object.#mediaLibrary.onSuccess(function(uri, url) {
                     if(object.#onAddSuccess) {
                         object.#onAddSuccess(object, elem, uri, url);
                     } else {
@@ -230,11 +230,11 @@ class FileSelector
         const elem = object.#getFileElement(fileURI, fileURL);
 
         if(object.#isMultiple) {
-            elem.find("[data-act=edit]").click(function () {
+            elem.find("[data-act=edit]").click(function() {
                 if(object.#onEdit) {
                     object.#onEdit(object, elem, id);
                 } else {
-                    object.#mediaLibrary.onSuccess(function (uri, url) {
+                    object.#mediaLibrary.onSuccess(function(uri, url) {
                         if(object.#onEditSuccess) {
                             object.#onEditSuccess(object, elem, id, uri, url);
                         } else {
@@ -244,7 +244,7 @@ class FileSelector
                 }
             });
 
-            elem.find("[data-act=remove]").click(function () {
+            elem.find("[data-act=remove]").click(function() {
                 if(object.#onRemove) {
                     object.#onRemove(object, elem, id, fileURI, fileURL);
                 } else {
@@ -254,11 +254,11 @@ class FileSelector
 
             elem.insertBefore(object.#listElem.children(":first").children(":last"));
         } else {
-            elem.find("[data-act=edit]").click(function () {
+            elem.find("[data-act=edit]").click(function() {
                 if(object.#onEdit) {
                     object.#onEdit(object, elem, id);
                 } else {
-                    object.#mediaLibrary.onSuccess(function (uri, url) {
+                    object.#mediaLibrary.onSuccess(function(uri, url) {
                         if(object.#onEditSuccess) {
                             object.#onEditSuccess(object, elem, id, uri, url);
                         } else {
@@ -268,7 +268,7 @@ class FileSelector
                 }
             });
 
-            elem.find("[data-act=remove]").click(function () {
+            elem.find("[data-act=remove]").click(function() {
                 if(object.#onRemove) {
                     object.#onRemove(object, elem, id, fileURI, fileURL);
                 } else {
@@ -328,10 +328,10 @@ class FileSelector
 
     #setFilePreviewEvents(filePreviewElement) 
     {
-        filePreviewElement.mouseover(function () {
+        filePreviewElement.mouseover(function() {
             $(this).find('button').show();
         });
-        filePreviewElement.mouseleave(function () {
+        filePreviewElement.mouseleave(function() {
             $(this).find('button').hide();
         });
 

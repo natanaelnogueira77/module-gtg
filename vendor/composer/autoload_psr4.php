@@ -7,9 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Svg\\' => array($vendorDir . '/phenx/php-svg-lib/src/Svg'),
-    'Src\\' => array($baseDir . '/src'),
     'Sabberworm\\CSS\\' => array($vendorDir . '/sabberworm/php-css-parser/src'),
-    'ReCaptcha\\' => array($vendorDir . '/google/recaptcha/src/ReCaptcha'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/src'),
     'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
@@ -18,4 +16,5 @@ return array(
     'GTG\\MVC\\' => array($vendorDir . '/gtg/php-mvc-core/src'),
     'FontLib\\' => array($vendorDir . '/phenx/php-font-lib/src/FontLib'),
     'Dompdf\\' => array($vendorDir . '/dompdf/dompdf/src'),
+    '' => array($baseDir . '/src'),
 );

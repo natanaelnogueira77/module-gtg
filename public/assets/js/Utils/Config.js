@@ -1,10 +1,9 @@
-$(function() {
-    $(`[data-bs-toggle="tooltip"]`).tooltip();
-    $('.table-responsive').on('show.bs.dropdown', function () {
-        $('.table-responsive').css( "overflow", "inherit" );
-   });
-   
-   $('.table-responsive').on('hide.bs.dropdown', function () {
-        $('.table-responsive').css( "overflow", "auto" );
-   })
-});
+const LIBRARY = (function() {
+     var _args = {};
+     return {
+         set: (key, value) => {
+             _args[key] = value;
+         }, 
+         get: (key) => _args[key]
+     };
+})();

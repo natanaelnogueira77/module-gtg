@@ -1,6 +1,6 @@
 <?php 
 
-namespace Src\Middlewares;
+namespace Middlewares;
 
 use GTG\MVC\Middleware as GTGMiddleware;
 

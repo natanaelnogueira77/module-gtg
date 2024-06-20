@@ -1,6 +1,6 @@
 <?php 
 
-namespace Src\Models\AR; 
+namespace Models\AR; 
 
 abstract class UserModel extends ActiveRecord 
 {}

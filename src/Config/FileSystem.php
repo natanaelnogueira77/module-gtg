@@ -1,9 +1,9 @@
 <?php
 
-namespace Src\Config;
+namespace Config;
 
 use Exception;
-use Src\Exceptions\ApplicationException;
+use Exceptions\ApplicationException;
 
 final class FileSystem 
 {

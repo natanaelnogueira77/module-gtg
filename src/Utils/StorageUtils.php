@@ -1,9 +1,9 @@
 <?php 
 
-namespace Src\Utils;
+namespace Utils;
 
 use GTG\MVC\Session;
-use Src\Models\AR\User;
+use Models\AR\User;
 
 final class StorageUtils 
 {

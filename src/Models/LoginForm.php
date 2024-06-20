@@ -1,9 +1,9 @@
 <?php
 
-namespace Src\Models;
+namespace Models;
 
-use Src\Exceptions\ApplicationException;
-use Src\Models\AR\User;
+use Exceptions\ApplicationException;
+use Models\AR\User;
 
 class LoginForm extends Model 
 {

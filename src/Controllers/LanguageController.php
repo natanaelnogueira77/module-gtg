@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Controllers;
+namespace Controllers;
 
 use GTG\MVC\Request;
 

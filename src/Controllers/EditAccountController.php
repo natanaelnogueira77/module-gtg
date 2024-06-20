@@ -1,22 +1,17 @@
 <?php 
 
-namespace Src\Controllers;
+namespace Controllers;
 
 use GTG\MVC\Request;
-use Src\Models\AR\User;
-use Src\Utils\ThemeUtils;
+use Models\AR\User;
+use Utils\ThemeUtils;
+use Views\Pages\EditAccountPage;
 
 class EditAccountController extends Controller
 {
     public function index(Request $request): void
     {
-        $this->renderPage('edit-account', [
-            'theme' => ThemeUtils::createDefault(
-                $this->router, 
-                $this->session, 
-                sprintf(_('Editar Conta | %s'), $this->appData['app_name'])
-            )
-        ]);
+        echo new EditAccountPage(request: $request);
     }
 
     public function update(Request $request): void 

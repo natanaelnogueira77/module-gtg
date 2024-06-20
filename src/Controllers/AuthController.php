@@ -1,23 +1,17 @@
 <?php 
 
-namespace Src\Controllers;
+namespace Controllers;
 
 use GTG\MVC\Request;
-use Src\Models\LoginForm;
-use Src\Utils\ThemeUtils;
+use Models\LoginForm;
+use Utils\ThemeUtils;
+use Views\Pages\AuthPage;
 
 class AuthController extends Controller
 {
     public function index(Request $request): void
     {
-        $this->renderPage('auth', [
-            'theme' => ThemeUtils::createDefault(
-                $this->router, 
-                $this->session, 
-                sprintf(_('Entrar | %s'), $this->appData['app_name'])
-            ),
-            'redirectURL' => $request->get('redirect')
-        ]);
+        echo new AuthPage(request: $request);
     }
 
     public function login(Request $request): void 

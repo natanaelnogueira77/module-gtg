@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Models\AR;
+namespace Models\AR;
 
 use DateTime;
 

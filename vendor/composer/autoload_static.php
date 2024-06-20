@@ -10,12 +10,7 @@ class ComposerStaticInitf2e7b00e698cb882453bc6dfac32a14c
         'S' => 
         array (
             'Svg\\' => 4,
-            'Src\\' => 4,
             'Sabberworm\\CSS\\' => 15,
-        ),
-        'R' => 
-        array (
-            'ReCaptcha\\' => 10,
         ),
         'P' => 
         array (
@@ -50,17 +45,9 @@ class ComposerStaticInitf2e7b00e698cb882453bc6dfac32a14c
         array (
             0 => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg',
         ),
-        'Src\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src',
-        ),
         'Sabberworm\\CSS\\' => 
         array (
             0 => __DIR__ . '/..' . '/sabberworm/php-css-parser/src',
-        ),
-        'ReCaptcha\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/google/recaptcha/src/ReCaptcha',
         ),
         'Psr\\Log\\' => 
         array (
@@ -96,6 +83,10 @@ class ComposerStaticInitf2e7b00e698cb882453bc6dfac32a14c
         ),
     );
 
+    public static $fallbackDirsPsr4 = array (
+        0 => __DIR__ . '/../..' . '/src',
+    );
+
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Dompdf\\Cpdf' => __DIR__ . '/..' . '/dompdf/dompdf/lib/Cpdf.php',
@@ -106,6 +97,7 @@ class ComposerStaticInitf2e7b00e698cb882453bc6dfac32a14c
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitf2e7b00e698cb882453bc6dfac32a14c::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitf2e7b00e698cb882453bc6dfac32a14c::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInitf2e7b00e698cb882453bc6dfac32a14c::$fallbackDirsPsr4;
             $loader->classMap = ComposerStaticInitf2e7b00e698cb882453bc6dfac32a14c::$classMap;
 
         }, null, ClassLoader::class);

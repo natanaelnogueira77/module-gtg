@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2024-06-03 11:52-0300\n"
-"PO-Revision-Date: 2024-06-03 11:52-0300\n"
+"POT-Creation-Date: 2024-06-20 12:50-0300\n"
+"PO-Revision-Date: 2024-06-20 12:51-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -22,39 +22,24 @@ msgstr "Desculpe, não foi possível criar o caminho para o arquivo!"
 msgid "Lamentamos, mas parece que ocorreu um erro ao enviar o arquivo!"
 msgstr "Lamentamos, mas parece que ocorreu um erro ao enviar o arquivo!"
 
-#: src/Controllers/AdminController.php:19
-#, php-format
-msgid "Administrador | %s"
-msgstr "Administrador | %s"
-
-#: src/Controllers/AdminController.php:49
+#: src/Controllers/AdminController.php:35
 msgid "As configurações foram atualizadas com sucesso!"
 msgstr "As configurações foram atualizadas com sucesso!"
 
-#: src/Controllers/AdminController.php:56
+#: src/Controllers/AdminController.php:42
 msgid "A plataforma foi atualizada para a última versão com sucesso!"
 msgstr "A plataforma foi atualizada para a última versão com sucesso!"
 
-#: src/Controllers/AdminController.php:65
+#: src/Controllers/AdminController.php:51
 msgid "A plataforma foi resetada com sucesso."
 msgstr "A plataforma foi resetada com sucesso."
 
-#: src/Controllers/AuthController.php:17
-#, php-format
-msgid "Entrar | %s"
-msgstr "Entrar | %s"
-
-#: src/Controllers/AuthController.php:32 views/pages/user.php:5
+#: src/Controllers/AuthController.php:26 src/Views/Pages/UserPage.php:29
 #, php-format
 msgid "Seja bem-vindo(a), %s!"
 msgstr "Seja bem-vindo(a), %s!"
 
-#: src/Controllers/EditAccountController.php:17
-#, php-format
-msgid "Editar Conta | %s"
-msgstr "Editar Conta | %s"
-
-#: src/Controllers/EditAccountController.php:37
+#: src/Controllers/EditAccountController.php:32
 #, php-format
 msgid "Seus dados foram atualizados com sucesso, %s!"
 msgstr "Seus dados foram atualizados com sucesso, %s!"
@@ -75,60 +60,44 @@ msgstr "Nenhum nome de arquivo foi declarado!"
 msgid "O arquivo foi excluído com sucesso."
 msgstr "O arquivo foi excluído com sucesso."
 
-#: src/Controllers/ResetPasswordController.php:18
-#: src/Controllers/ResetPasswordController.php:57
-#, php-format
-msgid "Redefinir Senha | %s"
-msgstr "Redefinir Senha | %s"
-
-#: src/Controllers/ResetPasswordController.php:35
+#: src/Controllers/ResetPasswordController.php:23
 msgid "Redefina Sua Senha"
 msgstr "Redefina Sua Senha"
 
-#: src/Controllers/ResetPasswordController.php:42
+#: src/Controllers/ResetPasswordController.php:31
 #, php-format
 msgid "Um email foi enviado para %s. Verifique para redefinir sua senha."
 msgstr "Um email foi enviado para %s. Verifique para redefinir sua senha."
 
-#: src/Controllers/ResetPasswordController.php:49
-#: src/Controllers/ResetPasswordController.php:74
+#: src/Controllers/ResetPasswordController.php:38
+#: src/Controllers/ResetPasswordController.php:54
 msgid "A chave de verificação é inválida!"
 msgstr "A chave de verificação é inválida!"
 
-#: src/Controllers/ResetPasswordController.php:88
+#: src/Controllers/ResetPasswordController.php:68
 msgid "Sua senha foi redefinida com sucesso!"
 msgstr "Sua senha foi redefinida com sucesso!"
 
-#: src/Controllers/UserController.php:15
-#, php-format
-msgid "Painel Principal | %s"
-msgstr "Painel Principal | %s"
-
-#: src/Controllers/UsersController.php:20
-#, php-format
-msgid "Usuários | %s"
-msgstr "Usuários | %s"
-
-#: src/Controllers/UsersController.php:45
-#: views/widgets/data-tables/users.php:49
+#: src/Controllers/UsersController.php:41
+#: src/Views/Components/DataTables/UsersDataTable.php:81
 msgid "Nenhum usuário foi encontrado!"
 msgstr "Nenhum usuário foi encontrado!"
 
-#: src/Controllers/UsersController.php:65
-msgid "Você Foi Registrado Com Sucesso!"
-msgstr "Você Foi Registrado Com Sucesso!"
+#: src/Controllers/UsersController.php:61
+msgid "Você foi registrado com sucesso!"
+msgstr "Você foi registrado com sucesso!"
 
-#: src/Controllers/UsersController.php:75
+#: src/Controllers/UsersController.php:69
 #, php-format
 msgid "O usuário \"%s\" foi criado com sucesso!"
 msgstr "O usuário \"%s\" foi criado com sucesso!"
 
-#: src/Controllers/UsersController.php:95
+#: src/Controllers/UsersController.php:89
 #, php-format
 msgid "O usuário \"%s\" foi atualizado com sucesso!"
 msgstr "O usuário \"%s\" foi atualizado com sucesso!"
 
-#: src/Controllers/UsersController.php:102
+#: src/Controllers/UsersController.php:96
 #, php-format
 msgid "O usuário \"%s\" foi excluído com sucesso!"
 msgstr "O usuário \"%s\" foi excluído com sucesso!"
@@ -286,7 +255,7 @@ msgstr "O email é invalido!"
 msgid "Este email não foi encontrado!"
 msgstr "Este email não foi encontrado!"
 
-#: src/Models/ForgotPasswordForm.php:36 src/Models/ForgotPasswordForm.php:37
+#: src/Models/ForgotPasswordForm.php:35 src/Models/ForgotPasswordForm.php:36
 msgid ""
 "Uma solicitação já foi enviada para este email! Espere 1 hora para enviar "
 "outra."
@@ -311,355 +280,215 @@ msgstr "A confirmação de senha é obrigatória!"
 msgid "As senhas não correspondem!"
 msgstr "As senhas não correspondem!"
 
-#: src/Utils/ThemeUtils.php:122
-msgid "GTG Software"
-msgstr "GTG Software"
-
-#: src/Utils/ThemeUtils.php:172
-msgid "Principal"
-msgstr "Principal"
-
-#: src/Utils/ThemeUtils.php:182
-msgid "Português"
-msgstr "Português"
-
-#: src/Utils/ThemeUtils.php:218
-msgid "Administração"
-msgstr "Administração"
-
-#: src/Utils/ThemeUtils.php:225
-msgid "Usuários"
-msgstr "Usuários"
-
-#: src/Utils/ThemeUtils.php:230
-msgid "Controle"
-msgstr "Controle"
-
-#: src/Utils/ThemeUtils.php:237 views/pages/user.php:4
-msgid "Painel Principal"
-msgstr "Painel Principal"
-
-#: src/Utils/ThemeUtils.php:248
-msgid "Editar Minha Conta"
-msgstr "Editar Minha Conta"
-
-#: src/Utils/ThemeUtils.php:253
-msgid "Sair"
-msgstr "Sair"
-
-#: views/pages/admin.php:4
-msgid "Painel do Administrador"
-msgstr "Painel do Administrador"
-
-#: views/pages/admin.php:5
-msgid "Relatórios e gerenciamento do sistema"
-msgstr "Relatórios e gerenciamento do sistema"
-
-#: views/pages/admin.php:17
-msgid "Informações da Aplicação"
-msgstr "Informações da Aplicação"
-
-#: views/pages/admin.php:22
-#, php-format
-msgid "Versão: <strong>%s</strong>"
-msgstr "Versão: <strong>%s</strong>"
-
-#: views/pages/admin.php:28
-msgid ""
-"Você tem certeza de que deseja atualizar o sistema para a última versão?"
-msgstr ""
-"Você tem certeza de que deseja atualizar o sistema para a última versão?"
-
-#: views/pages/admin.php:29
-msgid "Atualizar Sistema"
-msgstr "Atualizar Sistema"
-
-#: views/pages/admin.php:34
-msgid ""
-"Você tem certeza de que deseja remover todos os dados? Essa ação não terá "
-"volta!"
-msgstr ""
-"Você tem certeza de que deseja remover todos os dados? Essa ação não terá "
-"volta!"
-
-#: views/pages/admin.php:35
-msgid "Remover Dados"
-msgstr "Remover Dados"
-
-#: views/pages/admin.php:53
-#, php-format
-msgid "Usuários com permissão de %s"
-msgstr "Usuários com permissão de %s"
-
-#: views/pages/admin.php:77
-msgid "Configurações do Sistema"
-msgstr "Configurações do Sistema"
-
-#: views/pages/admin.php:86
-msgid "Tema"
-msgstr "Tema"
-
-#: views/pages/admin.php:87
-msgid "Escolha o tema de cores do sistema."
-msgstr "Escolha o tema de cores do sistema."
-
-#: views/pages/admin.php:92
-msgid "Escolha o tema de cores do sistema..."
-msgstr "Escolha o tema de cores do sistema..."
-
-#: views/pages/admin.php:94
-msgid "Tema Claro"
-msgstr "Tema Claro"
-
-#: views/pages/admin.php:97
-msgid "Tema Escuro"
-msgstr "Tema Escuro"
-
-#: views/pages/admin.php:105
-msgid "Imagem de Fundo (Login)"
-msgstr "Imagem de Fundo (Login)"
-
-#: views/pages/admin.php:106
-msgid "Escolha a imagem que ficará de fundo na página de login."
-msgstr "Escolha a imagem que ficará de fundo na página de login."
-
-#: views/pages/admin.php:119
-msgid "Logo"
-msgstr "Logo"
-
-#: views/pages/admin.php:120
-msgid "Escolha a imagem que ficará como logo do sistema."
-msgstr "Escolha a imagem que ficará como logo do sistema."
-
-#: views/pages/admin.php:131
-msgid "Ícone (Tamanho Recomendado: 512 x 512)"
-msgstr "Ícone (Tamanho Recomendado: 512 x 512)"
-
-#: views/pages/admin.php:132
-msgid "Escolha a imagem que ficará como ícone do sistema."
-msgstr "Escolha a imagem que ficará como ícone do sistema."
-
-#: views/pages/admin.php:145
-msgid "Salvar Configurações"
-msgstr "Salvar Configurações"
-
-#: views/pages/auth.php:16 views/pages/auth.php:29
-#: views/widgets/modals/expired-session-login.php:29
-msgid "Entrar"
-msgstr "Entrar"
-
-#: views/pages/auth.php:19 views/pages/reset-password.php:19
-msgid "Digite seu email"
-msgstr "Digite seu email"
-
-#: views/pages/auth.php:24
-msgid "Digite sua senha"
-msgstr "Digite sua senha"
-
-#: views/pages/auth.php:33
-msgid "Esqueceu a senha?"
-msgstr "Esqueceu a senha?"
-
-#: views/pages/edit-account.php:4
-msgid "Editar Conta"
-msgstr "Editar Conta"
-
-#: views/pages/edit-account.php:5
-msgid "Edite os detalhes de sua conta logo abaixo"
-msgstr "Edite os detalhes de sua conta logo abaixo"
-
-#: views/pages/edit-account.php:15
-msgid "Informações da Conta"
-msgstr "Informações da Conta"
-
-#: views/pages/edit-account.php:17
-msgid ""
-"Preencha os campos abaixo para editar os dados de sua conta. Então, clique "
-"em \"Salvar\"."
-msgstr ""
-"Preencha os campos abaixo para editar os dados de sua conta. Então, clique "
-"em \"Salvar\"."
-
-#: views/pages/edit-account.php:34
-msgid "Atualizar"
-msgstr "Atualizar"
-
-#: views/pages/edit-account.php:35 views/pages/error.php:7
-#: views/widgets/media-library/file-list-panel.php:32
-#: views/widgets/media-library/take-photo-panel.php:30
-#: views/widgets/media-library/upload-label-panel.php:25
-#: views/widgets/modals/expired-session-login.php:32
-#: views/widgets/modals/save-user.php:15
-msgid "Voltar"
-msgstr "Voltar"
-
-#: views/pages/error.php:1
-#, php-format
-msgid "%s | %s"
-msgstr "%s | %s"
-
-#: views/pages/error.php:6
-msgid "Lamentamos, mas ocorreu um erro ao tentar acessar esta página!"
-msgstr "Lamentamos, mas ocorreu um erro ao tentar acessar esta página!"
-
-#: views/pages/reset-password.php:12 views/widgets/emails/reset-password.php:3
-msgid "Redefinir Senha"
-msgstr "Redefinir Senha"
-
-#: views/pages/reset-password.php:18 views/widgets/data-tables/users.php:8
-#: views/widgets/forms/expired-session-login.php:3
-#: views/widgets/forms/save-user.php:19
-#: views/widgets/modals/expired-session-login.php:12
-msgid "Email"
-msgstr "Email"
-
-#: views/pages/reset-password.php:24
-msgid "Enviar"
-msgstr "Enviar"
-
-#: views/pages/reset-password.php:28
-msgid "Nova Senha"
-msgstr "Nova Senha"
-
-#: views/pages/reset-password.php:29
-msgid "Digite sua nova senha"
-msgstr "Digite sua nova senha"
-
-#: views/pages/reset-password.php:34
-msgid "Confirmar Nova Senha"
-msgstr "Confirmar Nova Senha"
-
-#: views/pages/reset-password.php:35
-msgid "Digite novamente a nova senha"
-msgstr "Digite novamente a nova senha"
-
-#: views/pages/reset-password.php:40
-msgid "Redefinir"
-msgstr "Redefinir"
-
-#: views/pages/users.php:4 views/pages/users.php:15
-msgid "Lista de Usuários"
-msgstr "Lista de Usuários"
-
-#: views/pages/users.php:5
-msgid "Segue abaixo a lista de usuários do sistema"
-msgstr "Segue abaixo a lista de usuários do sistema"
-
-#: views/pages/users.php:23 views/widgets/modals/save-user.php:6
-msgid "Cadastrar Usuário"
-msgstr "Cadastrar Usuário"
-
-#: views/pages/users.php:34 views/widgets/forms/save-user.php:35
-msgid "Nível de Permissão"
-msgstr "Nível de Permissão"
-
-#: views/pages/users.php:36
-msgid "Todas as Permissões"
-msgstr "Todas as Permissões"
-
-#: views/scripts/media-library-config.js.php:6
-msgid "A extensão deste arquivo não é permitida aqui! Extensões permitidas: "
-msgstr "A extensão deste arquivo não é permitida aqui! Extensões permitidas: "
-
-#: views/scripts/media-library-config.js.php:7
-#, php-format
-msgid "O arquivo que você tentou enviar é maior do que %sMB!"
-msgstr "O arquivo que você tentou enviar é maior do que %sMB!"
-
-#: views/scripts/media-library-config.js.php:8
-msgid "Lamentamos, mas ocorreu um erro ao ler o arquivo!"
-msgstr "Lamentamos, mas ocorreu um erro ao ler o arquivo!"
-
-#: views/scripts/tinymce.js.php:28 views/scripts/tinymce.js.php:33
-msgid "Erro de HTTP: "
-msgstr "Erro de HTTP: "
-
-#: views/scripts/tinymce.js.php:40
-msgid "JSON Inválido: "
-msgstr "JSON Inválido: "
-
-#: views/scripts/tinymce.js.php:48
-msgid "O upload da imagem falhou! Código: "
-msgstr "O upload da imagem falhou! Código: "
-
-#: views/widgets/components/actions-dropdown.php:4
-#: views/widgets/components/actions-dropdown.php:8
-#: views/widgets/data-tables/users.php:6
+#: src/Views/Components/DataTables/UsersDataTable.php:36
+#: views/components/actions-dropdown.php:4
+#: views/components/actions-dropdown.php:8
 msgid "Ações"
 msgstr "Ações"
 
-#: views/widgets/data-table/body.php:10
-msgid "Nenhum dado correspondente foi encontrado!"
-msgstr "Nenhum dado correspondente foi encontrado!"
-
-#: views/widgets/data-table/filters.php:5
-msgid "Mostrar"
-msgstr "Mostrar"
-
-#: views/widgets/data-table/filters.php:13
-msgid "Linhas"
-msgstr "Linhas"
-
-#: views/widgets/data-table/filters.php:20
-msgid "Buscar por"
-msgstr "Buscar por"
-
-#: views/widgets/data-table/pagination.php:23
-#, php-format
-msgid "Mostrando %s à %s de %s resultado(s)"
-msgstr "Mostrando %s à %s de %s resultado(s)"
-
-#: views/widgets/data-table/pagination.php:37
-msgid "Anterior"
-msgstr "Anterior"
-
-#: views/widgets/data-table/pagination.php:53
-msgid "Próxima"
-msgstr "Próxima"
-
-#: views/widgets/data-tables/users.php:7 views/widgets/forms/save-user.php:6
+#: src/Views/Components/DataTables/UsersDataTable.php:37
+#: views/components/forms/save-user.php:6
 msgid "Nome"
 msgstr "Nome"
 
-#: views/widgets/data-tables/users.php:9
+#: src/Views/Components/DataTables/UsersDataTable.php:38
+#: views/components/forms/expired-session-login.php:3
+#: views/components/forms/reset-password.php:16
+#: views/components/forms/save-user.php:18
+#: views/components/modals/expired-session-login.php:12
+msgid "Email"
+msgstr "Email"
+
+#: src/Views/Components/DataTables/UsersDataTable.php:39
 msgid "Criado em"
 msgstr "Criado em"
 
-#: views/widgets/data-tables/users.php:23
+#: src/Views/Components/DataTables/UsersDataTable.php:49
 msgid "Editar Usuário"
 msgstr "Editar Usuário"
 
-#: views/widgets/data-tables/users.php:32
+#: src/Views/Components/DataTables/UsersDataTable.php:59
+msgid "Excluir Usuário"
+msgstr "Excluir Usuário"
+
+#: src/Views/Components/DataTables/UsersDataTable.php:65
 #, php-format
 msgid "Você tem certeza de que deseja excluir o usuário %s?"
 msgstr "Você tem certeza de que deseja excluir o usuário %s?"
 
-#: views/widgets/data-tables/users.php:36
-msgid "Excluir Usuário"
-msgstr "Excluir Usuário"
+#: src/Views/Components/Layout/AppTheme.php:77
+msgid "Principal"
+msgstr "Principal"
 
-#: views/widgets/emails/registered-user.php:3
+#: src/Views/Components/Layout/AppTheme.php:89
+msgid "Português"
+msgstr "Português"
+
+#: src/Views/Components/Layout/AppTheme.php:104
+msgid "Editar Minha Conta"
+msgstr "Editar Minha Conta"
+
+#: src/Views/Components/Layout/AppTheme.php:109
+msgid "Sair"
+msgstr "Sair"
+
+#: src/Views/Components/Layout/AppTheme.php:131
+msgid "Administração"
+msgstr "Administração"
+
+#: src/Views/Components/Layout/AppTheme.php:135
+msgid "Usuários"
+msgstr "Usuários"
+
+#: src/Views/Components/Layout/AppTheme.php:142
+msgid "Controle"
+msgstr "Controle"
+
+#: src/Views/Components/Layout/AppTheme.php:146 src/Views/Pages/UserPage.php:28
+msgid "Painel Principal"
+msgstr "Painel Principal"
+
+#: src/Views/Components/Layout/AppTheme.php:160
+msgid "Soluções Smart"
+msgstr "Soluções Smart"
+
+#: src/Views/Components/Sections/UsersTableSection.php:36
+#: views/components/modals/save-user.php:6
+msgid "Cadastrar Usuário"
+msgstr "Cadastrar Usuário"
+
+#: src/Views/Pages/AdminPage.php:31
+#, php-format
+msgid "Administrador | %s"
+msgstr "Administrador | %s"
+
+#: src/Views/Pages/AdminPage.php:35
+msgid "Painel do Administrador"
+msgstr "Painel do Administrador"
+
+#: src/Views/Pages/AdminPage.php:36
+msgid "Relatórios e gerenciamento do sistema"
+msgstr "Relatórios e gerenciamento do sistema"
+
+#: src/Views/Pages/AdminPage.php:49
+msgid "Atualizar Sistema"
+msgstr "Atualizar Sistema"
+
+#: src/Views/Pages/AdminPage.php:54
+msgid ""
+"Você tem certeza de que deseja atualizar o sistema para a última versão?"
+msgstr ""
+"Você tem certeza de que deseja atualizar o sistema para a última versão?"
+
+#: src/Views/Pages/AdminPage.php:60
+msgid "Remover Dados"
+msgstr "Remover Dados"
+
+#: src/Views/Pages/AdminPage.php:65
+msgid ""
+"Você tem certeza de que deseja remover todos os dados? Essa ação não terá "
+"volta!"
+msgstr ""
+"Você tem certeza de que deseja remover todos os dados? Essa ação não terá "
+"volta!"
+
+#: src/Views/Pages/AuthPage.php:21
+#, php-format
+msgid "Entrar | %s"
+msgstr "Entrar | %s"
+
+#: src/Views/Pages/EditAccountPage.php:26
+#, php-format
+msgid "Editar Conta | %s"
+msgstr "Editar Conta | %s"
+
+#: src/Views/Pages/EditAccountPage.php:30
+msgid "Editar Conta"
+msgstr "Editar Conta"
+
+#: src/Views/Pages/EditAccountPage.php:31
+msgid "Edite os detalhes de sua conta logo abaixo"
+msgstr "Edite os detalhes de sua conta logo abaixo"
+
+#: src/Views/Pages/ResetPasswordPage.php:22
+#, php-format
+msgid "Redefinir Senha | %s"
+msgstr "Redefinir Senha | %s"
+
+#: src/Views/Pages/UserPage.php:24
+#, php-format
+msgid "Painel Principal | %s"
+msgstr "Painel Principal | %s"
+
+#: src/Views/Pages/UsersPage.php:28
+#, php-format
+msgid "Usuários | %s"
+msgstr "Usuários | %s"
+
+#: src/Views/Pages/UsersPage.php:32 views/components/sections/users-table.php:6
+msgid "Lista de Usuários"
+msgstr "Lista de Usuários"
+
+#: src/Views/Pages/UsersPage.php:33
+msgid "Segue abaixo a lista de usuários do sistema"
+msgstr "Segue abaixo a lista de usuários do sistema"
+
+#: views/components/data-table/body.php:8
+msgid "Nenhum dado correspondente foi encontrado!"
+msgstr "Nenhum dado correspondente foi encontrado!"
+
+#: views/components/data-table/filters.php:5
+msgid "Mostrar"
+msgstr "Mostrar"
+
+#: views/components/data-table/filters.php:13
+msgid "Linhas"
+msgstr "Linhas"
+
+#: views/components/data-table/filters.php:19
+msgid "Buscar por"
+msgstr "Buscar por"
+
+#: views/components/data-table/pagination.php:13
+#, php-format
+msgid "Mostrando %s à %s de %s resultado(s)"
+msgstr "Mostrando %s à %s de %s resultado(s)"
+
+#: views/components/data-table/pagination.php:27
+msgid "Anterior"
+msgstr "Anterior"
+
+#: views/components/data-table/pagination.php:43
+msgid "Próxima"
+msgstr "Próxima"
+
+#: views/components/emails/registered-user.php:3
 #, php-format
 msgid "Olá, %s!"
 msgstr "Olá, %s!"
 
-#: views/widgets/emails/registered-user.php:4
+#: views/components/emails/registered-user.php:4
 msgid "Aqui está as informações de seu registro:"
 msgstr "Aqui está as informações de seu registro:"
 
-#: views/widgets/emails/registered-user.php:6
+#: views/components/emails/registered-user.php:6
 msgid "Nome:"
 msgstr "Nome:"
 
-#: views/widgets/emails/registered-user.php:7
+#: views/components/emails/registered-user.php:7
 msgid "Email:"
 msgstr "Email:"
 
-#: views/widgets/emails/registered-user.php:8
+#: views/components/emails/registered-user.php:8
 msgid "Senha:"
 msgstr "Senha:"
 
-#: views/widgets/emails/reset-password.php:4
+#: views/components/emails/reset-password.php:3
+#: views/components/forms/reset-password.php:10
+msgid "Redefinir Senha"
+msgstr "Redefinir Senha"
+
+#: views/components/emails/reset-password.php:4
 #, php-format
 msgid ""
 "Recebemos uma solicitação de redefinição de senha do site \"%s\" para este "
@@ -672,152 +501,324 @@ msgstr ""
 "        Se não foi você, ignore esta mensagem. Caso contrário, click no link "
 "abaixo:"
 
-#: views/widgets/emails/reset-password.php:12
+#: views/components/emails/reset-password.php:10
 msgid "Clique aqui para redefinir sua senha"
 msgstr "Clique aqui para redefinir sua senha"
 
-#: views/widgets/forms/expired-session-login.php:4
+#: views/components/forms/auth.php:14 views/components/forms/auth.php:27
+#: views/components/modals/expired-session-login.php:26
+msgid "Entrar"
+msgstr "Entrar"
+
+#: views/components/forms/auth.php:17
+#: views/components/forms/reset-password.php:17
+msgid "Digite seu email"
+msgstr "Digite seu email"
+
+#: views/components/forms/auth.php:22
+msgid "Digite sua senha"
+msgstr "Digite sua senha"
+
+#: views/components/forms/auth.php:31
+msgid "Esqueceu a senha?"
+msgstr "Esqueceu a senha?"
+
+#: views/components/forms/config.php:5
+msgid "Tema"
+msgstr "Tema"
+
+#: views/components/forms/config.php:6
+msgid "Escolha o tema de cores do sistema."
+msgstr "Escolha o tema de cores do sistema."
+
+#: views/components/forms/config.php:11
+msgid "Escolha o tema de cores do sistema..."
+msgstr "Escolha o tema de cores do sistema..."
+
+#: views/components/forms/config.php:13
+msgid "Tema Claro"
+msgstr "Tema Claro"
+
+#: views/components/forms/config.php:16
+msgid "Tema Escuro"
+msgstr "Tema Escuro"
+
+#: views/components/forms/config.php:24
+msgid "Imagem de Fundo (Login)"
+msgstr "Imagem de Fundo (Login)"
+
+#: views/components/forms/config.php:25
+msgid "Escolha a imagem que ficará de fundo na página de login."
+msgstr "Escolha a imagem que ficará de fundo na página de login."
+
+#: views/components/forms/config.php:38
+msgid "Logo"
+msgstr "Logo"
+
+#: views/components/forms/config.php:39
+msgid "Escolha a imagem que ficará como logo do sistema."
+msgstr "Escolha a imagem que ficará como logo do sistema."
+
+#: views/components/forms/config.php:50
+msgid "Ícone (Tamanho Recomendado: 512 x 512)"
+msgstr "Ícone (Tamanho Recomendado: 512 x 512)"
+
+#: views/components/forms/config.php:51
+msgid "Escolha a imagem que ficará como ícone do sistema."
+msgstr "Escolha a imagem que ficará como ícone do sistema."
+
+#: views/components/forms/expired-session-login.php:4
 msgid "Digite seu email..."
 msgstr "Digite seu email..."
 
-#: views/widgets/forms/expired-session-login.php:9
-#: views/widgets/forms/save-user.php:71
-#: views/widgets/modals/expired-session-login.php:19
+#: views/components/forms/expired-session-login.php:9
+#: views/components/forms/save-user.php:68
+#: views/components/modals/expired-session-login.php:18
 msgid "Senha"
 msgstr "Senha"
 
-#: views/widgets/forms/expired-session-login.php:10
+#: views/components/forms/expired-session-login.php:10
 msgid "Digite sua senha..."
 msgstr "Digite sua senha..."
 
-#: views/widgets/forms/save-user.php:8
+#: views/components/forms/reset-password.php:22
+msgid "Enviar"
+msgstr "Enviar"
+
+#: views/components/forms/reset-password.php:26
+msgid "Nova Senha"
+msgstr "Nova Senha"
+
+#: views/components/forms/reset-password.php:27
+msgid "Digite sua nova senha"
+msgstr "Digite sua nova senha"
+
+#: views/components/forms/reset-password.php:32
+msgid "Confirmar Nova Senha"
+msgstr "Confirmar Nova Senha"
+
+#: views/components/forms/reset-password.php:33
+msgid "Digite novamente a nova senha"
+msgstr "Digite novamente a nova senha"
+
+#: views/components/forms/reset-password.php:38
+msgid "Redefinir"
+msgstr "Redefinir"
+
+#: views/components/forms/save-user.php:7
 msgid "Digite um nome."
 msgstr "Digite um nome."
 
-#: views/widgets/forms/save-user.php:12
+#: views/components/forms/save-user.php:11
 msgid "Digite um nome..."
 msgstr "Digite um nome..."
 
-#: views/widgets/forms/save-user.php:21
+#: views/components/forms/save-user.php:19
 msgid "Digite um email válido."
 msgstr "Digite um email válido."
 
-#: views/widgets/forms/save-user.php:25
+#: views/components/forms/save-user.php:23
 msgid "Digite um email..."
 msgstr "Digite um email..."
 
-#: views/widgets/forms/save-user.php:37
+#: views/components/forms/save-user.php:33
+#: views/components/sections/users-table.php:21
+msgid "Nível de Permissão"
+msgstr "Nível de Permissão"
+
+#: views/components/forms/save-user.php:34
 msgid "Escolha um nível de permissão."
 msgstr "Escolha um nível de permissão."
 
-#: views/widgets/forms/save-user.php:42
+#: views/components/forms/save-user.php:39
 msgid "Selecionar..."
 msgstr "Selecionar..."
 
-#: views/widgets/forms/save-user.php:56
+#: views/components/forms/save-user.php:53
 msgid "Você deseja alterar a senha?"
 msgstr "Você deseja alterar a senha?"
 
-#: views/widgets/forms/save-user.php:59
+#: views/components/forms/save-user.php:56
 msgid "Sim"
 msgstr "Sim"
 
-#: views/widgets/forms/save-user.php:64
+#: views/components/forms/save-user.php:61
 msgid "Não"
 msgstr "Não"
 
-#: views/widgets/forms/save-user.php:73
+#: views/components/forms/save-user.php:69
 msgid "Digite a senha de acesso à sua conta."
 msgstr "Digite a senha de acesso à sua conta."
 
-#: views/widgets/forms/save-user.php:77
+#: views/components/forms/save-user.php:73
 msgid "Digite uma senha..."
 msgstr "Digite uma senha..."
 
-#: views/widgets/forms/save-user.php:86
+#: views/components/forms/save-user.php:82
 msgid "Imagem"
 msgstr "Imagem"
 
-#: views/widgets/forms/save-user.php:87
+#: views/components/forms/save-user.php:83
 msgid "Selecione a imagem do usuário."
 msgstr "Selecione a imagem do usuário."
 
-#: views/widgets/layouts/dashboard/footer.php:19
-msgid "Soluções Smart"
-msgstr "Soluções Smart"
-
-#: views/widgets/layouts/dashboard/header-notification-bell.php:11
-msgid "Notificações"
-msgstr "Notificações"
-
-#: views/widgets/media-library/file-list-panel.php:6
+#: views/components/media-library/file-list-panel.php:6
 msgid "Buscar..."
 msgstr "Buscar..."
 
-#: views/widgets/media-library/file-list-panel.php:31
+#: views/components/media-library/file-list-panel.php:31
 msgid "Escolher"
 msgstr "Escolher"
 
-#: views/widgets/media-library/take-photo-panel.php:4
+#: views/components/media-library/file-list-panel.php:32
+#: views/components/media-library/take-photo-panel.php:30
+#: views/components/media-library/upload-label-panel.php:25
+#: views/components/modals/expired-session-login.php:27
+#: views/components/modals/save-user.php:15
+#: views/components/sections/edit-account.php:19 views/error.php:7
+msgid "Voltar"
+msgstr "Voltar"
+
+#: views/components/media-library/take-photo-panel.php:4
 msgid "Selecione um dispositivo..."
 msgstr "Selecione um dispositivo..."
 
-#: views/widgets/media-library/take-photo-panel.php:12
+#: views/components/media-library/take-photo-panel.php:12
 msgid "Câmera Atual"
 msgstr "Câmera Atual"
 
-#: views/widgets/media-library/take-photo-panel.php:19
+#: views/components/media-library/take-photo-panel.php:19
 msgid "Imagem Capturada"
 msgstr "Imagem Capturada"
 
-#: views/widgets/media-library/take-photo-panel.php:27
+#: views/components/media-library/take-photo-panel.php:27
 msgid "Capturar"
 msgstr "Capturar"
 
-#: views/widgets/media-library/take-photo-panel.php:28
+#: views/components/media-library/take-photo-panel.php:28
 msgid "Salvar Captura"
 msgstr "Salvar Captura"
 
-#: views/widgets/media-library/take-photo-panel.php:29
+#: views/components/media-library/take-photo-panel.php:29
 msgid "Descartar"
 msgstr "Descartar"
 
-#: views/widgets/media-library/upload-label-panel.php:7
+#: views/components/media-library/upload-label-panel.php:7
 msgid "Clique para selecionar ou"
 msgstr "Clique para selecionar ou"
 
-#: views/widgets/media-library/upload-label-panel.php:8
+#: views/components/media-library/upload-label-panel.php:8
 msgid "arraste o(s) arquivo(s)"
 msgstr "arraste o(s) arquivo(s)"
 
-#: views/widgets/modals/expired-session-login.php:6
+#: views/components/modals/expired-session-login.php:6
 msgid "Sessão expirada, faça login"
 msgstr "Sessão expirada, faça login"
 
-#: views/widgets/modals/expired-session-login.php:14
+#: views/components/modals/expired-session-login.php:13
 msgid "Informe seu email..."
 msgstr "Informe seu email..."
 
-#: views/widgets/modals/expired-session-login.php:20
+#: views/components/modals/expired-session-login.php:19
 msgid "Informe sua senha..."
 msgstr "Informe sua senha..."
 
-#: views/widgets/modals/media-library.php:6
-#: views/widgets/modals/media-library.php:25
+#: views/components/modals/media-library.php:6
+#: views/components/modals/media-library.php:25
 msgid "Biblioteca de Mídia"
 msgstr "Biblioteca de Mídia"
 
-#: views/widgets/modals/media-library.php:12
+#: views/components/modals/media-library.php:12
 msgid "Upload"
 msgstr "Upload"
 
-#: views/widgets/modals/media-library.php:18
+#: views/components/modals/media-library.php:18
 msgid "Tirar Foto"
 msgstr "Tirar Foto"
 
-#: views/widgets/modals/save-user.php:14
+#: views/components/modals/media-library.php:56
+msgid "A extensão deste arquivo não é permitida aqui! Extensões permitidas: "
+msgstr "A extensão deste arquivo não é permitida aqui! Extensões permitidas: "
+
+#: views/components/modals/media-library.php:57
+#, php-format
+msgid "O arquivo que você tentou enviar é maior do que %sMB!"
+msgstr "O arquivo que você tentou enviar é maior do que %sMB!"
+
+#: views/components/modals/media-library.php:58
+msgid "Lamentamos, mas ocorreu um erro ao ler o arquivo!"
+msgstr "Lamentamos, mas ocorreu um erro ao ler o arquivo!"
+
+#: views/components/modals/save-user.php:14
 msgid "Salvar"
 msgstr "Salvar"
+
+#: views/components/sections/application-info.php:8
+msgid "Informações da Aplicação"
+msgstr "Informações da Aplicação"
+
+#: views/components/sections/application-info.php:13
+#, php-format
+msgid "Versão: <strong>%s</strong>"
+msgstr "Versão: <strong>%s</strong>"
+
+#: views/components/sections/application-info.php:34
+#, php-format
+msgid "Usuários com permissão de %s"
+msgstr "Usuários com permissão de %s"
+
+#: views/components/sections/config-form.php:5
+msgid "Configurações do Sistema"
+msgstr "Configurações do Sistema"
+
+#: views/components/sections/config-form.php:15
+msgid "Salvar Configurações"
+msgstr "Salvar Configurações"
+
+#: views/components/sections/edit-account.php:5
+msgid "Informações da Conta"
+msgstr "Informações da Conta"
+
+#: views/components/sections/edit-account.php:7
+msgid ""
+"Preencha os campos abaixo para editar os dados de sua conta. Então, clique "
+"em \"Salvar\"."
+msgstr ""
+"Preencha os campos abaixo para editar os dados de sua conta. Então, clique "
+"em \"Salvar\"."
+
+#: views/components/sections/edit-account.php:18
+msgid "Atualizar"
+msgstr "Atualizar"
+
+#: views/components/sections/users-table.php:23
+msgid "Todas as Permissões"
+msgstr "Todas as Permissões"
+
+#: views/error.php:1
+#, php-format
+msgid "%s | %s"
+msgstr "%s | %s"
+
+#: views/error.php:6
+msgid "Lamentamos, mas ocorreu um erro ao tentar acessar esta página!"
+msgstr "Lamentamos, mas ocorreu um erro ao tentar acessar esta página!"
+
+#: views/layouts/dashboard/header-notification-bell.php:11
+msgid "Notificações"
+msgstr "Notificações"
+
+#~ msgid "GTG Software"
+#~ msgstr "GTG Software"
+
+#~ msgid "Erro de HTTP: "
+#~ msgstr "Erro de HTTP: "
+
+#~ msgid "JSON Inválido: "
+#~ msgstr "JSON Inválido: "
+
+#~ msgid "O upload da imagem falhou! Código: "
+#~ msgstr "O upload da imagem falhou! Código: "
 
 #~ msgid "Selecione o logo da igreja."
 #~ msgstr "Selecione o logo da igreja."

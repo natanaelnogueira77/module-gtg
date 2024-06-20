@@ -1,4 +1,7 @@
-class App 
+import DynamicForm from './DynamicForm.js';
+import DataTable from './DataTable.js';
+
+export default class App 
 {
     static getDynamicForm(form) 
     {

@@ -1,8 +1,6 @@
 <?php
 
-namespace Src\Models\Lists;
-
-use Closure;
+namespace Models\Lists;
 
 abstract class ActiveRecordList 
 {

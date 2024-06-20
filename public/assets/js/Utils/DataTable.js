@@ -1,4 +1,4 @@
-class DataTable 
+export default class DataTable 
 {
     container;
     #ajaxURL;
@@ -45,7 +45,7 @@ class DataTable
     {
         const object = this;
 
-        object.#filtersForm.find(`[name]`).change(function () {
+        object.#filtersForm.find(`[name]`).change(function() {
             var returnArray = {};
             var formArray = object.#filtersForm.serializeArray();
 
@@ -59,7 +59,7 @@ class DataTable
             object.load();
         });
 
-        object.#filtersForm.submit(function (e) {
+        object.#filtersForm.submit(function(e) {
             e.preventDefault();
         });
     }
@@ -109,7 +109,7 @@ class DataTable
     #setPagination() 
     {
         const object = this;
-        object.container.find("[dt-page]").click(function () {
+        object.container.find("[dt-page]").click(function() {
             object.#filters.page = $(this).attr('dt-page');
             object.load();
         });
@@ -120,7 +120,7 @@ class DataTable
     #setOrdenation() 
     {
         const object = this;
-        object.container.find("[dt-order-by]").click(function () {
+        object.container.find("[dt-order-by]").click(function() {
             object.#filters.orderBy = $(this).attr('dt-order-by');
             object.#filters.orderType = $(this).attr('dt-order-type');
             object.load();

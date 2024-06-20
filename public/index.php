@@ -11,4 +11,4 @@ if(file_exists($maintenance = __DIR__ . '/../maintenance.php')) {
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-Src\Program::init();
+Program::init();

@@ -1,4 +1,6 @@
-class SaveUserForm 
+import FileSelector from '../Utils/FileSelector.js';
+
+export default class SaveUserForm 
 {
     #dynamicForm;
     FSAvatarImage;

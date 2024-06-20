@@ -1,4 +1,6 @@
-class DynamicForm 
+import App from './App.js';
+
+export default class DynamicForm 
 {
     #form;
     #isRequestRunning = false;
@@ -69,7 +71,7 @@ class DynamicForm
 
     clearFieldsAndValidations() 
     {
-        this.#form.find('input, textarea, select').each(function () {
+        this.#form.find('input, textarea, select').each(function() {
             if(!['submit', 'checkbox', 'radio'].includes($(this).attr('type'))) {
                 $(this).val(``);
             } else if(['checkbox', 'radio'].includes($(this).attr('type'))) {
@@ -82,7 +84,7 @@ class DynamicForm
 
     fillFieldsByAttribute(attr = 'name', content = {})
     {
-        this.#form.find('input, textarea, select').each(function () {
+        this.#form.find('input, textarea, select').each(function() {
             if(!['submit', 'checkbox', 'radio'].includes($(this).attr('type'))) {
                 if(content[$(this).attr(attr)] != '') {
                     $(this).val(content[$(this).attr(attr)]);
@@ -135,7 +137,7 @@ class DynamicForm
         const object = this;
 
         object.#clearFieldOnChangeEvent();
-        object.#form.submit(function (e) {
+        object.#form.submit(function(e) {
             e.preventDefault();
 
             if(object.#isRequestRunning) return;
@@ -194,7 +196,7 @@ class DynamicForm
     #clearFieldOnChangeEvent() 
     {
         const object = this;
-        object.#form.find('input, textarea, select').change(function () {
+        object.#form.find('input, textarea, select').change(function() {
             var id = $(this).attr('id');
 
             $(this).removeClass('is-invalid');

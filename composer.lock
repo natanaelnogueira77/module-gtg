@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3394e3a3799ff705ad6393ebf10cb77c",
+    "content-hash": "3c5d0ce7b84591a2950d2dc0363a5cf9",
     "packages": [
         {
             "name": "dompdf/dompdf",
@@ -69,69 +69,17 @@
             "time": "2024-04-29T13:06:17+00:00"
         },
         {
-            "name": "google/recaptcha",
-            "version": "1.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/google/recaptcha.git",
-                "reference": "d59a801e98a4e9174814a6d71bbc268dff1202df"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/google/recaptcha/zipball/d59a801e98a4e9174814a6d71bbc268dff1202df",
-                "reference": "d59a801e98a4e9174814a6d71bbc268dff1202df",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.14",
-                "php-coveralls/php-coveralls": "^2.5",
-                "phpunit/phpunit": "^10"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.3.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "ReCaptcha\\": "src/ReCaptcha"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Client library for reCAPTCHA, a free service that protects websites from spam and abuse.",
-            "homepage": "https://www.google.com/recaptcha/",
-            "keywords": [
-                "Abuse",
-                "captcha",
-                "recaptcha",
-                "spam"
-            ],
-            "support": {
-                "forum": "https://groups.google.com/forum/#!forum/recaptcha",
-                "issues": "https://github.com/google/recaptcha/issues",
-                "source": "https://github.com/google/recaptcha"
-            },
-            "time": "2023-02-18T17:41:46+00:00"
-        },
-        {
             "name": "gtg/php-mvc-core",
-            "version": "v2.0.7",
+            "version": "v2.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/natanaelnogueira77/gtg-mvc-core.git",
-                "reference": "955b85083eb57277c8814e4ec8a2c224b1d0f9ee"
+                "reference": "1a86355aefb0e9c61b74364f17144541155138e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/natanaelnogueira77/gtg-mvc-core/zipball/955b85083eb57277c8814e4ec8a2c224b1d0f9ee",
-                "reference": "955b85083eb57277c8814e4ec8a2c224b1d0f9ee",
+                "url": "https://api.github.com/repos/natanaelnogueira77/gtg-mvc-core/zipball/1a86355aefb0e9c61b74364f17144541155138e8",
+                "reference": "1a86355aefb0e9c61b74364f17144541155138e8",
                 "shasum": ""
             },
             "require": {
@@ -159,9 +107,9 @@
             ],
             "support": {
                 "issues": "https://github.com/natanaelnogueira77/gtg-mvc-core/issues",
-                "source": "https://github.com/natanaelnogueira77/gtg-mvc-core/tree/v2.0.7"
+                "source": "https://github.com/natanaelnogueira77/gtg-mvc-core/tree/v2.0.8"
             },
-            "time": "2024-05-09T17:39:37+00:00"
+            "time": "2024-06-20T15:58:05+00:00"
         },
         {
             "name": "league/plates",

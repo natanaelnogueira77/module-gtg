@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Exceptions;
+namespace Exceptions;
 
 use Throwable;
 

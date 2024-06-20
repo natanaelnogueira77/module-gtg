@@ -1,9 +1,9 @@
 <?php
 
-namespace Src\Controllers;
+namespace Controllers;
 
 use GTG\MVC\Request;
-use Src\Models\AR\Notification;
+use Models\AR\Notification;
 
 class NotificationsController extends Controller
 {

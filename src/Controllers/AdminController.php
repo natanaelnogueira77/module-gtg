@@ -1,32 +1,18 @@
 <?php 
 
-namespace Src\Controllers;
+namespace Controllers;
 
 use GTG\MVC\Request;
-use Src\Models\AR\{ Config, User };
-use Src\Models\ConfigForm;
-use Src\Program;
-use Src\Utils\ThemeUtils;
+use Models\AR\{ Config, User };
+use Models\ConfigForm;
+use Program;
+use Views\Pages\AdminPage;
 
 class AdminController extends Controller
 {
     public function index(Request $request): void
     {
-        $this->renderPage('admin', [
-            'theme' => ThemeUtils::createDefault(
-                $this->router, 
-                $this->session, 
-                sprintf(_('Administrador | %s'), $this->appData['app_name'])
-            ),
-            'userTypes' => User::getUserTypes(),
-            'usersCount' => User::getUsersCountGroupedByUserType(),
-            'configValues' => Config::getValuesByMetaKeys([
-                Config::KEY_LOGO, 
-                Config::KEY_LOGO_ICON,
-                Config::KEY_STYLE,
-                Config::KEY_LOGIN_IMAGE
-            ])
-        ]);
+        echo new AdminPage(request: $request);
     }
 
     public function updateConfig(Request $request): void 

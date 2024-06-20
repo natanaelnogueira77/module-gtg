@@ -1,10 +1,10 @@
 <?php
 
-namespace Src\Controllers;
+namespace Controllers;
 
 use GTG\MVC\Request;
-use Src\Config\FileSystem;
-use Src\Utils\StorageUtils;
+use Config\FileSystem;
+use Utils\StorageUtils;
 
 class MediaLibraryController extends Controller
 {

@@ -3,13 +3,12 @@
     "description": "Project Example",
     "type": "project",
     "require": {
-        "gtg/php-mvc-core": "^2.0",
-        "google/recaptcha": "^1.3"
+        "gtg/php-mvc-core": "^2.0"
     },
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Src\\": "src/"
+            "": "src/"
         }
     },
     "authors": [

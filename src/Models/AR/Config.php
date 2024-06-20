@@ -1,8 +1,8 @@
 <?php
 
-namespace Src\Models\AR;
+namespace Models\AR;
 
-use Src\Config\FileSystem;
+use Config\FileSystem;
 
 class Config extends ActiveRecord 
 {

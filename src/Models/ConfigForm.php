@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Models;
+namespace Models;
 
 class ConfigForm extends Model 
 {

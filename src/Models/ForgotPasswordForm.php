@@ -1,9 +1,9 @@
 <?php
 
-namespace Src\Models;
+namespace Models;
 
-use Src\Exceptions\ValidationException;
-use Src\Models\AR\{ User, UserMeta };
+use Exceptions\ValidationException;
+use Models\AR\{ User, UserMeta };
 
 class ForgotPasswordForm extends Model 
 {
@@ -28,14 +28,12 @@ class ForgotPasswordForm extends Model
         if(!$user = User::getByEmail($this->email)) {
             throw new ValidationException([
                 'email' => _('Este email não foi encontrado!'),
-                _('Este email não foi encontrado!')
-            ]);
+            ], _('Este email não foi encontrado!'));
         } elseif($lastRequest = $user->getLastResetPasswordRequest()) {
             if(strtotime($lastRequest) >= strtotime('-1 hour')) {
                 throw new ValidationException([
                     'email' => _('Uma solicitação já foi enviada para este email! Espere 1 hora para enviar outra.'),
-                    _('Uma solicitação já foi enviada para este email! Espere 1 hora para enviar outra.')
-                ]);
+                ], _('Uma solicitação já foi enviada para este email! Espere 1 hora para enviar outra.'));
             }
         }
 

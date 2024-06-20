@@ -1,0 +1,1 @@
+<tr><?= $view->getCells() ?></tr>

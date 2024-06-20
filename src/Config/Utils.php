@@ -1,7 +1,6 @@
 <?php 
 
-use Src\Config\{ HTMLDocument, Provider };
-use Src\Program;
+use Config\{ HTMLDocument, Provider };
 
 function url(?string $uri = null): string 
 {
@@ -10,10 +9,10 @@ function url(?string $uri = null): string
             return $uri;
         }
 
-        return Program::getEnvironmentVariables()['app_url'] . "/{$uri}";
+        return Program::getProjectUrl() . "/{$uri}";
     }
 
-    return Program::getEnvironmentVariables()['app_url'];
+    return Program::getProjectUrl();
 }
 
 function slugify(string $str, string $delimiter = '-'): string

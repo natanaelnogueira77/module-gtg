@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Config;
+namespace Config;
 
 use Exception;
 

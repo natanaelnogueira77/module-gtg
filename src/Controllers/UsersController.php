@@ -1,26 +1,22 @@
 <?php 
 
-namespace Src\Controllers;
+namespace Controllers;
 
-use Exception;
-use GTG\MVC\Request;
-use Src\Exceptions\ApplicationException;
-use Src\Models\AR\User;
-use Src\Models\Lists\UsersList;
-use Src\Utils\ThemeUtils;
+use GTG\MVC\{ Request, Utils\Email };
+use Exceptions\ApplicationException;
+use Models\{ AR\User, Lists\UsersList };
+use Utils\ThemeUtils;
+use Views\{
+    Components\DataTables\UsersDataTable,
+    Components\Emails\RegisteredUserEmail, 
+    Pages\UsersPage
+};
 
 class UsersController extends Controller
 {
     public function index(Request $request): void
     {
-        $this->renderPage('users', [
-            'theme' => ThemeUtils::createDefault(
-                $this->router, 
-                $this->session, 
-                sprintf(_('Usuários | %s'), $this->appData['app_name'])
-            ),
-            'userTypes' => User::getUserTypes()
-        ]);
+        echo new UsersPage(request: $request);
     }
 
     public function show(Request $request): void 
@@ -61,15 +57,13 @@ class UsersController extends Controller
         $model->save();
 
         try {
-            $email = $this->createEmail();
-            $email->add(_('Você Foi Registrado Com Sucesso!'), $this->getEmailHTML('registered-user', [
-                'user' => $model,
-                'password' => $request->get('password')
-            ]), $model->name, $model->email);
+            $email = new Email();
+            $email->add(_('Você foi registrado com sucesso!'), new RegisteredUserEmail(
+                user: $model, 
+                password: $request->get('password')
+            ), $model->name, $model->email);
             $email->send();
-        } catch(Exception $e) {
-            
-        }
+        } catch(Exception $e) {}
 
         $this->writeSuccessResponse([
             'message' => ['success', sprintf(_('O usuário "%s" foi criado com sucesso!'), $model->name)], 
@@ -115,9 +109,9 @@ class UsersController extends Controller
         $models = User::getList($list);
         $list->setResultsCount(User::getListResultsCount($list));
         
-        echo $this->getDataTableHTML('users', [
-            'models' => $models,
-            'list' => $list
-        ]);
+        echo new UsersDataTable(
+            models: $models, 
+            list: $list
+        );
     }
 }
