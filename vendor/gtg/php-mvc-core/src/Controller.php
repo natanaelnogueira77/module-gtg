@@ -11,7 +11,6 @@ abstract class Controller
     protected ?array $appData;
     protected Router $router;
     protected Session $session;
-    private View $view;
     private Database $database;
     private SMTP $SMTP;
 
@@ -20,7 +19,6 @@ abstract class Controller
         $this->appData = Application::getInstance()->appData;
         $this->router = Application::getInstance()->router;
         $this->session = Application::getInstance()->session;
-        $this->view = Application::getInstance()->view;
         $this->database = Application::getInstance()->database;
         $this->SMTP = Application::getInstance()->SMTP;
     }
@@ -34,25 +32,5 @@ abstract class Controller
     protected function createResponse(array $data, int $statusCode = 200): Response 
     {
         return new Response($data, $statusCode);
-    }
-
-    protected function getContext(): BuildContext
-    {
-        return $this->view->getContext();
-    }
-
-    protected function createExcelGenerator(): ExcelGenerator 
-    {
-        return new ExcelGenerator();
-    }
-
-    protected function createPDFGenerator(): PDFGenerator 
-    {
-        return new PDFGenerator();
-    }
-    
-    protected function createEmail(): Email 
-    {
-        return new Email($this->SMTP);
     }
 }

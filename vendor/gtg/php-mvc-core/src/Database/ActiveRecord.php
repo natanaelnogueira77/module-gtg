@@ -4,7 +4,6 @@ namespace GTG\MVC\Database;
 
 use DateTime, PDO, PDOException;
 use GTG\MVC\{ Application, Model };
-use GTG\MVC\Database\{ ActiveRecordStatement, Database };
 use GTG\MVC\Exceptions\ActiveRecordException;
 
 abstract class ActiveRecord extends Model 

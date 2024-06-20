@@ -4,6 +4,7 @@ namespace GTG\MVC\Utils;
 
 use Exception, stdClass;
 use PHPMailer\PHPMailer\PHPMailer;
+use GTG\MVC\Application;
 use GTG\MVC\Exceptions\EmailException;
 use GTG\MVC\SMTP;
 
@@ -13,10 +14,10 @@ class Email
     private stdClass $data;
 
     public function __construct(
-        private SMTP $SMTP
+        private ?SMTP $SMTP = null
     ) 
     {
-        $this->SMTP = $SMTP;
+        $this->SMTP = $SMTP ?? Application::getInstance()->SMTP;
         $this->data = new stdClass();
         $this->setMailOptions();
     }

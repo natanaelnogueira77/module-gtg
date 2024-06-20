@@ -3,7 +3,6 @@
 namespace GTG\MVC;
 
 use DateTime;
-use GTG\MVC\Model;
 
 final class Rule 
 {

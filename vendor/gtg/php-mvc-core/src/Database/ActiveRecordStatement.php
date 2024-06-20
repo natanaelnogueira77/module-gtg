@@ -4,7 +4,6 @@ namespace GTG\MVC\Database;
 
 use DateTime, PDO, PDOException;
 use GTG\MVC\{ Application, Model };
-use GTG\MVC\Database\{ ActiveRecord, Database };
 use GTG\MVC\Database\Statement\Select;
 use GTG\MVC\Database\Statement\Clauses\{ From, Limit, OrderBy, Where };
 use GTG\MVC\Exceptions\StatementException;

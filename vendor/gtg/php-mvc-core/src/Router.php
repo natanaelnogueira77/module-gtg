@@ -47,51 +47,27 @@ final class Router
         return $this;
     }
 
-    public function get(
-        string $route,
-        callable|string $handler,
-        string $name = null,
-        array|string $middleware = null
-    ): void 
+    public function get(string $route, callable|string $handler, string $name = null, array|string $middleware = null): void 
     {
         $this->addRoute('GET', $route, $handler, $name, $middleware);
     }
 
-    public function post(
-        string $route,
-        callable|string $handler,
-        string $name = null,
-        array|string $middleware = null
-    ): void {
+    public function post(string $route, callable|string $handler, string $name = null, array|string $middleware = null): void 
+    {
         $this->addRoute('POST', $route, $handler, $name, $middleware);
     }
 
-    public function put(
-        string $route,
-        callable|string $handler,
-        string $name = null,
-        array|string $middleware = null
-    ): void 
+    public function put(string $route, callable|string $handler, string $name = null, array|string $middleware = null): void 
     {
         $this->addRoute('PUT', $route, $handler, $name, $middleware);
     }
 
-    public function patch(
-        string $route,
-        callable|string $handler,
-        string $name = null,
-        array|string $middleware = null
-    ): void 
+    public function patch(string $route, callable|string $handler, string $name = null, array|string $middleware = null): void 
     {
         $this->addRoute('PATCH', $route, $handler, $name, $middleware);
     }
 
-    public function delete(
-        string $route,
-        callable|string $handler,
-        string $name = null,
-        array|string $middleware = null
-    ): void 
+    public function delete(string $route, callable|string $handler, string $name = null, array|string $middleware = null): void 
     {
         $this->addRoute('DELETE', $route, $handler, $name, $middleware);
     }
@@ -111,7 +87,7 @@ final class Router
         $data = $this->data;
         $namespace = $this->namespace;
         $middleware = $middleware ?? (!empty($this->middleware[$this->group]) ? $this->middleware[$this->group] : null);
-        $router = function () use ($method, $handler, $data, $route, $name, $namespace, $middleware) {
+        $router = function() use ($method, $handler, $data, $route, $name, $namespace, $middleware) {
             return [
                 'route' => $route,
                 'name' => $name,
@@ -292,10 +268,7 @@ final class Router
         }
 
         if(is_callable($this->route['handler'])) {
-            call_user_func(
-                $this->route['handler'], 
-                $this->createRequest()
-            );
+            call_user_func($this->route['handler'], $this->createRequest());
             return true;
         }
 

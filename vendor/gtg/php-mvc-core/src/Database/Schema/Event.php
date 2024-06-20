@@ -2,8 +2,6 @@
 
 namespace GTG\MVC\Database\Schema;
 
-use GTG\MVC\Database\Schema\ColumnDefinition;
-
 final class Event 
 {
     protected string $schedule;

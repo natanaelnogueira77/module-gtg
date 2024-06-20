@@ -34,14 +34,14 @@ final class Database
         return $pdo->exec($sql);
     }
 
-    public function applyMigrations(string $relativePath, ?int $numberOfMigrations = null): void 
+    public function applyMigrations(string $relativePath, string $namespace, ?int $numberOfMigrations = null): void 
     {
         $this->createMigrationsTable();
         $toApplyMigrations = $this->getMigrationsToApply($relativePath);
 
         $newMigrations = [];
         foreach($toApplyMigrations as $migration) {
-            $className = $this->getClassNameFromPath($relativePath . "/{$migration}");
+            $className = $namespace . '\\' . $migration;
             $instance = new $className($this);
             $this->log("Applying migration {$migration}...");
             $instance->up();
@@ -70,22 +70,20 @@ final class Database
         );
     }
 
-    public function reverseMigrations(string $relativePath, ?int $number = null): void 
+    public function reverseMigrations(string $relativePath, string $namespace, ?int $number = null): void 
     {
         $this->createMigrationsTable();
         $appliedMigrations = $this->getAppliedMigrations();
 
         $toReverseMigrations = array_reverse($appliedMigrations);
         foreach($toReverseMigrations as $migration) {
-            $className = $this->getClassNameFromPath($relativePath . "/{$migration->migration}");
+            $className = $namespace . '\\' . $migration->migration;
             $instance = new $className($this);
             $this->log("Reversing migration {$migration->migration}...");
             $instance->down();
             $this->log("Migration {$migration->migration} reversed!");
             $newMigrationIds[] = $migration->id;
-            if($number && count($newMigrationIds) >= $number) {
-                break;
-            }
+            if($number && count($newMigrationIds) >= $number) break;
         }
 
         if(!empty($newMigrationIds)) {
@@ -121,18 +119,17 @@ final class Database
     public function deleteMigrations(?array $migrationIds = null): void 
     {
         if($migrationIds) {
-            $statement = $this->prepare("DELETE FROM migrations WHERE id IN (" 
-                . implode(',', $migrationIds) . ")");
+            $statement = $this->prepare("DELETE FROM migrations WHERE id IN (" . implode(',', $migrationIds) . ")");
         } else {
             $statement = $this->prepare("DELETE FROM migrations WHERE id >= 1");
         }
         $statement->execute();
     }
 
-    public function applySeeders(string $relativePath): void 
+    public function applySeeders(string $relativePath, string $namespace): void 
     {
         foreach($this->getSeedersToApply($relativePath) as $seeder) {
-            $className = $this->getClassNameFromPath($relativePath . "/{$seeder}");
+            $className = $namespace . '\\' . $seeder;
             $instance = new $className($this);
             $this->log("Applying seeder {$seeder}...");
             $instance->run();
@@ -153,11 +150,6 @@ final class Database
             fn($m) => pathinfo($m, PATHINFO_FILENAME), 
             array_filter(scandir($path), fn($m) => $m !== '.' && $m !== '..')
         );
-    }
-
-    private function getClassNameFromPath(string $path): string
-    {
-        return str_replace('/', '\\', ucfirst($path));
     }
 
     public function getConnection(): ?PDO 

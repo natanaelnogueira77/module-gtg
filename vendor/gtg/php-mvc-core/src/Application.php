@@ -15,12 +15,13 @@ final class Application
     public Session $session;
     public SMTP $SMTP;
     public ?View $view = null;
-    private string $projectPath;
     private ErrorHandler $errorHandler;
 
-    public function __construct(string $projectPath) 
+    public function __construct(
+        private string $projectPath,
+        private string $projectUrl
+    ) 
     {
-        $this->projectPath = $projectPath;
         $this->errorHandler = new ErrorHandler($projectPath);
         $this->database = new Database($projectPath);
         $this->SMTP = new SMTP();
@@ -33,18 +34,20 @@ final class Application
         return self::$instance;
     }
 
-    public function setRouter(string $projectURL): self 
+    public function setRouter(callable $function): self 
     {
         if(!isset($_SERVER['REQUEST_METHOD'])) {
             throw new AppException('No Request Method was settled for the Router!');
         }
-        $this->router = new Router($projectURL);
+        $this->router = new Router($this->projectUrl);
+        $function($this->router);
         return $this;
     }
 
-    public function setView(string $relativePath): self 
+    public function setView(string $relativePath, string $errorPagePath): self 
     {
-        $this->view = new View($this->projectPath . '/' . $relativePath);
+        View::setViewsPath($this->projectPath . '/' . $relativePath);
+        View::setErrorPagePath($errorPagePath);
         return $this;
     }
 
@@ -78,24 +81,17 @@ final class Application
 
     private function setErrorCallback(): void 
     {
-        if($this->view) {
-            $app = $this;
-            $this->errorHandler->setErrorCallback(function($error) use ($app) {
-                $app->renderErrorPage($error);
-            });
-        }
+        $this->errorHandler->setErrorCallback(fn($error) => $this->renderErrorPage($error));
     }
 
     private function renderErrorPage(ErrorDTO $error): void
     {
-        echo $this->view && $this->view->getErrorPagePath() 
-            ? $this->view->getContext()->render($this->view->getErrorPagePath(), [
-                'appData' => $this->appData,
-                'router' => $this->router,
-                'session' => $this->session,
-                'error' => $error
-            ]) 
-            : '';
+        echo View::getErrorPagePath() ? View::getContext()->render(View::getErrorPagePath(), [
+            'appData' => $this->appData,
+            'router' => $this->router,
+            'session' => $this->session,
+            'error' => $error
+        ]) : '';
     }
 
     private function configureErrorHandler(): void 
@@ -112,7 +108,7 @@ final class Application
         }
 
         date_default_timezone_set('America/Recife');
-        bindtextdomain('messages', $this->projectPath . '/lang');
+        bindtextdomain('messages', $this->projectUrl . '/lang');
         bind_textdomain_codeset('messages', 'UTF-8');
         textdomain('messages');
     }
@@ -125,10 +121,6 @@ final class Application
 
     private function dispatchRouter(): void
     {
-        if(!$this->router) {
-            throw new AppException('Error at run: No Router was settled!');
-        }
-
         $this->router->dispatch();
     }
 

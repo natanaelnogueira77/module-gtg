@@ -2,29 +2,30 @@
 
 namespace GTG\MVC;
 
-final class View 
+abstract class View 
 {
-    private BuildContext $buildContext;
-    private ?string $errorPagePath = null;
+    private static ?BuildContext $buildContext = null;
+    private static ?string $viewsPath = null;
+    private static ?string $errorPagePath = null;
 
-    public function __construct(string $viewsFolderPath) 
+    public static function getContext(): BuildContext 
     {
-        $this->buildContext = new BuildContext($viewsFolderPath);
+        self::$buildContext = self::$buildContext ?? new BuildContext(self::$viewsPath);
+        return self::$buildContext;
     }
 
-    public function getContext(): BuildContext 
+    public static function getErrorPagePath(): ?string
     {
-        return $this->buildContext;
+        return self::$errorPagePath;
     }
 
-    public function getErrorPagePath(): ?string
+    public static function setViewsPath(string $viewsPath): void
     {
-        return $this->errorPagePath;
+        self::$viewsPath = $viewsPath;
     }
 
-    public function setErrorPagePath(string $errorPagePath): self
+    public static function setErrorPagePath(string $errorPagePath): void
     {
-        $this->errorPagePath = $errorPagePath;
-        return $this;
+        self::$errorPagePath = $errorPagePath;
     }
 }
